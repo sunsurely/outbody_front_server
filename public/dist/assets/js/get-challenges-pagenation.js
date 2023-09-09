@@ -102,10 +102,10 @@ async function initChallengeList(option) {
 
       const pagenationTag = $('.pagination');
       const prevButton = `<li id="prev_button" class="page-item">
-                            <a class="page-link">previous</a>
+                            <a class="page-link">이전</a>
                           </li>`;
       const nextButton = `<li id="next_button" class="page-item">
-                            <a class="page-link">next</a>
+                            <a class="page-link">다음</a>
                           </li>`;
 
       let pageNumbers = '';
