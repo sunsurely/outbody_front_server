@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport" />
+  <title>User-Information &rsaquo; User &mdash; OutBody</title>
+
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" href="assets/modules/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css" />
+
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="assets/modules/bootstrap-social/bootstrap-social.css" />
+  <link rel="stylesheet" href="assets/modules/owlcarousel2/dist/assets/owl.carousel.min.css" />
+  <link rel="stylesheet" href="assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css" />
+
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <!-- Start GA -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-94034622-3');
+  </script>
+  <!-- /END GA -->
+</head>
+
+<body>
+  <div id="app">
+    <div class="main-wrapper main-wrapper-1">
+      <div class="navbar-bg"></div>
+      <nav class="navbar navbar-expand-lg main-navbar">
+        <form class="form-inline mr-auto">
+          <ul class="navbar-nav mr-3">
+            <li>
+              <a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a>
+            </li>
+            <li>
+              <a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a>
+            </li>
+          </ul>
+          <div class="search-element">
+            <!-- <input class="form-control" type="search" placeholder="Search" aria-label="Search"
+                      data-width="250">
+                  <button class="btn" type="submit"><i class="fas fa-search"></i></button> -->
+            <div class="search-backdrop"></div>
+            <div class="search-result">
+              <div class="search-header">Histories</div>
+              <div class="search-item">
+                <a href="#">How to hack NASA using CSS</a>
+                <a href="#" class="search-close"><i class="fas fa-times"></i></a>
+              </div>
+              <div class="search-item">
+                <a href="#">Kodinger.com</a>
+                <a href="#" class="search-close"><i class="fas fa-times"></i></a>
+              </div>
+              <div class="search-item">
+                <a>OUTBODY</a>
+                <a href="#" class="search-close"><i class="fas fa-times"></i></a>
+              </div>
+              <div class="search-header">Result</div>
+              <div class="search-item">
+                <a href="#">
+                  <img class="mr-3 rounded" width="30" src="assets/img/products/product-3-50.png" alt="product" />
+                  oPhone S9 Limited Edition
+                </a>
+              </div>
+              <div class="search-item">
+                <a href="#">
+                  <img class="mr-3 rounded" width="30" src="assets/img/products/product-2-50.png" alt="product" />
+                  Drone X2 New Gen-7
+                </a>
+              </div>
+              <div class="search-item">
+                <a href="#">
+                  <img class="mr-3 rounded" width="30" src="assets/img/products/product-1-50.png" alt="product" />
+                  Headphone Blitz
+                </a>
+              </div>
+              <div class="search-header">Projects</div>
+              <div class="search-item">
+                <a href="#">
+                  <div class="search-icon bg-danger text-white mr-3">
+                    <i class="fas fa-code"></i>
+                  </div>
+                  OutBody Admin Template
+                </a>
+              </div>
+              <div class="search-item">
+                <a href="#">
+                  <div class="search-icon bg-primary text-white mr-3">
+                    <i class="fas fa-laptop"></i>
+                  </div>
+                  Create a new Homepage Design
+                </a>
+              </div>
+            </div>
+          </div>
+        </form>
+        <ul class="navbar-nav navbar-right">
+          <li class="dropdown dropdown-list-toggle">
+            <a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep" id="requestlists"><i
+                class="far fa-envelope"></i></a>
+            <div class="dropdown-menu dropdown-list dropdown-menu-right" style="width: 450px; padding-left: 10px">
+              <div class="dropdown-header">
+                Messages
+                <div class="float-right">
+                  <a href="#">Mark All As Read</a>
+                </div>
+              </div>
+              <div class="dropdown-list-content dropdown-list-message" style="overflow-y: scroll; height: 300px">
+                <a href="#" class="dropdown-item dropdown-item-unread">
+                  <!-- 친구요청 메시지함 -->
+                  <div style="width: 50px" class="dropdown-item-avatar" id="friend">
+                    <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle" />
+                    <div class="is-online"></div>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    <p id="inviteUserMessage">Hello, Bro!</p>
+                    <div id="inviteUsercreatedAt">2023.08.31</div>
+                    <button class="btn btn-sm btn accept-friend" data-follower-id="${message.userId}">
+                      수락
+                    </button>
+                    <button class="btn btn-sm btn deny-friend" data-follower-id="${message.userId}">
+                      거절
+                    </button>
+                  </div>
+
+                  <!-- 도전 초대메시지함 -->
+                  <div class="dropdown-item-avatar" id="challenger">
+                    <img alt="image" src="assets/img/avatar/avatar-2.png" class="rounded-circle" />
+                    <div class="is-online"></div>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    <p id="challengeMessage">Hello, Bro!</p>
+                    <div id="challengeCreatedAt">2023.08.31</div>
+                    <button class="btn btn-sm btn accept-challenge" data-user-id="${message.userId}">
+                      수락
+                    </button>
+                    <button class="btn btn-sm btn deny-challenge" data-user-id="${message.userId}">
+                      거절
+                    </button>
+                  </div>
+                </a>
+              </div>
+              <div class="dropdown-footer text-center"></div>
+            </div>
+          </li>
+          <li class="dropdown dropdown-list-toggle">
+            <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i
+                class="far fa-bell"></i></a>
+            <div class="dropdown-menu dropdown-list dropdown-menu-right">
+              <div class="dropdown-header">
+                Notifications
+                <div class="float-right">
+                  <a href="#">Mark All As Read</a>
+                </div>
+              </div>
+              <div class="dropdown-list-content dropdown-list-icons">
+                <a href="#" class="dropdown-item dropdown-item-unread">
+                  <div class="dropdown-item-icon bg-primary text-white">
+                    <i class="fas fa-code"></i>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    Template update is available now!
+                    <div class="time text-primary">2 Min Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <div class="dropdown-item-icon bg-info text-white">
+                    <i class="far fa-user"></i>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    <b>You</b> and <b>Dedik Sugiharto</b> are now friends
+                    <div class="time">10 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <div class="dropdown-item-icon bg-success text-white">
+                    <i class="fas fa-check"></i>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    <b>Kusnaedi</b> has moved task <b>Fix bug header</b> to
+                    <b>Done</b>
+                    <div class="time">12 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <div class="dropdown-item-icon bg-danger text-white">
+                    <i class="fas fa-exclamation-triangle"></i>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    Low disk space. Let's clean it!
+                    <div class="time">17 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <div class="dropdown-item-icon bg-info text-white">
+                    <i class="fas fa-bell"></i>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    Welcome to OutBody template!
+                    <div class="time">Yesterday</div>
+                  </div>
+                </a>
+              </div>
+              <div class="dropdown-footer text-center">
+                <a href="#">View All <i class="fas fa-chevron-right"></i></a>
+              </div>
+            </div>
+          </li>
+          <li class="dropdown"><a href="#" data-toggle="dropdown"
+              class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+              <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+              <div class="d-sm-none d-lg-inline-block">내 정보</div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <div class="dropdown-title">OUTBODY</div>
+              <a href="my-Info.html" class="dropdown-item has-icon">
+                <i class="far fa-user"></i> Profile
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="login.html" class="dropdown-item has-icon text-primary">
+                <i class="fas fa-sign-in-alt"></i> Login
+              </a>
+              <a href="#" class="dropdown-item has-icon text-danger" id="logout-button">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <!-- 사이드바 -->
+      <div class="main-sidebar sidebar-style-2">
+        <aside id="sidebar-wrapper">
+          <div class="sidebar-brand">
+            <a>OUTBODY</a>
+            <br>
+          </div>
+          <div class="sidebar-brand sidebar-brand-sm">
+            <a>OB</a>
+          </div>
+
+          <!-- 사이드바 -->
+          <ul class="sidebar-menu">
+
+            <li class="menu-header">Record</li>
+            <li>
+              <a href="index-0.html"><i class="fas fa-columns"></i>
+                <span>체성분</span></a>
+            </li>
+
+            <li class="menu-header">Challenge</li>
+            <li>
+              <a href="get-challenges.html"><i class="fas fa-fire"></i>
+                <span>도전</span></a>
+            </li>
+
+            <li class="menu-header">Post</li>
+            <li>
+              <a href="sns.html"><i class="fas fa-bicycle"></i>
+                <span>오운완</span></a>
+            </li>
+
+            <li class="menu-header">Rank</li>
+            <li>
+              <a href="ranks.html"><i class="fas fa-th"></i>
+                <span>순위</span></a>
+            </li>
+            <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+              <a class="btn btn-primary btn-lg btn-block btn-icon-split" style="color: white; font-weight: bold;">
+                <i class="fas fa-rocket"></i> OUTBODY
+              </a>
+            </div>
+        </aside>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+          <div class="section-header">
+            <h1>User</h1>
+            <div class="section-header-breadcrumb">
+              <div class="breadcrumb-item active">
+                <a href="#">Dashboard</a>
+              </div>
+              <div class="breadcrumb-item"><a href="#">Components</a></div>
+              <div class="breadcrumb-item">User</div>
+            </div>
+          </div>
+
+          <div class="section-body">
+            <h2 class="section-title">회원 정보</h2>
+            <p class="section-lead">회원 정보 소개 페이지입니다.</p>
+
+            <div class="row">
+              <div class="col-12 col-sm-12 col-lg-7">
+                <div class="card author-box card-primary">
+                  <div class="card-body userImg-Box">
+                    <div class="author-box-left">
+                      <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle author-box-picture" />
+                      <div class="clearfix"></div>
+                      <a href="#" class="btn btn-primary mt-3 follow-btn" data-follow-action="alert('follow clicked');"
+                        data-unfollow-action="alert('unfollow clicked');">Follow</a>
+                    </div>
+                    <div class="user-head">
+                      <div class="author-box-details">
+                        <div class="author-box-name">
+                          <a href="#" id="nametag">name</a>
+                        </div>
+                        <div class="author-box-job" id="statustag">
+                          Web Developer
+                        </div>
+                        <div class="author-box-description">
+                          <p id="descriptiontag">
+                            저는 운동을 좋아했지만, OutBody 앱을 통해서 운동을
+                            더더욱 좋아하게 되었어요. 우리 모두 운동을 통해
+                            건강해져요! 3대 500 가즈아!!
+                          </p>
+                        </div>
+                        <div class="mb-2 mt-3">
+                          <div class="text-small font-weight-bold">
+                            Follow Hasan On
+                          </div>
+                        </div>
+                        <a href="#" class="btn btn-social-icon mr-1 btn-facebook">
+                          <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="btn btn-social-icon mr-1 btn-twitter">
+                          <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="btn btn-social-icon mr-1 btn-github">
+                          <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="btn btn-social-icon mr-1 btn-instagram">
+                          <i class="fab fa-instagram"></i>
+                        </a>
+                        <div class="w-100 d-sm-none"></div>
+                        <div class="float-right mt-sm-0 mt-3">
+                          <button class="btn btn-primary" id="postlist" data-toggle="modal" data-target="#exampleModal"
+                            style="display: inline-block">
+                            오운완 목록보기 <i class="fas fa-chevron-right"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card card-danger">
+                  <div class="card-header">
+                    <h4>친구 추천</h4>
+                    <div class="card-header-action"></div>
+                  </div>
+                  <div class="card-body">
+                    <div class="owl-carousel owl-theme" id="users-carousel">
+                      <div>
+                        <div class="user-item">
+                          <img alt="image" src="assets/img/avatar/avatar-1.png" class="img-fluid" id="profileImage" />
+                          <div class="user-details">
+                            <div class="user-name">Hasan Basri</div>
+                            <div class="user-email">asdsf@naver.com</div>
+                            <div class="user-cta">
+                              <button class="btn btn-primary follow-btn" data-follow-action="alert('user1 followed');"
+                                data-unfollow-action="alert('user1 unfollowed');">
+                                Follow
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="user-item">
+                          <img alt="image" src="assets/img/avatar/avatar-2.png" class="img-fluid" />
+                          <div class="user-details">
+                            <div class="user-name">Kusnaedi</div>
+                            <div class="user-email">google@naver.com</div>
+                            <div class="user-cta">
+                              <button class="btn btn-primary follow-btn" data-follow-action="alert('user2 followed');"
+                                data-unfollow-action="alert('user2 unfollowed');">
+                                Follow
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="user-item">
+                          <img alt="image" src="assets/img/avatar/avatar-3.png" class="img-fluid" />
+                          <div class="user-details">
+                            <div class="user-name">Bagus Dwi Cahya</div>
+                            <div class="user-email">power@google.com</div>
+                            <div class="user-cta">
+                              <button class="btn btn-danger following-btn"
+                                data-unfollow-action="alert('user3 unfollowed');"
+                                data-follow-action="alert('user3 followed');">
+                                Following
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="user-item">
+                          <img alt="image" src="assets/img/avatar/avatar-4.png" class="img-fluid" />
+                          <div class="user-details">
+                            <div class="user-name">Wildan Ahdian</div>
+                            <div class="user-email">hoho@naver.com</div>
+                            <div class="user-cta">
+                              <button class="btn btn-primary follow-btn" data-follow-action="alert('user4 followed');"
+                                data-unfollow-action="alert('user4 unfollowed');">
+                                Follow
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="user-item">
+                          <img alt="image" src="assets/img/avatar/avatar-5.png" class="img-fluid" />
+                          <div class="user-details">
+                            <div class="user-name">Deden Febriansyah</div>
+                            <div class="user-email">trt@naver.com</div>
+                            <div class="user-cta">
+                              <button class="btn btn-primary follow-btn" data-follow-action="alert('user5 followed');"
+                                data-unfollow-action="alert('user5 unfollowed');">
+                                Follow
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-12 col-lg-5">
+                <div class="card profile-widget">
+                  <div class="profile-widget-header">
+                    <div class="profile-widget-items">
+                      <div class="profile-widget-item">
+                        <div class="profile-widget-item-label">Point</div>
+                        <div class="profile-widget-item-value" id="pointtag">
+                          2100
+                        </div>
+                      </div>
+                      <div class="profile-widget-item">
+                        <div class="profile-widget-item-label">Ranks</div>
+                        <div class="profile-widget-item-value" id="rankstag">
+                          32
+                        </div>
+                      </div>
+                      <div class="profile-widget-item">
+                        <div class="profile-widget-item-label">Friends</div>
+                        <div class="profile-widget-item-value" id="friendtag">
+                          54
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="userInfo-Bottom">
+                    <div class="profile-widget-description pb-0">
+                      <div class="form-group col-md-6 col-12">
+                        <br />
+                        <h4>Information</h4>
+                        <br />
+                        <label>E-mail: </label>
+                        <div id="emailtag">Email@com</div>
+                        <div class="invalid-feedback"></div>
+                      </div>
+                      <div class="form-group col-md-6 col-12">
+                        <label>Gender: </label>
+                        <div id="gendertag">Male</div>
+                        <div class="invalid-feedback"></div>
+                      </div>
+                      <div class="form-group col-md-6 col-12">
+                        <label>Birthday: </label>
+                        <div id="birthdaytag">September 9th, 1992</div>
+                        <div class="invalid-feedback"></div>
+                      </div>
+                      <div class="form-group col-md-6 col-12">
+                        <label>CreatedAt: </label>
+                        <div id="createdAttag">August 15th, 2023</div>
+                        <div class="invalid-feedback"></div>
+                      </div>
+                      <br />
+                    </div>
+                  </div>
+
+                  <div class="card-footer text-center pt-0">
+                    <div class="font-weight-bold mb-2 text-small"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- 오운완 목록조회 모달 -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="postlistModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">오운완 목록</h5>
+            </div>
+            <div class="card-body">
+              <div style="overflow-y: scroll; height: 200px">
+                <table class="table table-sm" id="posts-table">
+                  <thead>
+                    <tr class="total-posts">
+                      Total Posts: 0
+                    </tr>
+                    <tr>
+                      <th scope="col">Post Id</th>
+                      <th scope="col">description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>하체</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>상체</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td>유산소</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">4</th>
+                      <td>상체</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">5</th>
+                      <td>하체</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <br />
+              </div>
+            </div>
+            <div class="card-footer text-right">
+              <button class="btn btn-primary" id="backtopage">
+                뒤로가기
+              </button>
+            </div>
+            <div class="modal-footer bg-whitesmoke br"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 모달 4: 친구 찾기  -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="searchfriendModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">친구 찾기</h5>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="친구요청을 보내고 싶은 유저의 E-mail을 입력해주세요." aria-label=""
+                    id="searchEmail" />
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" id="searchFriendByEmail">
+                      검색
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer text-right">
+              <button class="btn btn-primary" id="searchfriendCancel">
+                취소
+              </button>
+            </div>
+            <div class="modal-footer bg-whitesmoke br"></div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="main-footer">
+        <div class="footer-left">
+          Copyright &copy; 2023
+          <div class="bullet"></div>
+          Design By <a style="font-weight: bold">WildBody</a>
+        </div>
+        <div class="footer-right"></div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- General JS Scripts -->
+  <script src="assets/modules/jquery.min.js"></script>
+  <script src="assets/modules/popper.js"></script>
+  <script src="assets/modules/tooltip.js"></script>
+  <script src="assets/modules/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+  <script src="assets/modules/moment.min.js"></script>
+  <script src="assets/js/stisla.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- JS Libraies -->
+  <script src="assets/modules/owlcarousel2/dist/owl.carousel.min.js"></script>
+
+  <!-- Page Specific JS File -->
+  <script src="assets/js/page/components-user.js"></script>
+
+  <!-- Template JS File -->
+  <script src="assets/js/scripts.js"></script>
+  <script src="assets/js/user-Info.js"></script>
+  <script src="assets/js/custom.js"></script>
+</body>
+
+</html>

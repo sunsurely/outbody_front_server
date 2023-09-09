@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport" />
+  <title>Profile &mdash; Out Body</title>
+
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="assets/modules/bootstrap/css/bootstrap.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="./jquery-3.4.1.min.js"></script>
+  <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css" />
+  <script src="assets/modules/tooltip.js"></script>
+  <scripy src="assets/modules/modal.js"></scripy>
+
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="assets/modules/bootstrap-social/bootstrap-social.css" />
+  <script src="./bootstrapt/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="assets/modules/summernote/summernote-bs4.css" />
+  <link rel="stylesheet" href="assets/modules/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/modules/prism/prism.css" />
+
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <!-- Start GA -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-94034622-3');
+  </script>
+  <!-- /END GA -->
+  <style>
+    #modal.modal-overlay {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="main-wrapper main-wrapper-1">
+      <div class="navbar-bg"></div>
+      <nav class="navbar navbar-expand-lg main-navbar">
+        <form class="form-inline mr-auto">
+          <ul class="navbar-nav mr-3">
+            <li>
+              <a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a>
+            </li>
+            <li>
+              <a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a>
+            </li>
+          </ul>
+          <div class="search-element">
+            <!-- <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250" />
+            <button class="btn" type="submit"> -->
+            <i class="fas fa-search"></i>
+            </button>
+            <div class="search-backdrop"></div>
+            <div class="search-result">
+              <div class="search-header">Histories</div>
+              <div class="search-item">
+                <a href="#">How to hack NASA using CSS</a>
+                <a href="#" class="search-close"><i class="fas fa-times"></i></a>
+              </div>
+              <div class="search-item">
+                <a href="#">Kodinger.com</a>
+                <a href="#" class="search-close"><i class="fas fa-times"></i></a>
+              </div>
+              <div class="search-item">
+                <a>OUTBODY</a>
+                <a href="#" class="search-close"><i class="fas fa-times"></i></a>
+              </div>
+              <div class="search-header">Result</div>
+              <div class="search-item">
+                <a href="#">
+                  <img class="mr-3 rounded" width="30" src="assets/img/products/product-3-50.png" alt="product" />
+                  oPhone S9 Limited Edition
+                </a>
+              </div>
+              <div class="search-item">
+                <a href="#">
+                  <img class="mr-3 rounded" width="30" src="assets/img/products/product-2-50.png" alt="product" />
+                  Drone X2 New Gen-7
+                </a>
+              </div>
+              <div class="search-item">
+                <a href="#">
+                  <img class="mr-3 rounded" width="30" src="assets/img/products/product-1-50.png" alt="product" />
+                  Headphone Blitz
+                </a>
+              </div>
+              <div class="search-header">Projects</div>
+              <div class="search-item">
+                <a href="#">
+                  <div class="search-icon bg-danger text-white mr-3">
+                    <i class="fas fa-code"></i>
+                  </div>
+                  OutBody Admin Template
+                </a>
+              </div>
+              <div class="search-item">
+                <a href="#">
+                  <div class="search-icon bg-primary text-white mr-3">
+                    <i class="fas fa-laptop"></i>
+                  </div>
+                  Create a new Homepage Design
+                </a>
+              </div>
+            </div>
+          </div>
+        </form>
+        <ul class="navbar-nav navbar-right">
+          <li class="dropdown dropdown-list-toggle">
+            <a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep" id="requestlists"><i
+                class="far fa-envelope"></i></a>
+            <div class="dropdown-menu dropdown-list dropdown-menu-right" style="width: 450px; padding-left: 10px">
+              <div class="dropdown-header">
+                Messages
+                <div class="float-right">
+                  <a href="#">Mark All As Read</a>
+                </div>
+              </div>
+              <div class="dropdown-list-content dropdown-list-message" style="overflow-y: scroll; height: 300px">
+                <a href="#" class="dropdown-item dropdown-item-unread">
+                  <!-- 친구요청 메시지함 -->
+                  <div style="width: 50px" class="dropdown-item-avatar" id="friend">
+                    <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle" />
+                    <div class="is-online"></div>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    <p id="inviteUserMessage">Hello, Bro!</p>
+                    <div id="inviteUsercreatedAt">2023.08.31</div>
+                    <button class="btn btn-sm btn accept-friend" data-follower-id="${message.userId}">
+                      수락
+                    </button>
+                    <button class="btn btn-sm btn deny-friend" data-follower-id="${message.userId}">
+                      거절
+                    </button>
+                  </div>
+
+                  <!-- 도전 초대메시지함 -->
+                  <div class="dropdown-item-avatar" id="challenger">
+                    <img alt="image" src="assets/img/avatar/avatar-2.png" class="rounded-circle" />
+                    <div class="is-online"></div>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    <p id="challengeMessage">Hello, Bro!</p>
+                    <div id="challengeCreatedAt">2023.08.31</div>
+                    <button class="btn btn-sm btn accept-challenge" data-user-id="${message.userId}">
+                      수락
+                    </button>
+                    <button class="btn btn-sm btn deny-challenge" data-user-id="${message.userId}">
+                      거절
+                    </button>
+                  </div>
+                </a>
+              </div>
+              <div class="dropdown-footer text-center"></div>
+            </div>
+          </li>
+
+          <li class="dropdown dropdown-list-toggle">
+            <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i
+                class="far fa-bell"></i></a>
+            <div class="dropdown-menu dropdown-list dropdown-menu-right">
+              <div class="dropdown-header">
+                Notifications
+                <div class="float-right">
+                  <a href="#">Mark All As Read</a>
+                </div>
+              </div>
+              <div class="dropdown-list-content dropdown-list-icons">
+                <a href="#" class="dropdown-item dropdown-item-unread">
+                  <div class="dropdown-item-icon bg-primary text-white">
+                    <i class="fas fa-code"></i>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    Template update is available now!
+                    <div class="time text-primary">2 Min Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <div class="dropdown-item-icon bg-info text-white">
+                    <i class="far fa-user"></i>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    <b>You</b> and <b>Dedik Sugiharto</b> are now friends
+                    <div class="time">10 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <div class="dropdown-item-icon bg-success text-white">
+                    <i class="fas fa-check"></i>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    <b>Kusnaedi</b> has moved task <b>Fix bug header</b> to
+                    <b>Done</b>
+                    <div class="time">12 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <div class="dropdown-item-icon bg-danger text-white">
+                    <i class="fas fa-exclamation-triangle"></i>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    Low disk space. Let's clean it!
+                    <div class="time">17 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <div class="dropdown-item-icon bg-info text-white">
+                    <i class="fas fa-bell"></i>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    Welcome to OutBody template!
+                    <div class="time">Yesterday</div>
+                  </div>
+                </a>
+              </div>
+              <div class="dropdown-footer text-center">
+                <a href="#">View All <i class="fas fa-chevron-right"></i></a>
+              </div>
+            </div>
+          </li>
+          <li class="dropdown"><a href="#" data-toggle="dropdown"
+              class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+              <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+              <div class="d-sm-none d-lg-inline-block">내 정보</div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <div class="dropdown-title">OUTBODY</div>
+              <a href="my-Info.html" class="dropdown-item has-icon">
+                <i class="far fa-user"></i> Profile
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="login.html" class="dropdown-item has-icon text-primary">
+                <i class="fas fa-sign-in-alt"></i> Login
+              </a>
+              <a href="#" class="dropdown-item has-icon text-danger" id="logout-button">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <div class="main-sidebar sidebar-style-2">
+        <aside id="sidebar-wrapper">
+          <div class="sidebar-brand">
+            <a>OUTBODY</a>
+            <br>
+          </div>
+          <div class="sidebar-brand sidebar-brand-sm">
+            <a>OB</a>
+          </div>
+
+          <!-- 사이드바 -->
+          <ul class="sidebar-menu">
+
+            <li class="menu-header">Record</li>
+            <li>
+              <a href="index-0.html"><i class="fas fa-columns"></i>
+                <span>체성분</span></a>
+            </li>
+
+            <li class="menu-header">Challenge</li>
+            <li>
+              <a href="get-challenges.html"><i class="fas fa-fire"></i>
+                <span>도전</span></a>
+            </li>
+
+            <li class="menu-header">Post</li>
+            <li>
+              <a href="sns.html"><i class="fas fa-bicycle"></i>
+                <span>오운완</span></a>
+            </li>
+
+            <li class="menu-header">Rank</li>
+            <li>
+              <a href="ranks.html"><i class="fas fa-th"></i>
+                <span>순위</span></a>
+            </li>
+            <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+              <a class="btn btn-primary btn-lg btn-block btn-icon-split" style="color: white; font-weight: bold;">
+                <i class="fas fa-rocket"></i> OUTBODY
+              </a>
+            </div>
+        </aside>
+      </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+          <section class="section">
+            <div class="section-header">
+              <h1>Admin</h1>
+              <div class="section-header-breadcrumb">
+                <div class="breadcrumb-item active">
+                  <a href="#">Dashboard</a>
+                </div>
+                <div class="breadcrumb-item"><a href="#">Components</a></div>
+                <div class="breadcrumb-item">Table</div>
+              </div>
+            </div>
+
+            <div class="section-body">
+              <h2 class="section-title" style="float: left">관리자 계정</h2>
+              <a
+                id="addBlackList"
+                data-toggle="modal"
+                data-target="#exampleModal"
+                style="float: right; margin-right: 10px; "
+                href="#"
+                >블랙리스트</a
+              >
+              <!-- 회원탈퇴버튼 -->
+              <a
+                id="removeUser"
+                data-toggle="modal"
+                data-target="#exampleModal"
+                style="float: right; margin-right: 10px;"
+                href="#"
+                ></a
+              >
+
+              <div style="clear: both"></div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>신고 기록</h4>
+                    <div class="card-header-form">
+                      <!-- <form>
+                        <div class="input-group">
+                          <input type="text" class="form-control" placeholder="Search">
+                          <div class="input-group-btn">
+                            <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                          </div>
+                        </div>
+                      </form> -->
+                    </div>
+                  </div>
+                  <div class="card-body p-0">
+                    <div class="table-responsive">
+                      <table id="report-table" class="table table-striped">
+                      <!-- 신고 목록이 들어가는 자리 -->
+                      </table>
+                    </div>
+                  </div>
+                  <div class="float-right">
+                    <nav>
+                      <ul class="pagination">
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        
+        <!-- 모달 1: 블랙리스트 생성모달  -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="blackListUseradd">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">블랙리스트 추가</h5>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="블랙리스트에 추가할 유저의 E-mail을 입력해주세요." aria-label=""
+                      id="searchEmail" />
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button" id="findBlackList">
+                        검색
+                      </button>
+                    </div>                  
+                  </div>
+                </div>
+
+                <div id="searched-user" class="form-group mb-0">
+                  <br />
+                </div>
+                  <textarea type="text" id="description" class="form-control" placeholder="사유를 입력해주세요."></textarea>
+                  <br />
+              </div>
+              <div class="card-footer text-right">
+                <button class="btn btn-primary" type="button" id="createBlackList">
+                  추가
+                </button>
+                <button class="btn btn-primary" id="cancelBlackList">
+                  취소
+                </button>
+                <div style="margin-top: 10px">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 모달 2: 회원 강제탈퇴 모달  -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="withdrawal">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">유저 계정삭제</h5>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="계정 삭제할 유저의 E-mail을 입력해주세요." aria-label=""
+                      id="withdrawalEmail" />
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button" id="findwithdrawal">
+                        검색
+                      </button>
+                    </div>                  
+                  </div>
+                </div>
+
+                <div id="searched-withdraw-user" class="form-group mb-0">
+                  <br />
+                </div>
+                  <textarea type="text" id="withdrawaldescription" class="form-control" placeholder="사유를 입력해주세요."></textarea>
+                  <br />
+              </div>
+              <div class="card-footer text-right">
+                <button class="btn btn-primary" type="button" id="deleteUser">
+                  탈퇴
+                </button>
+                <button class="btn btn-primary" id="canceldelete">
+                  취소
+                </button>
+                <div style="margin-top: 10px">
+                  <input id="invite-checkbox" type="checkbox" style="margin-top: 9px" /><span
+                  style="margin-top: 6px; margin-left: 5px">해당 회원을 OutBody 서비스에서 영구 탈퇴시킵니다.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 모달 3: 신고유저 블랙리스트 추가모달  -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="addBlackUser">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">블랙리스트 추가</h5>
+              </div>
+              <div class="card-body">
+                  <textarea type="text" id="blackdescription" class="form-control" placeholder="사유를 입력해주세요."></textarea>
+                  <br />
+              </div>
+              <div class="card-footer text-right">
+                <button class="btn btn-primary" type="button" id="blackuser">
+                  추가
+                </button>
+                <button class="btn btn-primary" id="canceluser">
+                  취소
+                </button>
+                <div style="margin-top: 10px">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer class="main-footer">
+          <div class="footer-left">
+            Copyright &copy; 2023
+            <div class="bullet"></div>
+            Design By <a>OutBody</a>
+          </div>
+          <div class="footer-right"></div>
+        </footer>
+      </div>
+    </div>
+
+    <!-- General JS Scripts -->
+    <script src="assets/modules/jquery.min.js"></script>
+    <script src="assets/modules/popper.js"></script>
+    <script src="assets/modules/tooltip.js"></script>
+    <script src="assets/modules/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+    <script src="assets/modules/moment.min.js"></script>
+    <script src="assets/js/stisla.js"></script>
+
+    <!-- JS Libraies -->
+    <script src="assets/modules/jquery-ui/jquery-ui.min.js"></script>
+
+    <!-- Page Specific JS File -->
+    <script src="assets/js/page/components-table.js"></script>
+
+    <!-- Template JS File -->
+    <script src="assets/js/scripts.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <script src="assets/js/admin.js"></script>
+  </body>
+</html>

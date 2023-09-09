@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport" />
+  <title>Profile &mdash; Out Body</title>
+
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="assets/modules/bootstrap/css/bootstrap.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="./jquery-3.4.1.min.js"></script>
+  <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css" />
+  <script src="assets/modules/tooltip.js"></script>
+  <scripy src="assets/modules/modal.js"></scripy>
+
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="assets/modules/bootstrap-social/bootstrap-social.css" />
+  <script src="./bootstrapt/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="assets/modules/summernote/summernote-bs4.css" />
+  <link rel="stylesheet" href="assets/modules/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/modules/prism/prism.css" />
+
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <!-- Start GA -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-94034622-3');
+  </script>
+  <!-- /END GA -->
+  <style>
+    #modal.modal-overlay {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="main-wrapper main-wrapper-1">
+      <div class="navbar-bg"></div>
+      <nav class="navbar navbar-expand-lg main-navbar">
+        <form class="form-inline mr-auto">
+          <ul class="navbar-nav mr-3">
+            <li>
+              <a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a>
+            </li>
+            <li>
+              <a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a>
+            </li>
+          </ul>
+        </form>
+        <ul class="navbar-nav navbar-right">
+          <li class="dropdown dropdown-list-toggle">
+            <a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep" id="requestlists"><i
+                class="far fa-envelope"></i></a>
+            <div class="dropdown-menu dropdown-list dropdown-menu-right" style="width: 450px; padding-left: 10px">
+              <div class="dropdown-header">
+                Messages
+                <div class="float-right">
+                  <a href="#">Mark All As Read</a>
+                </div>
+              </div>
+              <div class="dropdown-list-content dropdown-list-message" style="overflow-y: scroll; height: 300px">
+                <a href="#" class="dropdown-item dropdown-item-unread">
+                  <!-- 친구요청 메시지함 -->
+                  <div style="width: 50px" class="dropdown-item-avatar" id="friend">
+                    <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle" />
+                    <div class="is-online"></div>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    <p id="inviteUserMessage">Hello, Bro!</p>
+                    <div id="inviteUsercreatedAt">2023.08.31</div>
+                    <button class="btn btn-sm btn accept-friend" data-follower-id="${message.userId}">
+                      수락
+                    </button>
+                    <button class="btn btn-sm btn deny-friend" data-follower-id="${message.userId}">
+                      거절
+                    </button>
+                  </div>
+
+                  <!-- 도전 초대메시지함 -->
+                  <div class="dropdown-item-avatar" id="challenger">
+                    <img alt="image" src="assets/img/avatar/avatar-2.png" class="rounded-circle" />
+                    <div class="is-online"></div>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    <p id="challengeMessage">Hello, Bro!</p>
+                    <div id="challengeCreatedAt">2023.08.31</div>
+                    <button class="btn btn-sm btn accept-challenge" data-user-id="${message.userId}">
+                      수락
+                    </button>
+                    <button class="btn btn-sm btn deny-challenge" data-user-id="${message.userId}">
+                      거절
+                    </button>
+                  </div>
+                </a>
+              </div>
+              <div class="dropdown-footer text-center"></div>
+            </div>
+          </li>
+
+          <li class="dropdown dropdown-list-toggle">
+            <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i
+                class="far fa-bell"></i></a>
+            <div class="dropdown-menu dropdown-list dropdown-menu-right">
+              <div class="dropdown-header">
+                Notifications
+                <div class="float-right">
+                  <a href="#">Mark All As Read</a>
+                </div>
+              </div>
+              <div id="log-box" class="dropdown-list-content dropdown-list-icons">
+                <a href="#" class="dropdown-item dropdown-item-unread">
+                  <div class="dropdown-item-icon bg-primary text-white">
+                    <i class="fas fa-code"></i>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    Template update is available now!
+                    <div class="time text-primary">2 Min Ago</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="dropdown"><a href="#" data-toggle="dropdown"
+              class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+              <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+              <div class="d-sm-none d-lg-inline-block">내 정보</div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <div class="dropdown-title">OUTBODY</div>
+              <a href="my-Info.html" class="dropdown-item has-icon">
+                <i class="far fa-user"></i> Profile
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="login.html" class="dropdown-item has-icon text-primary">
+                <i class="fas fa-sign-in-alt"></i> Login
+              </a>
+              <a href="#" class="dropdown-item has-icon text-danger" id="logout-button">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <div class="main-sidebar sidebar-style-2">
+        <aside id="sidebar-wrapper">
+          <div class="sidebar-brand">
+            <a>OUTBODY</a>
+            <br>
+          </div>
+          <div class="sidebar-brand sidebar-brand-sm">
+            <a>OB</a>
+          </div>
+
+          <!-- 사이드바 -->
+          <ul class="sidebar-menu">
+
+            <li class="menu-header">Record</li>
+            <li>
+              <a href="index-0.html"><i class="fas fa-columns"></i>
+                <span>체성분</span></a>
+            </li>
+
+            <li class="menu-header">Challenge</li>
+            <li>
+              <a href="get-challenges.html"><i class="fas fa-fire"></i>
+                <span>도전</span></a>
+            </li>
+
+            <li class="menu-header">Post</li>
+            <li>
+              <a href="sns.html"><i class="fas fa-bicycle"></i>
+                <span>오운완</span></a>
+            </li>
+
+            <li class="menu-header">Rank</li>
+            <li>
+              <a href="ranks.html"><i class="fas fa-th"></i>
+                <span>순위</span></a>
+            </li>
+            <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+              <a class="btn btn-primary btn-lg btn-block btn-icon-split" style="color: white; font-weight: bold;">
+                <i class="fas fa-rocket"></i> OUTBODY
+              </a>
+            </div>
+        </aside>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+          <div class="section-header">
+            <h1>내 정보</h1>
+          </div>
+
+          <div class="section-body">
+            <h2 class="section-title" id="greeting">회원님의 정보</h2>
+
+            <div class="row">
+              <div class="col-12 col-md-12 col-lg-5">
+                <div class="card profile-widget">
+                  <div class="profile-widget-header">
+                    <img id="profile-image" alt="image" src="assets/img/avatar/avatar-1.png"
+                      class="rounded-circle profile-widget-picture" />
+                    <div class="profile-widget-items">
+                      <div class="profile-widget-item">
+                        <div class="profile-widget-item-label">- 점수 -</div>
+                        <div class="profile-widget-item-value" id="my-point">
+                          <!-- 사용자 점수 -->
+                        </div>
+                      </div>
+                      <div class="profile-widget-item">
+                        <div class="profile-widget-item-label">- 순위 -</div>
+                        <div id="my-rank" class="profile-widget-item-value">
+                          <!-- 사용자 순위 -->
+                        </div>
+                      </div>
+                      <div class="profile-widget-item">
+                        <div class="profile-widget-item-label">- 친구 수 -</div>
+                        <div class="profile-widget-item-value" id="friend-count">
+                          <!-- 사용자 친구 수 -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="profile-widget-description">
+                    <div class="profile-widget-name">
+                      <div id="descriptionName" style="font-weight: bold; margin-left: 20px;">
+                        <!-- 사용자 이름 -->
+                      </div>
+                      <div class="text-muted d-inline font-weight-normal">
+                      </div>
+                    </div>
+                    <div id="self-description" style="margin-left: 20px;">
+                      <!-- 자기소개 -->
+                    </div>
+                    <br />
+
+                    <div style="position: relative; overflow: hidden">
+                      <div id="challenge-card" class="col-12 col-md-6 col-lg-12">
+                        <div class="card card-primary">
+                          <div class="card-header">
+                            <h4>회원님이 현재 참여중인 도전</h4>
+                          </div>
+                          <div class="card-body" style="cursor: pointer;">
+                            <p id="title">제목: </p>
+                            <p id="desc" style="margin-top: 15px;">내용: </p>
+                            <p id="date">도전 기간: </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-12 col-lg-7">
+                <div class="card card-primary">
+                  <form method="post" class="needs-validation" novalidate="">
+                    <div class="card-header">
+                      <h4 id="informationName">내 정보</h4>
+                      <div class="card-header-action">
+                        <a id="userInfoEdit" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary"
+                          style="color: white;">내 정보 수정</a>
+                        <a id="passwordEdit" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary"
+                          style="color: white;">비밀번호 수정</a>
+                        <a id="signout" data-toggle="modal" data-target="#exampleModal" class="btn btn-danger"
+                          style="color: white;">회원탈퇴</a>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="form-group col-md-6 col-12">
+                          <label>계정(e-mail)</label>
+                          <div id="emailaddress"></div>
+                          <div class="invalid-feedback"></div>
+                        </div>
+                        <div class="form-group col-md-6 col-12">
+                          <label>성별</label>
+                          <div id="mygender"></div>
+                          <div class="invalid-feedback"></div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-md-6 col-12">
+                          <label>생일</label>
+                          <div id="bdaytag"></div>
+                          <div class="invalid-feedback"></div>
+                        </div>
+                        <div class="form-group col-md-6 col-12">
+                          <label>가입일</label>
+                          <div id="createdate"></div>
+                          <div class="invalid-feedback"></div>
+                        </div>
+                      </div>
+                      <div class="row" id="mychatbox2">
+                        <div class="form-group col-12" data-toggle="tooltip">
+                          <div class="section-title mt-0">친구 목록</div>
+                        </div>
+                      </div>
+                      <div class="table-responsive">
+                        <div style="overflow-y: scroll; height: 200px">
+                          <table class="table table-sm">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">이름</th>
+                                <th scope="col">계정(e-mail)</th>
+                                <th scope="col">점수</th>
+                                <th scope="col">순위</th>
+                                <th scope="col"></th>
+                              </tr>
+                            </thead>
+                            <tbody id="my-friends-list">
+                              <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="card-footer text-right">
+                      <a id="searchfriend" data-toggle="modal" data-target="#exampleModal" style="font-size: 90%"
+                        href="#">
+                        <button class="btn btn-primary" style="border-radius: 15px;">친구 찾기</button>
+                      </a>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- 모달 1: 정보 수정  -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="infoEditModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">내 정보 수정</h5>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label>내 사진 올리기</label>
+                <form>
+                  <div class="form-group">
+                    <input id="profile-image-upload" type="file" class="form-control-file" />
+                  </div>
+                </form>
+              </div>
+              <div id="image-container"></div>
+              <div class="form-group">
+                <label>생일</label>
+                <input id="user-birthday" type="text" class="form-control datepicker" placeholder="예: 2000-01-01" />
+              </div>
+              <div class="form-group mb-0">
+                <label>자기소개</label>
+                <textarea id="user-description" class="form-control" placeholder="자신을 자유롭게 설명해주세요."></textarea>
+              </div>
+            </div>
+            <div class="modal-footer" style="margin-bottom: 20px;">
+              <button class="btn btn-primary" id="update-userInfo-button">완료</button>
+              <button class="btn btn-secondary" id="editcancel">취소</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 모달 2: 비밀번호 수정 -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="pwEditModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">비밀번호 수정</h5>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label>현재 비밀번호</label>
+                <input type="text" class="form-control datemask" placeholder="" id="current" />
+              </div>
+              <div class="form-group">
+                <label>새로운 비밀번호</label>
+                <input type="text" class="form-control datemask" placeholder="" id="newpw" />
+              </div>
+              <div class="form-group">
+                <label>새로운 비밀번호 확인</label>
+                <input type="text" class="form-control datemask" placeholder="" id="confirmpw" />
+              </div>
+              비밀번호는 최소 8자 이상, 영문 대소문자, 숫자를 포함해야 합니다.
+            </div>
+            <div class="modal-footer" style="margin-bottom: 20px;">
+              <button class="btn btn-primary" id="submit" onclick="editPassword();">
+                완료
+              </button>
+              <button class="btn btn-secondary" id="passwordcancel">
+                취소
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 모달 3: 회원 탈퇴 -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="signoutModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">회원탈퇴</h5>
+            </div>
+            <div class="card-body">
+              <div class="form-group mb-0">
+                <label>비밀번호</label>
+                <input type="text" class="form-control" required="" placeholder="" id="signoutpassword" />
+                <br />
+                탈퇴를 누를 시, 회원님의 계정은 즉시 삭제 처리됩니다.
+              </div>
+            </div>
+            <div class="modal-footer" style="margin-bottom: 20px;">
+              <button class="btn btn-primary" id="signout-btn">탈퇴</button>
+              <button class="btn btn-secondary" id="signoutcancel">취소</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 모달 4: 친구 찾기  -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="searchfriendModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">친구 찾기</h5>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="친구 요청을 보낼 회원의 계정(e-mail)을 입력해주세요." aria-label=""
+                    id="searchEmail" />
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" id="searchFriendByEmail">
+                      검색
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div id="searched-friend" class="form-group mb-0">
+                <br />
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <div style="margin-top: 5px; margin-right: 20px;">
+                <span style="margin-left: 5px">친구 요청시 회원님의 계정이 노출됩니다.&nbsp;</span>
+                <input id="invite-checkbox" type="checkbox" />
+              </div>
+              <button class="btn btn-primary" type="button" id="send-invite">
+                친구 요청
+              </button>
+              <button class="btn btn-secondary" id="searchfriendCancel">
+                취소
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="main-footer">
+        <div class="footer-left">
+          Copyright &copy; 2023
+          <div class="bullet"></div>
+          Design By <a style="font-weight: bold;">WildBody</a>
+        </div>
+        <div class="footer-right"></div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- General JS Scripts -->
+  <script src="assets/modules/jquery.min.js"></script>
+  <script src="assets/modules/popper.js"></script>
+  <script src="assets/modules/tooltip.js"></script>
+  <script src="assets/modules/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+  <script src="assets/modules/moment.min.js"></script>
+  <script src="assets/js/stisla.js"></script>
+  <scripy src="assets/modules/modal.js"></scripy>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <!-- JS Libraies -->
+  <script src="assets/modules/prism/prism.js"></script>
+
+  <!-- Page Specific JS File -->
+  <script src="assets/js/page/bootstrap-modal.js"></script>
+  <script src="assets/js/page/forms-advanced-forms.js"></script>
+
+  <!-- Template JS File -->
+  <script src="assets/js/scripts.js"></script>
+  <script src="assets/js/notice.js"></script>
+  <script src="assets/js/my-Info.js"></script>
+</body>
+
+</html>

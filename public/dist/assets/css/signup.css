@@ -1,0 +1,45 @@
+.signUp-box {
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+.form-group {
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.sm-gutters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-container {
+  margin-top: 10px;
+}
+
+.fa-solid {
+  margin-right: 5px;
+}
+
+.social-login {
+  color: #98a6ad;
+}
+
+.text-muted {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.kakao-btn {
+  background-color: #fee500;
+  border: none;
+  height: 50px;
+  width: 250px;
+  border-radius: 12px;
+  color: #000000 85%;
+}
+
+.kakao-btn:hover {
+  background-color: #ffde00;
+}
