@@ -18,14 +18,19 @@ const login = async () => {
       password: $('#password').val(),
     })
     .then((response) => {
-      console.log(response.data.data);
+      console.log('response', response.data.data);
       localStorage.setItem(
         `cookie`,
         `Bearer ${response.data.data.accessToken}`,
       );
-      // setCookie('Authorization', response.data.data.accessToken, 2);
-      alert('반갑습니다 회원님!');
-      location.href = `index-0.html?id=${response.data.data.userId}`;
+      if (response.data.data.status === 'admin') {
+        alert('관리자 페이지로 이동합니다.');
+        location.href = 'admin.html';
+      } else {
+        // setCookie('Authorization', response.data.data.accessToken, 2);
+        alert('반갑습니다 회원님!');
+        location.href = `main.html?id=${response.data.data.userId}`;
+      }
     })
     .catch((error) => {
       alert(error.response.data.message);
