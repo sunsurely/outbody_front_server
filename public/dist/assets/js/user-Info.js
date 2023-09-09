@@ -4,7 +4,7 @@ const userId = userInfoParams.get('id');
 console.log(userId);
 
 const accessTokenForUser = localStorage.getItem('cookie');
-
+console.log(accessTokenForUser);
 $(document).ready(function () {
   userPage();
 });
@@ -28,6 +28,17 @@ async function userPage() {
       },
     });
 
+    const followData = await axios.get(
+      `http://localhost:3000/follow/${userId}/isFollowed`,
+      {
+        headers: {
+          Authorization: accessTokenForUser,
+        },
+      },
+    );
+
+    const isFollowed = followData.data.data;
+
     const rankData = await axios.get('http://localhost:3000/user/me/rank', {
       headers: {
         Authorization: accessTokenForUser,
@@ -36,9 +47,6 @@ async function userPage() {
 
     const user = data.data;
     const userRank = rankData.data;
-
-    console.log(user);
-    console.log(userRank);
 
     if (!user.description) {
       user.description = '';
@@ -76,6 +84,43 @@ async function userPage() {
                     </div>`;
 
     $('.user-head').html(userBox);
+
+    const followBtn = $('#follow-user');
+
+    $(followBtn).text(isFollowed ? 'unfollow' : 'follow');
+
+    $(followBtn).on('click', async function () {
+      if ($(this).text() === 'follow') {
+        try {
+          await axios.post(
+            `http://localhost:3000/follow/${userId}/request`,
+            {},
+            {
+              headers: { Authorization: accessTokenForUser },
+              withCredentials: true,
+            },
+          );
+
+          alert('친구 요청을 보냈습니다.');
+          window.location.reload();
+        } catch (error) {
+          console.error(error.response.data.message);
+        }
+      }
+
+      try {
+        await axios.delete(`http://localhost:3000/follow/${user.id}`, {
+          headers: {
+            Authorization: accessTokenForUser,
+          },
+        });
+
+        alert('친구를 삭제했습니다.');
+        window.location.reload();
+      } catch (error) {
+        console.error(error.response.data.message);
+      }
+    });
 
     let userInfoTop = `<div class="profile-widget-items">
                         <div class="profile-widget-item">
@@ -131,91 +176,91 @@ async function userPage() {
   }
 
   // 유저 추천목록 (나와 follow관계가 아닌 유저들 추천목록)
-  try {
-    const response = await axios.get(
-      'http://localhost:3000/user/me/recommendation',
-      {
-        headers: {
-          Authorization: accessTokenForUser,
-        },
-      },
-    );
+  // try {
+  //   const response = await axios.get(
+  //     'http://localhost:3000/user/me/recommendation',
+  //     {
+  //       headers: {
+  //         Authorization: accessTokenForUser,
+  //       },
+  //     },
+  //   );
 
-    $('#users-carousel').html(recommendedUser);
+  //   $('#users-carousel').html(recommendedUser);
 
-    const recommendations = response.data;
-    const usersCarousel = $('#users-carousel');
-    recommendations.forEach((user) => {
-      const userItem = `
-        <div class="user-item">
-          <img alt="image" src="${user.imgUrl}" class="img-fluid" />
-          <div class="user-details">
-            <div class="user-name">${user.name}</div>
-            <div class="user-email">${user.email}</div>
-            <div class="user-cta">
-              <button class="btn ${
-                user.followed
-                  ? 'btn-danger following-btn'
-                  : 'btn-primary follow-btn'
-              }"
-                      data-user-id="${user.id}"
-                      data-action="${user.followed ? 'unfollow' : 'follow'}">
-                ${user.followed ? 'Following' : 'Follow'}
-              </button>
-            </div>
-          </div>
-        </div>
-      `;
-      usersCarousel.append(userItem);
-    });
-    // Follow 또는 Unfollow 버튼 클릭 처리
-    // (follow-btn: 친구요청), (following-btn: 현재 친구상태, 누르면 친구취소)
-    $('.follow-btn, .following-btn').on('click', async function () {
-      const action = $(this).data('action');
-      const targetUserId = $(this).data('user-id');
+  //   const recommendations = response.data;
+  //   const usersCarousel = $('#users-carousel');
+  //   recommendations.forEach((user) => {
+  //     const userItem = `
+  //       <div class="user-item">
+  //         <img alt="image" src="${user.imgUrl}" class="img-fluid" />
+  //         <div class="user-details">
+  //           <div class="user-name">${user.name}</div>
+  //           <div class="user-email">${user.email}</div>
+  //           <div class="user-cta">
+  //             <button class="btn ${
+  //               user.followed
+  //                 ? 'btn-danger following-btn'
+  //                 : 'btn-primary follow-btn'
+  //             }"
+  //                     data-user-id="${user.id}"
+  //                     data-action="${user.followed ? 'unfollow' : 'follow'}">
+  //               ${user.followed ? 'Following' : 'Follow'}
+  //             </button>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     `;
+  //     usersCarousel.append(userItem);
+  //   });
+  //   // Follow 또는 Unfollow 버튼 클릭 처리
+  //   // (follow-btn: 친구요청), (following-btn: 현재 친구상태, 누르면 친구취소)
+  //   $('.follow-btn, .following-btn').on('click', async function () {
+  //     const action = $(this).data('action');
+  //     const targetUserId = $(this).data('user-id');
 
-      try {
-        //친구요청(follow)
-        if (action === 'follow') {
-          await axios
-            .post(
-              `http://localhost:3000/follow/${Number(targetUserId)}/request`,
-              null,
-              {
-                headers: { Authorization: accessTokenForUser },
-              },
-            )
-            .then((response) => {
-              alert(`${response.data.name}님에게 친구요청을 보냈습니다.`);
-            });
+  //     try {
+  //       //친구요청(follow)
+  //       if (action === 'follow') {
+  //         await axios
+  //           .post(
+  //             `http://localhost:3000/follow/${Number(targetUserId)}/request`,
+  //             null,
+  //             {
+  //               headers: { Authorization: accessTokenForUser },
+  //             },
+  //           )
+  //           .then((response) => {
+  //             alert(`${response.data.name}님에게 친구요청을 보냈습니다.`);
+  //           });
 
-          //친구취소(unfollow)
-        } else if (action === 'unfollow') {
-          await axios
-            .delete(`http://localhost:3000/follow/${Number(targetUserId)}`, {
-              headers: { Authorization: accessTokenForUser },
-            })
-            .then((response) => {
-              alert(`${response.data.name}님과 친구 취소되었습니다.`);
-            });
-        }
+  //         //친구취소(unfollow)
+  //       } else if (action === 'unfollow') {
+  //         await axios
+  //           .delete(`http://localhost:3000/follow/${Number(targetUserId)}`, {
+  //             headers: { Authorization: accessTokenForUser },
+  //           })
+  //           .then((response) => {
+  //             alert(`${response.data.name}님과 친구 취소되었습니다.`);
+  //           });
+  //       }
 
-        // 버튼 상태 변경 및 메시지 출력 (버튼이 2개있는게 아니라, 버튼1개로 누를때마다 follow(친구요청), following(친구취소)이 바뀌는 형태)
-        const buttonText = action === 'follow' ? 'Following' : 'Follow';
-        $(this)
-          .removeClass('btn-primary btn-danger')
-          .addClass(action === 'follow' ? 'btn-danger' : 'btn-primary');
-        $(this).text(buttonText);
-        alert(
-          `${action === 'follow' ? 'Followed' : 'Unfollowed'} ${
-            recommendations.find((user) => user.id === targetUserId).name
-          }`,
-        );
-      } catch (error) {
-        console.error('Error:', error.response.data.message);
-      }
-    });
-  } catch (error) {
-    console.error('Error:', error.response.data.message);
-  }
+  //       // 버튼 상태 변경 및 메시지 출력 (버튼이 2개있는게 아니라, 버튼1개로 누를때마다 follow(친구요청), following(친구취소)이 바뀌는 형태)
+  //       const buttonText = action === 'follow' ? 'Following' : 'Follow';
+  //       $(this)
+  //         .removeClass('btn-primary btn-danger')
+  //         .addClass(action === 'follow' ? 'btn-danger' : 'btn-primary');
+  //       $(this).text(buttonText);
+  //       alert(
+  //         `${action === 'follow' ? 'Followed' : 'Unfollowed'} ${
+  //           recommendations.find((user) => user.id === targetUserId).name
+  //         }`,
+  //       );
+  //     } catch (error) {
+  //       console.error('Error:', error.response.data.message);
+  //     }
+  //   });
+  // } catch (error) {
+  //   console.error('Error:', error.response.data.message);
+  // }
 }

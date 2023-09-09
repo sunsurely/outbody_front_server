@@ -9,9 +9,6 @@ const login = async () => {
     return;
   }
 
-  console.log($('#email').val());
-  console.log($('#password').val());
-
   await axios
     .post('http://localhost:3000/auth/login', {
       email: $('#email').val(),
