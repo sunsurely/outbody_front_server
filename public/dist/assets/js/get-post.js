@@ -1,6 +1,5 @@
 const postParams = new URLSearchParams(window.location.search);
 const challengeId = postParams.get('id');
-console.log('challengeId', challengeId);
 
 const accessToken = localStorage.getItem('cookie');
 
@@ -21,60 +20,28 @@ const getPosts = async (page, pageSize) => {
         headers: {
           Authorization: accessToken,
         },
-      },
+      }
     );
-    console.log(response);
     console.log(response.data.data);
-    console.log(challengeId);
 
     let allPosts = '';
-    console.log(response.data.data);
+
     response.data.data.forEach((post) => {
       const profileImage = post.userImageUrl
         ? `https://inflearn-nest-cat.s3.amazonaws.com/${post.userImageUrl}`
         : `assets/img/avatar/avatar-1.png`;
 
-      const createdAt = post.createdAt;
-      const date = new Date(createdAt);
-      const months = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-      ];
-      const month = months[date.getMonth()];
-      const day = date.getDate();
-
-      const ordinalSuffix = getOrdinalSuffix(day);
-      const formattedDate = `${month} ${day}${ordinalSuffix}, ${date.getFullYear()}`;
-
-      function getOrdinalSuffix(day) {
-        if (day >= 11 && day <= 13) {
-          return 'th';
-        }
-        switch (day % 10) {
-          case 1:
-            return 'st';
-          case 2:
-            return 'nd';
-          case 3:
-            return 'rd';
-          default:
-            return 'th';
-        }
-      }
-
       const userId = post.userId;
-      console.log('userId', userId);
-      let temphtml = `<div class="col-12 col-md-4 ">
+
+      const createdAt = new Date(post.createdAt);
+
+      const year = createdAt.getFullYear();
+      const month = (createdAt.getMonth() + 1).toString().padStart(2, '0');
+      const day = createdAt.getDate().toString().padStart(2, '0');
+
+      const formattedDate = `${year}년 ${month}월 ${day}일`;
+
+      let temphtml = `<div class="col-12 col-md-2">
           <article class="article article-style-c">
             <div class="article-header">
               <div class="article-image"
@@ -97,7 +64,9 @@ const getPosts = async (page, pageSize) => {
                   <div class="user-detail-name">
                     <a href="user-info.html?id=${userId}">${post.userName}</a>
                     <div class="font-1000-bold"><i class="fas fa-circle"></i> ${post.userPoint}점</div>
-                    <p>${formattedDate}</p>
+                    <div style="margin-top: 20px">
+                      <p style="color: gray;">작성일: ${formattedDate}</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -131,9 +100,7 @@ const getPosts = async (page, pageSize) => {
   }
 
   pageNumbersHtml = prevButton + pageNumbers + nextButton;
-  pagenationTag.html(
-    `<ul class="pagination justify-content-center">${pageNumbersHtml}</ul>`,
-  );
+  pagenationTag.html(`<ul class="pagination justify-content-center">${pageNumbersHtml}</ul>`);
 
   const prevBtn = $('#prev_button');
   const nextBtn = $('#next_button');
@@ -225,10 +192,8 @@ const getPosts = async (page, pageSize) => {
         headers: {
           Authorization: ` ${accessToken}`,
         },
-      },
+      }
     );
-    console.log('data', data);
-    console.log('challengeId', challengeId);
     orderList = 'normal';
     return data;
   }
@@ -298,7 +263,7 @@ const deletePost = async (postId) => {
         headers: {
           Authorization: accessToken,
         },
-      },
+      }
     );
 
     alert('오운완 삭제가 완료 되었습니다.');
