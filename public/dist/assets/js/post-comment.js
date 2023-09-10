@@ -2,7 +2,7 @@ const commentParams = new URLSearchParams(window.location.search);
 const challengeIdForComment = commentParams.get('cid');
 const postId = commentParams.get('pid');
 
-const token = localStorage.getItem('cookie');
+const accessToken = localStorage.getItem('cookie');
 
 $(document).ready(function () {
   getOnePost();
@@ -16,7 +16,7 @@ const getOnePost = async () => {
       `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}/detail`,
       {
         headers: {
-          Authorization: token,
+          Authorization: accessToken,
         },
       },
     );
@@ -64,7 +64,7 @@ const getComment = async () => {
       `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
       {
         headers: {
-          Authorization: token,
+          Authorization: accessToken,
         },
       },
     );
@@ -124,7 +124,7 @@ const createComment = async () => {
       { comment: $('#comment_input').val() },
       {
         headers: {
-          Authorization: token,
+          Authorization: accessToken,
         },
       },
     );
@@ -157,7 +157,7 @@ const updateComment = async (commentId) => {
       { comment: $('#updateCmt_input').val() },
       {
         headers: {
-          Authorization: token,
+          Authorization: accessToken,
         },
       },
     );
@@ -179,7 +179,7 @@ const deleteComment = async (commentId) => {
       `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
       {
         headers: {
-          Authorization: token,
+          Authorization: accessToken,
         },
       },
     );
@@ -226,7 +226,7 @@ const reportComment = async (commentId) => {
       { description: $('.report_input').val() },
       {
         headers: {
-          Authorization: token,
+          Authorization: accessToken,
         },
       },
     );

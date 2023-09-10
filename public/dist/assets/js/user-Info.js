@@ -1,10 +1,8 @@
 const userInfoParams = new URLSearchParams(window.location.search);
 const userId = userInfoParams.get('id');
 
-console.log(userId);
-
 const accessTokenForUser = localStorage.getItem('cookie');
-console.log(accessTokenForUser);
+
 $(document).ready(function () {
   userPage();
 });
