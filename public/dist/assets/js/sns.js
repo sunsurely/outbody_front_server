@@ -1,3 +1,4 @@
+// 로그인 여부 확인
 const accessToken = localStorage.getItem('cookie');
 
 let nowPage = 1;
@@ -38,40 +39,35 @@ const getAllPosts = async (page, pageSize) => {
       const formattedDate = `${year}년 ${month}월 ${day}일`;
 
       let temphtml = `<div class="col-12 col-md-4 col-lg-2">
-      <article class="article article-style-c">
-        <div class="article-header">
-          <div class="article-image"
-          style="background-image: url(https://inflearn-nest-cat.s3.amazonaws.com/${post.imgUrl});
-          background-position: center; background-size: cover;">
-          </div>
-        </div>
-        <div class="article-details">
-          <div class="article-title">
-            <h2 class="ellipsis">
-              <a href="post-comment.html?cid=${post.challenges.id}&pid=${post.id}">${post.description}</a>
-            </h2>
-          </div>
-          <div class="article-user">
-            <img alt="image" src="${profileImage}">
-            <div class="article-user-details">
-              <div class="user-detail-name">
-                <a href="user-info.html?id=${userId}">${post.user.name}</a>
-                <div class="font-1000-bold"><i class="fas fa-circle"></i> ${post.user.point}점</div>
-                <div style="margin-top: 20px">
-                  <p style="color: gray;">작성일: ${formattedDate}</p>
+          <article class="article article-style-c">
+            <div class="article-header">
+              <div class="article-image"
+              style="background-image: url(https://inflearn-nest-cat.s3.amazonaws.com/${post.imgUrl});
+              background-position: center; background-size: cover;">
+              </div>
+            </div>
+            <div class="article-details">
+              <div class="article-title">
+                <h2 class="ellipsis">
+                  <a href="post-comment.html?cid=${post.challenges.id}&pid=${post.id}">${post.description}</a>
+                </h2>
+              </div>
+              <div class="article-user">
+                <img alt="image" src="${profileImage}">
+                <div class="article-user-details">
+                  <div class="user-detail-name">
+                    <a href="user-info.html?id=${userId}">${post.user.name}</a>
+                    <div class="font-1000-bold"><i class="fas fa-circle"></i> ${post.user.point}점</div>
+                    <div style="margin-top: 20px">
+                      <p style="color: gray;">작성일: ${formattedDate}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </article>
-    </div>`;
+          </article>
+        </div>`;
       allPosts += temphtml;
-
-      $('.btn btn-primary').on('click', function (event) {
-        event.preventDefault();
-        window.location.href = `user-info.html?id=${userId}`;
-      });
     });
     $('#postcardList').html(allPosts);
   } catch (error) {
@@ -86,10 +82,7 @@ const getAllPosts = async (page, pageSize) => {
   let pageNumbersHtml = '';
 
   const data = await getTotaldata(page, pageSize);
-  console.log(data);
-
   totalPages = data.data.data.totalPages;
-  console.log(totalPages);
 
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers += `<li class="page-item page_number">
@@ -209,40 +202,35 @@ const getAllPosts = async (page, pageSize) => {
       const formattedDate = `${year}년 ${month}월 ${day}일`;
 
       let temphtml = `<div class="col-12 col-md-4 col-lg-2">
-      <article class="article article-style-c">
-        <div class="article-header">
-          <div class="article-image"
-          style="background-image: url(https://inflearn-nest-cat.s3.amazonaws.com/${post.imgUrl});
-          background-position: center; background-size: cover;">
-          </div>
-        </div>
-        <div class="article-details">
-          <div class="article-title">
-            <h2 class="ellipsis">
-              <a href="post-comment.html?cid=${post.challenges.id}&pid=${post.id}">${post.description}</a>
-            </h2>
-          </div>
-          <div class="article-user">
-            <img alt="image" src="${profileImage}">
-            <div class="article-user-details">
-              <div class="user-detail-name">
-                <a href="user-info.html?id=${userId}">${post.user.name}</a>
-                <div class="font-1000-bold"><i class="fas fa-circle"></i> ${post.user.point}점</div>
-                <div style="margin-top: 20px">
-                  <p style="color: gray;">작성일: ${formattedDate}</p>
+          <article class="article article-style-c">
+            <div class="article-header">
+              <div class="article-image"
+              style="background-image: url(https://inflearn-nest-cat.s3.amazonaws.com/${post.imgUrl});
+              background-position: center; background-size: cover;">
+              </div>
+            </div>
+            <div class="article-details">
+              <div class="article-title">
+                <h2 class="ellipsis">
+                  <a href="post-comment.html?cid=${post.challenges.id}&pid=${post.id}">${post.description}</a>
+                </h2>
+              </div>
+              <div class="article-user">
+                <img alt="image" src="${profileImage}">
+                <div class="article-user-details">
+                  <div class="user-detail-name">
+                    <a href="user-info.html?id=${userId}">${post.user.name}</a>
+                    <div class="font-1000-bold"><i class="fas fa-circle"></i> ${post.user.point}점</div>
+                    <div style="margin-top: 20px">
+                      <p style="color: gray;">작성일: ${formattedDate}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </article>
-    </div>`;
+          </article>
+        </div>`;
       allPosts += temphtml;
-
-      $('.btn btn-primary').on('click', function (event) {
-        event.preventDefault();
-        window.location.href = `user-info.html?id=${userId}`;
-      });
     });
     $('#postcardList').html(allPosts);
   }

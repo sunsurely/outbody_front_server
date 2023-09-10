@@ -1,9 +1,8 @@
 const userInfoParams = new URLSearchParams(window.location.search);
 const userId = userInfoParams.get('id');
 
-console.log(userId);
-
-const accessTokenForUser = localStorage.getItem('cookie');
+// 로그인 여부 확인
+const accessToken = localStorage.getItem('cookie');
 
 $(document).ready(function () {
   userPage();
@@ -24,36 +23,22 @@ async function userPage() {
   try {
     const { data } = await axios.get(`http://localhost:3000/user/${userId}`, {
       headers: {
-        Authorization: accessTokenForUser,
+        Authorization: accessToken,
       },
     });
 
     const rankData = await axios.get('http://localhost:3000/user/me/rank', {
       headers: {
-        Authorization: accessTokenForUser,
+        Authorization: accessToken,
       },
     });
 
     const user = data.data;
     const userRank = rankData.data;
 
-    console.log(user);
-    console.log(userRank);
-
     if (!user.description) {
       user.description = '';
     }
-    // if (user.imgUrl === null) {
-    //   user.imgUrl = 'assets/img/avatar/avatar-1.png';
-    // }
-
-    // let userImg = `<div class="author-box-left">
-    //                   <img alt="image" src="${user.imgUrl}" class="rounded-circle author-box-picture" />
-    //                   <div class="clearfix"></div>
-    //                   <a href="#" class="btn btn-primary mt-3 follow-btn" data-follow-action="alert('follow clicked');"
-    //                     data-unfollow-action="alert('unfollow clicked');">Follow</a>
-    //                 </div>`;
-    // $('.userImg-Box').html(userImg);
 
     let userBox = `<div class="author-box-details">
                       <div class="author-box-name">
@@ -132,14 +117,11 @@ async function userPage() {
 
   // 유저 추천목록 (나와 follow관계가 아닌 유저들 추천목록)
   try {
-    const response = await axios.get(
-      'http://localhost:3000/user/me/recommendation',
-      {
-        headers: {
-          Authorization: accessTokenForUser,
-        },
+    const response = await axios.get('http://localhost:3000/user/me/recommendation', {
+      headers: {
+        Authorization: accessToken,
       },
-    );
+    });
 
     $('#users-carousel').html(recommendedUser);
 
@@ -154,9 +136,7 @@ async function userPage() {
             <div class="user-email">${user.email}</div>
             <div class="user-cta">
               <button class="btn ${
-                user.followed
-                  ? 'btn-danger following-btn'
-                  : 'btn-primary follow-btn'
+                user.followed ? 'btn-danger following-btn' : 'btn-primary follow-btn'
               }"
                       data-user-id="${user.id}"
                       data-action="${user.followed ? 'unfollow' : 'follow'}">
@@ -178,25 +158,21 @@ async function userPage() {
         //친구요청(follow)
         if (action === 'follow') {
           await axios
-            .post(
-              `http://localhost:3000/follow/${Number(targetUserId)}/request`,
-              null,
-              {
-                headers: { Authorization: accessTokenForUser },
-              },
-            )
+            .post(`http://localhost:3000/follow/${Number(targetUserId)}/request`, null, {
+              headers: { Authorization: accessToken },
+            })
             .then((response) => {
-              alert(`${response.data.name}님에게 친구요청을 보냈습니다.`);
+              alert(`${response.data.name}님에게 친구 요청을 보냈습니다.`);
             });
 
           //친구취소(unfollow)
         } else if (action === 'unfollow') {
           await axios
             .delete(`http://localhost:3000/follow/${Number(targetUserId)}`, {
-              headers: { Authorization: accessTokenForUser },
+              headers: { Authorization: accessToken },
             })
             .then((response) => {
-              alert(`${response.data.name}님과 친구 취소되었습니다.`);
+              alert(`${response.data.name}님과 친구 취소가 완료되었습니다.`);
             });
         }
 
@@ -209,7 +185,7 @@ async function userPage() {
         alert(
           `${action === 'follow' ? 'Followed' : 'Unfollowed'} ${
             recommendations.find((user) => user.id === targetUserId).name
-          }`,
+          }`
         );
       } catch (error) {
         console.error('Error:', error.response.data.message);
