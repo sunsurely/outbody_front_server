@@ -15,12 +15,12 @@ $(document).ready(function () {
 const getPosts = async (page, pageSize) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
+      `http://3.34.131.11:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: accessToken,
         },
-      }
+      },
     );
     console.log(response.data.data.result);
     const posts = response.data.data.result;
@@ -99,13 +99,17 @@ const getPosts = async (page, pageSize) => {
   }
 
   pageNumbersHtml = prevButton + pageNumbers + nextButton;
-  pagenationTag.html(`<ul class="pagination justify-content-center">${pageNumbersHtml}</ul>`);
+  pagenationTag.html(
+    `<ul class="pagination justify-content-center">${pageNumbersHtml}</ul>`,
+  );
 
   const prevBtn = $('#prev_button');
   const nextBtn = $('#next_button');
   const pages = $('.page_number');
 
-  $(pages).find(`#nowPage-${nowPage}`).css('background-color', 'rgb(103,119,239)');
+  $(pages)
+    .find(`#nowPage-${nowPage}`)
+    .css('background-color', 'rgb(103,119,239)');
   $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
 
   // 이전
@@ -123,7 +127,9 @@ const getPosts = async (page, pageSize) => {
 
         nowPage -= 1;
 
-        $(pages).find(`#nowPage-${nowPage}`).css('background-color', 'rgb(103,119,239)');
+        $(pages)
+          .find(`#nowPage-${nowPage}`)
+          .css('background-color', 'rgb(103,119,239)');
         $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
       } catch (error) {
         console.log('Error Message', error.response.data.message);
@@ -146,7 +152,9 @@ const getPosts = async (page, pageSize) => {
 
         nowPage += 1;
 
-        $(pages).find(`#nowPage-${nowPage}`).css('background-color', 'rgb(103,119,239)');
+        $(pages)
+          .find(`#nowPage-${nowPage}`)
+          .css('background-color', 'rgb(103,119,239)');
         $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
       } catch (error) {
         console.log('Error Message', error.response.data.message);
@@ -182,12 +190,12 @@ const getPosts = async (page, pageSize) => {
 
   async function getTotalpost(page, pageSize) {
     const data = await axios.get(
-      `http://localhost:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
+      `http://3.34.131.11:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: ` ${accessToken}`,
         },
-      }
+      },
     );
     orderList = 'normal';
     return data;
@@ -269,7 +277,7 @@ const createPost = async () => {
     formData.append('description', description);
 
     await axios
-      .post(`http://localhost:3000/challenge/${challengeId}/post`, formData, {
+      .post(`http://3.34.131.11:3000/challenge/${challengeId}/post`, formData, {
         headers: {
           Authorization: accessToken,
           'Content-Type': 'multipart/form-data',
@@ -307,11 +315,14 @@ image.addEventListener('change', (event) => {
 // 오운완 삭제
 const deletePost = async (postId) => {
   try {
-    await axios.delete(`http://localhost:3000/challenge/${challengeId}/post/${postId}`, {
-      headers: {
-        Authorization: accessToken,
+    await axios.delete(
+      `http://3.34.131.11:3000/challenge/${challengeId}/post/${postId}`,
+      {
+        headers: {
+          Authorization: accessToken,
+        },
       },
-    });
+    );
 
     alert('오운완 삭제가 완료 되었습니다.');
     location.reload();

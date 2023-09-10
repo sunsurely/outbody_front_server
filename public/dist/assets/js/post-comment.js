@@ -14,12 +14,12 @@ $(document).ready(function () {
 const getOnePost = async () => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}/detail`,
+      `http://3.34.131.11:3000/challenge/${challengeIdForComment}/post/${postId}/detail`,
       {
         headers: {
           Authorization: accessToken,
         },
-      }
+      },
     );
 
     let getPost = '';
@@ -62,12 +62,12 @@ const getOnePost = async () => {
 const getComment = async () => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
+      `http://3.34.131.11:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
       {
         headers: {
           Authorization: accessToken,
         },
-      }
+      },
     );
 
     let allComments = '';
@@ -121,13 +121,13 @@ const createComment = async () => {
     }
 
     await axios.post(
-      `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
+      `http://3.34.131.11:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
       { comment: $('#comment_input').val() },
       {
         headers: {
           Authorization: accessToken,
         },
-      }
+      },
     );
     alert('댓글이 작성되었습니다.');
     location.reload();
@@ -154,13 +154,13 @@ const updateComment = async (commentId) => {
     }
 
     await axios.patch(
-      `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
+      `http://3.34.131.11:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
       { comment: $('#updateCmt_input').val() },
       {
         headers: {
           Authorization: accessToken,
         },
-      }
+      },
     );
     alert('댓글이 수정되었습니다.');
     location.reload();
@@ -177,12 +177,12 @@ $(document).on('click', '#updateCmt_btn', function () {
 const deleteComment = async (commentId) => {
   try {
     await axios.delete(
-      `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
+      `http://3.34.131.11:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
       {
         headers: {
           Authorization: accessToken,
         },
-      }
+      },
     );
 
     alert('댓글이 삭제되었습니다.');
@@ -202,7 +202,7 @@ $(document).on('click', '#report-btn', function () {
   $('#reportModal').modal('show');
   $('#reportModal .modal-footer').html(
     `<button type="button" class="btn btn-primary" id="report-button" commentid=${commentId}>신고</button>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>`
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>`,
   );
 });
 
@@ -223,13 +223,13 @@ const reportComment = async (commentId) => {
     }
 
     await axios.post(
-      `http://localhost:3000/report/${commentId}`,
+      `http://3.34.131.11:3000/report/${commentId}`,
       { description: $('.report_input').val() },
       {
         headers: {
           Authorization: accessToken,
         },
-      }
+      },
     );
 
     alert('댓글이 신고되었습니다.');

@@ -10,7 +10,7 @@ $(document).ready(function () {
 // 용자 정보조회
 async function userPage() {
   try {
-    const { data } = await axios.get(`http://localhost:3000/user/${userId}`, {
+    const { data } = await axios.get(`http://3.34.131.11:3000/user/${userId}`, {
       headers: {
         Authorization: accessToken,
       },
@@ -31,7 +31,7 @@ async function userPage() {
     $('#descriptionTag').text(descriptionText);
 
     const followData = await axios.get(
-      `http://localhost:3000/follow/${userId}/isFollowed`,
+      `http://3.34.131.11:3000/follow/${userId}/isFollowed`,
       {
         headers: {
           Authorization: accessToken,
@@ -48,7 +48,7 @@ async function userPage() {
       if ($(this).text() === 'follow') {
         try {
           await axios.post(
-            `http://localhost:3000/follow/${userId}/request`,
+            `http://3.34.131.11:3000/follow/${userId}/request`,
             {},
             {
               headers: { Authorization: accessToken },
@@ -65,7 +65,7 @@ async function userPage() {
       }
 
       try {
-        await axios.delete(`http://localhost:3000/follow/${user.id}`, {
+        await axios.delete(`http://3.34.131.11:3000/follow/${user.id}`, {
           headers: {
             Authorization: accessToken,
           },
@@ -87,7 +87,7 @@ async function userPage() {
     }
     if (challengeId) {
       const challengeData = await axios.get(
-        `http://localhost:3000/challenge/${challengeId}`,
+        `http://3.34.131.11:3000/challenge/${challengeId}`,
         {
           headers: {
             Authorization: accessToken,

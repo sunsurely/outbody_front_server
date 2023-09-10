@@ -15,7 +15,8 @@ if (window.Chart) {
   Chart.defaults.global.defaultFontStyle = 500;
   Chart.defaults.global.defaultFontColor = '#999';
   Chart.defaults.global.tooltips.backgroundColor = '#000';
-  Chart.defaults.global.tooltips.titleFontFamily = "'Nunito', 'Segoe UI', 'Arial'";
+  Chart.defaults.global.tooltips.titleFontFamily =
+    "'Nunito', 'Segoe UI', 'Arial'";
   Chart.defaults.global.tooltips.titleFontColor = '#fff';
   Chart.defaults.global.tooltips.titleFontSize = 20;
   Chart.defaults.global.tooltips.xPadding = 10;
@@ -144,7 +145,9 @@ $(function () {
       }, 500);
       $('.main-sidebar .sidebar-menu > li > ul .dropdown-title').remove();
       $('.main-sidebar .sidebar-menu > li > a').removeAttr('data-toggle');
-      $('.main-sidebar .sidebar-menu > li > a').removeAttr('data-original-title');
+      $('.main-sidebar .sidebar-menu > li > a').removeAttr(
+        'data-original-title',
+      );
       $('.main-sidebar .sidebar-menu > li > a').removeAttr('title');
     } else {
       body.addClass('sidebar-mini');
@@ -157,7 +160,9 @@ $(function () {
         if (me.find('> .dropdown-menu').length) {
           me.find('> .dropdown-menu').hide();
           me.find('> .dropdown-menu').prepend(
-            '<li class="dropdown-title pt-3">' + me.find('> a').text() + '</li>'
+            '<li class="dropdown-title pt-3">' +
+              me.find('> a').text() +
+              '</li>',
           );
         } else {
           me.find('> a').attr('data-toggle', 'tooltip');
@@ -200,7 +205,8 @@ $(function () {
   var toggleLayout = function () {
     var w = $(window),
       layout_class = $('body').attr('class') || '',
-      layout_classes = layout_class.trim().length > 0 ? layout_class.split(' ') : '';
+      layout_classes =
+        layout_class.trim().length > 0 ? layout_class.split(' ') : '';
 
     if (layout_classes.length > 0) {
       layout_classes.forEach(function (item) {
@@ -222,7 +228,10 @@ $(function () {
       $('body')
         .off('click')
         .on('click', function (e) {
-          if ($(e.target).hasClass('sidebar-show') || $(e.target).hasClass('search-show')) {
+          if (
+            $(e.target).hasClass('sidebar-show') ||
+            $(e.target).hasClass('search-show')
+          ) {
             $('body').removeClass('sidebar-show');
             $('body').addClass('sidebar-gone');
             $('body').removeClass('search-show');
@@ -242,8 +251,14 @@ $(function () {
         nav_second.addClass('main-sidebar');
 
         let main_sidebar = $('.main-sidebar');
-        main_sidebar.find('.container').addClass('sidebar-wrapper').removeClass('container');
-        main_sidebar.find('.navbar-nav').addClass('sidebar-menu').removeClass('navbar-nav');
+        main_sidebar
+          .find('.container')
+          .addClass('sidebar-wrapper')
+          .removeClass('container');
+        main_sidebar
+          .find('.navbar-nav')
+          .addClass('sidebar-menu')
+          .removeClass('navbar-nav');
         main_sidebar.find('.sidebar-menu .nav-item.dropdown.show a').click();
         main_sidebar.find('.sidebar-brand').remove();
         main_sidebar.find('.sidebar-menu').before(
@@ -252,8 +267,8 @@ $(function () {
           }).append(
             $('<a>', {
               href: $('.navbar-brand').attr('href'),
-            }).html($('.navbar-brand').html())
-          )
+            }).html($('.navbar-brand').html()),
+          ),
         );
         setTimeout(function () {
           sidebar_nicescroll = main_sidebar.niceScroll(sidebar_nicescroll_opts);
@@ -270,15 +285,24 @@ $(function () {
       let nav_second_classes = $('.main-sidebar').attr('data-nav-classes'),
         nav_second = $('.main-sidebar');
 
-      if (now_layout_class == 'layout-3' && nav_second.hasClass('main-sidebar')) {
+      if (
+        now_layout_class == 'layout-3' &&
+        nav_second.hasClass('main-sidebar')
+      ) {
         nav_second.find('.sidebar-menu li a.has-dropdown').off('click');
         nav_second.find('.sidebar-brand').remove();
         nav_second.removeAttr('class');
         nav_second.addClass(nav_second_classes);
 
         let main_sidebar = $('.navbar-secondary');
-        main_sidebar.find('.sidebar-wrapper').addClass('container').removeClass('sidebar-wrapper');
-        main_sidebar.find('.sidebar-menu').addClass('navbar-nav').removeClass('sidebar-menu');
+        main_sidebar
+          .find('.sidebar-wrapper')
+          .addClass('container')
+          .removeClass('sidebar-wrapper');
+        main_sidebar
+          .find('.sidebar-menu')
+          .addClass('navbar-nav')
+          .removeClass('sidebar-menu');
         main_sidebar.find('.dropdown-menu').hide();
         main_sidebar.removeAttr('style');
         main_sidebar.removeAttr('tabindex');
@@ -356,7 +380,9 @@ $(function () {
       cursoropacitymin: 0.3,
       cursoropacitymax: 0.8,
     });
-    $('.chat-content').getNiceScroll(0).doScrollTop($('.chat-content').height());
+    $('.chat-content')
+      .getNiceScroll(0)
+      .doScrollTop($('.chat-content').height());
   }
 
   if (jQuery().summernote) {
@@ -483,7 +509,9 @@ $(function () {
     me.click(function () {
       if (!me.hasClass('active')) {
         var tab_group = $('[data-tab-group="' + me.data('tab') + '"]'),
-          tab_group_active = $('[data-tab-group="' + me.data('tab') + '"].active'),
+          tab_group_active = $(
+            '[data-tab-group="' + me.data('tab') + '"].active',
+          ),
           target = $(me.attr('href')),
           links = $('[data-tab="' + me.data('tab') + '"]');
 

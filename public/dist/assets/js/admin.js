@@ -30,7 +30,7 @@ $('#findBlackList').on('click', async () => {
   $(searchedUser).html('');
   try {
     const response = await axios.get(
-      `http://localhost:3000/user/me/searchEmail/?email=${email}`,
+      `http://3.34.131.11:3000/user/me/searchEmail/?email=${email}`,
       {
         headers: {
           Authorization: adminToken,
@@ -57,7 +57,7 @@ $('#findBlackList').on('click', async () => {
       }
       const data = { email, description };
       try {
-        await axios.post(`http://localhost:3000/blacklist`, data, {
+        await axios.post(`http://3.34.131.11:3000/blacklist`, data, {
           headers: { Authorization: adminToken },
         });
         alert(`${user.name}(${user.email})님을 블랙리스트에 등록했습니다.`);
@@ -84,7 +84,7 @@ $('#findwithdrawal').on('click', async () => {
 
   try {
     const response = await axios.get(
-      `http://localhost:3000/user/me/searchEmail/?email=${email}`,
+      `http://3.34.131.11:3000/user/me/searchEmail/?email=${email}`,
       {
         headers: {
           Authorization: adminToken,
@@ -112,7 +112,7 @@ $('#findwithdrawal').on('click', async () => {
       }
       const data = { email, description };
       try {
-        await axios.delete(`http://localhost:3000/blacklist/withdraw`, data, {
+        await axios.delete(`http://3.34.131.11:3000/blacklist/withdraw`, data, {
           headers: { Authorization: adminToken },
         });
         alert(`${user.email} 해당 계정을 OutBody 서비스에서 삭제했습니다.`);
@@ -139,7 +139,7 @@ let totalPages = 0;
 async function recordPage(page, pageSize) {
   nowPage = 1;
   await axios
-    .get(`http://localhost:3000/report?page=${page}&pageSize=${pageSize}`, {
+    .get(`http://3.34.131.11:3000/report?page=${page}&pageSize=${pageSize}`, {
       headers: {
         Authorization: adminToken,
       },
@@ -197,7 +197,7 @@ async function recordPage(page, pageSize) {
             const description = $('#blackdescription').val();
             const data = { description };
 
-            axios.post(`http://localhost:3000/blacklist/${userId}`, data, {
+            axios.post(`http://3.34.131.11:3000/blacklist/${userId}`, data, {
               headers: { Authorization: adminToken },
             });
             alert(`userId: ${userId}님을 블랙리스트에 추가했습니다.`);
@@ -390,7 +390,7 @@ async function recordPage(page, pageSize) {
 async function getReports(page, pageSize) {
   try {
     const { data } = await axios.get(
-      `http://localhost:3000/report?page=${page}&pageSize=${pageSize}`,
+      `http://3.34.131.11:3000/report?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: adminToken,
@@ -452,7 +452,7 @@ $(document).on('click', '.blacklist-link', function (event) {
         const description = $('#blackdescription').val();
         const data = { description };
 
-        axios.post(`http://localhost:3000/blacklist/${userId}`, data, {
+        axios.post(`http://3.34.131.11:3000/blacklist/${userId}`, data, {
           headers: { Authorization: accessToken },
         });
         alert(`해당 회원을 영구 정지 회원으로 등록했습니다.`);
@@ -473,7 +473,7 @@ $(document).on('click', '.blacklist-link', function (event) {
 async function checkAdmin() {
   try {
     const { data } = await axios.get(
-      `http://localhost:3000/blacklist/permision`,
+      `http://3.34.131.11:3000/blacklist/permision`,
       {
         headers: {
           Authorization: adminToken,

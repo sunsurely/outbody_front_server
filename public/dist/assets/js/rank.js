@@ -57,13 +57,17 @@ async function totalrankPage(page, pageSize) {
   }
 
   pageNumbersHtml = totalPrevButton + pageNumbers + totalNextButton;
-  totalPagenationTag.html(`<ul class="pagination justify-content-center">${pageNumbersHtml}</ul>`);
+  totalPagenationTag.html(
+    `<ul class="pagination justify-content-center">${pageNumbersHtml}</ul>`,
+  );
 
   const prevBtn = $('#prev-button');
   const nextBtn = $('#next-button');
   const pages = $('.page-number-total');
 
-  $(pages).find(`#nowPage-${nowPage}-total`).css('background-color', 'rgb(103,119,239)');
+  $(pages)
+    .find(`#nowPage-${nowPage}-total`)
+    .css('background-color', 'rgb(103,119,239)');
   $(pages).find(`#nowPage-${nowPage}-total`).css('color', 'white');
 
   // Previous Button Clicked
@@ -104,7 +108,9 @@ async function totalrankPage(page, pageSize) {
 
         nowPage -= 1;
 
-        $(pages).find(`#nowPage-${nowPage}-total`).css('background-color', 'rgb(103,119,239)');
+        $(pages)
+          .find(`#nowPage-${nowPage}-total`)
+          .css('background-color', 'rgb(103,119,239)');
         $(pages).find(`#nowPage-${nowPage}-total`).css('color', 'white');
       } catch (error) {
         console.log('Error Message', error.response.data.message);
@@ -150,7 +156,9 @@ async function totalrankPage(page, pageSize) {
 
         nowPage += 1;
 
-        $(pages).find(`#nowPage-${nowPage}-total`).css('background-color', 'rgb(103,119,239)');
+        $(pages)
+          .find(`#nowPage-${nowPage}-total`)
+          .css('background-color', 'rgb(103,119,239)');
         $(pages).find(`#nowPage-${nowPage}-total`).css('color', 'white');
       } catch (error) {
         console.log('Error Message', error.response.data.message);
@@ -197,7 +205,9 @@ async function totalrankPage(page, pageSize) {
         nowPage = pageNumber;
         console.log(nowPage);
 
-        $(pages).find(`#nowPage-${nowPage}-total`).css('background-color', 'rgb(103,119,239)');
+        $(pages)
+          .find(`#nowPage-${nowPage}-total`)
+          .css('background-color', 'rgb(103,119,239)');
         $(pages).find(`#nowPage-${nowPage}-total`).css('color', 'white');
       } catch (error) {
         console.error('Error message:', error.response.data.message);
@@ -208,12 +218,12 @@ async function totalrankPage(page, pageSize) {
 
 async function getTotaldata(page, pageSize) {
   const data = await axios.get(
-    `http://localhost:3000/rank/total/page/?page=${page}&pageSize=${pageSize}`,
+    `http://3.34.131.11:3000/rank/total/page/?page=${page}&pageSize=${pageSize}`,
     {
       headers: {
         Authorization: ` ${accessToken}`,
       },
-    }
+    },
   );
   return data.data;
 }
@@ -266,13 +276,17 @@ async function friendRankPage(page, pageSize) {
   }
 
   pageNumbersHtml = friendPrevButton + pageNumbers + friendNextButton;
-  friendPagenationTag.html(`<ul class="pagination justify-content-center">${pageNumbersHtml}</ul>`);
+  friendPagenationTag.html(
+    `<ul class="pagination justify-content-center">${pageNumbersHtml}</ul>`,
+  );
 
   const prevBtn = $('#prev_button');
   const nextBtn = $('#next_button');
   const pages = $('.page-number-friend');
 
-  $(pages).find(`#nowPage-${nowPage}-friend`).css('background-color', 'rgb(103,119,239)');
+  $(pages)
+    .find(`#nowPage-${nowPage}-friend`)
+    .css('background-color', 'rgb(103,119,239)');
   $(pages).find(`#nowPage-${nowPage}-friend`).css('color', 'white');
 
   // Previous Button Clicked
@@ -311,7 +325,9 @@ async function friendRankPage(page, pageSize) {
 
         nowPage -= 1;
 
-        $(pages).find(`#nowPage-${nowPage}-friend`).css('background-color', 'rgb(103,119,239)');
+        $(pages)
+          .find(`#nowPage-${nowPage}-friend`)
+          .css('background-color', 'rgb(103,119,239)');
         $(pages).find(`#nowPage-${nowPage}-friend`).css('color', 'white');
       } catch (error) {
         console.log('Error Message', error.response.data.message);
@@ -355,7 +371,9 @@ async function friendRankPage(page, pageSize) {
 
         nowPage += 1;
 
-        $(pages).find(`#nowPage-${nowPage}-friend`).css('background-color', 'rgb(103,119,239)');
+        $(pages)
+          .find(`#nowPage-${nowPage}-friend`)
+          .css('background-color', 'rgb(103,119,239)');
         $(pages).find(`#nowPage-${nowPage}-friend`).css('color', 'white');
       } catch (error) {
         console.log('Error Message', error.response.data.message);
@@ -401,7 +419,9 @@ async function friendRankPage(page, pageSize) {
 
         nowPage = pageNumber;
 
-        $(pages).find(`#nowPage-${nowPage}-friend`).css('background-color', 'rgb(103,119,239)');
+        $(pages)
+          .find(`#nowPage-${nowPage}-friend`)
+          .css('background-color', 'rgb(103,119,239)');
         $(pages).find(`#nowPage-${nowPage}-friend`).css('color', 'white');
       } catch (error) {
         console.error('Error message:', error.response.data.message);
@@ -412,12 +432,12 @@ async function friendRankPage(page, pageSize) {
 
 async function getFriendData(page, pageSize) {
   const data = await axios.get(
-    `http://localhost:3000/rank/followings/page/?page=${page}&pageSize=${pageSize}`,
+    `http://3.34.131.11:3000/rank/followings/page/?page=${page}&pageSize=${pageSize}`,
     {
       headers: {
         Authorization: ` ${accessToken}`,
       },
-    }
+    },
   );
   return data.data;
 }
