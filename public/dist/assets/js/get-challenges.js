@@ -1,3 +1,4 @@
+// 로그인 여부 확인
 const accessToken = localStorage.getItem('cookie');
 
 const filterApplyButton = document.querySelector('#filter-apply-button');

@@ -1,3 +1,4 @@
+// 로그인 여부 확인
 const accessToken = localStorage.getItem('cookie');
 
 // 도전 세부 설정

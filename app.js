@@ -21,5 +21,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(port, '실행중입니다...');
+  console.log(port, '=> server open!');
 });

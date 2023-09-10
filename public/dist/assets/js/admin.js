@@ -1,5 +1,5 @@
-const urlParams = new URLSearchParams(window.location.search);
-const adminToken = localStorage.getItem('cookie');
+// 로그인 여부 확인
+const accessToken = localStorage.getItem('cookie');
 
 // 1. 블랙리스트 생성모달
 document.getElementById('addBlackList').onclick = function (e) {
@@ -29,23 +29,18 @@ $('#findBlackList').on('click', async () => {
   const searchedUser = $('#searched-user');
   $(searchedUser).html('');
   try {
-    const response = await axios.get(
-      `http://localhost:3000/user/me/searchEmail/?email=${email}`,
-      {
-        headers: {
-          Authorization: adminToken,
-        },
+    const response = await axios.get(`http://localhost:3000/user/me/searchEmail/?email=${email}`, {
+      headers: {
+        Authorization: accessToken,
       },
-    );
+    });
     const user = response.data.data;
     const userEmail = user.email;
     const userId = user.id;
 
     const temp = `<div id=${userId}><img  class="rounded-circle" src=${
       user.imgUrl ? user.imgUrl : 'assets/img/avatar/avatar-1.png'
-    } style="width:50px; margin-right:10px"><span>${
-      user.name
-    }(${userEmail})</span></div> <br/> `;
+    } style="width:50px; margin-right:10px"><span>${user.name}(${userEmail})</span></div> <br/> `;
     $(searchedUser).html(temp);
 
     $('#createBlackList').on('click', async () => {
@@ -58,7 +53,7 @@ $('#findBlackList').on('click', async () => {
       const data = { email, description };
       try {
         await axios.post(`http://localhost:3000/blacklist`, data, {
-          headers: { Authorization: adminToken },
+          headers: { Authorization: accessToken },
         });
         alert(`${user.name}(${user.email})님을 블랙리스트에 등록했습니다.`);
         window.location.reload();
@@ -83,14 +78,11 @@ $('#findwithdrawal').on('click', async () => {
   $(withdrawUser).html('');
 
   try {
-    const response = await axios.get(
-      `http://localhost:3000/user/me/searchEmail/?email=${email}`,
-      {
-        headers: {
-          Authorization: adminToken,
-        },
+    const response = await axios.get(`http://localhost:3000/user/me/searchEmail/?email=${email}`, {
+      headers: {
+        Authorization: accessToken,
       },
-    );
+    });
     const user = response.data.data;
     const userEmail = user.email;
     const userId = user.id;
@@ -113,7 +105,7 @@ $('#findwithdrawal').on('click', async () => {
       const data = { email, description };
       try {
         await axios.delete(`http://localhost:3000/blacklist/withdraw`, data, {
-          headers: { Authorization: adminToken },
+          headers: { Authorization: accessToken },
         });
         alert(`${user.email} 해당 계정을 OutBody 서비스에서 삭제했습니다.`);
         window.location.reload();
@@ -142,7 +134,7 @@ async function recordPage(page, pageSize) {
   await axios
     .get(`http://localhost:3000/report?page=${page}&pageSize=${pageSize}`, {
       headers: {
-        Authorization: adminToken,
+        Authorization: accessToken,
       },
     })
     .then((response) => {
@@ -199,7 +191,7 @@ async function recordPage(page, pageSize) {
             const data = { description };
 
             axios.post(`http://localhost:3000/blacklist/${userId}`, data, {
-              headers: { Authorization: adminToken },
+              headers: { Authorization: accessToken },
             });
             alert(`userId: ${userId}님을 블랙리스트에 추가했습니다.`);
           });
@@ -237,9 +229,7 @@ async function recordPage(page, pageSize) {
       const nextBtn = $('#next_button');
       const pages = $('.page_number');
 
-      $(pages)
-        .find(`#nowPage-${nowPage}`)
-        .css('background-color', 'rgb(103,119,239)');
+      $(pages).find(`#nowPage-${nowPage}`).css('background-color', 'rgb(103,119,239)');
       $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
 
       // Previous Button Clicked
@@ -278,9 +268,7 @@ async function recordPage(page, pageSize) {
 
             nowPage -= 1;
 
-            $(pages)
-              .find(`#nowPage-${nowPage}`)
-              .css('background-color', 'rgb(103,119,239)');
+            $(pages).find(`#nowPage-${nowPage}`).css('background-color', 'rgb(103,119,239)');
             $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
           } catch (error) {
             alert(error.response.data.message);
@@ -324,9 +312,7 @@ async function recordPage(page, pageSize) {
 
             nowPage += 1;
 
-            $(pages)
-              .find(`#nowPage-${nowPage}`)
-              .css('background-color', 'rgb(103,119,239)');
+            $(pages).find(`#nowPage-${nowPage}`).css('background-color', 'rgb(103,119,239)');
             $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
           } catch (error) {
             alert(error.response.data.message);
@@ -340,10 +326,7 @@ async function recordPage(page, pageSize) {
           $(pages).find('.page-link').css('color', '');
 
           try {
-            const { data } = await getReports(
-              parseInt($(page).find(`.page-link`).text()),
-              10,
-            );
+            const { data } = await getReports(parseInt($(page).find(`.page-link`).text()), 10);
 
             reportTable.innerHTML = `<tr>
         <th>Id</th>
@@ -371,9 +354,7 @@ async function recordPage(page, pageSize) {
               .join('');
             nowPage = parseInt($(page).find(`.page-link`).text());
 
-            $(pages)
-              .find(`#nowPage-${nowPage}`)
-              .css('background-color', 'rgb(103,119,239)');
+            $(pages).find(`#nowPage-${nowPage}`).css('background-color', 'rgb(103,119,239)');
 
             $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
           } catch (error) {
@@ -394,9 +375,9 @@ async function getReports(page, pageSize) {
       `http://localhost:3000/report?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
-          Authorization: adminToken,
+          Authorization: accessToken,
         },
-      },
+      }
     );
     return data;
   } catch (error) {
