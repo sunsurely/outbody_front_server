@@ -127,6 +127,7 @@ $('#findwithdrawal').on('click', async () => {
 });
 
 $(document).ready(function () {
+  checkAdmin();
   recordPage(1, 10);
 });
 
@@ -400,5 +401,26 @@ async function getReports(page, pageSize) {
     return data;
   } catch (error) {
     alert(error.response.data.message);
+  }
+}
+
+async function checkAdmin() {
+  try {
+    const { data } = await axios.get(
+      `http://localhost:3000/blacklist/permision`,
+      {
+        headers: {
+          Authorization: adminToken,
+        },
+      },
+    );
+    const permision = data.data;
+
+    if (!permision) {
+      alert('잘못된 접근입니다!');
+      window.location.href = '/';
+    }
+  } catch (error) {
+    console.error(error.response.data.message);
   }
 }
