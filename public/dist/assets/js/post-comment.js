@@ -2,6 +2,7 @@ const commentParams = new URLSearchParams(window.location.search);
 const challengeIdForComment = commentParams.get('cid');
 const postId = commentParams.get('pid');
 
+// 로그인 여부 확인
 const accessToken = localStorage.getItem('cookie');
 
 $(document).ready(function () {
@@ -18,7 +19,7 @@ const getOnePost = async () => {
         headers: {
           Authorization: accessToken,
         },
-      },
+      }
     );
 
     let getPost = '';
@@ -66,7 +67,7 @@ const getComment = async () => {
         headers: {
           Authorization: accessToken,
         },
-      },
+      }
     );
 
     let allComments = '';
@@ -126,7 +127,7 @@ const createComment = async () => {
         headers: {
           Authorization: accessToken,
         },
-      },
+      }
     );
     alert('댓글이 작성되었습니다.');
     location.reload();
@@ -159,7 +160,7 @@ const updateComment = async (commentId) => {
         headers: {
           Authorization: accessToken,
         },
-      },
+      }
     );
     alert('댓글이 수정되었습니다.');
     location.reload();
@@ -181,7 +182,7 @@ const deleteComment = async (commentId) => {
         headers: {
           Authorization: accessToken,
         },
-      },
+      }
     );
 
     alert('댓글이 삭제되었습니다.');
@@ -201,7 +202,7 @@ $(document).on('click', '#report-btn', function () {
   $('#reportModal').modal('show');
   $('#reportModal .modal-footer').html(
     `<button type="button" class="btn btn-primary" id="report-button" commentid=${commentId}>신고</button>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>`,
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>`
   );
 });
 
@@ -228,7 +229,7 @@ const reportComment = async (commentId) => {
         headers: {
           Authorization: accessToken,
         },
-      },
+      }
     );
 
     alert('댓글이 신고되었습니다.');
