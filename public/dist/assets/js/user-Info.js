@@ -1,14 +1,13 @@
 const userInfoParams = new URLSearchParams(window.location.search);
 const userId = userInfoParams.get('id');
 
-// 로그인 여부 확인
 const accessToken = localStorage.getItem('cookie');
 
 $(document).ready(function () {
   userPage();
 });
 
-// 자동실행함수, 사용자 정보조회
+// 용자 정보조회
 async function userPage() {
   try {
     const { data } = await axios.get(`http://localhost:3000/user/${userId}`, {

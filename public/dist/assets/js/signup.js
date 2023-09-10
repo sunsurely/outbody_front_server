@@ -48,21 +48,3 @@ const signUp = async () => {
   }
 };
 $('#signUp_btn').click(signUp);
-
-// 카카오 로그인
-// const kakaoLoginLoading = async () => {
-//   try {
-//     await axios.get(`http://localhost:3000/auth/kakao`);
-//   } catch (error) {
-//     // alert(error.response.data.message);
-//     console.error('Error message:', error);
-//   }
-// };
-// $('.kakao-btn').click(kakaoLoginLoading);
-
-// 카카오 로그인
-// 배포하고 리다이렉트 URI 설정해야 요청보낼 수 있음
-const kakaoLoginLoading = () => {
-  window.location.href = '리다이렉트 URI 설정';
-};
-$('.kakao-btn').click(kakaoLoginLoading);
