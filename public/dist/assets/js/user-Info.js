@@ -75,7 +75,8 @@ async function userPage() {
         alert('친구 목록에서 삭제되었습니다.');
         window.location.reload();
       } catch (error) {
-        console.error(error.response.data.message);
+        alert(error.response.data.message);
+        window.location.reload();
       }
     });
 
