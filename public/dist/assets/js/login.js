@@ -10,7 +10,7 @@ const login = async () => {
   }
 
   await axios
-    .post('http://localhost:3000/auth/login', {
+    .post('http://3.34.131.11:3000/auth/login', {
       email: $('#email').val(),
       password: $('#password').val(),
     })
@@ -67,7 +67,7 @@ $('#login-btn').click(login);
 // 카카오 로그인
 // const kakaoLogin = async () => {
 //   try {
-//     await axios.get(`http://localhost:3000/auth/kakao/redirect`);
+//     await axios.get(`http://3.34.131.11:3000/auth/kakao/redirect`);
 //   } catch (error) {
 //     // alert(error.response.data.message);
 //     console.error('Error message:', error);
