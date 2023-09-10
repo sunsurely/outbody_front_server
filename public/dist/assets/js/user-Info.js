@@ -102,7 +102,8 @@ async function userPage() {
           alert('친구 요청을 보냈습니다.');
           window.location.reload();
         } catch (error) {
-          console.error(error.response.data.message);
+          alert(error.response.data.message);
+          window.location.reload();
         }
       }
 
@@ -116,7 +117,8 @@ async function userPage() {
         alert('친구를 삭제했습니다.');
         window.location.reload();
       } catch (error) {
-        console.error(error.response.data.message);
+        alert(error.response.data.message);
+        window.location.reload();
       }
     });
 
