@@ -33,7 +33,7 @@ async function initMessagesBox() {
   $(messageBox).html('');
   try {
     const response = await axios.get('http://localhost:3000/follow/request', {
-      headers: { Authorization: ` ${accessToken}` },
+      headers: { Authorization: `${accessToken}` },
       withCredentials: true,
     });
     const messages = response.data.data;
@@ -104,7 +104,7 @@ async function initMessagesBox() {
         const id = tagId.charAt(tagId.length - 1);
         const data = { response: 'yes' };
         await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
-          headers: { Authorization: ` ${storedToken}` },
+          headers: { Authorization: accessToken },
           withCredentials: true,
         });
 
@@ -119,7 +119,7 @@ async function initMessagesBox() {
         const id = tagId.charAt(tagId.length - 1);
         const data = { response: 'no' };
         await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
-          headers: { Authorization: ` ${storedToken}` },
+          headers: { Authorization: accessToken },
           withCredentials: true,
         });
 
@@ -189,12 +189,15 @@ async function initializeChart() {
 
 async function getBodyResults() {
   try {
-    const { data } = await axios.get('http://localhost:3000/record/result/detail', {
-      headers: {
-        Authorization: ` ${accessToken}`,
+    const { data } = await axios.get(
+      'http://localhost:3000/record/result/detail',
+      {
+        headers: {
+          Authorization: accessToken,
+        },
+        withCredentials: true,
       },
-      withCredentials: true,
-    });
+    );
 
     const avgDatas = data.data.avgDatas;
     const stdWeight = data.data.stdWeight;
@@ -568,7 +571,7 @@ $('.regist-record').click(async () => {
   try {
     await axios.post('http://localhost:3000/record', data, {
       headers: {
-        Authorization: ` ${accessToken}`,
+        Authorization: `${accessToken}`,
       },
       withCredentials: true,
     });
@@ -580,12 +583,15 @@ $('.regist-record').click(async () => {
 });
 
 async function getRecordData(page, pageSize) {
-  const data = await axios(`http://localhost:3000/record/page/?page=${page}&pageSize=${pageSize}`, {
-    headers: {
-      Authorization: ` ${accessToken}`,
+  const data = await axios(
+    `http://localhost:3000/record/page/?page=${page}&pageSize=${pageSize}`,
+    {
+      headers: {
+        Authorization: accessToken,
+      },
+      withCredentials: true,
     },
-    withCredentials: true,
-  });
+  );
   orderList = 'normal';
   return data.data;
 }
@@ -695,7 +701,7 @@ async function getDateRangeRecord(startDate, endDate, page) {
 
     {
       headers: {
-        Authorization: ` ${accessToken}`,
+        Authorization: accessToken,
       },
       withCredentials: true,
     }

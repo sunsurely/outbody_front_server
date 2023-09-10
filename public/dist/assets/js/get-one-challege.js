@@ -18,7 +18,6 @@ async function getChallengeDetail() {
       },
     })
     .then((response) => {
-      console.log(response.data.data);
       const challenge = response.data.data;
 
       // 남은 시간 설정
@@ -154,8 +153,6 @@ async function getChallengers() {
       },
     })
     .then((response) => {
-      console.log(response.data.data);
-
       const challengerCardHeader = document.querySelector(
         '#challenger-card-header',
       );
