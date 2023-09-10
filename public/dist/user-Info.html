@@ -4,21 +4,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport" />
-  <title>User-Information &rsaquo; User &mdash; OutBody</title>
+  <title>Profile &mdash; Out Body</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="./jquery-3.4.1.min.js"></script>
 
   <!-- General CSS Files -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <link rel="stylesheet" href="assets/modules/bootstrap/css/bootstrap.min.css" />
   <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css" />
 
   <!-- CSS Libraries -->
   <link rel="stylesheet" href="assets/modules/bootstrap-social/bootstrap-social.css" />
-  <link rel="stylesheet" href="assets/modules/owlcarousel2/dist/assets/owl.carousel.min.css" />
-  <link rel="stylesheet" href="assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css" />
+  <link rel="stylesheet" href="assets/modules/summernote/summernote-bs4.css" />
+  <link rel="stylesheet" href="assets/modules/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/modules/prism/prism.css" />
 
   <!-- Template CSS -->
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="stylesheet" href="assets/css/components.css" />
+
   <!-- Start GA -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
   <script>
@@ -31,6 +35,14 @@
     gtag('config', 'UA-94034622-3');
   </script>
   <!-- /END GA -->
+  <style>
+    #modal.modal-overlay {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
 </head>
 
 <body>
@@ -141,7 +153,6 @@
           </li>
         </ul>
       </nav>
-      <!-- 사이드바 -->
       <div class="main-sidebar sidebar-style-2">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
@@ -154,25 +165,21 @@
 
           <!-- 사이드바 -->
           <ul class="sidebar-menu">
-
             <li class="menu-header">Record</li>
             <li>
               <a href="main.html"><i class="fas fa-columns"></i>
                 <span>체성분</span></a>
             </li>
-
             <li class="menu-header">Challenge</li>
             <li>
               <a href="get-challenges.html"><i class="fas fa-fire"></i>
                 <span>도전</span></a>
             </li>
-
             <li class="menu-header">Post</li>
             <li>
               <a href="sns.html"><i class="fas fa-bicycle"></i>
                 <span>오운완</span></a>
             </li>
-
             <li class="menu-header">Rank</li>
             <li>
               <a href="rank.html"><i class="fas fa-th"></i>
@@ -190,217 +197,63 @@
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>User</h1>
-            <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active">
-                <a href="#">Dashboard</a>
-              </div>
-              <div class="breadcrumb-item"><a href="#">Components</a></div>
-              <div class="breadcrumb-item">User</div>
-            </div>
+            <h1>회원 조회</h1>
           </div>
 
           <div class="section-body">
-            <h2 class="section-title">회원 정보</h2>
-            <p class="section-lead">회원 정보 소개 페이지입니다.</p>
+            <h2 class="section-title" id="greeting">회원님의 정보</h2>
 
             <div class="row">
-              <div class="col-12 col-sm-12 col-lg-7">
-                <div class="card author-box card-primary">
-                  <div class="card-body userImg-Box">
-                    <div class="author-box-left">
-                      <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle author-box-picture" />
-                      <div class="clearfix"></div>
-                      <a href="#" id="follow-user" class="btn btn-primary mt-3 follow-btn" data-follow-action="alert('follow clicked');"
-                        data-unfollow-action="alert('unfollow clicked');">Follow</a>
-                    </div>
-                    <div class="user-head">
-                      <div class="author-box-details">
-                        <div class="author-box-name">
-                          <a href="#" id="nametag">name</a>
-                        </div>
-                        <div class="author-box-job" id="statustag">
-                          Web Developer
-                        </div>
-                        <div class="author-box-description">
-                          <p id="descriptiontag">
-                            저는 운동을 좋아했지만, OutBody 앱을 통해서 운동을
-                            더더욱 좋아하게 되었어요. 우리 모두 운동을 통해
-                            건강해져요! 3대 500 가즈아!!
-                          </p>
-                        </div>
-                        <div class="mb-2 mt-3">
-                          <div class="text-small font-weight-bold">
-                            Follow Hasan On
-                          </div>
-                        </div>
-                        <a href="#" class="btn btn-social-icon mr-1 btn-facebook">
-                          <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="btn btn-social-icon mr-1 btn-twitter">
-                          <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="btn btn-social-icon mr-1 btn-github">
-                          <i class="fab fa-github"></i>
-                        </a>
-                        <a href="#" class="btn btn-social-icon mr-1 btn-instagram">
-                          <i class="fab fa-instagram"></i>
-                        </a>
-                        <div class="w-100 d-sm-none"></div>
-                        <div class="float-right mt-sm-0 mt-3">
-                          <button class="btn btn-primary" id="postlist" data-toggle="modal" data-target="#exampleModal"
-                            style="display: inline-block">
-                            오운완 목록보기 <i class="fas fa-chevron-right"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card card-danger">
-                  <div class="card-header">
-                    <h4>친구 추천</h4>
-                    <div class="card-header-action"></div>
-                  </div>
-                  <div class="card-body">
-                    <div class="owl-carousel owl-theme" id="users-carousel">
-                      <div>
-                        <div class="user-item">
-                          <img alt="image" src="assets/img/avatar/avatar-1.png" class="img-fluid" id="profileImage" />
-                          <div class="user-details">
-                            <div class="user-name">Hasan Basri</div>
-                            <div class="user-email">asdsf@naver.com</div>
-                            <div class="user-cta">
-                              <button class="btn btn-primary follow-btn" data-follow-action="alert('user1 followed');"
-                                data-unfollow-action="alert('user1 unfollowed');">
-                                Follow
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div>
-                        <div class="user-item">
-                          <img alt="image" src="assets/img/avatar/avatar-2.png" class="img-fluid" />
-                          <div class="user-details">
-                            <div class="user-name">Kusnaedi</div>
-                            <div class="user-email">google@naver.com</div>
-                            <div class="user-cta">
-                              <button class="btn btn-primary follow-btn" data-follow-action="alert('user2 followed');"
-                                data-unfollow-action="alert('user2 unfollowed');">
-                                Follow
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div>
-                        <div class="user-item">
-                          <img alt="image" src="assets/img/avatar/avatar-3.png" class="img-fluid" />
-                          <div class="user-details">
-                            <div class="user-name">Bagus Dwi Cahya</div>
-                            <div class="user-email">power@google.com</div>
-                            <div class="user-cta">
-                              <button class="btn btn-danger following-btn"
-                                data-unfollow-action="alert('user3 unfollowed');"
-                                data-follow-action="alert('user3 followed');">
-                                Following
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div>
-                        <div class="user-item">
-                          <img alt="image" src="assets/img/avatar/avatar-4.png" class="img-fluid" />
-                          <div class="user-details">
-                            <div class="user-name">Wildan Ahdian</div>
-                            <div class="user-email">hoho@naver.com</div>
-                            <div class="user-cta">
-                              <button class="btn btn-primary follow-btn" data-follow-action="alert('user4 followed');"
-                                data-unfollow-action="alert('user4 unfollowed');">
-                                Follow
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div>
-                        <div class="user-item">
-                          <img alt="image" src="assets/img/avatar/avatar-5.png" class="img-fluid" />
-                          <div class="user-details">
-                            <div class="user-name">Deden Febriansyah</div>
-                            <div class="user-email">trt@naver.com</div>
-                            <div class="user-cta">
-                              <button class="btn btn-primary follow-btn" data-follow-action="alert('user5 followed');"
-                                data-unfollow-action="alert('user5 unfollowed');">
-                                Follow
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-12 col-sm-12 col-lg-5">
+              <div class="col-12 col-md-12 col-lg-5">
                 <div class="card profile-widget">
                   <div class="profile-widget-header">
+                    <img id="profile-image" alt="image" src="" class="rounded-circle profile-widget-picture" />
                     <div class="profile-widget-items">
                       <div class="profile-widget-item">
-                        <div class="profile-widget-item-label">Point</div>
-                        <div class="profile-widget-item-value" id="pointtag">
-                          2100
+                        <div class="profile-widget-item-label">- 점수 -</div>
+                        <div class="profile-widget-item-value" id="user-point">
+                          <!-- 사용자 점수 -->
                         </div>
                       </div>
                       <div class="profile-widget-item">
-                        <div class="profile-widget-item-label">Ranks</div>
-                        <div class="profile-widget-item-value" id="rankstag">
-                          32
-                        </div>
-                      </div>
-                      <div class="profile-widget-item">
-                        <div class="profile-widget-item-label">Friends</div>
-                        <div class="profile-widget-item-value" id="friendtag">
-                          54
+                        <div class="profile-widget-item-label">- 순위 -</div>
+                        <div id="user-rank" class="profile-widget-item-value">
+                          <!-- 사용자 순위 -->
                         </div>
                       </div>
                     </div>
                   </div>
-
-                  <div class="userInfo-Bottom">
-                    <div class="profile-widget-description pb-0">
-                      <div class="form-group col-md-6 col-12">
-                        <br />
-                        <h4>Information</h4>
-                        <br />
-                        <label>E-mail: </label>
-                        <div id="emailtag">Email@com</div>
-                        <div class="invalid-feedback"></div>
+                  <div class="profile-widget-description">
+                    <!-- 팔로우 버튼 -->
+                    <a href="#" id="follow-user" class="btn btn-primary"
+                      style="margin-left: 20px; border-radius: 30px;"></a>
+                    <div class="profile-widget-name">
+                      <div id="nameTag" style="font-weight: bold; margin-top: 20px; margin-left: 20px;">
+                        <!-- 사용자 이름 -->
                       </div>
-                      <div class="form-group col-md-6 col-12">
-                        <label>Gender: </label>
-                        <div id="gendertag">Male</div>
-                        <div class="invalid-feedback"></div>
+                      <div class="text-muted d-inline font-weight-normal">
                       </div>
-                      <div class="form-group col-md-6 col-12">
-                        <label>Birthday: </label>
-                        <div id="birthdaytag">September 9th, 1992</div>
-                        <div class="invalid-feedback"></div>
-                      </div>
-                      <div class="form-group col-md-6 col-12">
-                        <label>CreatedAt: </label>
-                        <div id="createdAttag">August 15th, 2023</div>
-                        <div class="invalid-feedback"></div>
-                      </div>
-                      <br />
                     </div>
-                  </div>
+                    <div id="descriptionTag" style="margin-left: 20px;">
+                      <!-- 자기소개 -->
+                    </div>
+                    <br />
 
-                  <div class="card-footer text-center pt-0">
-                    <div class="font-weight-bold mb-2 text-small"></div>
+                    <div style="position: relative; overflow: hidden">
+                      <div id="challenge-card" class="col-12 col-md-6 col-lg-12">
+                        <div class="card card-primary">
+                          <div class="card-header">
+                            <h4>회원님이 현재 참여중인 도전</h4>
+                          </div>
+                          <div class="card-body" style="cursor: pointer;">
+                            <p id="title">제목: </p>
+                            <p id="desc" style="margin-top: 15px;">내용: </p>
+                            <p id="date">도전 기간: </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
                 </div>
               </div>
@@ -409,96 +262,11 @@
         </section>
       </div>
 
-      <!-- 오운완 목록조회 모달 -->
-      <div class="modal fade" tabindex="-1" role="dialog" id="postlistModal">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">오운완 목록</h5>
-            </div>
-            <div class="card-body">
-              <div style="overflow-y: scroll; height: 200px">
-                <table class="table table-sm" id="posts-table">
-                  <thead>
-                    <tr class="total-posts">
-                      Total Posts: 0
-                    </tr>
-                    <tr>
-                      <th scope="col">Post Id</th>
-                      <th scope="col">description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>하체</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>상체</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>유산소</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">4</th>
-                      <td>상체</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">5</th>
-                      <td>하체</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <br />
-              </div>
-            </div>
-            <div class="card-footer text-right">
-              <button class="btn btn-primary" id="backtopage">
-                뒤로가기
-              </button>
-            </div>
-            <div class="modal-footer bg-whitesmoke br"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 모달 4: 친구 찾기  -->
-      <div class="modal fade" tabindex="-1" role="dialog" id="searchfriendModal">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">친구 찾기</h5>
-            </div>
-            <div class="card-body">
-              <div class="form-group">
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="친구요청을 보내고 싶은 유저의 E-mail을 입력해주세요." aria-label=""
-                    id="searchEmail" />
-                  <div class="input-group-append">
-                    <button class="btn btn-primary" type="button" id="searchFriendByEmail">
-                      검색
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card-footer text-right">
-              <button class="btn btn-primary" id="searchfriendCancel">
-                취소
-              </button>
-            </div>
-            <div class="modal-footer bg-whitesmoke br"></div>
-          </div>
-        </div>
-      </div>
-
       <footer class="main-footer">
         <div class="footer-left">
           Copyright &copy; 2023
           <div class="bullet"></div>
-          Design By <a style="font-weight: bold">WildBody</a>
+          Design By <a style="font-weight: bold;">WildBody</a>
         </div>
         <div class="footer-right"></div>
       </footer>
@@ -514,19 +282,19 @@
   <script src="assets/modules/moment.min.js"></script>
   <script src="assets/js/stisla.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="./bootstrap/js/bootstrap.min.js"></script>
 
   <!-- JS Libraies -->
-  <script src="assets/modules/owlcarousel2/dist/owl.carousel.min.js"></script>
+  <script src="assets/modules/prism/prism.js"></script>
 
   <!-- Page Specific JS File -->
-  <script src="assets/js/page/components-user.js"></script>
+  <script src="assets/js/page/bootstrap-modal.js"></script>
+  <script src="assets/js/page/forms-advanced-forms.js"></script>
 
   <!-- Template JS File -->
   <script src="assets/js/scripts.js"></script>
-  <script src="assets/js/user-Info.js"></script>
-  <script src="assets/js/custom.js"></script>
   <script src="assets/js/notice.js"></script>
+  <script src="assets/js/copy.js"></script>
 </body>
 
 </html>
