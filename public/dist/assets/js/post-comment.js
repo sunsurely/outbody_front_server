@@ -2,7 +2,8 @@ const commentParams = new URLSearchParams(window.location.search);
 const challengeIdForComment = commentParams.get('cid');
 const postId = commentParams.get('pid');
 
-const token = localStorage.getItem('cookie');
+// 로그인 여부 확인
+const accessToken = localStorage.getItem('cookie');
 
 $(document).ready(function () {
   getOnePost();
@@ -16,9 +17,9 @@ const getOnePost = async () => {
       `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}/detail`,
       {
         headers: {
-          Authorization: token,
+          Authorization: accessToken,
         },
-      },
+      }
     );
 
     let getPost = '';
@@ -64,9 +65,9 @@ const getComment = async () => {
       `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
       {
         headers: {
-          Authorization: token,
+          Authorization: accessToken,
         },
-      },
+      }
     );
 
     let allComments = '';
@@ -124,9 +125,9 @@ const createComment = async () => {
       { comment: $('#comment_input').val() },
       {
         headers: {
-          Authorization: token,
+          Authorization: accessToken,
         },
-      },
+      }
     );
     alert('댓글이 작성되었습니다.');
     location.reload();
@@ -157,9 +158,9 @@ const updateComment = async (commentId) => {
       { comment: $('#updateCmt_input').val() },
       {
         headers: {
-          Authorization: token,
+          Authorization: accessToken,
         },
-      },
+      }
     );
     alert('댓글이 수정되었습니다.');
     location.reload();
@@ -179,9 +180,9 @@ const deleteComment = async (commentId) => {
       `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
       {
         headers: {
-          Authorization: token,
+          Authorization: accessToken,
         },
-      },
+      }
     );
 
     alert('댓글이 삭제되었습니다.');
@@ -201,7 +202,7 @@ $(document).on('click', '#report-btn', function () {
   $('#reportModal').modal('show');
   $('#reportModal .modal-footer').html(
     `<button type="button" class="btn btn-primary" id="report-button" commentid=${commentId}>신고</button>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>`,
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>`
   );
 });
 
@@ -226,9 +227,9 @@ const reportComment = async (commentId) => {
       { description: $('.report_input').val() },
       {
         headers: {
-          Authorization: token,
+          Authorization: accessToken,
         },
-      },
+      }
     );
 
     alert('댓글이 신고되었습니다.');
