@@ -56,7 +56,7 @@ async function initMessagesBox() {
     const diffInMilliseconds = now - msgDate;
     const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
     const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
-
+    console.log(res);
     let msgTime;
 
     if (diffInDays >= 1) {
@@ -68,8 +68,8 @@ async function initMessagesBox() {
     const id = res.userId;
 
     const temp = `
-     
-       <a href="user-info.html?userId=${res.userId}">
+         
+       <a href="user-Info.html?userId=${res.userId}">
           <img
             alt="image"
             src="${res.imgUrl ? res.imgUrl : 'assets/img/avatar/avatar-1.png'}"
