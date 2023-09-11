@@ -125,7 +125,7 @@ async function initMessagesBox() {
       await axios.post(`http://3.39.237.124:3000/follow/${id}/accept`, data, {
         headers: { Authorization: accessToken },
       });
-
+      console.log('거절', id);
       alert('친구요청을 거절했습니다.');
       window.location.reload();
     });
