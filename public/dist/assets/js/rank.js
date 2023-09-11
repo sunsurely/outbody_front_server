@@ -218,7 +218,7 @@ async function totalrankPage(page, pageSize) {
 
 async function getTotaldata(page, pageSize) {
   const data = await axios.get(
-    `http://3.34.132.157:3000/rank/total/page/?page=${page}&pageSize=${pageSize}`,
+    `http://3.39.237.124:3000/rank/total/page/?page=${page}&pageSize=${pageSize}`,
     {
       headers: {
         Authorization: ` ${accessToken}`,
@@ -432,7 +432,7 @@ async function friendRankPage(page, pageSize) {
 
 async function getFriendData(page, pageSize) {
   const data = await axios.get(
-    `http://3.34.132.157:3000/rank/followings/page/?page=${page}&pageSize=${pageSize}`,
+    `http://3.39.237.124:3000/rank/followings/page/?page=${page}&pageSize=${pageSize}`,
     {
       headers: {
         Authorization: ` ${accessToken}`,
