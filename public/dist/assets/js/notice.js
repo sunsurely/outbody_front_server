@@ -127,7 +127,7 @@ async function initMessagesBox() {
       });
       console.log('거절', id);
       alert('친구요청을 거절했습니다.');
-      window.location.reload();
+      // window.location.reload();
     });
   });
 
