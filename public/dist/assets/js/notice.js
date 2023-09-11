@@ -125,9 +125,9 @@ async function initMessagesBox() {
       await axios.post(`http://3.39.237.124:3000/follow/${id}/accept`, data, {
         headers: { Authorization: accessToken },
       });
-      console.log('거절', id);
+
       alert('친구요청을 거절했습니다.');
-      // window.location.reload();
+      window.location.reload();
     });
   });
 
@@ -158,7 +158,7 @@ async function initMessagesBox() {
     $(acc).on('click', async function (e) {
       try {
         const tagId = $(this).attr('id');
-        const id = tagId.charAt(tagId.length - 1);
+        const id = parseInt(tagId.match(/\d+/)[0], 10);
         const data = { response: 'no' };
         await axios.post(
           `http://3.39.237.124:3000/challenge/${id}/accept`,
