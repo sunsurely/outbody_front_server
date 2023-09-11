@@ -57,7 +57,7 @@ async function initMessagesBox() {
     const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60));
     const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
     const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
-    console.log(res);
+
     let msgTime;
 
     if (diffInDays >= 1) {

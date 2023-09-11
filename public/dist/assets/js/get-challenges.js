@@ -17,8 +17,6 @@ async function initChallengeList(option) {
       },
     })
     .then((response) => {
-      console.log(response.data.data);
-
       const challengeTable = document.querySelector('#challenge-table');
       challengeTable.innerHTML = `<tr>
           <th>제목</th>
