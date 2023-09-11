@@ -1,5 +1,9 @@
 const urlParams = new URLSearchParams(window.location.search);
 const adminToken = localStorage.getItem('cookie');
+if (!adminToken) {
+  alert('로그인 후 이용 가능합니다.');
+  window.location.href = 'login.html';
+}
 
 // 1. 블랙리스트 생성모달
 document.getElementById('addBlackList').onclick = function (e) {
