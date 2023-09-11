@@ -53,8 +53,7 @@ async function initMessagesBox() {
   for (const res of sortedResponse) {
     const now = new Date();
     const msgDate = new Date(res.createdAt);
-    const nineHoursInMilliseconds = 9 * 60 * 60 * 1000;
-    const diffInMilliseconds = now - msgDate - nineHoursInMilliseconds;
+    const diffInMilliseconds = now - msgDate;
     const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60));
     const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
     const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
@@ -89,7 +88,7 @@ async function initMessagesBox() {
             <button id="accept${id}"
             class="btn btn-primary btn-sm btn ${
               res.invitedId ? 'accept-challenge' : 'accept-friend'
-            }" style="margin-left:200px"
+            }" style="margin-left:180px"
             > 수락 </button>
             <button id="cancel${id}"
               class="btn btn-primary btn-sm btn ${
@@ -196,8 +195,7 @@ async function initLogBox() {
     for (const log of logMessages) {
       const now = new Date();
       const msgDate = new Date(log.createdAt);
-      const nineHoursInMilliseconds = 9 * 60 * 60 * 1000;
-      const diffInMilliseconds = now - msgDate - nineHoursInMilliseconds;
+      const diffInMilliseconds = now - msgDate;
       const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60));
       const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
       const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
