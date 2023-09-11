@@ -1,21 +1,21 @@
 .section-body {
-  margin: 0px 300px 0px 300px;
+  margin: 0 auto; /* 가로 중앙 정렬을 위한 수정 */
+  max-width: 800px;
 }
 
 .comment-title {
-  margin-left: 300px;
+  margin: 0 auto; /* 가로 중앙 정렬을 위한 수정 */
+  max-width: 800px;
+}
+
+.input {
+  margin: 0 auto; /* 가로 중앙 정렬을 위한 수정 */
+  max-width: 800px;
 }
 
 .comment-body {
-  margin: 0px 300px 0px 300px;
-}
-
-#comment_input {
-  margin-left: 300px;
-}
-
-#createCmt_btn {
-  margin-right: 300px;
+  margin: 0 auto; /* 가로 중앙 정렬을 위한 수정 */
+  max-width: 800px;
 }
 
 #updateCmt_btn {

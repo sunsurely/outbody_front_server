@@ -7,7 +7,7 @@ $(document).ready(function () {
   userPage();
 });
 
-// 용자 정보조회
+// 사용자 정보조회
 async function userPage() {
   try {
     const { data } = await axios.get(`http://localhost:3000/user/${userId}`, {

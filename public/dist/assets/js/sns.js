@@ -16,7 +16,7 @@ const getAllPosts = async (page, pageSize) => {
         headers: {
           Authorization: accessToken,
         },
-      }
+      },
     );
     console.log(response.data.data);
 
@@ -91,7 +91,9 @@ const getAllPosts = async (page, pageSize) => {
   }
 
   pageNumbersHtml = prevButton + pageNumbers + nextButton;
-  pagenationTag.html(`<ul class="pagination justify-content-center">${pageNumbersHtml}</ul>`);
+  pagenationTag.html(
+    `<ul class="pagination justify-content-center">${pageNumbersHtml}</ul>`,
+  );
 
   const prevBtn = $('#prev_button');
   const nextBtn = $('#next_button');
@@ -99,7 +101,9 @@ const getAllPosts = async (page, pageSize) => {
 
   console.log(nowPage);
 
-  $(pages).find(`#nowPage-${nowPage}`).css('background-color', 'rgb(103,119,239)');
+  $(pages)
+    .find(`#nowPage-${nowPage}`)
+    .css('background-color', 'rgb(103,119,239)');
   $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
 
   // 이전
@@ -116,7 +120,9 @@ const getAllPosts = async (page, pageSize) => {
 
         nowPage -= 1;
 
-        $(pages).find(`#nowPage-${nowPage}`).css('background-color', 'rgb(103,119,239)');
+        $(pages)
+          .find(`#nowPage-${nowPage}`)
+          .css('background-color', 'rgb(103,119,239)');
         $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
       } catch (error) {
         console.log('Error Message', error.response.data.message);
@@ -139,7 +145,9 @@ const getAllPosts = async (page, pageSize) => {
 
         nowPage += 1;
 
-        $(pages).find(`#nowPage-${nowPage}`).css('background-color', 'rgb(103,119,239)');
+        $(pages)
+          .find(`#nowPage-${nowPage}`)
+          .css('background-color', 'rgb(103,119,239)');
         $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
       } catch (error) {
         console.log(error);
@@ -161,7 +169,9 @@ const getAllPosts = async (page, pageSize) => {
 
         setTotalPost(posts);
 
-        $(page).find(`#nowPage-${nowPage}`).css('background-color', 'rgb(103,119,239)');
+        $(page)
+          .find(`#nowPage-${nowPage}`)
+          .css('background-color', 'rgb(103,119,239)');
         $(page).find(`#nowPage-${nowPage}`).css('color', 'white');
 
         nowPage = pageNumber;
@@ -178,7 +188,7 @@ const getAllPosts = async (page, pageSize) => {
         headers: {
           Authorization: ` ${accessToken}`,
         },
-      }
+      },
     );
     return data;
   }

@@ -19,7 +19,7 @@ const getOnePost = async () => {
         headers: {
           Authorization: accessToken,
         },
-      }
+      },
     );
 
     let getPost = '';
@@ -30,26 +30,28 @@ const getOnePost = async () => {
       : `assets/img/avatar/avatar-1.png`;
 
     let temphtml = `<div class="card-header">
-                        <ul class="list-unstyled user-details list-unstyled-border list-unstyled-noborder">
-                            <li class="media">
-                                <img alt="image" class="mr-3 rounded-circle" width="50"
-                                    src="${profileImage}">
-                                <div class="media-body">
-                                    <div class="media-title">${post.userName}</div>
-                                    <div class="font-1000-bold"><i class="fas fa-circle"></i> ${post.userPoint}점</div>
-                                </div>
-                            </li>
-                        </ul>
+                      <ul class="list-unstyled user-details list-unstyled-border list-unstyled-noborder">
+                        <li class="media">
+                          <img alt="image" class="mr-3 rounded-circle" width="50"
+                            src="${profileImage}">
+                          <div class="media-body">
+                            <div class="media-title">${post.userName}</div>
+                            <div class="font-1000-bold"><i class="fas fa-circle"></i> ${post.userPoint}점</div>
+                          </div>
+                        </li>
+                      </ul>
                     </div>
                     <div class="card-body">
-                        <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img class="d-block w-100" src="https://inflearn-nest-cat.s3.amazonaws.com/${post.imgUrl}" style="margin-botton: 20px;">
-                                    <h6 style="float: left;">${post.description}</h6>
-                                </div>
-                            </div>
+                      <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <img class="d-block w-100"
+                            src="https://inflearn-nest-cat.s3.amazonaws.com/${post.imgUrl}"
+                            style="margin-botton: 20px;">
+                            <h6 style="float: left; margin-top: 20px">${post.description}</h6>
+                          </div>
                         </div>
+                      </div>
                     </div>`;
     getPost += temphtml;
     $('#card').html(getPost);
@@ -67,7 +69,7 @@ const getComment = async () => {
         headers: {
           Authorization: accessToken,
         },
-      }
+      },
     );
 
     let allComments = '';
@@ -94,7 +96,7 @@ const getComment = async () => {
                                     <div class="section-title">댓글 수정</div>
                                     <div class="form-group">
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control" id="updateCmt_input" placeholder="댓글을 입력해주세요" aria-label="">
+                                            <input type="text" class="form-control" id="updateCmt_input" placeholder="내용을 입력해주세요." aria-label="">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary" type="button" id="updateCmt_btn" commentId="${comment.commentId}">수정</button>
                                             </div>
@@ -127,7 +129,7 @@ const createComment = async () => {
         headers: {
           Authorization: accessToken,
         },
-      }
+      },
     );
     alert('댓글이 작성되었습니다.');
     location.reload();
@@ -160,7 +162,7 @@ const updateComment = async (commentId) => {
         headers: {
           Authorization: accessToken,
         },
-      }
+      },
     );
     alert('댓글이 수정되었습니다.');
     location.reload();
@@ -182,7 +184,7 @@ const deleteComment = async (commentId) => {
         headers: {
           Authorization: accessToken,
         },
-      }
+      },
     );
 
     alert('댓글이 삭제되었습니다.');
@@ -202,7 +204,7 @@ $(document).on('click', '#report-btn', function () {
   $('#reportModal').modal('show');
   $('#reportModal .modal-footer').html(
     `<button type="button" class="btn btn-primary" id="report-button" commentid=${commentId}>신고</button>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>`
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>`,
   );
 });
 
@@ -229,7 +231,7 @@ const reportComment = async (commentId) => {
         headers: {
           Authorization: accessToken,
         },
-      }
+      },
     );
 
     alert('댓글이 신고되었습니다.');
