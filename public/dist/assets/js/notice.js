@@ -9,16 +9,19 @@ async function initMessagesBox() {
   $(messageBox).html('');
   let followResponse, challengeResponse;
   try {
-    followResponse = await axios.get('http://3.34.131.11:3000/follow/request', {
-      headers: { Authorization: accessToken },
-    });
+    followResponse = await axios.get(
+      'http://3.34.132.157:3000/follow/request',
+      {
+        headers: { Authorization: accessToken },
+      },
+    );
   } catch (error) {
     console.error('Error message:', error.response.data.message);
   }
 
   try {
     challengeResponse = await axios.get(
-      'http://3.34.131.11:3000/challenge/invite/list',
+      'http://3.34.132.157:3000/challenge/invite/list',
       {
         headers: {
           Authorization: accessToken,
@@ -109,7 +112,7 @@ async function initMessagesBox() {
       const tagId = $(this).attr('id');
       const id = tagId.charAt(tagId.length - 1);
       const data = { response: 'yes' };
-      await axios.post(`http://3.34.131.11:3000/follow/${id}/accept`, data, {
+      await axios.post(`http://3.34.132.157:3000/follow/${id}/accept`, data, {
         headers: { Authorization: accessToken },
       });
 
@@ -124,7 +127,7 @@ async function initMessagesBox() {
       const tagId = $(this).attr('id');
       const id = tagId.charAt(tagId.length - 1);
       const data = { response: 'no' };
-      await axios.post(`http://3.34.131.11:3000/follow/${id}/accept`, data, {
+      await axios.post(`http://3.34.132.157:3000/follow/${id}/accept`, data, {
         headers: { Authorization: accessToken },
       });
 
@@ -141,7 +144,7 @@ async function initMessagesBox() {
         const data = { response: 'yes' };
         e.preventDefault();
         await axios.post(
-          `http://3.34.131.11:3000/challenge/${id}/accept`,
+          `http://3.34.132.157:3000/challenge/${id}/accept`,
           data,
           {
             headers: { Authorization: accessToken },
@@ -163,7 +166,7 @@ async function initMessagesBox() {
         const id = tagId.charAt(tagId.length - 1);
         const data = { response: 'no' };
         await axios.post(
-          `http://3.34.131.11:3000/challenge/${id}/accept`,
+          `http://3.34.132.157:3000/challenge/${id}/accept`,
           data,
           {
             headers: { Authorization: accessToken },
@@ -186,7 +189,7 @@ async function initLogBox() {
 
   try {
     const { data } = await axios.get(
-      'http://3.34.131.11:3000/challenge/message/log',
+      'http://3.34.132.157:3000/challenge/message/log',
       {
         headers: { Authorization: accessToken },
       },

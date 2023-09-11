@@ -32,10 +32,13 @@ async function initMessagesBox() {
   const messageBox = $('.dropdown-list-message');
   $(messageBox).html('');
   try {
-    const response = await axios.get('http://3.34.131.11:3000/follow/request', {
-      headers: { Authorization: `${accessToken}` },
-      withCredentials: true,
-    });
+    const response = await axios.get(
+      'http://3.34.132.157:3000/follow/request',
+      {
+        headers: { Authorization: `${accessToken}` },
+        withCredentials: true,
+      },
+    );
     const messages = response.data.data;
 
     for (const msg of messages) {
@@ -103,7 +106,7 @@ async function initMessagesBox() {
         const tagId = $(this).attr('id');
         const id = tagId.charAt(tagId.length - 1);
         const data = { response: 'yes' };
-        await axios.post(`http://3.34.131.11:3000/follow/${id}/accept`, data, {
+        await axios.post(`http://3.34.132.157:3000/follow/${id}/accept`, data, {
           headers: { Authorization: accessToken },
           withCredentials: true,
         });
@@ -118,7 +121,7 @@ async function initMessagesBox() {
         const tagId = $(this).attr('id');
         const id = tagId.charAt(tagId.length - 1);
         const data = { response: 'no' };
-        await axios.post(`http://3.34.131.11:3000/follow/${id}/accept`, data, {
+        await axios.post(`http://3.34.132.157:3000/follow/${id}/accept`, data, {
           headers: { Authorization: accessToken },
           withCredentials: true,
         });
@@ -198,7 +201,7 @@ async function initializeChart() {
 async function getBodyResults() {
   try {
     const { data } = await axios.get(
-      'http://3.34.131.11:3000/record/result/detail',
+      'http://3.34.132.157:3000/record/result/detail',
       {
         headers: {
           Authorization: accessToken,
@@ -612,7 +615,7 @@ $('.regist-record').click(async () => {
   const data = { height, weight, fat, muscle, bmr };
 
   try {
-    await axios.post('http://3.34.131.11:3000/record', data, {
+    await axios.post('http://3.34.132.157:3000/record', data, {
       headers: {
         Authorization: `${accessToken}`,
       },
@@ -627,7 +630,7 @@ $('.regist-record').click(async () => {
 
 async function getRecordData(page, pageSize) {
   const data = await axios(
-    `http://3.34.131.11:3000/record/page/?page=${page}&pageSize=${pageSize}`,
+    `http://3.34.132.157:3000/record/page/?page=${page}&pageSize=${pageSize}`,
     {
       headers: {
         Authorization: accessToken,
@@ -740,7 +743,7 @@ function setRecordList(records) {
 
 async function getDateRangeRecord(startDate, endDate, page) {
   const { data } = await axios.get(
-    `http://3.34.131.11:3000/record/date/period/page/?page=${page}&pageSize=10&start=${startDate}&end=${endDate}`,
+    `http://3.34.132.157:3000/record/date/period/page/?page=${page}&pageSize=10&start=${startDate}&end=${endDate}`,
 
     {
       headers: {

@@ -11,7 +11,7 @@ filterApplyButton.addEventListener('click', () => {
 async function initChallengeList(option) {
   let nowPage = 1;
   await axios
-    .get(`http://3.34.131.11:3000/challenge?filter=${option}&page=${1}`, {
+    .get(`http://3.34.132.157:3000/challenge?filter=${option}&page=${1}`, {
       headers: {
         Authorization: accessToken,
       },
@@ -453,7 +453,7 @@ async function initChallengeList(option) {
 async function getChallenges(option, page) {
   try {
     const { data } = await axios.get(
-      `http://3.34.131.11:3000/challenge?filter=${option}&page=${page}`,
+      `http://3.34.132.157:3000/challenge?filter=${option}&page=${page}`,
       {
         headers: {
           Authorization: accessToken,

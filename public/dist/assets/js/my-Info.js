@@ -54,7 +54,7 @@ async function updateUserInfo() {
   formData.append('description', description);
 
   await axios
-    .patch(`http://3.34.131.11:3000/user/me`, formData, {
+    .patch(`http://3.34.132.157:3000/user/me`, formData, {
       headers: {
         Authorization: accessToken,
         'Content-Type': 'multipart/form-data',
@@ -103,7 +103,7 @@ async function initMyPage() {
 
   try {
     const { data } = await axios.get(
-      'http://3.34.131.11:3000/user/me/profile',
+      'http://3.34.132.157:3000/user/me/profile',
       {
         headers: {
           Authorization: accessToken,
@@ -114,7 +114,7 @@ async function initMyPage() {
     const challengeId = data.data.challengeId;
     if (challengeId) {
       const challengeData = await axios.get(
-        `http://3.34.131.11:3000/challenge/${challengeId}`,
+        `http://3.34.132.157:3000/challenge/${challengeId}`,
         {
           headers: {
             Authorization: accessToken,
@@ -135,7 +135,7 @@ async function initMyPage() {
       );
     }
 
-    const rankData = await axios.get('http://3.34.131.11:3000/user/me/rank', {
+    const rankData = await axios.get('http://3.34.132.157:3000/user/me/rank', {
       headers: {
         Authorization: accessToken,
       },
@@ -202,7 +202,7 @@ $(document).on('click', '.delete-friend-button', function () {
 });
 async function deleteFriend(followerId) {
   try {
-    await axios.delete(`http://3.34.131.11:3000/follow/${followerId}`, {
+    await axios.delete(`http://3.34.132.157:3000/follow/${followerId}`, {
       headers: {
         Authorization: accessToken,
       },
@@ -268,7 +268,7 @@ $(signoutBtn).click(async () => {
   const password = $('#signoutpassword').val();
   const data = { password };
   try {
-    await axios.delete('http://3.34.131.11:3000/user/me/signout', {
+    await axios.delete('http://3.34.132.157:3000/user/me/signout', {
       data,
       headers: { Authorization: accessToken },
     });
@@ -286,7 +286,7 @@ $('#searchFriendByEmail').on('click', async () => {
   $(searchUser).html('');
   try {
     const response = await axios.get(
-      `http://3.34.131.11:3000/user/me/searchEmail/?email=${email}`,
+      `http://3.34.132.157:3000/user/me/searchEmail/?email=${email}`,
       {
         headers: {
           Authorization: accessToken,
@@ -323,7 +323,7 @@ $('#searchFriendByEmail').on('click', async () => {
       try {
         if (isChecked) {
           await axios.post(
-            `http://3.34.131.11:3000/follow/${userId}/request`,
+            `http://3.34.132.157:3000/follow/${userId}/request`,
             {},
             {
               headers: { Authorization: accessToken },

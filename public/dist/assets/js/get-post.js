@@ -15,7 +15,7 @@ $(document).ready(function () {
 const getPosts = async (page, pageSize) => {
   try {
     const response = await axios.get(
-      `http://3.34.131.11:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
+      `http://3.34.132.157:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: accessToken,
@@ -190,7 +190,7 @@ const getPosts = async (page, pageSize) => {
 
   async function getTotalpost(page, pageSize) {
     const data = await axios.get(
-      `http://3.34.131.11:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
+      `http://3.34.132.157:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: ` ${accessToken}`,
@@ -277,12 +277,16 @@ const createPost = async () => {
     formData.append('description', description);
 
     await axios
-      .post(`http://3.34.131.11:3000/challenge/${challengeId}/post`, formData, {
-        headers: {
-          Authorization: accessToken,
-          'Content-Type': 'multipart/form-data',
+      .post(
+        `http://3.34.132.157:3000/challenge/${challengeId}/post`,
+        formData,
+        {
+          headers: {
+            Authorization: accessToken,
+            'Content-Type': 'multipart/form-data',
+          },
         },
-      })
+      )
       .then((response) => {
         alert('오운완 생성이 완료되었습니다.');
         location.reload();
@@ -316,7 +320,7 @@ image.addEventListener('change', (event) => {
 const deletePost = async (postId) => {
   try {
     await axios.delete(
-      `http://3.34.131.11:3000/challenge/${challengeId}/post/${postId}`,
+      `http://3.34.132.157:3000/challenge/${challengeId}/post/${postId}`,
       {
         headers: {
           Authorization: accessToken,
