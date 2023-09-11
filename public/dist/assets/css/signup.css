@@ -1,6 +1,8 @@
 .signUp-box {
-  margin-left: 150px;
-  margin-right: 150px;
+  max-width: 500px;
+  min-width: 200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .form-group {

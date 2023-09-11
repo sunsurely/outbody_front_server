@@ -1,6 +1,8 @@
 .login-box {
-  margin-left: 150px;
-  margin-right: 150px;
+  max-width: 400px;
+  min-width: 100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .form-group {

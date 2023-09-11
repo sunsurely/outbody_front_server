@@ -103,7 +103,7 @@ async function createChallenge() {
     muscle,
     fat,
   };
-  console.log(data);
+
   await axios
     .post('http://3.39.237.124:3000/challenge', data, {
       headers: {
