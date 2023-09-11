@@ -82,7 +82,7 @@ async function initMessagesBox() {
             <img alt="image" src="${profileImage}" class="rounded-circle" style="width:50px; htight:50px;"/>
           </div>
           <div class="dropdown-item-desc">
-            <a href="user-info.html?id=${res.userId}">${userInfo}</a>      
+            <a href="user-Info.html?id=${res.userId}">${userInfo}</a>      
             <p id="inviteUserMessage" style="margin-bottom:0px;">님이 ${message}.</p>
             <span style="font-size:12px; font-weight:bold";>${msgTime}</span>
             <button id="accept${id}"
