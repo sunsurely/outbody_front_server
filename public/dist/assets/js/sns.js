@@ -56,7 +56,7 @@ const getAllPosts = async (page, pageSize) => {
                 <img alt="image" src="${profileImage}">
                 <div class="article-user-details">
                   <div class="user-detail-name">
-                    <a href="user-info.html?id=${userId}">${post.user.name}</a>
+                    <a href="user-Info.html?id=${userId}">${post.user.name}</a>
                     <div class="font-1000-bold"><i class="fas fa-circle"></i> ${post.user.point}점</div>
                     <div style="margin-top: 20px">
                       <p style="color: gray;">작성일: ${formattedDate}</p>
@@ -229,7 +229,7 @@ const getAllPosts = async (page, pageSize) => {
                 <img alt="image" src="${profileImage}">
                 <div class="article-user-details">
                   <div class="user-detail-name">
-                    <a href="user-info.html?id=${userId}">${post.user.name}</a>
+                    <a href="user-Info.html?id=${userId}">${post.user.name}</a>
                     <div class="font-1000-bold"><i class="fas fa-circle"></i> ${post.user.point}점</div>
                     <div style="margin-top: 20px">
                       <p style="color: gray;">작성일: ${formattedDate}</p>
