@@ -64,7 +64,7 @@ const getPosts = async (page, pageSize) => {
                     <a href="#" class="btn btn-icon btn-primary"><i class="fas fa-times delPost-btn" postId=${post.id}></i></a>
                   </div>
                   <div class="user-detail-name">
-                    <a href="user-info.html?id=${userId}">${post.userName}</a>
+                    <a href="user-Info.html?id=${userId}">${post.userName}</a>
                     <div class="font-1000-bold"><i class="fas fa-circle"></i> ${post.userPoint}점</div>
                     <div style="margin-top: 20px">
                       <p style="color: gray;">작성일: ${formattedDate}</p>
@@ -240,7 +240,7 @@ const getPosts = async (page, pageSize) => {
                     <a href="#" class="btn btn-icon btn-primary"><i class="fas fa-times delPost-btn" postId=${post.id}></i></a>
                   </div>
                   <div class="user-detail-name">
-                    <a href="user-info.html?id=${userId}">${post.userName}</a>
+                    <a href="user-Info.html?id=${userId}">${post.userName}</a>
                     <div class="font-1000-bold"><i class="fas fa-circle"></i> ${post.userPoint}점</div>
                     <div style="margin-top: 20px">
                       <p style="color: gray;">작성일: ${formattedDate}</p>
