@@ -14,7 +14,7 @@ $(document).ready(function () {
 const getOnePost = async () => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}/detail`,
+      `http://3.39.237.124:3000/challenge/${challengeIdForComment}/post/${postId}/detail`,
       {
         headers: {
           Authorization: accessToken,
@@ -64,7 +64,7 @@ const getOnePost = async () => {
 const getComment = async () => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
+      `http://3.39.237.124:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
       {
         headers: {
           Authorization: accessToken,
@@ -123,7 +123,7 @@ const createComment = async () => {
     }
 
     await axios.post(
-      `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
+      `http://3.39.237.124:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
       { comment: $('#comment_input').val() },
       {
         headers: {
@@ -156,7 +156,7 @@ const updateComment = async (commentId) => {
     }
 
     await axios.patch(
-      `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
+      `http://3.39.237.124:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
       { comment: $('#updateCmt_input').val() },
       {
         headers: {
@@ -179,7 +179,7 @@ $(document).on('click', '#updateCmt_btn', function () {
 const deleteComment = async (commentId) => {
   try {
     await axios.delete(
-      `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
+      `http://3.39.237.124:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
       {
         headers: {
           Authorization: accessToken,
@@ -225,7 +225,7 @@ const reportComment = async (commentId) => {
     }
 
     await axios.post(
-      `http://localhost:3000/report/${commentId}`,
+      `http://3.39.237.124:3000/report/${commentId}`,
       { description: $('.report_input').val() },
       {
         headers: {

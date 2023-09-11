@@ -32,10 +32,13 @@ async function initMessagesBox() {
   const messageBox = $('.dropdown-list-message');
   $(messageBox).html('');
   try {
-    const response = await axios.get('http://localhost:3000/follow/request', {
-      headers: { Authorization: `${accessToken}` },
-      withCredentials: true,
-    });
+    const response = await axios.get(
+      'http://3.39.237.124:3000/follow/request',
+      {
+        headers: { Authorization: `${accessToken}` },
+        withCredentials: true,
+      },
+    );
     const messages = response.data.data;
 
     for (const msg of messages) {
@@ -103,7 +106,7 @@ async function initMessagesBox() {
         const tagId = $(this).attr('id');
         const id = tagId.charAt(tagId.length - 1);
         const data = { response: 'yes' };
-        await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
+        await axios.post(`http://3.39.237.124:3000/follow/${id}/accept`, data, {
           headers: { Authorization: accessToken },
           withCredentials: true,
         });
@@ -118,7 +121,7 @@ async function initMessagesBox() {
         const tagId = $(this).attr('id');
         const id = tagId.charAt(tagId.length - 1);
         const data = { response: 'no' };
-        await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
+        await axios.post(`http://3.39.237.124:3000/follow/${id}/accept`, data, {
           headers: { Authorization: accessToken },
           withCredentials: true,
         });
@@ -169,16 +172,24 @@ async function initializeChart() {
   fatArr.reverse();
 
   $(recentDatas[0]).text(
-    weightArr[weightArr.length - 1] !== undefined ? `${weightArr[weightArr.length - 1]} kg` : 'kg'
+    weightArr[weightArr.length - 1] !== undefined
+      ? `${weightArr[weightArr.length - 1]} kg`
+      : 'kg',
   );
   $(recentDatas[1]).text(
-    fatArr[fatArr.length - 1] !== undefined ? `${fatArr[fatArr.length - 1]} %` : '%'
+    fatArr[fatArr.length - 1] !== undefined
+      ? `${fatArr[fatArr.length - 1]} %`
+      : '%',
   );
   $(recentDatas[2]).text(
-    muscleArr[muscleArr.length - 1] !== undefined ? `${muscleArr[muscleArr.length - 1]} kg` : 'kg'
+    muscleArr[muscleArr.length - 1] !== undefined
+      ? `${muscleArr[muscleArr.length - 1]} kg`
+      : 'kg',
   );
   $(recentDatas[3]).text(
-    bmrArr[bmrArr.length - 1] !== undefined ? `${bmrArr[bmrArr.length - 1]} kcal` : 'kcal'
+    bmrArr[bmrArr.length - 1] !== undefined
+      ? `${bmrArr[bmrArr.length - 1]} kcal`
+      : 'kcal',
   );
 
   initChart('myChart', bmrArr, dateArr, 50, '기초대사량(kcal)');
@@ -190,7 +201,7 @@ async function initializeChart() {
 async function getBodyResults() {
   try {
     const { data } = await axios.get(
-      'http://localhost:3000/record/result/detail',
+      'http://3.39.237.124:3000/record/result/detail',
       {
         headers: {
           Authorization: accessToken,
@@ -224,7 +235,8 @@ async function getBodyResults() {
     } else if (resWeight > 5 && resFat > 5 && resMuscle > 0) {
       diet =
         '적당한 근육량을 가지고 있지만 표준의 체지방률을 유지하는 것이 건강에 큰 도움이 됩니다. 적당량의 탄수화물과 고단백 식단을 꾸준히 섭취하세요.';
-      workout = '표준 이상의 근육량을 유지하려면 꾸준한 근력 운동과 건강한 식단을 병행하세요.';
+      workout =
+        '표준 이상의 근육량을 유지하려면 꾸준한 근력 운동과 건강한 식단을 병행하세요.';
     } else if (resWeight < -5 && resFat < -5 && resMuscle > 5) {
       diet =
         '체지방량이 표준을 초과하며 근육량이 표준 미만이므로 고단백 저탄수화물의 식단으로 관리가 필요한 상태입니다. 더불어 식이섬유가 풍부한 오이나 당근 등 채소를 많이 드세요.';
@@ -241,8 +253,10 @@ async function getBodyResults() {
       workout =
         '모든 수치가 정상 범주에 속해있으며, 지금처럼만 관리한다면 건강한 몸을 유지할 수 있습니다.';
     } else {
-      diet = '표준에 가까운 체성분 수치이므로, 건강한 식단을 꾸준히 유지하세요.';
-      workout = '표준에 가까운 체성분 수치이므로, 유산소 운동과 근력 운동을 꾸준히 실시하세요.';
+      diet =
+        '표준에 가까운 체성분 수치이므로, 건강한 식단을 꾸준히 유지하세요.';
+      workout =
+        '표준에 가까운 체성분 수치이므로, 유산소 운동과 근력 운동을 꾸준히 실시하세요.';
     }
 
     $('#food-result').text(diet);
@@ -254,15 +268,25 @@ async function getBodyResults() {
     const avgMuscle = $('#avg-muscle');
 
     $(bodyResults[0]).text(`${stdWeight}kg`);
-    $(bodyResults[1]).text(resWeight < 0 ? `${resWeight}kg` : `+${resWeight}kg`);
+    $(bodyResults[1]).text(
+      resWeight < 0 ? `${resWeight}kg` : `+${resWeight}kg`,
+    );
     $(bodyResults[2]).text(`${stdFat}%`);
     $(bodyResults[3]).text(resFat < 0 ? `${resFat}%` : `+${resFat}%`);
     $(bodyResults[4]).text(`${stdMuscle}kg`);
-    $(bodyResults[5]).text(resMuscle < 0 ? `${resMuscle}kg` : `+${resMuscle}kg`);
+    $(bodyResults[5]).text(
+      resMuscle < 0 ? `${resMuscle}kg` : `+${resMuscle}kg`,
+    );
 
-    $(avgWeight).text(`평균 체중 :  ${avgDatas.avgWgt ? avgDatas.avgWgt : ''}(kg)`);
-    $(avgFat).text(`평균 체지방률 :  ${avgDatas.avgFat ? avgDatas.avgFat : ''}(%)`);
-    $(avgMuscle).text(`평균 골격근량 :  ${avgDatas.avgMus ? avgDatas.avgMus : ''}(kg)`);
+    $(avgWeight).text(
+      `평균 체중 :  ${avgDatas.avgWgt ? avgDatas.avgWgt : ''}(kg)`,
+    );
+    $(avgFat).text(
+      `평균 체지방률 :  ${avgDatas.avgFat ? avgDatas.avgFat : ''}(%)`,
+    );
+    $(avgMuscle).text(
+      `평균 골격근량 :  ${avgDatas.avgMus ? avgDatas.avgMus : ''}(kg)`,
+    );
   } catch (error) {
     console.error('Error message:', error.response.data.message);
   }
@@ -386,11 +410,16 @@ async function initializeList(page, pageSize) {
         $(pages).find('.page-link').css('color', '');
 
         try {
-          const { data } = await getRecordData(parseInt($(page).find('.page-link').text()), 10);
+          const { data } = await getRecordData(
+            parseInt($(page).find('.page-link').text()),
+            10,
+          );
           const records = data.pageinatedUsersRecords;
           setRecordList(records);
 
-          $(page).find('.page-link').css('background-color', 'rgb(103,119,239)');
+          $(page)
+            .find('.page-link')
+            .css('background-color', 'rgb(103,119,239)');
           $(page).find('.page-link').css('color', 'white');
           nowPage = parseInt($(page).find('.page-link').text());
 
@@ -461,7 +490,10 @@ async function initializeList(page, pageSize) {
     pageNumbersHtml = prevButton + pageNumbers + nextButton;
     recordTable.html(recordsHtml);
     pagenationTag.html(pageNumbersHtml);
-    $('.page_number').eq(0).find('.page-link').css('background-color', 'rgb(103,119,239)');
+    $('.page_number')
+      .eq(0)
+      .find('.page-link')
+      .css('background-color', 'rgb(103,119,239)');
     $('.page_number').eq(0).find('.page-link').css('color', 'white');
     const prevBtn = $('#prev_button');
     const nextBtn = $('#next_button');
@@ -478,7 +510,11 @@ async function initializeList(page, pageSize) {
             $(pages).find('.page-link').css('background-color', '');
             $(pages).find('.page-link').css('color', '');
 
-            const { data } = await getDateRangeRecord(startDate, endDate, nowPage - 1);
+            const { data } = await getDateRangeRecord(
+              startDate,
+              endDate,
+              nowPage - 1,
+            );
             const records = data.pageinatedUsersRecords;
             setRecordList(records);
             nowPage -= 1;
@@ -509,7 +545,11 @@ async function initializeList(page, pageSize) {
           $(pages).find('.page-link').css('background-color', '');
           $(pages).find('.page-link').css('color', '');
           try {
-            const { data } = await getDateRangeRecord(startDate, endDate, nowPage + 1);
+            const { data } = await getDateRangeRecord(
+              startDate,
+              endDate,
+              nowPage + 1,
+            );
             const records = data.pageinatedUsersRecords;
             setRecordList(records);
             nowPage += 1;
@@ -540,11 +580,17 @@ async function initializeList(page, pageSize) {
           $(pages).find('.page-link').css('color', '');
           nowPage = parseInt($(page).find('.page-link').text());
           try {
-            const { data } = await getDateRangeRecord(startDate, endDate, nowPage);
+            const { data } = await getDateRangeRecord(
+              startDate,
+              endDate,
+              nowPage,
+            );
             const records = data.pageinatedUsersRecords;
             setRecordList(records);
 
-            $(page).find('.page-link').css('background-color', 'rgb(103,119,239)');
+            $(page)
+              .find('.page-link')
+              .css('background-color', 'rgb(103,119,239)');
             $(page).find('.page-link').css('color', 'white');
 
             recordsHtml = '';
@@ -569,7 +615,7 @@ $('.regist-record').click(async () => {
   const data = { height, weight, fat, muscle, bmr };
 
   try {
-    await axios.post('http://localhost:3000/record', data, {
+    await axios.post('http://3.39.237.124:3000/record', data, {
       headers: {
         Authorization: `${accessToken}`,
       },
@@ -584,7 +630,7 @@ $('.regist-record').click(async () => {
 
 async function getRecordData(page, pageSize) {
   const data = await axios(
-    `http://localhost:3000/record/page/?page=${page}&pageSize=${pageSize}`,
+    `http://3.39.237.124:3000/record/page/?page=${page}&pageSize=${pageSize}`,
     {
       headers: {
         Authorization: accessToken,
@@ -697,14 +743,14 @@ function setRecordList(records) {
 
 async function getDateRangeRecord(startDate, endDate, page) {
   const { data } = await axios.get(
-    `http://localhost:3000/record/date/period/page/?page=${page}&pageSize=10&start=${startDate}&end=${endDate}`,
+    `http://3.39.237.124:3000/record/date/period/page/?page=${page}&pageSize=10&start=${startDate}&end=${endDate}`,
 
     {
       headers: {
         Authorization: accessToken,
       },
       withCredentials: true,
-    }
+    },
   );
 
   return data;

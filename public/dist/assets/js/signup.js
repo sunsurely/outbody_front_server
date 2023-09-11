@@ -33,7 +33,7 @@ const signUp = async () => {
       return;
     }
 
-    await axios.post(`http://localhost:3000/user/signup`, {
+    await axios.post(`http://3.39.237.124:3000/user/signup`, {
       name,
       email,
       password,
