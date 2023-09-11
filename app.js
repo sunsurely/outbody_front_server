@@ -7,9 +7,9 @@ const port = 3001;
 
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: 'http://3.34.131.11:3000',
     credentials: true,
-  })
+  }),
 );
 
 app.use(express.urlencoded({ extended: true }));

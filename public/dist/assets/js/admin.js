@@ -1,5 +1,5 @@
-// 로그인 여부 확인
-const accessToken = localStorage.getItem('cookie');
+const urlParams = new URLSearchParams(window.location.search);
+const adminToken = localStorage.getItem('cookie');
 
 // 1. 블랙리스트 생성모달
 document.getElementById('addBlackList').onclick = function (e) {
@@ -29,18 +29,23 @@ $('#findBlackList').on('click', async () => {
   const searchedUser = $('#searched-user');
   $(searchedUser).html('');
   try {
-    const response = await axios.get(`http://localhost:3000/user/me/searchEmail/?email=${email}`, {
-      headers: {
-        Authorization: accessToken,
+    const response = await axios.get(
+      `http://3.39.237.124:3000/user/me/searchEmail/?email=${email}`,
+      {
+        headers: {
+          Authorization: adminToken,
+        },
       },
-    });
+    );
     const user = response.data.data;
     const userEmail = user.email;
     const userId = user.id;
 
     const temp = `<div id=${userId}><img  class="rounded-circle" src=${
       user.imgUrl ? user.imgUrl : 'assets/img/avatar/avatar-1.png'
-    } style="width:50px; margin-right:10px"><span>${user.name}(${userEmail})</span></div> <br/> `;
+    } style="width:50px; margin-right:10px"><span>${
+      user.name
+    }(${userEmail})</span></div> <br/> `;
     $(searchedUser).html(temp);
 
     $('#createBlackList').on('click', async () => {
@@ -52,8 +57,8 @@ $('#findBlackList').on('click', async () => {
       }
       const data = { email, description };
       try {
-        await axios.post(`http://localhost:3000/blacklist`, data, {
-          headers: { Authorization: accessToken },
+        await axios.post(`http://3.39.237.124:3000/blacklist`, data, {
+          headers: { Authorization: adminToken },
         });
         alert(`${user.name}(${user.email})님을 블랙리스트에 등록했습니다.`);
         window.location.reload();
@@ -78,11 +83,14 @@ $('#findwithdrawal').on('click', async () => {
   $(withdrawUser).html('');
 
   try {
-    const response = await axios.get(`http://localhost:3000/user/me/searchEmail/?email=${email}`, {
-      headers: {
-        Authorization: accessToken,
+    const response = await axios.get(
+      `http://3.39.237.124:3000/user/me/searchEmail/?email=${email}`,
+      {
+        headers: {
+          Authorization: adminToken,
+        },
       },
-    });
+    );
     const user = response.data.data;
     const userEmail = user.email;
     const userId = user.id;
@@ -104,9 +112,13 @@ $('#findwithdrawal').on('click', async () => {
       }
       const data = { email, description };
       try {
-        await axios.delete(`http://localhost:3000/blacklist/withdraw`, data, {
-          headers: { Authorization: accessToken },
-        });
+        await axios.delete(
+          `http://3.39.237.124:3000/blacklist/withdraw`,
+          data,
+          {
+            headers: { Authorization: adminToken },
+          },
+        );
         alert(`${user.email} 해당 계정을 OutBody 서비스에서 삭제했습니다.`);
         window.location.reload();
       } catch (error) {
@@ -131,9 +143,9 @@ let totalPages = 0;
 async function recordPage(page, pageSize) {
   nowPage = 1;
   await axios
-    .get(`http://localhost:3000/report?page=${page}&pageSize=${pageSize}`, {
+    .get(`http://3.39.237.124:3000/report?page=${page}&pageSize=${pageSize}`, {
       headers: {
-        Authorization: accessToken,
+        Authorization: adminToken,
       },
     })
     .then((response) => {
@@ -189,8 +201,8 @@ async function recordPage(page, pageSize) {
             const description = $('#blackdescription').val();
             const data = { description };
 
-            axios.post(`http://localhost:3000/blacklist/${userId}`, data, {
-              headers: { Authorization: accessToken },
+            axios.post(`http://3.39.237.124:3000/blacklist/${userId}`, data, {
+              headers: { Authorization: adminToken },
             });
             alert(`userId: ${userId}님을 블랙리스트에 추가했습니다.`);
           });
@@ -228,7 +240,9 @@ async function recordPage(page, pageSize) {
       const nextBtn = $('#next_button');
       const pages = $('.page_number');
 
-      $(pages).find(`#nowPage-${nowPage}`).css('background-color', 'rgb(103,119,239)');
+      $(pages)
+        .find(`#nowPage-${nowPage}`)
+        .css('background-color', 'rgb(103,119,239)');
       $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
 
       // Previous Button Clicked
@@ -267,7 +281,9 @@ async function recordPage(page, pageSize) {
 
             nowPage -= 1;
 
-            $(pages).find(`#nowPage-${nowPage}`).css('background-color', 'rgb(103,119,239)');
+            $(pages)
+              .find(`#nowPage-${nowPage}`)
+              .css('background-color', 'rgb(103,119,239)');
             $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
           } catch (error) {
             alert(error.response.data.message);
@@ -311,7 +327,9 @@ async function recordPage(page, pageSize) {
 
             nowPage += 1;
 
-            $(pages).find(`#nowPage-${nowPage}`).css('background-color', 'rgb(103,119,239)');
+            $(pages)
+              .find(`#nowPage-${nowPage}`)
+              .css('background-color', 'rgb(103,119,239)');
             $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
           } catch (error) {
             alert(error.response.data.message);
@@ -325,7 +343,10 @@ async function recordPage(page, pageSize) {
           $(pages).find('.page-link').css('color', '');
 
           try {
-            const { data } = await getReports(parseInt($(page).find(`.page-link`).text()), 10);
+            const { data } = await getReports(
+              parseInt($(page).find(`.page-link`).text()),
+              10,
+            );
 
             reportTable.innerHTML = `<tr>
         <th>Id</th>
@@ -353,7 +374,9 @@ async function recordPage(page, pageSize) {
               .join('');
             nowPage = parseInt($(page).find(`.page-link`).text());
 
-            $(pages).find(`#nowPage-${nowPage}`).css('background-color', 'rgb(103,119,239)');
+            $(pages)
+              .find(`#nowPage-${nowPage}`)
+              .css('background-color', 'rgb(103,119,239)');
 
             $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
           } catch (error) {
@@ -371,15 +394,103 @@ async function recordPage(page, pageSize) {
 async function getReports(page, pageSize) {
   try {
     const { data } = await axios.get(
-      `http://localhost:3000/report?page=${page}&pageSize=${pageSize}`,
+      `http://3.39.237.124:3000/report?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: adminToken,
         },
-      }
+      },
     );
     return data;
   } catch (error) {
     alert(error.response.data.message);
+  }
+}
+
+// 신고 목록 세팅함수
+async function setReports(data) {
+  const reportTable = document.querySelector('#report-table');
+  reportTable.innerHTML = `<tr>
+          <th>댓글 내용</th>
+          <th>신고 내용</th>
+          <th>신고일</th>
+          <th></th>
+        </tr>`;
+
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
+  reportTable.innerHTML += data
+    .map((report) => {
+      const formattedDate = formatDate(report.report_createdAt);
+      return `<tr id="${report.comment_userId}">
+            <td>${report.comment_comment}</span></td>
+            <td>${report.report_description}</span></td>
+            <td>${formattedDate}</td>
+            <td><a href="#" id="${report.comment_userId}" class="blacklist-link">
+              <button class="btn btn-primary" style="border-radius: 15px;">
+                영구 정지 처리
+              </button></a>
+            </td>
+          </tr>`;
+    })
+    .join('');
+}
+
+// 3. 블랙리스트 추가 생성모달
+$(document).on('click', '.blacklist-link', function (event) {
+  try {
+    event.preventDefault();
+    const id = $(this).attr('id');
+    const userId = id.charAt(id.length - 1);
+    $('#addBlackUser').modal('show');
+
+    $('#blackuser')
+      .off('click')
+      .on('click', function () {
+        const description = $('#blackdescription').val();
+        const data = { description };
+
+        axios.post(`http://3.39.237.124:3000/blacklist/${userId}`, data, {
+          headers: { Authorization: accessToken },
+        });
+        alert(`해당 회원을 영구 정지 회원으로 등록했습니다.`);
+        window.location.reload();
+      });
+  } catch (error) {
+    alert(error.response.data.message);
+  }
+
+  // 취소 버튼 클릭 시 모달 창 닫기
+  $('#canceluser')
+    .off('click')
+    .on('click', function () {
+      $('#addBlackUser').modal('hide');
+    });
+});
+
+async function checkAdmin() {
+  try {
+    const { data } = await axios.get(
+      `http://3.39.237.124:3000/blacklist/permision`,
+      {
+        headers: {
+          Authorization: adminToken,
+        },
+      },
+    );
+    const permision = data.data;
+
+    if (!permision) {
+      alert('잘못된 접근입니다!');
+      window.location.href = '/';
+    }
+  } catch (error) {
+    console.error(error.response.data.message);
   }
 }

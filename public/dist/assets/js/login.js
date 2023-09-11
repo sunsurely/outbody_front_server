@@ -10,7 +10,7 @@ const login = async () => {
   }
 
   await axios
-    .post('http://localhost:3000/auth/login', {
+    .post('http://3.39.237.124:3000/auth/login', {
       email: $('#email').val(),
       password: $('#password').val(),
     })
