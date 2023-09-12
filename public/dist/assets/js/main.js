@@ -570,7 +570,7 @@ async function initChart(chartName, recordArr, dateArr, stepSize, title) {
         {
           label: title,
           data: [...recordArr],
-          borderWidth: 2,
+          borderWidth: 4,
           borderColor: 'rgb(103,119,239)',
           backgroundColor: 'transparent',
           pointBackgroundColor: 'rgb(103,119,239)',
