@@ -80,7 +80,8 @@ async function initMessagesBox() {
 
     const temp = `
           <div class="dropdown-item-avatar">
-            <img alt="image" src="${profileImage}" class="rounded-circle" style="width:50px; htight:50px;"/>
+            <img alt="image" src="${profileImage}"
+            style="border-radius:50%; width:50px; height:50px; margin-right: 15px;"/>
           </div>
           <div class="dropdown-item-desc">
             <a href="user-Info.html?id=${res.userId}">${userInfo}</a>      
