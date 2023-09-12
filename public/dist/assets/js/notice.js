@@ -53,6 +53,7 @@ async function initMessagesBox() {
   for (const res of sortedResponse) {
     const now = new Date();
     const msgDate = new Date(res.createdAt);
+    msgDate.setHours(msgDate.getHours() + 9);
     const diffInMilliseconds = now - msgDate;
     const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60));
     const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
@@ -195,6 +196,7 @@ async function initLogBox() {
     for (const log of logMessages) {
       const now = new Date();
       const msgDate = new Date(log.createdAt);
+      msgDate.setHours(msgDate.getHours() + 9);
       const diffInMilliseconds = now - msgDate;
       const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60));
       const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
