@@ -1,5 +1,5 @@
-// const port = 'localhost';
-const port = '3.39.237.124';
+const port = 'localhost';
+// const port = '3.39.237.124';
 
 const accessToken = localStorage.getItem('cookie');
 
@@ -112,7 +112,7 @@ async function createChallenge() {
   };
 
   await axios
-    .post(`http://${port}:3000/challenge`, data, {
+    .post(`http://${port}:3001/challenge`, data, {
       headers: {
         Authorization: accessToken,
       },

@@ -1,3 +1,6 @@
+const port = 'localhost';
+// const port = '3.39.237.124';
+
 const commentParams = new URLSearchParams(window.location.search);
 const challengeIdForComment = commentParams.get('cid');
 const postId = commentParams.get('pid');
@@ -14,7 +17,7 @@ $(document).ready(function () {
 const getOnePost = async () => {
   try {
     const response = await axios.get(
-      `http://3.39.237.124:3000/challenge/${challengeIdForComment}/post/${postId}/detail`,
+      `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/detail`,
       {
         headers: {
           Authorization: accessToken,
@@ -32,7 +35,7 @@ const getOnePost = async () => {
     let temphtml = `<div class="card-header">
                       <ul class="list-unstyled user-details list-unstyled-border list-unstyled-noborder">
                         <li class="media">
-                          <img alt="image"  style="border-radius:50%; width:50px; height:50px"
+                          <img alt="image" class="mr-3 rounded-circle" width="50"
                             src="${profileImage}">
                           <div class="media-body">
                             <div class="media-title">${post.userName}</div>
@@ -64,7 +67,7 @@ const getOnePost = async () => {
 const getComment = async () => {
   try {
     const response = await axios.get(
-      `http://3.39.237.124:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
+      `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/comment`,
       {
         headers: {
           Authorization: accessToken,
@@ -79,7 +82,7 @@ const getComment = async () => {
         : `assets/img/avatar/avatar-1.png`;
 
       let temphtml = `<li class="media" id="comment-${comment.commentId}">
-                        <img alt="image"  style="border-radius:50%; width:50px; height:50px" src="${profileImage}">
+                        <img alt="image" class="mr-3 rounded-circle" width="70" src="${profileImage}">
                         <div class="media-body">
                             <div class="media-title mb-1">${comment.username}</div>
                             <div class="media-description text-muted">
@@ -123,7 +126,7 @@ const createComment = async () => {
     }
 
     await axios.post(
-      `http://3.39.237.124:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
+      `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/comment`,
       { comment: $('#comment_input').val() },
       {
         headers: {
@@ -156,7 +159,7 @@ const updateComment = async (commentId) => {
     }
 
     await axios.patch(
-      `http://3.39.237.124:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
+      `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
       { comment: $('#updateCmt_input').val() },
       {
         headers: {
@@ -179,7 +182,7 @@ $(document).on('click', '#updateCmt_btn', function () {
 const deleteComment = async (commentId) => {
   try {
     await axios.delete(
-      `http://3.39.237.124:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
+      `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
       {
         headers: {
           Authorization: accessToken,
@@ -225,7 +228,7 @@ const reportComment = async (commentId) => {
     }
 
     await axios.post(
-      `http://3.39.237.124:3000/report/${commentId}`,
+      `http://${port}:3001/report/${commentId}`,
       { description: $('.report_input').val() },
       {
         headers: {
@@ -243,3 +246,61 @@ const reportComment = async (commentId) => {
 $(document).on('click', '#report-button', function () {
   reportComment($(this).attr('commentid'));
 });
+
+// 좋아요 생성
+const getLike = async () => {
+  const likeButton = $('#likeButton');
+  let isLiked = false;
+
+  likeButton.on('click', async function () {
+    isLiked = true;
+    if ((isLiked = true)) {
+      await axios
+        .post(
+          `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/like`,
+          {
+            headers: {
+              Authorization: accessToken,
+            },
+          },
+        )
+        .then((response) => {
+          if (response.data.data) {
+            alert('좋아요를 눌렀습니다.');
+          }
+        })
+        .catch((error) => {
+          console.error('Error message:', error.response.data.message);
+        });
+    }
+  });
+};
+
+// 좋아요 취소
+const unLike = async (likeId) => {
+  const likeButton = $('#likeButton');
+  let isLiked = true;
+
+  likeButton.on('click', async function () {
+    isLiked = false;
+    if ((isLiked = false)) {
+      await axios
+        .delete(
+          `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}/like/${likeId}`,
+          {
+            headers: {
+              Authorization: accessToken,
+            },
+          },
+        )
+        .then((response) => {
+          if (response.data.data) {
+            alert('좋아요를 취소했습니다.');
+          }
+        })
+        .catch((error) => {
+          console.error('Error message:', error.response.data.message);
+        });
+    }
+  });
+};

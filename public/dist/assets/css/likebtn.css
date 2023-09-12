@@ -1,0 +1,136 @@
+* {
+  /* 초기화 */
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* 100% 창 높이 */
+  height: 100vh;
+  /* 사용자 정의: var 함수로 핸들링 */
+  --c: #ff6b81;
+}
+
+.container {
+  /* 배치 center */
+  display: flex;
+  justify-content: flex-end; /* 좌우 간격을 최대로 설정 */
+  align-items: center;
+  /* 마진을 사용하여 좌측에 공간을 만듭니다. */
+  margin-left: 30px; /* 원하는 좌측 간격 설정 */
+  margin-right: 30px; /* 원하는 우측 간격 설정 */
+  position: relative; /* container를 기준으로 좋아요 버튼 배치 */
+}
+
+svg {
+  width: 30px;
+  height: 30px;
+  /* 상대 포지션 */
+  position: absolute;
+  right: 20px;
+}
+
+#heart {
+  /* 색 보충 */
+  fill: #eee;
+
+  /* stroke 속성은 선, 문자, 원소 등의 테두리에 대해서 디자인 가능 */
+  stroke: var(--c);
+  /* 선의 넓이 */
+  stroke-width: 40px;
+  /* 선을 점선으로 설정, 점선의 길이 설정 */
+  stroke-dasharray: 3000;
+  /* displacement of line */
+  stroke-dashoffset: 3000;
+  /* 끝점은 둥글게 */
+  stroke-linecap: round;
+}
+
+span {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border-radius: 50%;
+  /* 절대적 포지션: center */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  /* 각 방향의 쉐도우 설정 */
+  /* var 함수로 쉐도우 컬러 설정 */
+  box-shadow: 0 -80px 0 var(--c), 0 80px 0 var(--c), -80px 0 0 var(--c),
+    80px 0 0 var(--c), -60px -60px 0 var(--c), 60px -60px 0 var(--c),
+    60px 60px 0 var(--c), -60px 60px 0 var(--c);
+}
+
+/* checkbox를 클릭할 경우 애니메이션 실행 */
+#checkbox:checked + svg #heart {
+  /* 애니메이션 실행: 애니메이션 이름, 실행 시간, 선형 마지막 정지한 프레임 */
+  animation: drawHeart 1s linear forwards;
+}
+
+#checkbox:checked ~ span {
+  /* 애니메이션 실행: 애니메이션 이름, 실행 시간, 선형 마지막 정지한 프레임 */
+  animation: blink 0.5s ease-in-out forwards;
+  /* 애니메이션 딜레이 */
+  animation-delay: 0.8s;
+}
+
+#checkbox:checked + svg {
+  /* 애니메이션 실행: 애니메이션 이름, 실행 시간, 선형 마지막 정지한 프레임 */
+  animation: beat 1s linear forwards;
+}
+
+label {
+  /* 마우스 heart로 이동시 마우스 커서 변동 */
+  cursor: pointer;
+}
+
+/* 애니메이션 효과 설정 */
+/* heart 애니메이션 */
+@keyframes drawHeart {
+  0% {
+    stroke-dashoffset: 2600;
+  }
+  80% {
+    fill: #eee;
+    stroke-dashoffset: 0;
+  }
+  100% {
+    fill: var(--c);
+    stroke-dashoffset: 0;
+  }
+}
+
+/* 점 애니메이션 */
+@keyframes blink {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0.8;
+  }
+  80% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 0;
+  }
+}
+
+/* 두근두근 애니메이션 */
+@keyframes beat {
+  0% {
+    transform: scale(1);
+  }
+  70% {
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
