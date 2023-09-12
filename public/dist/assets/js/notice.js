@@ -188,8 +188,9 @@ async function initLogBox() {
     for (const log of logMessages) {
       const now = new Date();
       const msgDate = new Date(log.createdAt).getTime();
-      msgDate.setHours(msgDate.getHours() + 9 * 60 * 60 * 1000);
-      const diffInMilliseconds = Math.abs(now - msgDate);
+      const koreaTime = 9 * 60 * 60 * 1000;
+      const diffTime = msgDate + koreaTimeOffset;
+      const diffInMilliseconds = Math.abs(now - diffTime);
       const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60));
       const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
       const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
