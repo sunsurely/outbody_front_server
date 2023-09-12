@@ -332,6 +332,7 @@ $(signoutBtn).click(async () => {
 
 //친구찾기 , 친구요청 보내기
 $('#searchFriendByEmail').on('click', async () => {
+  console.log('이건 또 왜안되는데?');
   const email = $('#searchEmail').val();
   const searchUser = $('#searched-friend');
   $(searchUser).html('');
