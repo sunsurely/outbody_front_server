@@ -93,7 +93,7 @@ async function updateUserInfo() {
   formData.append('image', profileImage);
   formData.append('birthday', birthday);
   formData.append('description', description);
-  // formData.append('name', myName);
+  formData.append('name', myName);
 
   await axios
     .patch(`http://3.39.237.124:3000/user/me`, formData, {
