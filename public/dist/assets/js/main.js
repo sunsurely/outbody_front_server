@@ -7,7 +7,6 @@ let totalPages = 0;
 $(document).ready(function () {
   initializeChart();
   getBodyResults();
-  saveToken();
   initializeList(1, 10);
   $('.daterange-cus').daterangepicker({
     startDate: moment().subtract(1, 'years'),
