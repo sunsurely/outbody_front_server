@@ -84,7 +84,7 @@ async function initChallengeList(option) {
           <td>
           <img id="profile-image" alt="image"
           src="${profileImage}"
-          class="rounded-circle" width="35" data-toggle="title" title="">
+          class="rounded-circle" style="border-radius:50%" data-toggle="title" title="">
             <div class="d-inline-block ml-1">${challenge.hostName}</div>
           </td>
           <td>${publicView}</td>
