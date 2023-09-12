@@ -5,7 +5,6 @@ const commentParams = new URLSearchParams(window.location.search);
 const challengeIdForComment = commentParams.get('cid');
 const postId = commentParams.get('pid');
 
-// 로그인 여부 확인
 const accessToken = localStorage.getItem('cookie');
 
 $(document).ready(function () {
@@ -35,7 +34,7 @@ const getOnePost = async () => {
     let temphtml = `<div class="card-header">
                       <ul class="list-unstyled user-details list-unstyled-border list-unstyled-noborder">
                         <li class="media">
-                          <img alt="image" class="mr-3 rounded-circle" width="50"
+                          <img alt="image" style="border-radius:50%; width:50px; height:50px; margin-right: 15px;"
                             src="${profileImage}">
                           <div class="media-body">
                             <div class="media-title">${post.userName}</div>
@@ -82,7 +81,7 @@ const getComment = async () => {
         : `assets/img/avatar/avatar-1.png`;
 
       let temphtml = `<li class="media" id="comment-${comment.commentId}">
-                        <img alt="image" class="mr-3 rounded-circle" width="70" src="${profileImage}">
+                        <img alt="image"  style="border-radius:50%; width:50px; height:50px; margin-right: 15px;" src="${profileImage}">
                         <div class="media-body">
                             <div class="media-title mb-1">${comment.username}</div>
                             <div class="media-description text-muted">

@@ -41,7 +41,7 @@ const getAllPosts = async (page, pageSize) => {
 
       const formattedDate = `${year}년 ${month}월 ${day}일`;
 
-      let temphtml = `<div class="col-12 col-md-4 col-lg-2">
+      let temphtml = `<div class="col-12 col-md-4 col-lg-3">
           <article class="article article-style-c">
             <div class="article-header">
               <div class="article-image"
@@ -56,7 +56,7 @@ const getAllPosts = async (page, pageSize) => {
                 </h2>
               </div>
               <div class="article-user">
-                <img alt="image" src="${profileImage}">
+                <img alt="image" style="border-radius:50%; width:50px; height:50px; margin-right:15px"  src="${profileImage}">
                 <div class="article-user-details">
                   <div class="user-detail-name">
                     <a href="user-Info.html?id=${userId}">${post.user.name}</a>
@@ -229,7 +229,7 @@ const getAllPosts = async (page, pageSize) => {
                 </h2>
               </div>
               <div class="article-user">
-                <img alt="image" src="${profileImage}">
+                <img alt="image" style="border-radius:50%; width:50px; height:50px; margin-right:15px"  src="${profileImage}">
                 <div class="article-user-details">
                   <div class="user-detail-name">
                     <a href="user-Info.html?id=${userId}">${post.user.name}</a>

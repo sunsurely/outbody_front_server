@@ -1,5 +1,17 @@
-const port = 'localhost';
-// const port = '3.39.237.124';
+$(document).ready(function () {
+  $('.btn-show-pass').on('click', function (event) {
+    event.preventDefault();
+    if ($('#password').attr('type') == 'text') {
+      $('#password').attr('type', 'password');
+      $('.fa').addClass('fa-eye');
+      $('.fa').removeClass('fa-eye-slash');
+    } else if ($('#password').attr('type') == 'password') {
+      $('#password').attr('type', 'text');
+      $('.fa').removeClass('fa-eye');
+      $('.fa').addClass('fa-eye-slash');
+    }
+  });
+});
 
 const login = async () => {
   if (!$('#email').val()) {

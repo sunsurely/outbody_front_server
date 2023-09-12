@@ -8,6 +8,47 @@ $(document).ready(function () {
   initMyPage();
 });
 
+$(document).ready(function () {
+  $('#eyeCurrent').on('click', function (event) {
+    event.preventDefault();
+    if ($('#current').attr('type') == 'text') {
+      $('#current').attr('type', 'password');
+      $(this).removeClass('fa-eye-slash');
+      $(this).addClass('fa-eye');
+    } else if ($('#current').attr('type') == 'password') {
+      $('#current').attr('type', 'text');
+      $(this).removeClass('fa-eye');
+      $(this).addClass('fa-eye-slash');
+    }
+  });
+
+  $('#eyeNew').on('click', function (event) {
+    event.preventDefault();
+    if ($('#newpw').attr('type') == 'text') {
+      $('#newpw').attr('type', 'password');
+      $(this).removeClass('.fas fa-eye-slash');
+      $(this).addClass('.fas fa-eye');
+    } else if ($('#newpw').attr('type') == 'password') {
+      $('#newpw').attr('type', 'text');
+      $(this).removeClass('.fas fa-eye');
+      $(this).addClass('.fas fa-eye-slash');
+    }
+  });
+
+  $('#eyeConfirm').on('click', function (event) {
+    event.preventDefault();
+    if ($('#confirmpw').attr('type') == 'text') {
+      $('#confirmpw').attr('type', 'password');
+      $(this).removeClass('.fas fa-eye-slash');
+      $(this).addClass('.fas fa-eye');
+    } else if ($('#confirmpw').attr('type') == 'password') {
+      $('#confirmpw').attr('type', 'text');
+      $(this).removeClass('.fas fa-eye');
+      $(this).addClass('.fas fa-eye-slash');
+    }
+  });
+});
+
 // 1. 정보수정 모달
 document.getElementById('userInfoEdit').onclick = function (e) {
   e.preventDefault();
@@ -50,12 +91,14 @@ async function updateUserInfo() {
   const profileImage = $('#profile-image-upload')[0].files[0];
   const birthday = $('#user-birthday').val();
   const description = $('#user-description').val();
+  const myName = $('#user-name').val();
 
   const formData = new FormData();
   formData.append('image', profileImage);
   formData.append('birthday', birthday);
   formData.append('description', description);
-
+  formData.append('name', myName);
+  console.log(myName);
   await axios
     .patch(`http://${port}:3000/user/me`, formData, {
       headers: {
@@ -65,6 +108,7 @@ async function updateUserInfo() {
     })
     .then((response) => {
       if (response.data.success === true) {
+        console.log(response);
         alert('내 정보 수정이 완료되었습니다.');
         location.reload();
       }

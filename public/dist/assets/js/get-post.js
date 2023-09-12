@@ -4,7 +4,6 @@ const port = 'localhost';
 const postParams = new URLSearchParams(window.location.search);
 const challengeId = postParams.get('id');
 
-// 로그인 여부 확인
 const accessToken = localStorage.getItem('cookie');
 
 let nowPage = 1;
@@ -46,7 +45,7 @@ const getPosts = async (page, pageSize) => {
 
       const formattedDate = `${year}년 ${month}월 ${day}일`;
 
-      let temphtml = `<div class="col-12 col-md-2">
+      let temphtml = `<div class="col-12 col-lg-3">
           <article class="article article-style-c">
             <div class="article-header">
               <div class="article-image"

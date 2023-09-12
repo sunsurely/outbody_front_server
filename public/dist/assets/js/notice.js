@@ -53,7 +53,7 @@ async function initMessagesBox() {
   for (const res of sortedResponse) {
     const now = new Date();
     const msgDate = new Date(res.createdAt);
-    msgDate.setHours(msgDate.getHours() + 9);
+
     const diffInMilliseconds = Math.abs(now - msgDate);
     const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60));
     const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
@@ -80,11 +80,12 @@ async function initMessagesBox() {
 
     const temp = `
           <div class="dropdown-item-avatar">
-            <img alt="image" src="${profileImage}" class="rounded-circle" style="width:50px; htight:50px;"/>
+            <img alt="image" src="${profileImage}"
+            style="border-radius:50%; width:50px; height:50px; margin-right: 15px;"/>
           </div>
           <div class="dropdown-item-desc">
             <a href="user-Info.html?id=${res.userId}">${userInfo}</a>      
-            <p id="inviteUserMessage" style="margin-bottom:0px;">님이 ${message}.</p>
+            <p id="inviteUserMessage" style="margin-bottom:0px;">님이 ${message}</p>
             <span style="font-size:12px; font-weight:bold";>${msgTime}</span>
             <button id="accept${id}"
             class="btn btn-primary btn-sm btn ${
@@ -188,7 +189,8 @@ async function initLogBox() {
     for (const log of logMessages) {
       const now = new Date();
       const msgDate = new Date(log.createdAt);
-      msgDate.setHours(msgDate.getHours() + 9);
+      msgDate.setHours(msgDate.getHours() - 9);
+
       const diffInMilliseconds = Math.abs(now - msgDate);
       const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60));
       const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
@@ -206,7 +208,7 @@ async function initLogBox() {
 
       const temp = `
         <a href="#" class="dropdown-item dropdown-item-unread">
-          <div class="dropdown-item-desc">${log.message}.
+          <div class="dropdown-item-desc">${log.message}
             <div class="time text-primary">${msgTime}</div>
           </div>
         </a>`;

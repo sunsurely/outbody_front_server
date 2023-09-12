@@ -1,4 +1,3 @@
-// 로그인 여부 확인
 const accessToken = localStorage.getItem('cookie');
 
 let nowPage = 1;
@@ -8,7 +7,6 @@ let totalPages = 0;
 $(document).ready(function () {
   initializeChart();
   getBodyResults();
-  saveToken();
   initializeList(1, 10);
   $('.daterange-cus').daterangepicker({
     startDate: moment().subtract(1, 'years'),
@@ -674,16 +672,3 @@ async function getDateRangeRecord(startDate, endDate, page) {
 
   return data;
 }
-// 카카오 로그인
-const saveToken = async () => {
-  // try {
-  const response = await axios.get(`http://localhost:3000/auth/sendToken`, {
-    user: kakaoUserId,
-  });
-  const authorization = response.header.get('authorization');
-  localStorage.setItem(`cookie`, `Bearer ${authorization}`);
-  // } catch (error) {
-  //   // alert(error.response.data.message);
-  //   console.error('Error message:', error);
-  // }
-};
