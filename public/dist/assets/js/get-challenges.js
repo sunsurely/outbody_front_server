@@ -1,6 +1,3 @@
-// const port = 'localhost';
-const port = '3.39.237.124';
-
 const accessToken = localStorage.getItem('cookie');
 
 const filterApplyButton = document.querySelector('#filter-apply-button');
@@ -17,7 +14,7 @@ filterApplyButton.addEventListener('click', () => {
 async function initChallengeList(option) {
   let nowPage = 1;
   await axios
-    .get(`http://${port}:3000/challenge?filter=${option}&page=${1}`, {
+    .get(`http://3.39.237.124:3000/challenge?filter=${option}&page=${1}`, {
       headers: {
         Authorization: accessToken,
       },
@@ -90,7 +87,7 @@ async function initChallengeList(option) {
           <td>
           <img id="profile-image" alt="image"
           src="${profileImage}"
-         style="border-radius:50%; width:35px; height:35px" data-toggle="title" title="">
+          style="border-radius:50%; width:35px; height:35px" data-toggle="title" title="">
             <div class="d-inline-block ml-1">${challenge.hostName}</div>
           </td>
           <td>${publicView}</td>
@@ -457,7 +454,7 @@ async function initChallengeList(option) {
 async function getChallenges(option, page) {
   try {
     const { data } = await axios.get(
-      `http://${port}:3000/challenge?filter=${option}&page=${page}`,
+      `http://3.39.237.124:3000/challenge?filter=${option}&page=${page}`,
       {
         headers: {
           Authorization: accessToken,

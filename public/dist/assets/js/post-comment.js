@@ -2,7 +2,6 @@ const commentParams = new URLSearchParams(window.location.search);
 const challengeIdForComment = commentParams.get('cid');
 const postId = commentParams.get('pid');
 
-// 로그인 여부 확인
 const accessToken = localStorage.getItem('cookie');
 
 $(document).ready(function () {
