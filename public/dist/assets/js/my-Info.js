@@ -87,11 +87,13 @@ async function updateUserInfo() {
   const profileImage = $('#profile-image-upload')[0].files[0];
   const birthday = $('#user-birthday').val();
   const description = $('#user-description').val();
+  const myName = $('#user-name').val();
 
   const formData = new FormData();
   formData.append('image', profileImage);
   formData.append('birthday', birthday);
   formData.append('description', description);
+  formData.append('name', myName);
 
   await axios
     .patch(`http://3.39.237.124:3000/user/me`, formData, {
