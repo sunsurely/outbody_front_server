@@ -2,6 +2,9 @@
 
 // 로그아웃
 async function logout() {
+  accessToken = '';
+  getAccessToken = '';
+
   localStorage.removeItem('cookie');
   location.href = 'login.html';
 }
