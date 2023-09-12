@@ -19,7 +19,6 @@ async function userPage() {
       },
     );
     const user = data.data;
-    console.log(user);
 
     $('#profile-image').attr(
       'src',
@@ -68,7 +67,7 @@ async function userPage() {
       }
 
       try {
-        await axios.delete(`http://3.39.237.124:3000/follow/${user.id}`, {
+        await axios.delete(`http://3.39.237.124:3000/follow/${userId}`, {
           headers: {
             Authorization: accessToken,
           },
