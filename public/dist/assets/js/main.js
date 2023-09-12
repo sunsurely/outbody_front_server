@@ -576,7 +576,7 @@ async function initChart(chartName, recordArr, dateArr, stepSize, title) {
           pointBackgroundColor: 'rgb(103,119,239)',
           pointBorderColor: 'rgb(103,119,239)',
           pointRadius: 2,
-          tension: 10,
+          tension: 0,
         },
       ],
     },
