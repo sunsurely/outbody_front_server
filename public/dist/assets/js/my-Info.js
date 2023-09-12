@@ -94,9 +94,9 @@ async function updateUserInfo() {
   formData.append('birthday', birthday);
   formData.append('description', description);
   formData.append('name', myName);
-
+  console.log(myName);
   await axios
-    .patch(`http://3.39.237.124:3000/user/me`, formData, {
+    .patch(`localhost:3000/user/me`, formData, {
       headers: {
         Authorization: accessToken,
         'Content-Type': 'multipart/form-data',
