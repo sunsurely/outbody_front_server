@@ -1,6 +1,3 @@
-// const port = 'localhost';
-const port = '3.39.237.124';
-
 $(document).ready(function () {
   initMessagesBox();
   initLogBox();
@@ -12,16 +9,19 @@ async function initMessagesBox() {
   $(messageBox).html('');
   let followResponse, challengeResponse;
   try {
-    followResponse = await axios.get(`http://${port}:3000/follow/request`, {
-      headers: { Authorization: accessToken },
-    });
+    followResponse = await axios.get(
+      `http://3.39.237.124:3000/follow/request`,
+      {
+        headers: { Authorization: accessToken },
+      },
+    );
   } catch (error) {
     console.error('Error message:', error.response.data.message);
   }
 
   try {
     challengeResponse = await axios.get(
-      `http://${port}:3000/challenge/invite/list`,
+      `http://3.39.237.124:3000/challenge/invite/list`,
       {
         headers: {
           Authorization: accessToken,
@@ -85,7 +85,7 @@ async function initMessagesBox() {
           </div>
           <div class="dropdown-item-desc">
             <a href="user-Info.html?id=${res.userId}">${userInfo}</a>      
-            <p id="inviteUserMessage" style="margin-bottom:0px;">님이 ${message}.</p>
+            <p id="inviteUserMessage" style="margin-bottom:0px;">님이 ${message}</p>
             <span style="font-size:12px; font-weight:bold";>${msgTime}</span>
             <button id="accept${id}"
             class="btn btn-primary btn-sm btn ${
@@ -109,7 +109,7 @@ async function initMessagesBox() {
       const tagId = $(this).attr('id');
       const id = parseInt(tagId.match(/\d+/)[0], 10);
       const data = { response: 'yes' };
-      await axios.post(`http://${port}:3000/follow/${id}/accept`, data, {
+      await axios.post(`http://3.39.237.124:3000/follow/${id}/accept`, data, {
         headers: { Authorization: accessToken },
       });
 
@@ -124,7 +124,7 @@ async function initMessagesBox() {
       const tagId = $(this).attr('id');
       const id = parseInt(tagId.match(/\d+/)[0], 10);
       const data = { response: 'no' };
-      await axios.post(`http://${port}:3000/follow/${id}/accept`, data, {
+      await axios.post(`http://3.39.237.124:3000/follow/${id}/accept`, data, {
         headers: { Authorization: accessToken },
       });
 
@@ -140,9 +140,13 @@ async function initMessagesBox() {
         const id = tagId.charAt(tagId.length - 1);
         const data = { response: 'yes' };
         e.preventDefault();
-        await axios.post(`http://${port}:3000/challenge/${id}/accept`, data, {
-          headers: { Authorization: accessToken },
-        });
+        await axios.post(
+          `http://3.39.237.124:3000/challenge/${id}/accept`,
+          data,
+          {
+            headers: { Authorization: accessToken },
+          },
+        );
 
         alert(`도전방 초대를 수락했습니다.`);
         window.location.reload();
@@ -158,9 +162,13 @@ async function initMessagesBox() {
         const tagId = $(this).attr('id');
         const id = parseInt(tagId.match(/\d+/)[0], 10);
         const data = { response: 'no' };
-        await axios.post(`http://${port}:3000/challenge/${id}/accept`, data, {
-          headers: { Authorization: accessToken },
-        });
+        await axios.post(
+          `http://3.39.237.124:3000/challenge/${id}/accept`,
+          data,
+          {
+            headers: { Authorization: accessToken },
+          },
+        );
 
         alert(`도전방 초대를 거절했습니다.`);
         window.location.reload();
@@ -178,7 +186,7 @@ async function initLogBox() {
 
   try {
     const { data } = await axios.get(
-      `http://${port}:3000/challenge/message/log`,
+      `http://3.39.237.124:3000/challenge/message/log`,
       {
         headers: { Authorization: accessToken },
       },
@@ -208,7 +216,7 @@ async function initLogBox() {
 
       const temp = `
         <a href="#" class="dropdown-item dropdown-item-unread">
-          <div class="dropdown-item-desc">${log.message}.
+          <div class="dropdown-item-desc">${log.message}
             <div class="time text-primary">${msgTime}</div>
           </div>
         </a>`;

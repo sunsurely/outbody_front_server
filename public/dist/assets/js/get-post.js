@@ -1,7 +1,6 @@
 const postParams = new URLSearchParams(window.location.search);
 const challengeId = postParams.get('id');
 
-// 로그인 여부 확인
 const accessToken = localStorage.getItem('cookie');
 
 let nowPage = 1;
