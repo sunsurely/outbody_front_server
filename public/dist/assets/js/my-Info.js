@@ -104,6 +104,7 @@ async function updateUserInfo() {
     })
     .then((response) => {
       if (response.data.success === true) {
+        console.log(response);
         alert('내 정보 수정이 완료되었습니다.');
         location.reload();
       }
