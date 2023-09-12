@@ -83,7 +83,7 @@ document.getElementById('searchfriendCancel').onclick = function () {
 
 // 내 정보 수정 (재용 작성)
 $('#update-userInfo-button').click(updateUserInfo);
-getAccessToken;
+accessToken;
 async function updateUserInfo() {
   const profileImage = $('#profile-image-upload')[0].files[0];
   const birthday = $('#user-birthday').val();
