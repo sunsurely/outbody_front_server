@@ -94,7 +94,7 @@ async function updateUserInfo() {
   formData.append('birthday', birthday);
   formData.append('description', description);
   formData.append('name', myName);
-  console.log(myName);
+
   await axios
     .patch(`http://3.39.237.124:3000/user/me`, formData, {
       headers: {
@@ -104,9 +104,8 @@ async function updateUserInfo() {
     })
     .then((response) => {
       if (response.data.success === true) {
-        console.log(response);
-        // alert('내 정보 수정이 완료되었습니다.');
-        // location.reload();
+        alert('내 정보 수정이 완료되었습니다.');
+        location.reload();
       }
     })
     .catch((error) => {
