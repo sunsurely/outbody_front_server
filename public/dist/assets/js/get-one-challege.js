@@ -178,7 +178,7 @@ async function getChallengers() {
             : `assets/img/avatar/avatar-1.png`;
 
           return `<li class="media">
-            <img alt="image" class="mr-3 rounded-circle" width="50"
+            <img alt="image"style="border-radius:50%; width:50px; height:50px"
             src="${profileImage}">
             <div class="media-body">
               <div class="mt-0 mb-1 font-weight-bold">${challenger.user.name}</div>
