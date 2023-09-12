@@ -189,9 +189,10 @@ async function initLogBox() {
       const now = new Date();
       const msgDate = new Date(log.createdAt);
       msgDate.setHours(msgDate.getHours() + 9);
-      const diffInMinutes = nowMoment.diff(msgMoment, 'minutes');
-      const diffInHours = nowMoment.diff(msgMoment, 'hours');
-      const diffInDays = nowMoment.diff(msgMoment, 'days');
+      const diffInMilliseconds = Math.abs(now - msgDate);
+      const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60));
+      const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
+      const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
 
       let msgTime;
 
