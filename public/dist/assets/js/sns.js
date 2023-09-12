@@ -225,7 +225,7 @@ const getAllPosts = async (page, pageSize) => {
                 </h2>
               </div>
               <div class="article-user">
-                <img alt="image" src="${profileImage}">
+                <img alt="image" style="border-radius:50%; width:50px; height:50px; margin-right:15px"  src="${profileImage}">
                 <div class="article-user-details">
                   <div class="user-detail-name">
                     <a href="user-Info.html?id=${userId}">${post.user.name}</a>
