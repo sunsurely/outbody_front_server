@@ -259,7 +259,7 @@ document.addEventListener('click', async (event) => {
         })
         .then((response) => {
           alert('도전 삭제 완료');
-          window.location.href = 'get-challenges.html';
+          location.reload();
         })
         .catch((error) => {
           alert(error.response.data.message);
@@ -320,6 +320,7 @@ $('#send-invitation-button').on('click', async () => {
           alert(
             `${friend.name}(${friend.email})님에게 도전 초대문을 보냈습니다.`,
           );
+          location.reload();
         })
         .catch((error) => {
           alert(error.response.data.message);
