@@ -53,7 +53,6 @@ async function initMessagesBox() {
   for (const res of sortedResponse) {
     const now = new Date();
     const msgDate = new Date(res.createdAt);
-    msgDate.setHours(msgDate.getHours() - 9);
 
     const diffInMilliseconds = Math.abs(now - msgDate);
     const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60));
