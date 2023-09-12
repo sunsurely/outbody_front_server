@@ -79,7 +79,7 @@ const getComment = async () => {
         : `assets/img/avatar/avatar-1.png`;
 
       let temphtml = `<li class="media" id="comment-${comment.commentId}">
-                        <img alt="image" class="mr-3 style="border-radius:50%; width:50px; height:50px" src="${profileImage}">
+                        <img alt="image"  style="border-radius:50%; width:50px; height:50px" src="${profileImage}">
                         <div class="media-body">
                             <div class="media-title mb-1">${comment.username}</div>
                             <div class="media-description text-muted">
