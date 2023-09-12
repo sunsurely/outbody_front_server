@@ -12,19 +12,16 @@ async function initMessagesBox() {
   $(messageBox).html('');
   let followResponse, challengeResponse;
   try {
-    followResponse = await axios.get(
-      `http://3.39.237.124:3000/follow/request`,
-      {
-        headers: { Authorization: accessToken },
-      },
-    );
+    followResponse = await axios.get(`http://${port}:3000/follow/request`, {
+      headers: { Authorization: accessToken },
+    });
   } catch (error) {
     console.error('Error message:', error.response.data.message);
   }
 
   try {
     challengeResponse = await axios.get(
-      `http://3.39.237.124:3000/challenge/invite/list`,
+      `http://${port}:3000/challenge/invite/list`,
       {
         headers: {
           Authorization: accessToken,
