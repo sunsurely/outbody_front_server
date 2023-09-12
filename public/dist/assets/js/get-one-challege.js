@@ -2,7 +2,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const challengeId = urlParams.get('id');
 
 // 로그인 여부 확인
-const accessToken = localStorage.getItem('cookie');
+const getAccessToken = localStorage.getItem('cookie');
 
 window.onload = function () {
   getChallengeDetail();
@@ -14,7 +14,7 @@ async function getChallengeDetail() {
   axios
     .get(`http://3.34.132.157:3000/challenge/${challengeId}`, {
       headers: {
-        Authorization: accessToken,
+        Authorization: getAccessToken,
       },
     })
     .then((response) => {
@@ -149,7 +149,7 @@ async function getChallengers() {
   axios
     .get(`http://3.34.132.157:3000/challenge/${challengeId}/challengers`, {
       headers: {
-        Authorization: accessToken,
+        Authorization: getAccessToken,
       },
     })
     .then((response) => {
@@ -201,7 +201,7 @@ document.addEventListener('click', async (event) => {
     await axios
       .post(`http://3.34.132.157:3000/challenge/${challengeId}/enter`, null, {
         headers: {
-          Authorization: accessToken,
+          Authorization: getAccessToken,
         },
       })
       .then((response) => {
@@ -227,7 +227,7 @@ document.addEventListener('click', async (event) => {
       await axios
         .delete(`http://3.34.132.157:3000/challenge/${challengeId}/leave`, {
           headers: {
-            Authorization: accessToken,
+            Authorization: getAccessToken,
           },
         })
         .then((response) => {
@@ -254,7 +254,7 @@ document.addEventListener('click', async (event) => {
       await axios
         .delete(`http://3.34.132.157:3000/challenge/${challengeId}`, {
           headers: {
-            Authorization: accessToken,
+            Authorization: getAccessToken,
           },
         })
         .then((response) => {
@@ -280,7 +280,7 @@ $('#send-invitation-button').on('click', async () => {
       `http://3.34.132.157:3000/user/me/searchEmail/?email=${emailInput}`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: getAccessToken,
         },
       },
     );
@@ -312,7 +312,7 @@ $('#send-invitation-button').on('click', async () => {
           data,
           {
             headers: {
-              Authorization: accessToken,
+              Authorization: getAccessToken,
             },
           },
         )
