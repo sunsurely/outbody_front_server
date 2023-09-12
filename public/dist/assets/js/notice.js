@@ -1,3 +1,6 @@
+// const port = 'localhost';
+const port = '3.39.237.124';
+
 $(document).ready(function () {
   initMessagesBox();
   initLogBox();
@@ -9,7 +12,7 @@ async function initMessagesBox() {
   $(messageBox).html('');
   let followResponse, challengeResponse;
   try {
-    followResponse = await axios.get(`http://3.39.237.124:3000/follow/request`, {
+    followResponse = await axios.get(`http://${port}:3000/follow/request`, {
       headers: { Authorization: accessToken },
     });
   } catch (error) {
@@ -18,7 +21,7 @@ async function initMessagesBox() {
 
   try {
     challengeResponse = await axios.get(
-      `http://3.39.237.124:3000/challenge/invite/list`,
+      `http://${port}:3000/challenge/invite/list`,
       {
         headers: {
           Authorization: accessToken,
@@ -105,7 +108,7 @@ async function initMessagesBox() {
       const tagId = $(this).attr('id');
       const id = parseInt(tagId.match(/\d+/)[0], 10);
       const data = { response: 'yes' };
-      await axios.post(`http://3.39.237.124:3000/follow/${id}/accept`, data, {
+      await axios.post(`http://${port}:3000/follow/${id}/accept`, data, {
         headers: { Authorization: accessToken },
       });
 
@@ -120,7 +123,7 @@ async function initMessagesBox() {
       const tagId = $(this).attr('id');
       const id = parseInt(tagId.match(/\d+/)[0], 10);
       const data = { response: 'no' };
-      await axios.post(`http://3.39.237.124:3000/follow/${id}/accept`, data, {
+      await axios.post(`http://${port}:3000/follow/${id}/accept`, data, {
         headers: { Authorization: accessToken },
       });
 
@@ -136,7 +139,7 @@ async function initMessagesBox() {
         const id = tagId.charAt(tagId.length - 1);
         const data = { response: 'yes' };
         e.preventDefault();
-        await axios.post(`http://3.39.237.124:3000/challenge/${id}/accept`, data, {
+        await axios.post(`http://${port}:3000/challenge/${id}/accept`, data, {
           headers: { Authorization: accessToken },
         });
 
@@ -154,7 +157,7 @@ async function initMessagesBox() {
         const tagId = $(this).attr('id');
         const id = parseInt(tagId.match(/\d+/)[0], 10);
         const data = { response: 'no' };
-        await axios.post(`http://3.39.237.124:3000/challenge/${id}/accept`, data, {
+        await axios.post(`http://${port}:3000/challenge/${id}/accept`, data, {
           headers: { Authorization: accessToken },
         });
 
@@ -174,7 +177,7 @@ async function initLogBox() {
 
   try {
     const { data } = await axios.get(
-      `http://3.39.237.124:3000/challenge/message/log`,
+      `http://${port}:3000/challenge/message/log`,
       {
         headers: { Authorization: accessToken },
       },

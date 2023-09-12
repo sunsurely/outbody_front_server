@@ -125,7 +125,7 @@ async function getChallengeDetail() {
           <div class="card-footer bg-whitesmoke">
             <ul class="list-unstyled list-unstyled-border" style="margin-top: 20px;">
               <li class="media">
-                <img alt="image" class="mr-3 rounded-circle" width="50" src="${profileImage}">
+                <img alt="image" style="border-radius:50%; width:50px; height:50px" src="${profileImage}">
                 <div class="media-body">
                   <div class="mt-0 mb-1 font-weight-bold">${
                     challenge.userName
