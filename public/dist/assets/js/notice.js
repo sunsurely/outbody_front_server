@@ -1,27 +1,27 @@
+// const port = 'localhost';
+const port = '3.39.237.124'
+
 $(document).ready(function () {
   initMessagesBox();
   initLogBox();
 });
 
-//친구 & 도전  초대 메세지함  , 초대 수락기능 같이 구현
+// 친구 & 도전 초대 메세지함, 초대 수락기능 같이 구현
 async function initMessagesBox() {
   const messageBox = $('.dropdown-item-unread');
   $(messageBox).html('');
   let followResponse, challengeResponse;
   try {
-    followResponse = await axios.get(
-      'http://3.39.237.124:3000/follow/request',
-      {
-        headers: { Authorization: accessToken },
-      },
-    );
+    followResponse = await axios.get(`http://${port}:3000/follow/request`, {
+      headers: { Authorization: accessToken },
+    });
   } catch (error) {
     console.error('Error message:', error.response.data.message);
   }
 
   try {
     challengeResponse = await axios.get(
-      'http://3.39.237.124:3000/challenge/invite/list',
+      `http://${port}:3000/challenge/invite/list`,
       {
         headers: {
           Authorization: accessToken,
@@ -54,7 +54,7 @@ async function initMessagesBox() {
     const now = new Date();
     const msgDate = new Date(res.createdAt);
     msgDate.setHours(msgDate.getHours() + 9);
-    const diffInMilliseconds = now - msgDate;
+    const diffInMilliseconds = Math.abs(now - msgDate);
     const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60));
     const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
     const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
@@ -108,7 +108,7 @@ async function initMessagesBox() {
       const tagId = $(this).attr('id');
       const id = parseInt(tagId.match(/\d+/)[0], 10);
       const data = { response: 'yes' };
-      await axios.post(`http://3.39.237.124:3000/follow/${id}/accept`, data, {
+      await axios.post(`http://${port}:3000/follow/${id}/accept`, data, {
         headers: { Authorization: accessToken },
       });
 
@@ -123,7 +123,7 @@ async function initMessagesBox() {
       const tagId = $(this).attr('id');
       const id = parseInt(tagId.match(/\d+/)[0], 10);
       const data = { response: 'no' };
-      await axios.post(`http://3.39.237.124:3000/follow/${id}/accept`, data, {
+      await axios.post(`http://${port}:3000/follow/${id}/accept`, data, {
         headers: { Authorization: accessToken },
       });
 
@@ -139,13 +139,9 @@ async function initMessagesBox() {
         const id = tagId.charAt(tagId.length - 1);
         const data = { response: 'yes' };
         e.preventDefault();
-        await axios.post(
-          `http://3.39.237.124:3000/challenge/${id}/accept`,
-          data,
-          {
-            headers: { Authorization: accessToken },
-          },
-        );
+        await axios.post(`http://${port}:3000/challenge/${id}/accept`, data, {
+          headers: { Authorization: accessToken },
+        });
 
         alert(`도전방 초대를 수락했습니다.`);
         window.location.reload();
@@ -161,13 +157,9 @@ async function initMessagesBox() {
         const tagId = $(this).attr('id');
         const id = parseInt(tagId.match(/\d+/)[0], 10);
         const data = { response: 'no' };
-        await axios.post(
-          `http://3.39.237.124:3000/challenge/${id}/accept`,
-          data,
-          {
-            headers: { Authorization: accessToken },
-          },
-        );
+        await axios.post(`http://${port}:3000/challenge/${id}/accept`, data, {
+          headers: { Authorization: accessToken },
+        });
 
         alert(`도전방 초대를 거절했습니다.`);
         window.location.reload();
@@ -185,7 +177,7 @@ async function initLogBox() {
 
   try {
     const { data } = await axios.get(
-      'http://3.39.237.124:3000/challenge/message/log',
+      `http://${port}:3000/challenge/message/log`,
       {
         headers: { Authorization: accessToken },
       },
@@ -197,7 +189,7 @@ async function initLogBox() {
       const now = new Date();
       const msgDate = new Date(log.createdAt);
       msgDate.setHours(msgDate.getHours() + 9);
-      const diffInMilliseconds = now - msgDate;
+      const diffInMilliseconds = Math.abs(now - msgDate);
       const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60));
       const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
       const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
@@ -214,7 +206,7 @@ async function initLogBox() {
 
       const temp = `
         <a href="#" class="dropdown-item dropdown-item-unread">
-          <div class="dropdown-item-desc">${log.message}
+          <div class="dropdown-item-desc">${log.message}.
             <div class="time text-primary">${msgTime}</div>
           </div>
         </a>`;
