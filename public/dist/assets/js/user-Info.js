@@ -64,20 +64,20 @@ async function userPage() {
           alert(error.response.data.message);
           window.location.reload();
         }
-      }
+      } else {
+        try {
+          await axios.delete(`http://3.39.237.124:3000/follow/${userId}`, {
+            headers: {
+              Authorization: accessToken,
+            },
+          });
 
-      try {
-        await axios.delete(`http://3.39.237.124:3000/follow/${userId}`, {
-          headers: {
-            Authorization: accessToken,
-          },
-        });
-
-        alert('친구 목록에서 삭제되었습니다.');
-        window.location.reload();
-      } catch (error) {
-        alert(error.response.data.message);
-        window.location.reload();
+          alert('친구 목록에서 삭제되었습니다.');
+          window.location.reload();
+        } catch (error) {
+          alert(error.response.data.message);
+          window.location.reload();
+        }
       }
     });
 
