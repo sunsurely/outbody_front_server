@@ -31,7 +31,7 @@ const getOnePost = async () => {
     let temphtml = `<div class="card-header">
                       <ul class="list-unstyled user-details list-unstyled-border list-unstyled-noborder">
                         <li class="media">
-                          <img alt="image"  style="border-radius:50%; width:50px; height:50px; margin-right: 15px;"
+                          <img alt="image" style="border-radius:50%; width:50px; height:50px; margin-right: 15px;"
                             src="${profileImage}">
                           <div class="media-body">
                             <div class="media-title">${post.userName}</div>
