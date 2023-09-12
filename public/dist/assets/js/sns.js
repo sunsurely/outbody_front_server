@@ -37,7 +37,7 @@ const getAllPosts = async (page, pageSize) => {
 
       const formattedDate = `${year}년 ${month}월 ${day}일`;
 
-      let temphtml = `<div class="col-12 col-md-4 col-lg-2">
+      let temphtml = `<div class="col-12 col-md-4 col-lg-3">
           <article class="article article-style-c">
             <div class="article-header">
               <div class="article-image"

@@ -4,6 +4,47 @@ $(document).ready(function () {
   initMyPage();
 });
 
+$(document).ready(function () {
+  $('#eyeCurrent').on('click', function (event) {
+    event.preventDefault();
+    if ($('#current').attr('type') == 'text') {
+      $('#current').attr('type', 'password');
+      $(this).removeClass('fa-eye-slash');
+      $(this).addClass('fa-eye');
+    } else if ($('#current').attr('type') == 'password') {
+      $('#current').attr('type', 'text');
+      $(this).removeClass('fa-eye');
+      $(this).addClass('fa-eye-slash');
+    }
+  });
+
+  $('#eyeNew').on('click', function (event) {
+    event.preventDefault();
+    if ($('#newpw').attr('type') == 'text') {
+      $('#newpw').attr('type', 'password');
+      $(this).removeClass('.fas fa-eye-slash');
+      $(this).addClass('.fas fa-eye');
+    } else if ($('#newpw').attr('type') == 'password') {
+      $('#newpw').attr('type', 'text');
+      $(this).removeClass('.fas fa-eye');
+      $(this).addClass('.fas fa-eye-slash');
+    }
+  });
+
+  $('#eyeConfirm').on('click', function (event) {
+    event.preventDefault();
+    if ($('#confirmpw').attr('type') == 'text') {
+      $('#confirmpw').attr('type', 'password');
+      $(this).removeClass('.fas fa-eye-slash');
+      $(this).addClass('.fas fa-eye');
+    } else if ($('#confirmpw').attr('type') == 'password') {
+      $('#confirmpw').attr('type', 'text');
+      $(this).removeClass('.fas fa-eye');
+      $(this).addClass('.fas fa-eye-slash');
+    }
+  });
+});
+
 // 1. 정보수정 모달
 document.getElementById('userInfoEdit').onclick = function (e) {
   e.preventDefault();

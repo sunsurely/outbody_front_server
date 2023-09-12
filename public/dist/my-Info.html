@@ -393,16 +393,42 @@
             <div class="card-body">
               <div class="form-group">
                 <label>현재 비밀번호</label>
-                <input type="password" class="form-control datemask" placeholder="" id="current" />
+                <div class="input-group">
+                  <input type="password" class="form-control datemask" placeholder="" id="current" />
+                  <div class="input-group-append">
+                    <button type='button'
+                      class='btn btn-outline-secondary border-left-0 border-0 d-block text-success'><i id='eyeCurrent'
+                        class='fa fa-eye'></i></button>
+                  </div>
+                </div>
               </div>
+
               <div class="form-group">
                 <label>새로운 비밀번호</label>
-                <input type="password" class="form-control datemask" placeholder="" id="newpw" />
+                <div class="input-group">
+                  <input type="password" class="form-control datemask" placeholder="" id="newpw" />
+                  <div class="input-group-append">
+                    <button type='button'
+                      class='btn btn-outline-secondary border-left-0 border-0 d-block text-success'><i id='eyeNew'
+                        class='fa fa-eye'></i></button>
+                  </div>
+                </div>
               </div>
+
               <div class="form-group">
                 <label>새로운 비밀번호 확인</label>
-                <input type="password" class="form-control datemask" placeholder="" id="confirmpw" />
+                <div class="input-group">
+                  <input type="password" class="form-control datemask" placeholder="" id="confirmpw" required />
+                  <div class="input-group-append">
+                    <button type='button'
+                      class='btn btn-outline-secondary border-left-0 border-0 d-block text-success'><i id='eyeConfirm'
+                        class='fa fa-eye'></i></button>
+                  </div>
+                </div>
               </div>
+
+
+
               비밀번호는 최소 8자 이상, 영문 대소문자, 숫자를 포함해야 합니다.
             </div>
             <div class="modal-footer" style="margin-bottom: 20px;">

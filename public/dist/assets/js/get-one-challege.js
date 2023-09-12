@@ -125,7 +125,7 @@ async function getChallengeDetail() {
           <div class="card-footer bg-whitesmoke">
             <ul class="list-unstyled list-unstyled-border" style="margin-top: 20px;">
               <li class="media">
-                <img alt="image" style="border-radius:50%; width:50px; height:50px" src="${profileImage}">
+                <img alt="image" style="border-radius:50%; width:50px; height:50px; margin-right: 15px;" src="${profileImage}">
                 <div class="media-body">
                   <div class="mt-0 mb-1 font-weight-bold">${
                     challenge.userName
@@ -178,7 +178,7 @@ async function getChallengers() {
             : `assets/img/avatar/avatar-1.png`;
 
           return `<li class="media">
-            <img alt="image"style="border-radius:50%; width:50px; height:50px"
+            <img alt="image" style="border-radius:50%; width:50px; height:50px; margin-right: 15px;"
             src="${profileImage}">
             <div class="media-body">
               <div class="mt-0 mb-1 font-weight-bold">${challenger.user.name}</div>
@@ -307,15 +307,11 @@ $('#send-invitation-button').on('click', async () => {
       };
 
       await axios
-        .post(
-          `http://3.39.237.124:3000/challenge/${challengeId}/invite`,
-          data,
-          {
-            headers: {
-              Authorization: getAccessToken,
-            },
+        .post(`http://3.39.237.124:3000/challenge/${challengeId}/invite`, data, {
+          headers: {
+            Authorization: getAccessToken,
           },
-        )
+        })
         .then((response) => {
           alert(
             `${friend.name}(${friend.email})님에게 도전 초대문을 보냈습니다.`,
