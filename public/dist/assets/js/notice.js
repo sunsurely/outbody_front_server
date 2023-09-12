@@ -186,7 +186,7 @@ async function initLogBox() {
     const logMessages = data.data;
     let logTemp = '';
     for (const log of logMessages) {
-      const now = new Date();
+      const now = new Date().getTime();
       const msgDate = new Date(log.createdAt).getTime();
       const koreaTime = 9 * 60 * 60 * 1000;
       const diffTime = msgDate + koreaTime;
