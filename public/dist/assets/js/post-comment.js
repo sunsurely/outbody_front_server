@@ -1,5 +1,5 @@
-const port = 'localhost';
-// const port = '3.39.237.124';
+// const port = 'localhost';
+const port = '3.39.237.124';
 
 const commentParams = new URLSearchParams(window.location.search);
 const challengeIdForComment = commentParams.get('cid');
