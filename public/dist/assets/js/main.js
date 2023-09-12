@@ -501,6 +501,30 @@ async function initializeList(page, pageSize) {
 // 체성분 등록
 $('.regist-record').click(async () => {
   const bodyDatas = $('.body-data');
+  const isvalidInput = true;
+
+  function isNumericInput(input) {
+    return /^\d+$/.test(input);
+  }
+
+  function isFourDigitInteger(input) {
+    return /^\d{1,4}$/.test(input);
+  }
+
+  bodyDatas.each((index, element) => {
+    const value = $(element).val();
+
+    if (!isNumericInput(value) || !isFourDigitInteger(value)) {
+      isvalidInput = false;
+      return false;
+    }
+
+    if (!isvalidInput) {
+      alert('4자리 이하의 정수만 입력 가능합니다.');
+      return;
+    }
+  });
+
   const height = parseInt($(bodyDatas[0]).val());
   const weight = parseInt($(bodyDatas[1]).val());
   const fat = parseInt($(bodyDatas[2]).val());
