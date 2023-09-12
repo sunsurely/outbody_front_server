@@ -65,7 +65,7 @@
                 <a href="#" class="dropdown-item dropdown-item-unread">
                   <!-- 친구요청 메시지함 -->
                   <div style="width: 50px" class="dropdown-item-avatar" id="friend">
-                    <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle" />
+                    <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle" style="border-radius: 50%;"/>
                     <div class="is-online"></div>
                   </div>
                   <div class="dropdown-item-desc">
@@ -81,7 +81,7 @@
 
                   <!-- 도전 초대메시지함 -->
                   <div class="dropdown-item-avatar" id="challenger">
-                    <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle" />
+                    <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle" style="border-radius: 50%;"/>
                     <div class="is-online"></div>
                   </div>
                   <div class="dropdown-item-desc">
@@ -125,7 +125,7 @@
           </li>
           <li class="dropdown"><a href="#" data-toggle="dropdown"
               class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-              <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+              <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle mr-1" style="border-radius: 50%;">
               <div class="d-sm-none d-lg-inline-block">내 정보</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
@@ -418,23 +418,23 @@
             <div class="card-body">
               <div class="form-group">
                 <label>키(cm)</label>
-                <input type="text" name="title" class="form-control body-data" required />
+                <input type="number" name="title" class="form-control body-data" required min="100" max="300" />
               </div>
               <div class="form-group">
                 <label>체중(kg)</label>
-                <input type="text" name="title" class="form-control body-data" required />
+                <input type="number" name="title" class="form-control body-data" required min="20" max="300" />
               </div>
               <div class="form-group">
                 <label>체지방률(%)</label>
-                <input type="text" name="title" class="form-control body-data" required />
+                <input type="number" name="title" class="form-control body-data" required min="1" max="100" />
               </div>
               <div class="form-group">
                 <label>골격근량(kg)</label>
-                <input type="text" name="title" class="form-control body-data" required />
+                <input type="number" name="title" class="form-control body-data" required min="1" max="200" />
               </div>
               <div class="form-group">
                 <label>기초대사량(kcal)</label>
-                <input type="text" name="title" class="form-control body-data" required />
+                <input type="number" name="title" class="form-control body-data" required min="1" max="9999" />
               </div>
             </div>
             <div class="modal-footer" style="margin-bottom: 20px;">
