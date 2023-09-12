@@ -87,6 +87,7 @@ document.getElementById('searchfriendCancel').onclick = function () {
 
 // 내 정보 수정 (재용 작성)
 $('#update-userInfo-button').click(updateUserInfo);
+accessToken;
 async function updateUserInfo() {
   const profileImage = $('#profile-image-upload')[0].files[0];
   const birthday = $('#user-birthday').val();
@@ -98,7 +99,7 @@ async function updateUserInfo() {
   formData.append('birthday', birthday);
   formData.append('description', description);
   formData.append('name', myName);
-  console.log(myName);
+
   await axios
     .patch(`http://${port}:3000/user/me`, formData, {
       headers: {
@@ -108,7 +109,6 @@ async function updateUserInfo() {
     })
     .then((response) => {
       if (response.data.success === true) {
-        console.log(response);
         alert('내 정보 수정이 완료되었습니다.');
         location.reload();
       }
