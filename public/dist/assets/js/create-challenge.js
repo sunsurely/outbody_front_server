@@ -1,4 +1,6 @@
-// 로그인 여부 확인
+// const port = 'localhost';
+const port = '3.39.237.124';
+
 const accessToken = localStorage.getItem('cookie');
 
 // 도전 세부 설정
@@ -18,9 +20,14 @@ $('#apply-button').click(function () {
 
   if (startDate) {
     const today = moment();
+    if (startDate.isBefore(today, 'day')) {
+      alert('도전 시작일은 오늘 이전으로 설정할 수 없습니다.');
+      return;
+    }
 
-    if (startDate.isSameOrBefore(today, 'day')) {
-      alert('도전 시작일은 오늘 이후여야 합니다.');
+    const oneMonthLater = today.clone().add(1, 'month');
+    if (startDate.isAfter(oneMonthLater, 'day')) {
+      alert('도전 시작일은 현재로부터 1달 이내로 설정해야 합니다.');
       return;
     }
 
@@ -105,7 +112,7 @@ async function createChallenge() {
   };
 
   await axios
-    .post('http://3.39.237.124:3000/challenge', data, {
+    .post(`http://${port}:3000/challenge`, data, {
       headers: {
         Authorization: accessToken,
       },
@@ -113,7 +120,7 @@ async function createChallenge() {
     .then((response) => {
       if (response.data.success === true) {
         alert('도전이 생성되었습니다.');
-        location.href = `get-challenges.html`;
+        location.reload();
       }
     })
     .catch((error) => {
@@ -121,7 +128,7 @@ async function createChallenge() {
     });
 }
 
-// 제목 글자수 실시간작동 (함수바깥으로 빼야 함)
+// 제목 글자수 실시간 검사
 $('#challenge-title').on('input', function () {
   const description = $(this).val();
   const maxLength = parseInt($(this).attr('maxlength'));

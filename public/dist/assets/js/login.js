@@ -1,4 +1,6 @@
-// 로그인
+// const port = 'localhost';
+const port = '3.39.237.124'
+
 const login = async () => {
   if (!$('#email').val()) {
     alert('계정(e-mail)을 입력해주세요');
@@ -10,7 +12,7 @@ const login = async () => {
   }
 
   await axios
-    .post('http://3.39.237.124:3000/auth/login', {
+    .post(`http://${port}:3000/auth/login`, {
       email: $('#email').val(),
       password: $('#password').val(),
     })
