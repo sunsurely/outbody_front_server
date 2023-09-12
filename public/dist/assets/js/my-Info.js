@@ -71,6 +71,14 @@ async function updateUserInfo() {
     });
 }
 
+// 글자 수 실시간
+$('#user-description').on('input', function () {
+  const description = $(this).val();
+  const maxLength = parseInt($(this).attr('maxlength'));
+  const charCount = description.length;
+  $('#description-char-count').text(charCount + '/' + maxLength);
+});
+
 // 올린 사진 미리보기
 const image = document.querySelector('#profile-image-upload');
 image.addEventListener('change', (event) => {

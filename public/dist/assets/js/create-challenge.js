@@ -120,3 +120,11 @@ async function createChallenge() {
       alert(error.response.data.message);
     });
 }
+
+// 제목 글자수 실시간작동 (함수바깥으로 빼야 함)
+$('#challenge-title').on('input', function () {
+  const description = $(this).val();
+  const maxLength = parseInt($(this).attr('maxlength'));
+  const charCount = description.length;
+  $('#title-char-count').text(charCount + '/' + maxLength);
+});

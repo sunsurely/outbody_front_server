@@ -65,7 +65,7 @@
               <div class="dropdown-header">
                 알림
                 <div class="float-right">
-                  
+
                 </div>
               </div>
               <div class="dropdown-list-content dropdown-list-message" style="overflow-y: scroll; height: 300px">
@@ -73,7 +73,7 @@
 
                   <!-- 친구요청 메시지함 -->
                   <div style="width: 50px" class="dropdown-item-avatar" id="friend">
-                    <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle" />
+                    <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle" style="border-radius: 50%;"/>
                     <div class="is-online"></div>
                   </div>
                   <div class="dropdown-item-desc">
@@ -89,7 +89,7 @@
 
                   <!-- 도전 초대메시지함 -->
                   <div class="dropdown-item-avatar" id="challenger">
-                    <img alt="image" src="assets/img/avatar/avatar-2.png" class="rounded-circle" />
+                    <img alt="image" src="assets/img/avatar/avatar-2.png" class="rounded-circle" style="border-radius: 50%;"/>
                     <div class="is-online"></div>
                   </div>
                   <div class="dropdown-item-desc">
@@ -113,9 +113,9 @@
                 class="far fa-bell"></i></a>
             <div class="dropdown-menu dropdown-list dropdown-menu-right">
               <div class="dropdown-header">
-               요청
+                요청
                 <div class="float-right">
-                  
+
                 </div>
               </div>
               <div id="log-box" class="dropdown-list-content dropdown-list-icons">
@@ -134,7 +134,7 @@
 
           <li class="dropdown"><a href="#" data-toggle="dropdown"
               class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-              <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+              <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle" style="border-radius: 50%;">
               <div class="d-sm-none d-lg-inline-block">내 정보</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
@@ -208,7 +208,7 @@
                 <div class="card profile-widget">
                   <div class="profile-widget-header">
                     <img id="profile-image" alt="image" src="assets/img/avatar/avatar-1.png"
-                      class="rounded-circle profile-widget-picture" />
+                      class="rounded-circle" style="border-radius: 50%;" />
                     <div class="profile-widget-items">
                       <div class="profile-widget-item">
                         <div class="profile-widget-item-label">- 점수 -</div>
@@ -341,7 +341,7 @@
                   </form>
                 </div>
               </div>
-              
+
             </div>
           </div>
         </section>
@@ -366,11 +366,12 @@
               <div id="image-container"></div>
               <div class="form-group">
                 <label>생일</label>
-                <input id="user-birthday" type="text" class="form-control datepicker" placeholder="예: 2000-01-01" />
+                <input type="date" id="user-birthday" class="form-control datemask" placeholder="YYYY/MM/DD">
               </div>
               <div class="form-group mb-0">
                 <label>자기소개</label>
-                <textarea id="user-description" class="form-control" placeholder="자신을 자유롭게 설명해주세요."></textarea>
+                <textarea id="user-description" class="form-control" placeholder="자신을 자유롭게 설명해주세요." maxlength="300"></textarea>
+                <span id="description-char-count">0/500</span>
               </div>
             </div>
             <div class="modal-footer" style="margin-bottom: 20px;">
@@ -391,15 +392,15 @@
             <div class="card-body">
               <div class="form-group">
                 <label>현재 비밀번호</label>
-                <input type="text" class="form-control datemask" placeholder="" id="current" />
+                <input type="password" class="form-control datemask" placeholder="" id="current" />
               </div>
               <div class="form-group">
                 <label>새로운 비밀번호</label>
-                <input type="text" class="form-control datemask" placeholder="" id="newpw" />
+                <input type="password" class="form-control datemask" placeholder="" id="newpw" />
               </div>
               <div class="form-group">
                 <label>새로운 비밀번호 확인</label>
-                <input type="text" class="form-control datemask" placeholder="" id="confirmpw" />
+                <input type="password" class="form-control datemask" placeholder="" id="confirmpw" />
               </div>
               비밀번호는 최소 8자 이상, 영문 대소문자, 숫자를 포함해야 합니다.
             </div>
@@ -500,6 +501,8 @@
   <script src="assets/js/stisla.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="./bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/modules/bootstrap-daterangepicker/daterangepicker.js"></script>
+  <script src="assets/modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
 
   <!-- JS Libraies -->
   <script src="assets/modules/prism/prism.js"></script>
