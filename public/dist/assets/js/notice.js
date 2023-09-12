@@ -189,7 +189,7 @@ async function initLogBox() {
       const now = new Date();
       const msgDate = new Date(log.createdAt).getTime();
       const koreaTime = 9 * 60 * 60 * 1000;
-      const diffTime = msgDate + koreaTimeOffset;
+      const diffTime = msgDate + koreaTime;
       const diffInMilliseconds = Math.abs(now - diffTime);
       const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60));
       const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
