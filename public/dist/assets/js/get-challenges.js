@@ -1,5 +1,5 @@
 // const port = 'localhost';
-const port = '3.39.237.124'
+const port = '3.39.237.124';
 
 const accessToken = localStorage.getItem('cookie');
 
@@ -90,7 +90,7 @@ async function initChallengeList(option) {
           <td>
           <img id="profile-image" alt="image"
           src="${profileImage}"
-          class="rounded-circle" style="border-radius:50%" data-toggle="title" title="">
+         style="border-radius:50%" data-toggle="title" title="">
             <div class="d-inline-block ml-1">${challenge.hostName}</div>
           </td>
           <td>${publicView}</td>
