@@ -86,7 +86,7 @@ async function initializeChart() {
   );
 
   initChart('myChart', bmrArr, dateArr, 50, '기초대사량(kcal)');
-  initChart('myChart2', weightArr, dateArr, 1, '체중(kg)');
+  initChart('myChart2', weightArr, dateArr, 5, '체중(kg)');
   initChart('myChart3', muscleArr, dateArr, 5, '골격근량(kg)');
   initChart('myChart4', fatArr, dateArr, 5, '체지방률(%)');
 }
