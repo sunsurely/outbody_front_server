@@ -36,7 +36,7 @@ const signUp = async () => {
       return;
     }
 
-    await axios.post(`http://${port}:3001/user/signup`, {
+    await axios.post(`http://${port}:3000/user/signup`, {
       name,
       email,
       password,

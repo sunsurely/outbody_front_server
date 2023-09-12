@@ -10,6 +10,7 @@ const accessToken = localStorage.getItem('cookie');
 $(document).ready(function () {
   getOnePost();
   getComment();
+  getLikes();
 });
 
 // 오운완 상세 조회
@@ -246,14 +247,13 @@ $(document).on('click', '#report-button', function () {
   reportComment($(this).attr('commentid'));
 });
 
-// 좋아요 생성
-const getLike = async () => {
-  const likeButton = $('#likeButton');
-  let isLiked = false;
+// 오운완 좋아요 생성
+let isLiked = null;
 
+const addLike = async () => {
+  const likeButton = $('#checkbox');
   likeButton.on('click', async function () {
-    isLiked = true;
-    if ((isLiked = true)) {
+    if (!isLiked) {
       await axios
         .post(
           `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/like`,
@@ -275,31 +275,40 @@ const getLike = async () => {
   });
 };
 
-// 좋아요 취소
+// 오운완 좋아요 취소
 const unLike = async (likeId) => {
-  const likeButton = $('#likeButton');
-  let isLiked = true;
-
+  const likeButton = $('#checkbox');
   likeButton.on('click', async function () {
-    isLiked = false;
-    if ((isLiked = false)) {
-      await axios
-        .delete(
-          `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}/like/${likeId}`,
+    try {
+      if (isLiked) {
+        await axios.delete(
+          `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/like/${likeId}`,
           {
             headers: {
               Authorization: accessToken,
             },
           },
-        )
-        .then((response) => {
-          if (response.data.data) {
-            alert('좋아요를 취소했습니다.');
-          }
-        })
-        .catch((error) => {
-          console.error('Error message:', error.response.data.message);
-        });
+        );
+      }
+      alert('좋아요를 취소했습니다.');
+    } catch (error) {
+      alert(error.response.data.message);
     }
   });
+};
+
+// 오운완 좋아요 조회
+const getLikes = async () => {
+  try {
+    const response = await axios.get(
+      `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/like`,
+      {
+        headers: {
+          Authorization: accessToken,
+        },
+      },
+    );
+  } catch (error) {
+    alert(error.response.data.message);
+  }
 };

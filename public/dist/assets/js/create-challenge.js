@@ -112,7 +112,7 @@ async function createChallenge() {
   };
 
   await axios
-    .post(`http://${port}:3001/challenge`, data, {
+    .post(`http://${port}:3000/challenge`, data, {
       headers: {
         Authorization: accessToken,
       },

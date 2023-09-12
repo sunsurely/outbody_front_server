@@ -157,7 +157,7 @@ async function initMyPage() {
   const profileImg = $('#profile-image');
 
   try {
-    const { data } = await axios.get(`http://${port}:3001/user/me/profile`, {
+    const { data } = await axios.get(`http://${port}:3000/user/me/profile`, {
       headers: {
         Authorization: accessToken,
       },
@@ -166,7 +166,7 @@ async function initMyPage() {
     const challengeId = data.data.challengeId;
     if (challengeId) {
       const challengeData = await axios.get(
-        `http://${port}:3001/challenge/${challengeId}`,
+        `http://${port}:3000/challenge/${challengeId}`,
         {
           headers: {
             Authorization: accessToken,
@@ -187,7 +187,7 @@ async function initMyPage() {
       );
     }
 
-    const rankData = await axios.get(`http://${port}:3001/user/me/rank`, {
+    const rankData = await axios.get(`http://${port}:3000/user/me/rank`, {
       headers: {
         Authorization: accessToken,
       },
@@ -254,7 +254,7 @@ $(document).on('click', '.delete-friend-button', function () {
 });
 async function deleteFriend(followerId) {
   try {
-    await axios.delete(`http://${port}:3001/follow/${followerId}`, {
+    await axios.delete(`http://${port}:3000/follow/${followerId}`, {
       headers: {
         Authorization: accessToken,
       },
@@ -338,7 +338,7 @@ $('#searchFriendByEmail').on('click', async () => {
   $(searchUser).html('');
   try {
     const response = await axios.get(
-      `http://${port}:3001/user/me/searchEmail/?email=${email}`,
+      `http://${port}:3000/user/me/searchEmail/?email=${email}`,
       {
         headers: {
           Authorization: accessToken,

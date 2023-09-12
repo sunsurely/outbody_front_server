@@ -32,7 +32,7 @@ svg {
 
 #heart {
   /* 색 보충 */
-  fill: #eee;
+  fill: #374cd3;
 
   /* stroke 속성은 선, 문자, 원소 등의 테두리에 대해서 디자인 가능 */
   stroke: var(--c);

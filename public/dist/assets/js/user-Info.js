@@ -13,7 +13,7 @@ $(document).ready(function () {
 // 사용자 정보조회
 async function userPage() {
   try {
-    const { data } = await axios.get(`http://${port}:3001/user/${userId}`, {
+    const { data } = await axios.get(`http://${port}:3000/user/${userId}`, {
       headers: {
         Authorization: accessToken,
       },
@@ -33,7 +33,7 @@ async function userPage() {
     $('#descriptionTag').text(descriptionText);
 
     const followData = await axios.get(
-      `http://${port}:3001/follow/${userId}/isFollowed`,
+      `http://${port}:3000/follow/${userId}/isFollowed`,
       {
         headers: {
           Authorization: accessToken,
@@ -50,7 +50,7 @@ async function userPage() {
       if ($(this).text() === 'follow') {
         try {
           await axios.post(
-            `http://${port}:3001/follow/${userId}/request`,
+            `http://${port}:3000/follow/${userId}/request`,
             {},
             {
               headers: { Authorization: accessToken },
@@ -67,7 +67,7 @@ async function userPage() {
       }
 
       try {
-        await axios.delete(`http://${port}:3001/follow/${userId}`, {
+        await axios.delete(`http://${port}:3000/follow/${userId}`, {
           headers: {
             Authorization: accessToken,
           },
@@ -89,7 +89,7 @@ async function userPage() {
     }
     if (challengeId) {
       const challengeData = await axios.get(
-        `http://${port}:3001/challenge/${challengeId}`,
+        `http://${port}:3000/challenge/${challengeId}`,
         {
           headers: {
             Authorization: accessToken,
