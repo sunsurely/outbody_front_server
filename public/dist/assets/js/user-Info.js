@@ -1,10 +1,10 @@
-// const userInfoPort = 'localhost';
-const userInfoPort = '3.39.237.124';
+const userInfoPort = 'localhost';
+// const userInfoPort = '3.39.237.124';
 
 const userInfoParams = new URLSearchParams(window.location.search);
 const userId = userInfoParams.get('id');
 
-const accessToken = localStorage.getItem('cookie');
+const userInfoToken = localStorage.getItem('cookie');
 
 $(document).ready(function () {
   userPage();
@@ -17,7 +17,7 @@ async function userPage() {
       `http://${userInfoPort}:3000/user/${userId}`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: userInfoToken,
         },
       },
     );
@@ -39,7 +39,7 @@ async function userPage() {
       `http://${userInfoPort}:3000/follow/${userId}/isFollowed`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: userInfoToken,
         },
       },
     );
@@ -56,7 +56,7 @@ async function userPage() {
             `http://${userInfoPort}:3000/follow/${userId}/request`,
             {},
             {
-              headers: { Authorization: accessToken },
+              headers: { Authorization: userInfoToken },
               withCredentials: true,
             },
           );
@@ -72,7 +72,7 @@ async function userPage() {
       try {
         await axios.delete(`http://${userInfoPort}:3000/follow/${userId}`, {
           headers: {
-            Authorization: accessToken,
+            Authorization: userInfoToken,
           },
         });
 
@@ -95,7 +95,7 @@ async function userPage() {
         `http://${userInfoPort}:3000/challenge/${challengeId}`,
         {
           headers: {
-            Authorization: accessToken,
+            Authorization: userInfoToken,
           },
         },
       );

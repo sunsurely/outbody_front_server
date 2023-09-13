@@ -1,6 +1,6 @@
-// const mainPort = 'localhost';
-const mainPort = '3.39.237.124';
-const accessToken = localStorage.getItem('cookie');
+const mainPort = 'localhost';
+// const mainPort = '3.39.237.124';
+const mainToken = localStorage.getItem('cookie');
 
 let nowPage = 1;
 let orderList = 'normal';
@@ -99,7 +99,7 @@ async function getBodyResults() {
       `http://${mainPort}:3000/record/result/detail`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: mainToken,
         },
         withCredentials: true,
       },
@@ -540,7 +540,7 @@ $('.regist-record').click(async () => {
   try {
     await axios.post(`http://${mainPort}:3000/record`, data, {
       headers: {
-        Authorization: `${accessToken}`,
+        Authorization: `${mainToken}`,
       },
       withCredentials: true,
     });
@@ -556,7 +556,7 @@ async function getRecordData(page, pageSize) {
     `http://${mainPort}:3000/record/page/?page=${page}&pageSize=${pageSize}`,
     {
       headers: {
-        Authorization: accessToken,
+        Authorization: mainToken,
       },
       withCredentials: true,
     },
@@ -670,7 +670,7 @@ async function getDateRangeRecord(startDate, endDate, page) {
 
     {
       headers: {
-        Authorization: accessToken,
+        Authorization: mainToken,
       },
       withCredentials: true,
     },

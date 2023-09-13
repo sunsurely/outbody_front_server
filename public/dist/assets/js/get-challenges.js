@@ -1,7 +1,7 @@
-// const getChallengePort = 'localhost';
-const getChallengePort = '3.39.237.124';
+const getChallengePort = 'localhost';
+// const getChallengePort = '3.39.237.124';
 
-const accessToken = localStorage.getItem('cookie');
+const getChallengeToken = localStorage.getItem('cookie');
 
 const filterApplyButton = document.querySelector('#filter-apply-button');
 const challengeFilter = $('#challenge-filter');
@@ -21,7 +21,7 @@ async function initChallengeList(option) {
       `http://${getChallengePort}:3000/challenge?filter=${option}&page=${1}`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: getChallengeToken,
         },
       },
     )
@@ -463,7 +463,7 @@ async function getChallenges(option, page) {
       `http://${getChallengePort}:3000/challenge?filter=${option}&page=${page}`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: getChallengeToken,
         },
       },
     );

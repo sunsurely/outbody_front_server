@@ -1,10 +1,10 @@
-// const getPostPort = 'localhost';
-const getPostPort = '3.39.237.124';
+const getPostPort = 'localhost';
+// const getPostPort = '3.39.237.124';
 
 const postParams = new URLSearchParams(window.location.search);
 const challengeId = postParams.get('id');
 
-const accessToken = localStorage.getItem('cookie');
+const getPostToken = localStorage.getItem('cookie');
 
 let nowPage = 1;
 let totalPages = 0;
@@ -20,7 +20,7 @@ const getPosts = async (page, pageSize) => {
       `http://${getPostPort}:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: getPostToken,
         },
       },
     );
@@ -195,7 +195,7 @@ const getPosts = async (page, pageSize) => {
       `http://${getPostPort}:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
-          Authorization: ` ${accessToken}`,
+          Authorization: ` ${getPostToken}`,
         },
       },
     );
@@ -284,7 +284,7 @@ const createPost = async () => {
         formData,
         {
           headers: {
-            Authorization: accessToken,
+            Authorization: getPostToken,
             'Content-Type': 'multipart/form-data',
           },
         },
@@ -325,7 +325,7 @@ const deletePost = async (postId) => {
       `http://${getPostPort}:3000/challenge/${challengeId}/post/${postId}`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: getPostToken,
         },
       },
     );

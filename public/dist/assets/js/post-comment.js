@@ -1,11 +1,11 @@
-// const postCommentPort = 'localhost';
-const postCommentPort = '3.39.237.124';
+const postCommentPort = 'localhost';
+// const postCommentPort = '3.39.237.124';
 
 const commentParams = new URLSearchParams(window.location.search);
 const challengeIdForComment = commentParams.get('cid');
 const postId = commentParams.get('pid');
 
-const accessToken = localStorage.getItem('cookie');
+const postCommentToken = localStorage.getItem('cookie');
 
 $(document).ready(function () {
   getOnePost();
@@ -20,7 +20,7 @@ const getOnePost = async () => {
       `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/detail`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: postCommentToken,
         },
       },
     );
@@ -70,7 +70,7 @@ const getComment = async () => {
       `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: postCommentToken,
         },
       },
     );
@@ -130,7 +130,7 @@ const createComment = async () => {
       { comment: $('#comment_input').val() },
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: postCommentToken,
         },
       },
     );
@@ -163,7 +163,7 @@ const updateComment = async (commentId) => {
       { comment: $('#updateCmt_input').val() },
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: postCommentToken,
         },
       },
     );
@@ -185,7 +185,7 @@ const deleteComment = async (commentId) => {
       `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: postCommentToken,
         },
       },
     );
@@ -232,7 +232,7 @@ const reportComment = async (commentId) => {
       { description: $('.report_input').val() },
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: postCommentToken,
         },
       },
     );
@@ -259,7 +259,7 @@ const addLike = async () => {
           `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/like`,
           {
             headers: {
-              Authorization: accessToken,
+              Authorization: postCommentToken,
             },
           },
         );
@@ -284,7 +284,7 @@ const unLike = async (likeId) => {
           `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/like/${likeId}`,
           {
             headers: {
-              Authorization: accessToken,
+              Authorization: postCommentToken,
             },
           },
         );
@@ -307,7 +307,7 @@ const getLikes = async () => {
       `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/like`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: postCommentToken,
         },
       },
     );

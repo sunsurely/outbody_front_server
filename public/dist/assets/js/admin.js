@@ -1,7 +1,7 @@
-// const adminPort = 'localhost';
-const adminPort = '3.39.237.124';
+const adminPort = 'localhost';
+// const adminPort = '3.39.237.124';
 
-const accessToken = localStorage.getItem('cookie');
+const adminToken = localStorage.getItem('cookie');
 
 // 1. 블랙리스트 생성모달
 document.getElementById('addBlackList').onclick = function (e) {
@@ -27,7 +27,7 @@ $('#findBlackList').on('click', async () => {
       `http://${adminPort}:3000/user/me/searchEmail/?email=${email}`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: adminToken,
         },
       },
     );
@@ -60,7 +60,7 @@ $('#findBlackList').on('click', async () => {
       const data = { email, description };
       try {
         await axios.post(`http://${adminPort}/blacklist`, data, {
-          headers: { Authorization: accessToken },
+          headers: { Authorization: adminToken },
         });
         alert(
           `${user.name}(${user.email}) 회원을 영구 정지 회원으로 등록했습니다.`,
@@ -87,7 +87,7 @@ async function recordPage(page, pageSize) {
   await axios
     .get(`http://${adminPort}/report?page=${page}&pageSize=${pageSize}`, {
       headers: {
-        Authorization: accessToken,
+        Authorization: adminToken,
       },
     })
     .then((response) => {
@@ -214,7 +214,7 @@ async function getReports(page, pageSize) {
       `http://${adminPort}/report?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: adminToken,
         },
       },
     );
@@ -274,7 +274,7 @@ $(document).on('click', '.blacklist-link', function (event) {
         const data = { description };
 
         axios.post(`http://${adminPort}/blacklist/${userId}`, data, {
-          headers: { Authorization: accessToken },
+          headers: { Authorization: adminToken },
         });
         alert(`해당 회원을 영구 정지 회원으로 등록했습니다.`);
         window.location.reload();
@@ -297,7 +297,7 @@ async function checkAdmin() {
       `http://${adminPort}/blacklist/permision`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: adminToken,
         },
       },
     );
