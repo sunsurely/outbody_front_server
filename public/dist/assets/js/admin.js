@@ -1,6 +1,10 @@
 const adminPort = '3.39.237.124';
 
 const adminToken = localStorage.getItem('cookie');
+if (!adminToken) {
+  alert('접근 권한이 없습니다.');
+  location.href = 'login.html';
+}
 
 // 1. 블랙리스트 생성모달
 document.getElementById('addBlackList').onclick = function (e) {
@@ -249,7 +253,7 @@ async function setReports(data) {
             <td>${report.report_description}</span></td>
             <td>${formattedDate}</td>
             <td><a href="#" id="${report.comment_userId}" class="blacklist-link">
-              <button class="btn btn-primary" style="border-radius: 15px;">
+              <button class="btn btn-primary" style="border-radius:50%" width="50" height="50">
                 영구 정지 처리
               </button></a>
             </td>
