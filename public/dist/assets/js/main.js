@@ -1,5 +1,4 @@
-const mainPort = 'localhost';
-// const mainPort = '3.39.237.124';
+const mainPort = '3.39.237.124';
 const mainToken = localStorage.getItem('cookie');
 
 let nowPage = 1;

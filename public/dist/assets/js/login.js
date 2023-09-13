@@ -1,5 +1,4 @@
-const loginPort = 'localhost';
-// const loginPort = '3.39.237.124';
+const loginPort = '3.39.237.124';
 
 $(document).ready(function () {
   $('.btn-show-pass').on('click', function (event) {

@@ -1,5 +1,4 @@
-const noticePort = 'localhost';
-// const noticePort = '3.39.237.124';
+const noticePort = '3.39.237.124';
 
 $(document).ready(function () {
   initMessagesBox();

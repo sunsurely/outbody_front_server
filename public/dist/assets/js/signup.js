@@ -1,5 +1,4 @@
-const scriptPort = 'localhost';
-// const scriptPort = '3.39.237.124';
+const scriptPort = '3.39.237.124';
 
 // 회원가입
 const signUp = async () => {

@@ -1,4 +1,3 @@
-// const snsPort = 'localhost';
 const snsPort = '3.39.237.124';
 
 // 로그인 여부 확인
