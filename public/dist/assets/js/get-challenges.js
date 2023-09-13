@@ -1,7 +1,6 @@
-// const getChallengesPort = '3.39.237.124';
-const getChallengesPort = 'localhost';
+const getChallengePort = '3.39.237.124';
 
-const accessToken = localStorage.getItem('cookie');
+const getChallengeToken = localStorage.getItem('cookie');
 
 const filterApplyButton = document.querySelector('#filter-apply-button');
 const challengeFilter = $('#challenge-filter');
@@ -463,7 +462,7 @@ async function getChallenges(option, page) {
       `http://${getChallengesPort}:3000/challenge?filter=${option}&page=${page}`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: getChallengeToken,
         },
       },
     );

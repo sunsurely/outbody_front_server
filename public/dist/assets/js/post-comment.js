@@ -1,22 +1,25 @@
+const postCommentPort = '3.39.237.124';
+
 const commentParams = new URLSearchParams(window.location.search);
 const challengeIdForComment = commentParams.get('cid');
 const postId = commentParams.get('pid');
 
-const accessToken = localStorage.getItem('cookie');
+const postCommentToken = localStorage.getItem('cookie');
 
 $(document).ready(function () {
   getOnePost();
   getComment();
+  getLikes();
 });
 
 // 오운완 상세 조회
 const getOnePost = async () => {
   try {
     const response = await axios.get(
-      `http://3.39.237.124:3000/challenge/${challengeIdForComment}/post/${postId}/detail`,
+      `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/detail`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: postCommentToken,
         },
       },
     );
@@ -63,10 +66,10 @@ const getOnePost = async () => {
 const getComment = async () => {
   try {
     const response = await axios.get(
-      `http://3.39.237.124:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
+      `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: postCommentToken,
         },
       },
     );
@@ -122,11 +125,11 @@ const createComment = async () => {
     }
 
     await axios.post(
-      `http://3.39.237.124:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
+      `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
       { comment: $('#comment_input').val() },
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: postCommentToken,
         },
       },
     );
@@ -155,11 +158,11 @@ const updateComment = async (commentId) => {
     }
 
     await axios.patch(
-      `http://3.39.237.124:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
+      `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
       { comment: $('#updateCmt_input').val() },
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: postCommentToken,
         },
       },
     );
@@ -178,10 +181,10 @@ $(document).on('click', '#updateCmt_btn', function () {
 const deleteComment = async (commentId) => {
   try {
     await axios.delete(
-      `http://3.39.237.124:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
+      `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: postCommentToken,
         },
       },
     );
@@ -224,11 +227,11 @@ const reportComment = async (commentId) => {
     }
 
     await axios.post(
-      `http://3.39.237.124:3000/report/${commentId}`,
+      `http://${postCommentPort}:3000/report/${commentId}`,
       { description: $('.report_input').val() },
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: postCommentToken,
         },
       },
     );
@@ -242,3 +245,73 @@ const reportComment = async (commentId) => {
 $(document).on('click', '#report-button', function () {
   reportComment($(this).attr('commentid'));
 });
+
+let isLiked = false;
+
+// 오운완 좋아요 생성
+const addLike = async () => {
+  const likeButton = $('#checkbox');
+  try {
+    likeButton.on('click', async function () {
+      if (!isLiked) {
+        const response = await axios.post(
+          `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/like`,
+          {
+            headers: {
+              Authorization: postCommentToken,
+            },
+          },
+        );
+        if (response.data.data) {
+          alert(`좋아요를 눌렀습니다.`);
+          isLiked = true;
+        }
+      }
+    });
+  } catch (error) {
+    alert(error.response.data.message);
+  }
+};
+
+// 오운완 좋아요 취소
+const unLike = async (likeId) => {
+  const likeButton = $('#checkbox');
+  likeButton.on('click', async function () {
+    try {
+      if (isLiked) {
+        const response = await axios.delete(
+          `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/like/${likeId}`,
+          {
+            headers: {
+              Authorization: postCommentToken,
+            },
+          },
+        );
+        if (response.data.data) {
+          alert(`좋아요를 취소했습니다.`);
+          isLiked = false;
+        }
+      }
+      alert('좋아요를 취소했습니다.');
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  });
+};
+
+// 오운완 좋아요 조회 (sns에서 만듦)
+const getLikes = async () => {
+  try {
+    const response = await axios.get(
+      `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/like`,
+      {
+        headers: {
+          Authorization: postCommentToken,
+        },
+      },
+    );
+    console.log(response.data.data);
+  } catch (error) {
+    alert(error.response.data.message);
+  }
+};

@@ -1,3 +1,6 @@
+const myinfoPort = '3.39.237.124';
+
+// 로그인 여부 확인
 const accessToken = localStorage.getItem('cookie');
 
 $(document).ready(function () {
@@ -83,7 +86,7 @@ document.getElementById('searchfriendCancel').onclick = function () {
 
 // 내 정보 수정 (재용 작성)
 $('#update-userInfo-button').click(updateUserInfo);
-getAccessToken;
+accessToken;
 async function updateUserInfo() {
   const profileImage = $('#profile-image-upload')[0].files[0];
   const birthday = $('#user-birthday').val();
@@ -97,7 +100,7 @@ async function updateUserInfo() {
   formData.append('name', myName);
 
   await axios
-    .patch(`http://3.39.237.124:3000/user/me`, formData, {
+    .patch(`http://${myinfoPort}:3000/user/me`, formData, {
       headers: {
         Authorization: accessToken,
         'Content-Type': 'multipart/form-data',
@@ -154,7 +157,7 @@ async function initMyPage() {
 
   try {
     const { data } = await axios.get(
-      'http://3.39.237.124:3000/user/me/profile',
+      `http://${myinfoPort}:3000/user/me/profile`,
       {
         headers: {
           Authorization: accessToken,
@@ -165,7 +168,7 @@ async function initMyPage() {
     const challengeId = data.data.challengeId;
     if (challengeId) {
       const challengeData = await axios.get(
-        `http://3.39.237.124:3000/challenge/${challengeId}`,
+        `http://${myinfoPort}:3000/challenge/${challengeId}`,
         {
           headers: {
             Authorization: accessToken,
@@ -186,7 +189,7 @@ async function initMyPage() {
       );
     }
 
-    const rankData = await axios.get('http://3.39.237.124:3000/user/me/rank', {
+    const rankData = await axios.get(`http://${myinfoPort}:3000/user/me/rank`, {
       headers: {
         Authorization: accessToken,
       },
@@ -253,7 +256,7 @@ $(document).on('click', '.delete-friend-button', function () {
 });
 async function deleteFriend(followerId) {
   try {
-    await axios.delete(`http://3.39.237.124:3000/follow/${followerId}`, {
+    await axios.delete(`http://${myinfoPort}:3000/follow/${followerId}`, {
       headers: {
         Authorization: accessToken,
       },
@@ -319,7 +322,7 @@ $(signoutBtn).click(async () => {
   const password = $('#signoutpassword').val();
   const data = { password };
   try {
-    await axios.delete('http://3.39.237.124:3000/user/me/signout', {
+    await axios.delete(`http://${myinfoPort}:3000/user/me/signout`, {
       data,
       headers: { Authorization: accessToken },
     });
@@ -337,7 +340,7 @@ $('#searchFriendByEmail').on('click', async () => {
   $(searchUser).html('');
   try {
     const response = await axios.get(
-      `http://3.39.237.124:3000/user/me/searchEmail/?email=${email}`,
+      `http://${myinfoPort}:3000/user/me/searchEmail/?email=${email}`,
       {
         headers: {
           Authorization: accessToken,
@@ -374,7 +377,7 @@ $('#searchFriendByEmail').on('click', async () => {
       try {
         if (isChecked) {
           await axios.post(
-            `http://3.39.237.124:3000/follow/${userId}/request`,
+            `http://${myinfoPort}:3000/follow/${userId}/request`,
             {},
             {
               headers: { Authorization: accessToken },

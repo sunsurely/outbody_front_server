@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Post Detail &mdash; OUTBODY</title>
+  <title>Comments &mdash; OUTBODY</title>
 
   <!-- 제이쿼리 -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/components.css">
   <link rel="stylesheet" href="assets/css/post-comment.css">
+  <link rel="stylesheet" href="assets/css/likebtn.css">
 
   <!-- Start GA -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
@@ -202,11 +203,11 @@
               <a href="rank.html"><i class="fas fa-th"></i>
                 <span>순위</span></a>
             </li>
-            <!-- <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-              <a class="btn btn-primary btn-lg btn-block btn-icon-split" style="color: white; font-weight: bold;">
+            <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+              <a href="outbody.html" class="btn btn-primary btn-lg btn-block btn-icon-split" style="color: white; font-weight: bold;">
                 <i class="fas fa-rocket"></i> OUTBODY
               </a>
-            </div> -->
+            </div>
         </aside>
       </div>
 
@@ -223,13 +224,20 @@
                 <ul class="list-unstyled user-details list-unstyled-border list-unstyled-noborder">
                   <li class="media">
                     <img alt="image" class="mr-3 rounded-circle" width="50" src="">
-                    <div class="media-body">
+                    <div class="media-body d-flex justify-content-between align-items-center">
                       <div class="media-title">이연오</div>
                       <div class="font-1000-bold"><i class="fas fa-circle"></i> 1000점</div>
+                      <!-- 좋아요 버튼 -->
+                      <label for="checkbox" id="likeButton">
+                        <input type="checkbox" id="checkbox" hidden>
+                        <svg t="1689815540548" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2271"><path d="M742.4 101.12A249.6 249.6 0 0 0 512 256a249.6 249.6 0 0 0-230.72-154.88C143.68 101.12 32 238.4 32 376.32c0 301.44 416 546.56 480 546.56s480-245.12 480-546.56c0-137.92-111.68-275.2-249.6-275.2z" fill="#231F20" p-id="2272" id="heart"></path></svg>
+                        <span></span>
+                      </label>
                     </div>
                   </li>
                 </ul>
               </div>
+              
               <div class="card-body">
                 <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
                   <div class="carousel-inner">
@@ -262,7 +270,7 @@
               <ul class="list-unstyled list-unstyled-border list-unstyled-noborder" id="comment-card">
 
                 <li class="media">
-                  <img alt="image" class="rounded-circle" width="50" height="50" src="assets/img/avatar/avatar-1.png">
+                  <img alt="image" class="mr-3 rounded-circle" width="50" height="50" src="assets/img/avatar/avatar-1.png">
                   <div class="media-body">
                     <div class="media-title mb-1"></div>
                     <div class="media-description text-muted">
@@ -307,6 +315,7 @@
   <!-- JS Libraies -->
 
   <!-- Page Specific JS File -->
+  <script src="assets/js/page/modules-ion-icons.js"></script>
 
   <!-- Template JS File -->
   <script src="assets/js/scripts.js"></script>

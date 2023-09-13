@@ -1,7 +1,9 @@
+const getPostPort = '3.39.237.124';
+
 const postParams = new URLSearchParams(window.location.search);
 const challengeId = postParams.get('id');
 
-const accessToken = localStorage.getItem('cookie');
+const getPostToken = localStorage.getItem('cookie');
 
 let nowPage = 1;
 let totalPages = 0;
@@ -14,20 +16,19 @@ $(document).ready(function () {
 const getPosts = async (page, pageSize) => {
   try {
     const response = await axios.get(
-      `http://3.39.237.124:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
+      `http://${getPostPort}:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: getPostToken,
         },
       },
     );
-    console.log(response.data.data.result);
+
     const posts = response.data.data.result;
 
     let allPosts = '';
 
     posts.forEach((post) => {
-      console.log(post);
       const profileImage = post.userImageUrl
         ? `https://inflearn-nest-cat.s3.amazonaws.com/${post.userImageUrl}`
         : `assets/img/avatar/avatar-1.png`;
@@ -78,7 +79,7 @@ const getPosts = async (page, pageSize) => {
     });
     $('.row').html(allPosts);
   } catch (error) {
-    console.log(error.response.data.message);
+    error.response.data.message;
   }
 
   const pagenationTag = $('#total-posts');
@@ -120,7 +121,7 @@ const getPosts = async (page, pageSize) => {
       try {
         const { data } = await getTotalpost(nowPage - 1, 1);
         const posts = data.data.result;
-        console.log(posts);
+        posts;
 
         setTotalPost(posts);
 
@@ -131,7 +132,7 @@ const getPosts = async (page, pageSize) => {
           .css('background-color', 'rgb(103,119,239)');
         $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
       } catch (error) {
-        console.log('Error Message', error.response.data.message);
+        'Error Message', error.response.data.message;
       }
     }
   });
@@ -145,7 +146,7 @@ const getPosts = async (page, pageSize) => {
       try {
         const { data } = await getTotalpost(nowPage + 1, 1);
         const posts = data.data.result;
-        console.log(posts);
+        posts;
 
         setTotalPost(posts);
 
@@ -156,7 +157,7 @@ const getPosts = async (page, pageSize) => {
           .css('background-color', 'rgb(103,119,239)');
         $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
       } catch (error) {
-        console.log('Error Message', error.response.data.message);
+        'Error Message', error.response.data.message;
       }
     }
   });
@@ -189,10 +190,10 @@ const getPosts = async (page, pageSize) => {
 
   async function getTotalpost(page, pageSize) {
     const data = await axios.get(
-      `http://3.39.237.124:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
+      `http://${getPostPort}:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
-          Authorization: ` ${accessToken}`,
+          Authorization: ` ${getPostToken}`,
         },
       },
     );
@@ -277,11 +278,11 @@ const createPost = async () => {
 
     await axios
       .post(
-        `http://3.39.237.124:3000/challenge/${challengeId}/post`,
+        `http://${getPostPort}:3000/challenge/${challengeId}/post`,
         formData,
         {
           headers: {
-            Authorization: accessToken,
+            Authorization: getPostToken,
             'Content-Type': 'multipart/form-data',
           },
         },
@@ -319,10 +320,10 @@ image.addEventListener('change', (event) => {
 const deletePost = async (postId) => {
   try {
     await axios.delete(
-      `http://3.39.237.124:3000/challenge/${challengeId}/post/${postId}`,
+      `http://${getPostPort}:3000/challenge/${challengeId}/post/${postId}`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: getPostToken,
         },
       },
     );

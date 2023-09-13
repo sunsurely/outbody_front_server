@@ -1,7 +1,6 @@
-// const createChallengePort = '3.39.237.124';
-const createChallengePort = 'localhost';
+const createChallengePort = '3.39.237.124';
 
-const accessToken = localStorage.getItem('cookie');
+const createChallengeToken = localStorage.getItem('cookie');
 
 // 도전 세부 설정
 let startDate = null;
@@ -114,7 +113,7 @@ async function createChallenge() {
   await axios
     .post(`http://${createChallengePort}:3000/challenge`, data, {
       headers: {
-        Authorization: accessToken,
+        Authorization: createChallengeToken,
       },
     })
     .then((response) => {

@@ -1,13 +1,15 @@
-const accessToken = localStorage.getItem('cookie');
+const mainPort = '3.39.237.124';
+const mainToken = localStorage.getItem('cookie');
 
 let nowPage = 1;
 let orderList = 'normal';
 let totalPages = 0;
 
 $(document).ready(function () {
+  initializeList(1, 10);
   initializeChart();
   getBodyResults();
-  initializeList(1, 10);
+
   $('.daterange-cus').daterangepicker({
     startDate: moment().subtract(1, 'years'),
     endDate: moment(),
@@ -86,7 +88,7 @@ async function initializeChart() {
   );
 
   initChart('myChart', bmrArr, dateArr, 50, '기초대사량(kcal)');
-  initChart('myChart2', weightArr, dateArr, 1, '체중(kg)');
+  initChart('myChart2', weightArr, dateArr, 5, '체중(kg)');
   initChart('myChart3', muscleArr, dateArr, 5, '골격근량(kg)');
   initChart('myChart4', fatArr, dateArr, 5, '체지방률(%)');
 }
@@ -94,10 +96,10 @@ async function initializeChart() {
 async function getBodyResults() {
   try {
     const { data } = await axios.get(
-      'http://3.39.237.124:3000/record/result/detail',
+      `http://${mainPort}:3000/record/result/detail`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: mainToken,
         },
         withCredentials: true,
       },
@@ -197,12 +199,18 @@ async function initializeList(page, pageSize) {
   orderList = 'normal';
   const data = await getRecordData(page, pageSize);
 
+  if (!data) {
+    const temp = `<div>체성분 등록을 하면 변화그래프와 진단내용을 보실 수 있습니다.</div>`;
+    $(recordTable).html(temp);
+    return;
+  }
+
   const records = data.data.pageinatedUsersRecords;
   totalPages = data.data.totalPages;
   for (let i = 1; i <= data.data.totalPages; i++) {
     pageNumbers += `<li class="page-item page_number">
-    <a class="page-link">${i}</a>
-  </li>`;
+      <a class="page-link">${i}</a>
+    </li>`;
   }
 
   records.forEach((record) => {
@@ -532,9 +540,9 @@ $('.regist-record').click(async () => {
   const data = { height, weight, fat, muscle, bmr };
 
   try {
-    await axios.post('http://3.39.237.124:3000/record', data, {
+    await axios.post(`http://${mainPort}:3000/record`, data, {
       headers: {
-        Authorization: `${accessToken}`,
+        Authorization: `${mainToken}`,
       },
       withCredentials: true,
     });
@@ -546,17 +554,21 @@ $('.regist-record').click(async () => {
 });
 
 async function getRecordData(page, pageSize) {
-  const data = await axios(
-    `http://3.39.237.124:3000/record/page/?page=${page}&pageSize=${pageSize}`,
-    {
-      headers: {
-        Authorization: accessToken,
+  try {
+    const data = await axios(
+      `http://${mainPort}:3000/record/page/?page=${page}&pageSize=${pageSize}`,
+      {
+        headers: {
+          Authorization: mainToken,
+        },
+        withCredentials: true,
       },
-      withCredentials: true,
-    },
-  );
-  orderList = 'normal';
-  return data.data;
+    );
+    orderList = 'normal';
+    return data.data;
+  } catch (error) {
+    console.error(error.response.data.message);
+  }
 }
 
 async function initChart(chartName, recordArr, dateArr, stepSize, title) {
@@ -570,7 +582,7 @@ async function initChart(chartName, recordArr, dateArr, stepSize, title) {
         {
           label: title,
           data: [...recordArr],
-          borderWidth: 2,
+          borderWidth: 3,
           borderColor: 'rgb(103,119,239)',
           backgroundColor: 'transparent',
           pointBackgroundColor: 'rgb(103,119,239)',
@@ -660,11 +672,11 @@ function setRecordList(records) {
 
 async function getDateRangeRecord(startDate, endDate, page) {
   const { data } = await axios.get(
-    `http://3.39.237.124:3000/record/date/period/page/?page=${page}&pageSize=10&start=${startDate}&end=${endDate}`,
+    `http://${mainPort}:3000/record/date/period/page/?page=${page}&pageSize=10&start=${startDate}&end=${endDate}`,
 
     {
       headers: {
-        Authorization: accessToken,
+        Authorization: mainToken,
       },
       withCredentials: true,
     },
