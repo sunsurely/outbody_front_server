@@ -1,6 +1,11 @@
 const mainPort = '3.39.237.124';
 const mainToken = localStorage.getItem('cookie');
 
+if (!mainToken) {
+  alert('로그인이 필요한 페이지입니다.');
+  location.href = 'login.html';
+}
+
 let nowPage = 1;
 let orderList = 'normal';
 let totalPages = 0;
