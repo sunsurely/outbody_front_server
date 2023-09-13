@@ -197,165 +197,19 @@ async function initializeList(page, pageSize) {
   let recordsHtml = '';
 
   orderList = 'normal';
-  const data = await getRecordData(page, pageSize);
+  try {
+    const data = await getRecordData(page, pageSize);
 
-  if (data) {
-    $('.place-holder-record').html('');
-    $('.total-record').css('display', 'block');
-    $('.table-responsive').css('display', 'block');
-    $('#myChart').css('display', 'block');
-    $('#myChart1').css('display', 'block');
-    $('#myChart2').css('display', 'block');
-    $('#myChart3').css('display', 'block');
-    $('.main-footer').css('display', 'block');
-    const records = data.data.pageinatedUsersRecords;
-    totalPages = data.data.totalPages;
-    for (let i = 1; i <= data.data.totalPages; i++) {
-      pageNumbers += `<li class="page-item page_number">
-        <a class="page-link">${i}</a>
-      </li>`;
-    }
-
-    records.forEach((record) => {
-      const date = new Date(record.createdAt);
-      const year = date.getFullYear().toString().slice(-2);
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const day = date.getDate().toString().padStart(2, '0');
-
-      const recordDate = `${year}.${month}.${day}`;
-
-      const temp = `  <tr style="border-bottom:solid 2px rgba(0,0,0,0.1)">
-      <td>
-        <div style="margin-top:10px; ">${recordDate}</div>
-      </td>
-      <td>
-        <p href="#" class="font-weight-600" style="margin-top:25px;">${record.weight}kg</p>
-      </td>
-      <td>
-        <p href="#" class="font-weight-600" style="margin-top:25px;">${record.fat}%</p>
-      </td>
-      <td>
-        <p href="#" class="font-weight-600" style="margin-top:25px;">${record.muscle}kg</p>
-      </td>
-      <td>
-        <p href="#" class="font-weight-600" style="margin-top:25px;">${record.bmr}kcal</p>
-      </td>
-    </tr>`;
-
-      recordsHtml += temp;
-    });
-
-    pageNumbersHtml = prevButton + pageNumbers + nextButton;
-    recordTable.html(recordsHtml);
-    pagenationTag.html(pageNumbersHtml);
-    const prevBtn = $('#prev_button');
-    const nextBtn = $('#next_button');
-    const pages = $('.page_number');
-
-    $(prevBtn).click(async () => {
-      if (orderList === 'normal') {
-        if (nowPage > 1) {
-          try {
-            $(pages).find('.page-link').css('background-color', '');
-            $(pages).find('.page-link').css('color', '');
-
-            const { data } = await getRecordData(nowPage - 1, 10);
-            const records = data.pageinatedUsersRecords;
-            setRecordList(records);
-            nowPage -= 1;
-            recordsHtml = '';
-
-            $(pages)
-              .eq(nowPage - 1)
-              .find('.page-link')
-              .css('background-color', 'rgb(103,119,239)');
-            $(pages)
-              .eq(nowPage - 1)
-              .find('.page-link')
-              .css('color', 'white');
-          } catch (error) {
-            console.error('Error message:', error.response.data.message);
-          }
-        }
-      }
-    });
-
-    $(nextBtn).click(async () => {
-      if (orderList === 'normal') {
-        if (nowPage > 0 && nowPage < totalPages) {
-          $(pages).find('.page-link').css('background-color', '');
-          $(pages).find('.page-link').css('color', '');
-          try {
-            const { data } = await getRecordData(nowPage + 1, 10);
-            const records = data.pageinatedUsersRecords;
-            setRecordList(records);
-            nowPage += 1;
-            recordsHtml = '';
-
-            $(pages)
-              .eq(nowPage - 1)
-              .find('.page-link')
-              .css('background-color', 'rgb(103,119,239)');
-            $(pages)
-              .eq(nowPage - 1)
-              .find('.page-link')
-              .css('color', 'white');
-          } catch (error) {
-            console.error('Error message:', error.response.data.message);
-          }
-        }
-      }
-    });
-
-    $(pages).each((idx, page) => {
-      $(page).click(async () => {
-        if (orderList === 'normal') {
-          $(pages).find('.page-link').css('background-color', '');
-          $(pages).find('.page-link').css('color', '');
-
-          try {
-            const { data } = await getRecordData(
-              parseInt($(page).find('.page-link').text()),
-              10,
-            );
-            const records = data.pageinatedUsersRecords;
-            setRecordList(records);
-
-            $(page)
-              .find('.page-link')
-              .css('background-color', 'rgb(103,119,239)');
-            $(page).find('.page-link').css('color', 'white');
-            nowPage = parseInt($(page).find('.page-link').text());
-
-            recordsHtml = '';
-          } catch (error) {
-            console.error('Error message:', error.response.data.message);
-          }
-        }
-      });
-    });
-
-    $('.daterange-btn').on('click', async function () {
-      $('.page_number').find('.page-link').css('background-color', '');
-      $('.page_number').find('.page-link').css('color', '');
-      nowPage = 1;
-      const recordTable = $('#record-table');
-      const pagenationTag = $('#record-pagenation');
-      const prevButton = `<li id="prev_button" class="page-item"><a class="page-link">이전</a></li>`;
-      const nextButton = `<li id="next_button" class="page-item"><a class="page-link">다음</a></li>`;
-      let pageNumbers = '';
-      let pageNumbersHtml = '';
-      let recordsHtml = '';
-
-      orderList = 'date';
-      const range = $('.daterange-cus').data('daterangepicker');
-      const startDate = range.startDate.format('YYYY-MM-DD');
-      const endDate = range.endDate.format('YYYY-MM-DD');
-
-      const data = await getDateRangeRecord(startDate, endDate, 1);
-
+    if (data) {
+      $('.place-holder-record').html('');
+      $('.total-record').css('display', 'block');
+      $('.table-responsive').css('display', 'block');
+      $('#myChart').css('display', 'block');
+      $('#myChart1').css('display', 'block');
+      $('#myChart2').css('display', 'block');
+      $('#myChart3').css('display', 'block');
+      $('.main-footer').css('display', 'block');
       const records = data.data.pageinatedUsersRecords;
-
       totalPages = data.data.totalPages;
       for (let i = 1; i <= data.data.totalPages; i++) {
         pageNumbers += `<li class="page-item page_number">
@@ -372,53 +226,41 @@ async function initializeList(page, pageSize) {
         const recordDate = `${year}.${month}.${day}`;
 
         const temp = `  <tr style="border-bottom:solid 2px rgba(0,0,0,0.1)">
-      <td>
-        <div style="margin-top:10px; ">${recordDate}</div>
-      </td>
-      <td>
-        <p href="#" class="font-weight-600" style="margin-top:25px;">${record.weight}kg</p>
-      </td>
-      <td>
-        <p href="#" class="font-weight-600" style="margin-top:25px;">${record.fat}%</p>
-      </td>
-      <td>
-        <p href="#" class="font-weight-600" style="margin-top:25px;">${record.muscle}kg</p>
-      </td>
-      <td>
-        <p href="#" class="font-weight-600" style="margin-top:25px;">${record.bmr}kcal</p>
-      </td>
-    </tr>`;
+        <td>
+          <div style="margin-top:10px; ">${recordDate}</div>
+        </td>
+        <td>
+          <p href="#" class="font-weight-600" style="margin-top:25px;">${record.weight}kg</p>
+        </td>
+        <td>
+          <p href="#" class="font-weight-600" style="margin-top:25px;">${record.fat}%</p>
+        </td>
+        <td>
+          <p href="#" class="font-weight-600" style="margin-top:25px;">${record.muscle}kg</p>
+        </td>
+        <td>
+          <p href="#" class="font-weight-600" style="margin-top:25px;">${record.bmr}kcal</p>
+        </td>
+      </tr>`;
+
         recordsHtml += temp;
       });
 
       pageNumbersHtml = prevButton + pageNumbers + nextButton;
       recordTable.html(recordsHtml);
       pagenationTag.html(pageNumbersHtml);
-      $('.page_number')
-        .eq(0)
-        .find('.page-link')
-        .css('background-color', 'rgb(103,119,239)');
-      $('.page_number').eq(0).find('.page-link').css('color', 'white');
       const prevBtn = $('#prev_button');
       const nextBtn = $('#next_button');
       const pages = $('.page_number');
 
       $(prevBtn).click(async () => {
-        if (orderList === 'date') {
+        if (orderList === 'normal') {
           if (nowPage > 1) {
-            const range = $('.daterange-cus').data('daterangepicker');
-            const startDate = range.startDate.format('YYYY-MM-DD');
-            const endDate = range.endDate.format('YYYY-MM-DD');
-
             try {
               $(pages).find('.page-link').css('background-color', '');
               $(pages).find('.page-link').css('color', '');
 
-              const { data } = await getDateRangeRecord(
-                startDate,
-                endDate,
-                nowPage - 1,
-              );
+              const { data } = await getRecordData(nowPage - 1, 10);
               const records = data.pageinatedUsersRecords;
               setRecordList(records);
               nowPage -= 1;
@@ -427,7 +269,7 @@ async function initializeList(page, pageSize) {
               $(pages)
                 .eq(nowPage - 1)
                 .find('.page-link')
-                .css('background-color', 'blue');
+                .css('background-color', 'rgb(103,119,239)');
               $(pages)
                 .eq(nowPage - 1)
                 .find('.page-link')
@@ -440,20 +282,12 @@ async function initializeList(page, pageSize) {
       });
 
       $(nextBtn).click(async () => {
-        if (orderList === 'date') {
+        if (orderList === 'normal') {
           if (nowPage > 0 && nowPage < totalPages) {
-            const range = $('.daterange-cus').data('daterangepicker');
-            const startDate = range.startDate.format('YYYY-MM-DD');
-            const endDate = range.endDate.format('YYYY-MM-DD');
-
             $(pages).find('.page-link').css('background-color', '');
             $(pages).find('.page-link').css('color', '');
             try {
-              const { data } = await getDateRangeRecord(
-                startDate,
-                endDate,
-                nowPage + 1,
-              );
+              const { data } = await getRecordData(nowPage + 1, 10);
               const records = data.pageinatedUsersRecords;
               setRecordList(records);
               nowPage += 1;
@@ -476,18 +310,14 @@ async function initializeList(page, pageSize) {
 
       $(pages).each((idx, page) => {
         $(page).click(async () => {
-          if (orderList === 'date') {
-            const range = $('.daterange-cus').data('daterangepicker');
-            const startDate = range.startDate.format('YYYY-MM-DD');
-            const endDate = range.endDate.format('YYYY-MM-DD');
+          if (orderList === 'normal') {
             $(pages).find('.page-link').css('background-color', '');
             $(pages).find('.page-link').css('color', '');
-            nowPage = parseInt($(page).find('.page-link').text());
+
             try {
-              const { data } = await getDateRangeRecord(
-                startDate,
-                endDate,
-                nowPage,
+              const { data } = await getRecordData(
+                parseInt($(page).find('.page-link').text()),
+                10,
               );
               const records = data.pageinatedUsersRecords;
               setRecordList(records);
@@ -496,6 +326,7 @@ async function initializeList(page, pageSize) {
                 .find('.page-link')
                 .css('background-color', 'rgb(103,119,239)');
               $(page).find('.page-link').css('color', 'white');
+              nowPage = parseInt($(page).find('.page-link').text());
 
               recordsHtml = '';
             } catch (error) {
@@ -504,7 +335,184 @@ async function initializeList(page, pageSize) {
           }
         });
       });
-    });
+
+      $('.daterange-btn').on('click', async function () {
+        $('.page_number').find('.page-link').css('background-color', '');
+        $('.page_number').find('.page-link').css('color', '');
+        nowPage = 1;
+        const recordTable = $('#record-table');
+        const pagenationTag = $('#record-pagenation');
+        const prevButton = `<li id="prev_button" class="page-item"><a class="page-link">이전</a></li>`;
+        const nextButton = `<li id="next_button" class="page-item"><a class="page-link">다음</a></li>`;
+        let pageNumbers = '';
+        let pageNumbersHtml = '';
+        let recordsHtml = '';
+
+        orderList = 'date';
+        const range = $('.daterange-cus').data('daterangepicker');
+        const startDate = range.startDate.format('YYYY-MM-DD');
+        const endDate = range.endDate.format('YYYY-MM-DD');
+
+        const data = await getDateRangeRecord(startDate, endDate, 1);
+
+        const records = data.data.pageinatedUsersRecords;
+
+        totalPages = data.data.totalPages;
+        for (let i = 1; i <= data.data.totalPages; i++) {
+          pageNumbers += `<li class="page-item page_number">
+            <a class="page-link">${i}</a>
+          </li>`;
+        }
+
+        records.forEach((record) => {
+          const date = new Date(record.createdAt);
+          const year = date.getFullYear().toString().slice(-2);
+          const month = (date.getMonth() + 1).toString().padStart(2, '0');
+          const day = date.getDate().toString().padStart(2, '0');
+
+          const recordDate = `${year}.${month}.${day}`;
+
+          const temp = `  <tr style="border-bottom:solid 2px rgba(0,0,0,0.1)">
+        <td>
+          <div style="margin-top:10px; ">${recordDate}</div>
+        </td>
+        <td>
+          <p href="#" class="font-weight-600" style="margin-top:25px;">${record.weight}kg</p>
+        </td>
+        <td>
+          <p href="#" class="font-weight-600" style="margin-top:25px;">${record.fat}%</p>
+        </td>
+        <td>
+          <p href="#" class="font-weight-600" style="margin-top:25px;">${record.muscle}kg</p>
+        </td>
+        <td>
+          <p href="#" class="font-weight-600" style="margin-top:25px;">${record.bmr}kcal</p>
+        </td>
+      </tr>`;
+          recordsHtml += temp;
+        });
+
+        pageNumbersHtml = prevButton + pageNumbers + nextButton;
+        recordTable.html(recordsHtml);
+        pagenationTag.html(pageNumbersHtml);
+        $('.page_number')
+          .eq(0)
+          .find('.page-link')
+          .css('background-color', 'rgb(103,119,239)');
+        $('.page_number').eq(0).find('.page-link').css('color', 'white');
+        const prevBtn = $('#prev_button');
+        const nextBtn = $('#next_button');
+        const pages = $('.page_number');
+
+        $(prevBtn).click(async () => {
+          if (orderList === 'date') {
+            if (nowPage > 1) {
+              const range = $('.daterange-cus').data('daterangepicker');
+              const startDate = range.startDate.format('YYYY-MM-DD');
+              const endDate = range.endDate.format('YYYY-MM-DD');
+
+              try {
+                $(pages).find('.page-link').css('background-color', '');
+                $(pages).find('.page-link').css('color', '');
+
+                const { data } = await getDateRangeRecord(
+                  startDate,
+                  endDate,
+                  nowPage - 1,
+                );
+                const records = data.pageinatedUsersRecords;
+                setRecordList(records);
+                nowPage -= 1;
+                recordsHtml = '';
+
+                $(pages)
+                  .eq(nowPage - 1)
+                  .find('.page-link')
+                  .css('background-color', 'blue');
+                $(pages)
+                  .eq(nowPage - 1)
+                  .find('.page-link')
+                  .css('color', 'white');
+              } catch (error) {
+                console.error('Error message:', error.response.data.message);
+              }
+            }
+          }
+        });
+
+        $(nextBtn).click(async () => {
+          if (orderList === 'date') {
+            if (nowPage > 0 && nowPage < totalPages) {
+              const range = $('.daterange-cus').data('daterangepicker');
+              const startDate = range.startDate.format('YYYY-MM-DD');
+              const endDate = range.endDate.format('YYYY-MM-DD');
+
+              $(pages).find('.page-link').css('background-color', '');
+              $(pages).find('.page-link').css('color', '');
+              try {
+                const { data } = await getDateRangeRecord(
+                  startDate,
+                  endDate,
+                  nowPage + 1,
+                );
+                const records = data.pageinatedUsersRecords;
+                setRecordList(records);
+                nowPage += 1;
+                recordsHtml = '';
+
+                $(pages)
+                  .eq(nowPage - 1)
+                  .find('.page-link')
+                  .css('background-color', 'rgb(103,119,239)');
+                $(pages)
+                  .eq(nowPage - 1)
+                  .find('.page-link')
+                  .css('color', 'white');
+              } catch (error) {
+                console.error('Error message:', error.response.data.message);
+              }
+            }
+          }
+        });
+
+        $(pages).each((idx, page) => {
+          $(page).click(async () => {
+            if (orderList === 'date') {
+              const range = $('.daterange-cus').data('daterangepicker');
+              const startDate = range.startDate.format('YYYY-MM-DD');
+              const endDate = range.endDate.format('YYYY-MM-DD');
+              $(pages).find('.page-link').css('background-color', '');
+              $(pages).find('.page-link').css('color', '');
+              nowPage = parseInt($(page).find('.page-link').text());
+              try {
+                const { data } = await getDateRangeRecord(
+                  startDate,
+                  endDate,
+                  nowPage,
+                );
+                const records = data.pageinatedUsersRecords;
+                setRecordList(records);
+
+                $(page)
+                  .find('.page-link')
+                  .css('background-color', 'rgb(103,119,239)');
+                $(page).find('.page-link').css('color', 'white');
+
+                recordsHtml = '';
+              } catch (error) {
+                console.error('Error message:', error.response.data.message);
+              }
+            }
+          });
+        });
+      });
+    }
+  } catch (error) {
+    if (error.response.status === 401) {
+      alert('로그인이 필요한 기능입니다');
+      location.href = 'login.html';
+    }
+    console.error(error.response.data);
   }
 }
 
@@ -571,10 +579,6 @@ async function getRecordData(page, pageSize) {
     orderList = 'normal';
     return data.data;
   } catch (error) {
-    if (error.response.status === 401) {
-      alert('로그인이 필요한 기능입니다');
-      location.href = 'login.html';
-    }
     console.error(error.response.data.message);
   }
 }
