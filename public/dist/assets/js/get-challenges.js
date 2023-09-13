@@ -1,6 +1,7 @@
-const getChallengePort = '3.39.237.124';
+const getChallengesPort = '3.39.237.124';
+// const getChallengesPort = 'localhost';
 
-const getChallengeToken = localStorage.getItem('cookie');
+const getChallengesToken = localStorage.getItem('cookie');
 
 const filterApplyButton = document.querySelector('#filter-apply-button');
 const challengeFilter = $('#challenge-filter');
@@ -17,10 +18,10 @@ async function initChallengeList(option) {
   let nowPage = 1;
   await axios
     .get(
-      `http://${getChallengePort}:3000/challenge?filter=${option}&page=${1}`,
+      `http://${getChallengesPort}:3000/challenge?filter=${option}&page=${1}`,
       {
         headers: {
-          Authorization: getChallengeToken,
+          Authorization: getChallengesToken,
         },
       },
     )
@@ -459,10 +460,10 @@ async function initChallengeList(option) {
 async function getChallenges(option, page) {
   try {
     const { data } = await axios.get(
-      `http://${getChallengePort}:3000/challenge?filter=${option}&page=${page}`,
+      `http://${getChallengesPort}:3000/challenge?filter=${option}&page=${page}`,
       {
         headers: {
-          Authorization: getChallengeToken,
+          Authorization: getChallengesToken,
         },
       },
     );

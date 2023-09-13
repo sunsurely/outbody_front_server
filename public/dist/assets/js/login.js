@@ -1,4 +1,5 @@
 const loginPort = '3.39.237.124';
+// const loginPort = 'localhost';
 
 $(document).ready(function () {
   $('.btn-show-pass').on('click', function (event) {
@@ -31,7 +32,7 @@ const login = async () => {
       password: $('#password').val(),
     })
     .then((response) => {
-      console.log('response', response.data.data);
+      // console.log('response', response.data.data);
       localStorage.setItem(
         `cookie`,
         `Bearer ${response.data.data.accessToken}`,

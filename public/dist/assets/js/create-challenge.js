@@ -1,4 +1,5 @@
 const createChallengePort = '3.39.237.124';
+// const createChallengePort = 'localhost';
 
 const createChallengeToken = localStorage.getItem('cookie');
 
@@ -119,7 +120,7 @@ async function createChallenge() {
     .then((response) => {
       if (response.data.success === true) {
         alert('도전이 생성되었습니다.');
-        location.reload();
+        location.href = 'get-challenges.html';
       }
     })
     .catch((error) => {
