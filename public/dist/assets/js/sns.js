@@ -18,12 +18,12 @@ const getAllPosts = async (page, pageSize) => {
         },
       },
     );
-    console.log(response.data.data);
+    // console.log(response.data.data);
 
     let allPosts = '';
 
     response.data.data.pagenatedTotalPosts.forEach((post) => {
-      console.log(post);
+      // console.log(post);
       const profileImage = post.user.imgUrl
         ? `https://inflearn-nest-cat.s3.amazonaws.com/${post.user.imgUrl}`
         : `assets/img/avatar/avatar-1.png`;
@@ -89,7 +89,7 @@ const getAllPosts = async (page, pageSize) => {
   const prevBtn = $('#prev_button');
   const nextBtn = $('#next_button');
   const pages = $('.page_number');
-  console.log(nowPage);
+  // console.log(nowPage);
   $(pages)
     .find(`#nowPage-${nowPage}`)
     .css('background-color', 'rgb(103,119,239)');
@@ -115,7 +115,7 @@ const getAllPosts = async (page, pageSize) => {
   });
   // 다음
   $(nextBtn).click(async () => {
-    console.log('next', nowPage);
+    // console.log('next', nowPage);
     if (nowPage > 0 && nowPage < totalPages) {
       $(pages).find('.page-link').css('background-color', '');
       $(pages).find('.page-link').css('color', '');

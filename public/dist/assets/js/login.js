@@ -32,7 +32,7 @@ const login = async () => {
       password: $('#password').val(),
     })
     .then((response) => {
-      console.log('response', response.data.data);
+      // console.log('response', response.data.data);
       localStorage.setItem(
         `cookie`,
         `Bearer ${response.data.data.accessToken}`,

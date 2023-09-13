@@ -92,7 +92,7 @@ async function recordPage(page, pageSize) {
     })
     .then((response) => {
       const data = response.data.data.pageinatedReports;
-      console.log(data);
+      // console.log(data);
 
       const reportTable = document.querySelector('#report-table');
       setReports(data);
@@ -109,7 +109,7 @@ async function recordPage(page, pageSize) {
       let pageNumbersHtml = '';
 
       const totalPages = response.data.data.totalPages;
-      console.log(totalPages);
+      // console.log(totalPages);
 
       for (let i = 1; i <= totalPages; i++) {
         pageNumbers += `<li class="page-item page_number">

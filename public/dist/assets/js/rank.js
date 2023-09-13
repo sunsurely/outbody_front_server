@@ -75,7 +75,7 @@ async function totalrankPage(page, pageSize) {
 
   // Previous Button Clicked
   $(prevBtn).click(async () => {
-    console.log(nowPage - 1);
+    // console.log(nowPage - 1);
     if (nowPage > 1) {
       $(pages).find('.page-link').css('background-color', '');
       $(pages).find('.page-link').css('color', '');
@@ -85,7 +85,7 @@ async function totalrankPage(page, pageSize) {
         const ranks = data.paginationTotalRanks;
 
         let num = (nowPage - 1) * 10 - 9;
-        console.log(num);
+        // console.log(num);
         let totalTemp = '';
 
         for (ranker of ranks) {
@@ -123,7 +123,7 @@ async function totalrankPage(page, pageSize) {
 
   // Next Button Clicked
   $(nextBtn).click(async () => {
-    console.log(nowPage);
+    // console.log(nowPage);
     if (nowPage > 0 && nowPage < totalPages) {
       $(pages).find('.page-link').css('background-color', '');
       $(pages).find('.page-link').css('color', '');
@@ -133,7 +133,7 @@ async function totalrankPage(page, pageSize) {
         const ranks = data.paginationTotalRanks;
 
         let num = (nowPage + 1) * 10 - 9;
-        console.log(num);
+        // console.log(num);
         let totalTemp = '';
 
         for (ranker of ranks) {
@@ -206,7 +206,7 @@ async function totalrankPage(page, pageSize) {
         totalTable.html(totalTemp);
 
         nowPage = pageNumber;
-        console.log(nowPage);
+        // console.log(nowPage);
 
         $(pages)
           .find(`#nowPage-${nowPage}-total`)
