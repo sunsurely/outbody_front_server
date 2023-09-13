@@ -1,5 +1,5 @@
-const port = 'localhost';
-// const port = '3.39.237.124';
+// const getPostPort = 'localhost';
+const getPostPort = '3.39.237.124';
 
 const postParams = new URLSearchParams(window.location.search);
 const challengeId = postParams.get('id');
@@ -17,7 +17,7 @@ $(document).ready(function () {
 const getPosts = async (page, pageSize) => {
   try {
     const response = await axios.get(
-      `http://${port}:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
+      `http://${getPostPort}:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: accessToken,
@@ -192,7 +192,7 @@ const getPosts = async (page, pageSize) => {
 
   async function getTotalpost(page, pageSize) {
     const data = await axios.get(
-      `http://${port}:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
+      `http://${getPostPort}:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: ` ${accessToken}`,
@@ -279,12 +279,16 @@ const createPost = async () => {
     formData.append('description', description);
 
     await axios
-      .post(`http://${port}:3000/challenge/${challengeId}/post`, formData, {
-        headers: {
-          Authorization: accessToken,
-          'Content-Type': 'multipart/form-data',
+      .post(
+        `http://${getPostPort}:3000/challenge/${challengeId}/post`,
+        formData,
+        {
+          headers: {
+            Authorization: accessToken,
+            'Content-Type': 'multipart/form-data',
+          },
         },
-      })
+      )
       .then((response) => {
         alert('오운완 생성이 완료되었습니다.');
         location.reload();
@@ -318,7 +322,7 @@ image.addEventListener('change', (event) => {
 const deletePost = async (postId) => {
   try {
     await axios.delete(
-      `http://${port}:3000/challenge/${challengeId}/post/${postId}`,
+      `http://${getPostPort}:3000/challenge/${challengeId}/post/${postId}`,
       {
         headers: {
           Authorization: accessToken,

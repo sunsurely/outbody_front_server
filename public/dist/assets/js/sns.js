@@ -1,5 +1,5 @@
-const port = 'localhost';
-// const port = '3.39.237.124';
+// const snsPort = 'localhost';
+const snsPort = '3.39.237.124';
 
 // 로그인 여부 확인
 const accessToken = localStorage.getItem('cookie');
@@ -14,7 +14,7 @@ $(document).ready(function () {
 const getAllPosts = async (page, pageSize) => {
   try {
     const response = await axios.get(
-      `http://${port}:3000/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
+      `http://${snsPort}:3000/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: accessToken,
@@ -43,7 +43,7 @@ const getAllPosts = async (page, pageSize) => {
 
       // 오운완 별 좋아요 숫자
       const like = await axios.get(
-        `http://${port}:3000/challenge/${post.challenges.id}/post/${post.id}/like`,
+        `http://${snsPort}:3000/challenge/${post.challenges.id}/post/${post.id}/like`,
         {
           headers: {
             Authorization: accessToken,
@@ -199,7 +199,7 @@ const getAllPosts = async (page, pageSize) => {
 
   async function getTotaldata(page, pageSize) {
     const data = await axios.get(
-      `http://${port}:3000/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
+      `http://${snsPort}:3000/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: ` ${accessToken}`,

@@ -1,5 +1,5 @@
-const port = 'localhost';
-// const port = '3.39.237.124';
+// const getOneChallengePort = 'localhost';
+const getOneChallengePort = '3.39.237.124';
 
 const urlParams = new URLSearchParams(window.location.search);
 const challengeId = urlParams.get('id');
@@ -15,7 +15,7 @@ window.onload = function () {
 // 도전 상세 조회 (도전)
 async function getChallengeDetail() {
   axios
-    .get(`http://${port}:3000/challenge/${challengeId}`, {
+    .get(`http://${getOneChallengePort}:3000/challenge/${challengeId}`, {
       headers: {
         Authorization: getAccessToken,
       },
@@ -150,11 +150,14 @@ async function getChallengeDetail() {
 // 도전 상세 조회 (도전자)
 async function getChallengers() {
   axios
-    .get(`http://${port}:3000/challenge/${challengeId}/challengers`, {
-      headers: {
-        Authorization: getAccessToken,
+    .get(
+      `http://${getOneChallengePort}:3000/challenge/${challengeId}/challengers`,
+      {
+        headers: {
+          Authorization: getAccessToken,
+        },
       },
-    })
+    )
     .then((response) => {
       const challengerCardHeader = document.querySelector(
         '#challenger-card-header',
@@ -202,11 +205,15 @@ document.addEventListener('click', async (event) => {
 
   if (target.matches('#enter-challenge')) {
     await axios
-      .post(`http://${port}:3000/challenge/${challengeId}/enter`, null, {
-        headers: {
-          Authorization: getAccessToken,
+      .post(
+        `http://${getOneChallengePort}:3000/challenge/${challengeId}/enter`,
+        null,
+        {
+          headers: {
+            Authorization: getAccessToken,
+          },
         },
-      })
+      )
       .then((response) => {
         if (response.data.success === true) {
           alert('도전 입장 완료');
@@ -228,11 +235,14 @@ document.addEventListener('click', async (event) => {
 
     if (leaveConfirm) {
       await axios
-        .delete(`http://${port}:3000/challenge/${challengeId}/leave`, {
-          headers: {
-            Authorization: getAccessToken,
+        .delete(
+          `http://${getOneChallengePort}:3000/challenge/${challengeId}/leave`,
+          {
+            headers: {
+              Authorization: getAccessToken,
+            },
           },
-        })
+        )
         .then((response) => {
           if (response.data.success === true) {
             alert('도전 퇴장 완료');
@@ -255,7 +265,7 @@ document.addEventListener('click', async (event) => {
 
     if (deleteConfirm) {
       await axios
-        .delete(`http://${port}:3000/challenge/${challengeId}`, {
+        .delete(`http://${getOneChallengePort}:3000/challenge/${challengeId}`, {
           headers: {
             Authorization: getAccessToken,
           },
@@ -280,7 +290,7 @@ $('#send-invitation-button').on('click', async () => {
 
   try {
     const response = await axios.get(
-      `http://3${port}:3000/user/me/searchEmail/?email=${emailInput}`,
+      `http://3${getOneChallengePort}:3000/user/me/searchEmail/?email=${emailInput}`,
       {
         headers: {
           Authorization: getAccessToken,
@@ -310,11 +320,15 @@ $('#send-invitation-button').on('click', async () => {
       };
 
       await axios
-        .post(`http://${port}:3000/challenge/${challengeId}/invite`, data, {
-          headers: {
-            Authorization: getAccessToken,
+        .post(
+          `http://${getOneChallengePort}:3000/challenge/${challengeId}/invite`,
+          data,
+          {
+            headers: {
+              Authorization: getAccessToken,
+            },
           },
-        })
+        )
         .then((response) => {
           alert(
             `${friend.name}(${friend.email})님에게 도전 초대문을 보냈습니다.`,
