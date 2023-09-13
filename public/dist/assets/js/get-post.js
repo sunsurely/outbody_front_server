@@ -23,13 +23,12 @@ const getPosts = async (page, pageSize) => {
         },
       },
     );
-    console.log(response.data.data.result);
+
     const posts = response.data.data.result;
 
     let allPosts = '';
 
     posts.forEach((post) => {
-      console.log(post);
       const profileImage = post.userImageUrl
         ? `https://inflearn-nest-cat.s3.amazonaws.com/${post.userImageUrl}`
         : `assets/img/avatar/avatar-1.png`;
@@ -80,7 +79,7 @@ const getPosts = async (page, pageSize) => {
     });
     $('.row').html(allPosts);
   } catch (error) {
-    console.log(error.response.data.message);
+    error.response.data.message;
   }
 
   const pagenationTag = $('#total-posts');
@@ -122,7 +121,7 @@ const getPosts = async (page, pageSize) => {
       try {
         const { data } = await getTotalpost(nowPage - 1, 1);
         const posts = data.data.result;
-        console.log(posts);
+        posts;
 
         setTotalPost(posts);
 
@@ -133,7 +132,7 @@ const getPosts = async (page, pageSize) => {
           .css('background-color', 'rgb(103,119,239)');
         $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
       } catch (error) {
-        console.log('Error Message', error.response.data.message);
+        'Error Message', error.response.data.message;
       }
     }
   });
@@ -147,7 +146,7 @@ const getPosts = async (page, pageSize) => {
       try {
         const { data } = await getTotalpost(nowPage + 1, 1);
         const posts = data.data.result;
-        console.log(posts);
+        posts;
 
         setTotalPost(posts);
 
@@ -158,7 +157,7 @@ const getPosts = async (page, pageSize) => {
           .css('background-color', 'rgb(103,119,239)');
         $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
       } catch (error) {
-        console.log('Error Message', error.response.data.message);
+        'Error Message', error.response.data.message;
       }
     }
   });
