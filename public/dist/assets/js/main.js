@@ -572,7 +572,7 @@ async function getRecordData(page, pageSize) {
     return data.data;
   } catch (error) {
     if (error.response.status === 401) {
-      alert('로그인이 필요한 기능입니다.');
+      alert('로그인이 하라고!');
       location.href = 'login.html';
     }
     console.error(error.response.data.message);
