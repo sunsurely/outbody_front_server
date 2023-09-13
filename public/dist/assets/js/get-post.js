@@ -1,5 +1,5 @@
-// const port = 'localhost';
-const port = '3.39.237.124';
+const port = 'localhost';
+// const port = '3.39.237.124';
 
 const postParams = new URLSearchParams(window.location.search);
 const challengeId = postParams.get('id');

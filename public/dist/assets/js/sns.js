@@ -1,5 +1,5 @@
-// const port = 'localhost';
-const port = '3.39.237.124';
+const port = 'localhost';
+// const port = '3.39.237.124';
 
 // 로그인 여부 확인
 const accessToken = localStorage.getItem('cookie');

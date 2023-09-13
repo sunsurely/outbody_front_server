@@ -4,7 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Challenge Detail &mdash; OUTBODY</title>
+  <title>Get Post &mdash; OUTBODY</title>
+
+  <!-- jquery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
   <!-- axios -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -13,19 +16,12 @@
   <link rel="stylesheet" href="assets/modules/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css">
 
-  <!-- Custom CSS Files -->
-  <link rel="stylesheet" href="assets/css/custom.css">
-
   <!-- CSS Libraries -->
-  <link rel="stylesheet" href="assets/modules/codemirror/lib/codemirror.css">
-  <link rel="stylesheet" href="assets/modules/codemirror/theme/duotone-dark.css">
-  <link rel="stylesheet" href="assets/modules/jquery-selectric/selectric.css">
-  <link rel="stylesheet" href="assets/modules/select2/dist/css/select2.min.css">
+  <link rel="stylesheet" href="assets/css/get-post.css">
 
   <!-- Template CSS -->
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/components.css">
-
   <!-- Start GA -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
   <script>
@@ -61,7 +57,7 @@
               <div class="dropdown-header">
                 요청
                 <div class="float-right">
-                 
+                
                 </div>
               </div>
               <div class="dropdown-list-content dropdown-list-message" style="overflow-y: scroll; height: 300px">
@@ -108,9 +104,9 @@
                 class="far fa-bell"></i></a>
             <div class="dropdown-menu dropdown-list dropdown-menu-right">
               <div class="dropdown-header">
-                알림
+               알림
                 <div class="float-right">
-                
+                 
                 </div>
               </div>
               <div id="log-box" class="dropdown-list-content dropdown-list-icons">
@@ -156,7 +152,6 @@
           <div class="sidebar-brand sidebar-brand-sm">
             <a>OB</a>
           </div>
-
           <!-- 사이드바 -->
           <ul class="sidebar-menu">
 
@@ -195,66 +190,95 @@
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>도전</h1>
+            <h1>OUTBODY</h1>
+            <div class="section-header-breadcrumb">
+            </div>
           </div>
+
           <div class="section-body">
-            <h2 class="section-title">상세 조회</h2>
-            <div class="row">
-              <div id="challenge-detail" class="col-12 col-md-6 col-lg-6">
-                <!-- 도전 상세 정보가 들어가는 자리 -->
+            <h2 class="section-title">아웃바디</h2>
+            <p class="section-lead"></p>
+            <div class="card">
+              <div class="card-header">
+                <h4>아웃바디란?</h4>
+              </div>
+              <div class="card-body">
+                <p>OUTBODY는 체성분 측정기록 기반 SNS 서비스로써, 사용자가 자신의 키, 몸무게, 체지방률, 골격근량, 기초대사량 등을 일정 기간동안 기입함으로써
+                  변화되는 그래프를 통해 자신의 신체상태를 한 눈에 알아볼 수 있게 하고, 이를 통해 사용자가 건강한 피트니스 라이프 스타일을 추구할 수 있게 도와줍니다.
+                </p>
+                <br>
+                <p>
+                또한 SNS의 기능을 갖고 있어, 친구 요청 및 수락을 통해 사용자들이 서비스 상에서 친구를 만들 수 있도록 하였습니다.
+                사용자가 도전을 생성해서 일정 기간동안 동일한 목표를 가진 친구들을 초대하여 목표 달성시 점수를 얻고, 목표 미달성시 점수를 잃는 등 점수에
+                따른 순위 계산을 통해 경쟁적이면서도 흥미로운 요소를 한 층 높였습니다.
+              </p>
+              </div>
+              <div class="card-header">
+                <h4>아웃바디의 주요 기능</h4>
+              </div>
+              
+              <div class="card-body">
+                <div>
+                  <p>체성분 측정</p>
+                </div>
+                <div>
+                  ㆍ 체성분 측정 결과를 토대로 기간 별 체성분 변화 그래프 제공<br>
+                  ㆍ 해당 측정 일자의 체성분 분석표 상세조회<br>
+                  ㆍ 체성분 기반 종합평가 제공 및 식단과 운동법에 대한 개인 맞춤형 피드백<br>
+                  ㆍ 연령과 성별을 기준으로 다른 사용자들의 평균 체성분 데이터 제공
+                </div>
               </div>
 
-              <div id="challenger-card-header" class="col-12 col-md-6 col-lg-6">
-                <!-- 도전자 정보가 들어가는 자리 -->
+              <div class="card-body">
+                <div>
+                  <p>친구 요청, 도전 초대</p>
+                </div>
+                <div>
+                  ㆍ 다른 사용자에게 친구 요청 및 수락, 거절<br>
+                  ㆍ 사용자가 현재 참여한 도전에 친구 초대 및 수락, 거절<br>
+                </div>
+              </div>
+
+              <div class="card-body">
+                <div>
+                  <p>도전, 오운완</p>
+                </div>
+                <div>
+                  ㆍ 도전 기간, 인원, 공개 여부, 목표 설정 후 생성<br>
+                  ㆍ 도전 생성 후 생성일이 지났는데도 참여자가 없을 경우 자동 삭제 처리<br>
+                  ㆍ 도전 종료 시 성공, 실패 여부 자동 판단 후 점수 분배 및 차감 처리<br>
+                  ㆍ 도전방 내 사용자의 '오운완(출석 인증)' 게시물 작성<br>
+                  ㆍ 포스팅한 오운완 게시물은 사이드바의 오운완 탭에서 모든 사용자가 확인 가능<br>
+                  ㆍ 오운완 게시글 좋아요 및 댓글을 통한 소통, 악성댓글 신고 가능
+                </div>
+              </div>
+
+              <div class="card-body">
+                <div>
+                  <p>점수, 순위</p>
+                </div>
+                <div>
+                  ㆍ 도전 목표(출석, 체성분) 달성시 로직에 따라 점수 부여, 미달성시 점수 차감 기능<br>
+                  ㆍ 점수 기준 전체 순위 및 내 친구 순위 조회<br>
+                  ㆍ 2주간 도전 미참시 자동 점수 삭감으로 인한 도전 참여 동기 부여
+                </div>
+              </div>
+              
+              <div class="card-footer bg-whitesmoke">
+                
               </div>
             </div>
           </div>
+        </section>
       </div>
-      </section>
-    </div>
-    <footer class="main-footer">
-      <div class="footer-left">
-        Copyright &copy; 2023 <div class="bullet"></div> Design By <a style="font-weight: bold;">WildBody</a>
-      </div>
-      <div class="footer-right">
-
-      </div>
-    </footer>
-  </div>
-  </div>
-
-  <!-- Modal -->
-  <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true"
-    data-backdrop="false">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content" style="overflow: hidden;">
-        <div class="modal-header">
-          <h5 class="modal-title">도전 친구 초대</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+      <footer class="main-footer">
+        <div class="footer-left">
+          Copyright &copy; 2023 <div class="bullet"></div> Design By <a>OutBody</a>
         </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <div class="input-group mb-3">
-              <input id="search-email-input" type="text" class="form-control"
-                placeholder="초대할 친구의 계정(e-mail) 입력해주세요." />
-              <div class="input-group-append">
-                <button id="send-invitation-button" class="btn btn-primary" type="button">
-                  검색
-                </button>
-              </div>
-            </div>
-          </div>
-          <div id="searched-friend" class="form-group mb-0">
-            <br />
-          </div>
+        <div class="footer-right">
+          
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" id="send-invitation">초대하기</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">돌아가기</button>
-        </div>
-      </div>
+      </footer>
     </div>
   </div>
 
@@ -266,23 +290,13 @@
   <script src="assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
   <script src="assets/modules/moment.min.js"></script>
   <script src="assets/js/stisla.js"></script>
-
+  
   <!-- JS Libraies -->
-  <script src="assets/modules/codemirror/lib/codemirror.js"></script>
-  <script src="assets/modules/codemirror/mode/javascript/javascript.js"></script>
-  <script src="assets/modules/cleave-js/dist/cleave.min.js"></script>
-  <script src="assets/modules/cleave-js/dist/addons/cleave-phone.us.js"></script>
-  <script src="assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
-  <script src="assets/modules/select2/dist/js/select2.full.min.js"></script>
-  <script src="assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
 
   <!-- Page Specific JS File -->
-  <script src="assets/js/page/forms-advanced-forms.js"></script>
-
+  
   <!-- Template JS File -->
   <script src="assets/js/scripts.js"></script>
-  <script src="assets/js/get-one-challege.js"></script>
-  <script src="assets/js/notice.js"></script>
+  <script src="assets/js/custom.js"></script>
 </body>
-
 </html>
