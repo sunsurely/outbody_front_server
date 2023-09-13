@@ -1,3 +1,6 @@
+// const port = 'localhost';
+const port = '3.39.237.124';
+
 const accessToken = localStorage.getItem('cookie');
 
 // 도전 세부 설정
@@ -109,7 +112,7 @@ async function createChallenge() {
   };
 
   await axios
-    .post(`http://3.39.237.124:3000/challenge`, data, {
+    .post(`http://${port}:3000/challenge`, data, {
       headers: {
         Authorization: accessToken,
       },

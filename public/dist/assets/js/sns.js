@@ -1,3 +1,7 @@
+// const port = 'localhost';
+const port = '3.39.237.124';
+
+// 로그인 여부 확인
 const accessToken = localStorage.getItem('cookie');
 
 let nowPage = 1;
@@ -10,7 +14,7 @@ $(document).ready(function () {
 const getAllPosts = async (page, pageSize) => {
   try {
     const response = await axios.get(
-      `http://3.39.237.124:3000/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
+      `http://3${port}:3000/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: accessToken,
@@ -182,7 +186,7 @@ const getAllPosts = async (page, pageSize) => {
 
   async function getTotaldata(page, pageSize) {
     const data = await axios.get(
-      `http://3.39.237.124:3000/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
+      `http://${port}:3000/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: ` ${accessToken}`,

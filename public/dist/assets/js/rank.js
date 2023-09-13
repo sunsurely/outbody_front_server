@@ -1,3 +1,6 @@
+// const port = 'localhost';
+const port = '3.39.237.124';
+
 const urlParams = new URLSearchParams(window.location.search);
 const challengeId = urlParams.get('id');
 
@@ -218,7 +221,7 @@ async function totalrankPage(page, pageSize) {
 
 async function getTotaldata(page, pageSize) {
   const data = await axios.get(
-    `http://3.39.237.124:3000/rank/total/page/?page=${page}&pageSize=${pageSize}`,
+    `http://${port}:3000/rank/total/page/?page=${page}&pageSize=${pageSize}`,
     {
       headers: {
         Authorization: ` ${accessToken}`,
@@ -432,7 +435,7 @@ async function friendRankPage(page, pageSize) {
 
 async function getFriendData(page, pageSize) {
   const data = await axios.get(
-    `http://3.39.237.124:3000/rank/followings/page/?page=${page}&pageSize=${pageSize}`,
+    `http://${port}:3000/rank/followings/page/?page=${page}&pageSize=${pageSize}`,
     {
       headers: {
         Authorization: ` ${accessToken}`,

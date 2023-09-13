@@ -1,3 +1,6 @@
+// const port = 'localhost';
+const port = '3.39.237.124';
+
 const accessToken = localStorage.getItem('cookie');
 
 // 1. 블랙리스트 생성모달
@@ -21,7 +24,7 @@ $('#findBlackList').on('click', async () => {
   $(searchedUser).html('');
   try {
     const response = await axios.get(
-      `http://3.39.237.124/user/me/searchEmail/?email=${email}`,
+      `http://${port}:3000/user/me/searchEmail/?email=${email}`,
       {
         headers: {
           Authorization: accessToken,
@@ -290,11 +293,14 @@ $(document).on('click', '.blacklist-link', function (event) {
 
 async function checkAdmin() {
   try {
-    const { data } = await axios.get(`http://3.39.237.124/blacklist/permision`, {
-      headers: {
-        Authorization: accessToken,
+    const { data } = await axios.get(
+      `http://3.39.237.124/blacklist/permision`,
+      {
+        headers: {
+          Authorization: accessToken,
+        },
       },
-    });
+    );
     const permision = data.data;
 
     if (!permision) {

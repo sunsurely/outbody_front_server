@@ -1,3 +1,6 @@
+// const port = 'localhost';
+const port = '3.39.237.124';
+
 const commentParams = new URLSearchParams(window.location.search);
 const challengeIdForComment = commentParams.get('cid');
 const postId = commentParams.get('pid');
@@ -7,13 +10,14 @@ const accessToken = localStorage.getItem('cookie');
 $(document).ready(function () {
   getOnePost();
   getComment();
+  getLikes();
 });
 
 // 오운완 상세 조회
 const getOnePost = async () => {
   try {
     const response = await axios.get(
-      `http://3.39.237.124:3000/challenge/${challengeIdForComment}/post/${postId}/detail`,
+      `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/detail`,
       {
         headers: {
           Authorization: accessToken,
@@ -63,7 +67,7 @@ const getOnePost = async () => {
 const getComment = async () => {
   try {
     const response = await axios.get(
-      `http://3.39.237.124:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
+      `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/comment`,
       {
         headers: {
           Authorization: accessToken,
@@ -122,7 +126,7 @@ const createComment = async () => {
     }
 
     await axios.post(
-      `http://3.39.237.124:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
+      `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/comment`,
       { comment: $('#comment_input').val() },
       {
         headers: {
@@ -155,7 +159,7 @@ const updateComment = async (commentId) => {
     }
 
     await axios.patch(
-      `http://3.39.237.124:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
+      `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
       { comment: $('#updateCmt_input').val() },
       {
         headers: {
@@ -178,7 +182,7 @@ $(document).on('click', '#updateCmt_btn', function () {
 const deleteComment = async (commentId) => {
   try {
     await axios.delete(
-      `http://3.39.237.124:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
+      `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
       {
         headers: {
           Authorization: accessToken,
@@ -224,7 +228,7 @@ const reportComment = async (commentId) => {
     }
 
     await axios.post(
-      `http://3.39.237.124:3000/report/${commentId}`,
+      `http://${port}:3001/report/${commentId}`,
       { description: $('.report_input').val() },
       {
         headers: {
@@ -242,3 +246,69 @@ const reportComment = async (commentId) => {
 $(document).on('click', '#report-button', function () {
   reportComment($(this).attr('commentid'));
 });
+
+// 오운완 좋아요 생성
+let isLiked = null;
+
+const addLike = async () => {
+  const likeButton = $('#checkbox');
+  likeButton.on('click', async function () {
+    if (!isLiked) {
+      await axios
+        .post(
+          `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/like`,
+          {
+            headers: {
+              Authorization: accessToken,
+            },
+          },
+        )
+        .then((response) => {
+          if (response.data.data) {
+            alert('좋아요를 눌렀습니다.');
+          }
+        })
+        .catch((error) => {
+          console.error('Error message:', error.response.data.message);
+        });
+    }
+  });
+};
+
+// 오운완 좋아요 취소
+const unLike = async (likeId) => {
+  const likeButton = $('#checkbox');
+  likeButton.on('click', async function () {
+    try {
+      if (isLiked) {
+        await axios.delete(
+          `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/like/${likeId}`,
+          {
+            headers: {
+              Authorization: accessToken,
+            },
+          },
+        );
+      }
+      alert('좋아요를 취소했습니다.');
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  });
+};
+
+// 오운완 좋아요 조회
+const getLikes = async () => {
+  try {
+    const response = await axios.get(
+      `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/like`,
+      {
+        headers: {
+          Authorization: accessToken,
+        },
+      },
+    );
+  } catch (error) {
+    alert(error.response.data.message);
+  }
+};

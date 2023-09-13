@@ -1,118 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no"
+      name="viewport"
+    />
+    <title>Login &mdash; OutBody</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport" />
-  <title>Login &mdash; OutBody</title>
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-  <!-- jquery -->
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-  <!-- axios -->
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- fontawesome -->
+    <script
+      src="https://kit.fontawesome.com/89de84782a.js"
+      crossorigin="anonymous"
+    ></script>
 
-  <!-- fontawesome -->
-  <script src="https://kit.fontawesome.com/89de84782a.js" crossorigin="anonymous"></script>
+    <!-- General CSS Files -->
+    <link
+      rel="stylesheet"
+      href="assets/modules/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css" />
 
-  <!-- General CSS Files -->
-  <link rel="stylesheet" href="assets/modules/bootstrap/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css" />
+    <!-- CSS Libraries -->
+    <link
+      rel="stylesheet"
+      href="assets/modules/bootstrap-social/bootstrap-social.css"
+    />
 
-  <!-- CSS Libraries -->
-  <link rel="stylesheet" href="assets/modules/bootstrap-social/bootstrap-social.css" />
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/login.css" />
 
-  <!-- Template CSS -->
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <link rel="stylesheet" href="assets/css/components.css" />
-  <link rel="stylesheet" href="assets/css/login.css" />
+    <!-- Start GA -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
 
-  <!-- Start GA -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
+      gtag('config', 'UA-94034622-3');
+    </script>
+    <!-- /END GA -->
+  </head>
 
-    gtag('config', 'UA-94034622-3');
-  </script>
-  <!-- /END GA -->
-</head>
-
-<body>
-  <div id="app">
-    <section class="section">
-      <div class="container mt-5">
-        <div class="row">
-          <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
-            <div class="login-brand">
-              <img src="assets/img/Free_Sample_By_Wix.jpg" alt="logo" width="100" class="shadow-light rounded-circle"
-                style="border-radius: 50%" />
-            </div>
-
-            <div class="login-box">
-              <div class="card card-primary">
-                <div class="card-header">
-                  <h4>로그인</h4>
-                </div>
-
-                <div class="card-body">
-                  <div class="form-group">
-                    <label for="email">계정(e-mail)</label>
-                    <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus />
-                  </div>
-
-                  <div class="form-group">
-                    <div class="d-block">
-                      <label for="password" class="control-label">비밀번호</label>
-                    </div>
-                    <div class='input-group' id='show_hide_password'>
-                      <input id='password' type='password' class='form-control' name='password' tabindex='2' required />
-                      <div class='input-group-append'>
-                        <button
-                          class='btn btn-outline-secondary border-left-0 border-0 d-block text-success btn-show-pass'><i
-                            class='fa fa-eye'></i></button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="text-muted text-center">
-                    계정이 없으신가요? <a href="./signup.html">회원가입</a>
-                  </div>
-
-                  <div class="form-group">
-                    <button type="submit" id="login-btn" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                      로그인
-                    </button>
-                  </div>
-                </div>
+  <body>
+    <div id="app">
+      <section class="section">
+        <div class="container mt-5">
+          <div class="row">
+            <div
+              class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2"
+            >
+              <div class="login-brand">
+                <img
+                  src="assets/img/Free_Sample_By_Wix.jpg"
+                  alt="logo"
+                  width="100"
+                  class="shadow-light rounded-circle"
+                  style="border-radius: 50%"
+                />
               </div>
 
-              <div class="simple-footer">
-                Copyright &copy; 2023
-                <a style="font-weight: bold">WildBody</a>
+              <div class="login-box">
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h4>로그인</h4>
+                  </div>
+
+                  <div class="card-body">
+                    <div class="form-group">
+                      <label for="email">계정(e-mail)</label>
+                      <input
+                        id="email"
+                        type="email"
+                        class="form-control"
+                        name="email"
+                        tabindex="1"
+                        required
+                        autofocus
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <div class="d-block">
+                        <label for="password" class="control-label"
+                          >비밀번호</label
+                        >
+                      </div>
+                      <div class="input-group" id="show_hide_password">
+                        <input
+                          id="password"
+                          type="password"
+                          class="form-control"
+                          name="password"
+                          tabindex="2"
+                          required
+                        />
+                        <div class="input-group-append">
+                          <button
+                            class="btn btn-outline-secondary border-left-0 border-0 d-block text-success btn-show-pass"
+                          >
+                            <i class="fa fa-eye"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="text-muted text-center">
+                      계정이 없으신가요? <a href="./signup.html">회원가입</a>
+                    </div>
+
+                    <div class="form-group">
+                      <button
+                        type="submit"
+                        id="login-btn"
+                        class="btn btn-primary btn-lg btn-block"
+                        tabindex="4"
+                      >
+                        로그인
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="simple-footer">
+                  Copyright &copy; 2023
+                  <a style="font-weight: bold">WildBody</a>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-  </div>
+      </section>
+    </div>
 
-  <!-- General JS Scripts -->
-  <script src="assets/modules/jquery.min.js"></script>
-  <script src="assets/modules/popper.js"></script>
-  <script src="assets/modules/tooltip.js"></script>
-  <script src="assets/modules/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
-  <script src="assets/modules/moment.min.js"></script>
-  <script src="assets/js/stisla.js"></script>
+    <!-- General JS Scripts -->
+    <script src="assets/modules/jquery.min.js"></script>
+    <script src="assets/modules/popper.js"></script>
+    <script src="assets/modules/tooltip.js"></script>
+    <script src="assets/modules/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+    <script src="assets/modules/moment.min.js"></script>
+    <script src="assets/js/stisla.js"></script>
 
-  <!-- Template JS File -->
-  <script src="assets/js/scripts.js"></script>
-  <script src="assets/js/login.js"></script>
-</body>
-
+    <!-- Template JS File -->
+    <script src="assets/js/scripts.js"></script>
+    <script src="assets/js/login.js"></script>
+  </body>
 </html>

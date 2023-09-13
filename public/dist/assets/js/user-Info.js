@@ -1,3 +1,6 @@
+// const port = 'localhost';
+const port = '3.39.237.124';
+
 const userInfoParams = new URLSearchParams(window.location.search);
 const userId = userInfoParams.get('id');
 
@@ -10,14 +13,11 @@ $(document).ready(function () {
 // 사용자 정보조회
 async function userPage() {
   try {
-    const { data } = await axios.get(
-      `http://3.39.237.124:3000/user/${userId}`,
-      {
-        headers: {
-          Authorization: accessToken,
-        },
+    const { data } = await axios.get(`http://${port}:3000/user/${userId}`, {
+      headers: {
+        Authorization: accessToken,
       },
-    );
+    });
     const user = data.data;
 
     $('#profile-image').attr(
@@ -33,7 +33,7 @@ async function userPage() {
     $('#descriptionTag').text(descriptionText);
 
     const followData = await axios.get(
-      `http://3.39.237.124:3000/follow/${userId}/isFollowed`,
+      `http://${port}:3000/follow/${userId}/isFollowed`,
       {
         headers: {
           Authorization: accessToken,
@@ -50,7 +50,7 @@ async function userPage() {
       if ($(this).text() === 'follow') {
         try {
           await axios.post(
-            `http://3.39.237.124:3000/follow/${userId}/request`,
+            `http://${port}:3000/follow/${userId}/request`,
             {},
             {
               headers: { Authorization: accessToken },
@@ -64,20 +64,20 @@ async function userPage() {
           alert(error.response.data.message);
           window.location.reload();
         }
-      } else {
-        try {
-          await axios.delete(`http://3.39.237.124:3000/follow/${userId}`, {
-            headers: {
-              Authorization: accessToken,
-            },
-          });
+      }
 
-          alert('친구 목록에서 삭제되었습니다.');
-          window.location.reload();
-        } catch (error) {
-          alert(error.response.data.message);
-          window.location.reload();
-        }
+      try {
+        await axios.delete(`http://${port}:3000/follow/${userId}`, {
+          headers: {
+            Authorization: accessToken,
+          },
+        });
+
+        alert('친구 목록에서 삭제되었습니다.');
+        window.location.reload();
+      } catch (error) {
+        alert(error.response.data.message);
+        window.location.reload();
       }
     });
 
@@ -89,7 +89,7 @@ async function userPage() {
     }
     if (challengeId) {
       const challengeData = await axios.get(
-        `http://3.39.237.124:3000/challenge/${challengeId}`,
+        `http://${port}:3000/challenge/${challengeId}`,
         {
           headers: {
             Authorization: accessToken,
