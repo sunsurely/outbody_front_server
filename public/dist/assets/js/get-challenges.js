@@ -21,7 +21,7 @@ async function initChallengeList(option) {
       `http://${getChallengesPort}:3000/challenge?filter=${option}&page=${1}`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: getChallengesToken,
         },
       },
     )
@@ -463,7 +463,7 @@ async function getChallenges(option, page) {
       `http://${getChallengesPort}:3000/challenge?filter=${option}&page=${page}`,
       {
         headers: {
-          Authorization: s,
+          Authorization: getChallengesToken,
         },
       },
     );
