@@ -57,6 +57,10 @@ async function initializeChart() {
       dateArr.push(recordDate);
     }
   } catch (error) {
+    if (error.response.status === 401) {
+      alert('로그인이 필요한 기능입니다');
+      location.href = 'login.html';
+    }
     console.error('Error message:', error.response.data.message);
   }
 
@@ -571,10 +575,6 @@ async function getRecordData(page, pageSize) {
     orderList = 'normal';
     return data.data;
   } catch (error) {
-    if (error.response.status === 401) {
-      alert('로그인이 필요한 기능입니다');
-      location.href = 'login.html';
-    }
     console.error(error.response.data.message);
   }
 }
