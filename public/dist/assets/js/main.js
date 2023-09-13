@@ -552,7 +552,7 @@ $('.regist-record').click(async () => {
     alert('체성분 등록 완료');
     window.location.reload();
   } catch (error) {
-    console.error('Error message:', error.response.data.message);
+    alert(error.response.data.message);
   }
 });
 
