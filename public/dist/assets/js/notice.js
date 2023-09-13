@@ -1,3 +1,6 @@
+// const noticePort = '3.39.237.124';
+const noticePort = 'localhost';
+
 $(document).ready(function () {
   initMessagesBox();
   initLogBox();
@@ -10,7 +13,7 @@ async function initMessagesBox() {
   let followResponse, challengeResponse;
   try {
     followResponse = await axios.get(
-      `http://3.39.237.124:3000/follow/request`,
+      `http://${noticePort}:3000/follow/request`,
       {
         headers: { Authorization: accessToken },
       },
@@ -21,7 +24,7 @@ async function initMessagesBox() {
 
   try {
     challengeResponse = await axios.get(
-      `http://3.39.237.124:3000/challenge/invite/list`,
+      `http://${noticePort}:3000/challenge/invite/list`,
       {
         headers: {
           Authorization: accessToken,
@@ -51,23 +54,17 @@ async function initMessagesBox() {
   });
 
   for (const res of sortedResponse) {
-    const now = new Date();
-    const msgDate = new Date(res.createdAt);
+    const createdAt = new Date(res.createdAt);
 
-    const diffInMilliseconds = Math.abs(now - msgDate);
-    const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60));
-    const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
-    const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
+    createdAt.setHours(createdAt.getHours() + 9);
 
-    let msgTime;
+    const year = createdAt.getFullYear();
+    const month = createdAt.getMonth() + 1;
+    const day = createdAt.getDate();
+    const hour = createdAt.getHours();
+    const minute = createdAt.getMinutes();
 
-    if (diffInDays >= 1) {
-      msgTime = `${diffInDays}일 전`;
-    } else if (diffInHours >= 1) {
-      msgTime = `${diffInHours}시간 전`;
-    } else if (diffInHours < 1) {
-      msgTime = `${diffInMinutes}분 전`;
-    }
+    const formattedDate = `${year}년 ${month}월 ${day}일 ${hour}시 ${minute}분`;
 
     const id = res.userId;
     const profileImage = res.imgUrl
@@ -86,7 +83,7 @@ async function initMessagesBox() {
           <div class="dropdown-item-desc">
             <a href="user-Info.html?id=${res.userId}">${userInfo}</a>      
             <p id="inviteUserMessage" style="margin-bottom:0px;">님이 ${message}</p>
-            <span style="font-size:12px; font-weight:bold";>${msgTime}</span>
+            <span style="font-size:12px; font-weight:bold";>${formattedDate}</span>
             <button id="accept${id}"
             class="btn btn-primary btn-sm btn ${
               res.invitedId ? 'accept-challenge' : 'accept-friend'
@@ -109,7 +106,7 @@ async function initMessagesBox() {
       const tagId = $(this).attr('id');
       const id = parseInt(tagId.match(/\d+/)[0], 10);
       const data = { response: 'yes' };
-      await axios.post(`http://3.39.237.124:3000/follow/${id}/accept`, data, {
+      await axios.post(`http://${noticePort}:3000/follow/${id}/accept`, data, {
         headers: { Authorization: accessToken },
       });
 
@@ -124,7 +121,7 @@ async function initMessagesBox() {
       const tagId = $(this).attr('id');
       const id = parseInt(tagId.match(/\d+/)[0], 10);
       const data = { response: 'no' };
-      await axios.post(`http://3.39.237.124:3000/follow/${id}/accept`, data, {
+      await axios.post(`http://${noticePort}:3000/follow/${id}/accept`, data, {
         headers: { Authorization: accessToken },
       });
 
@@ -141,7 +138,7 @@ async function initMessagesBox() {
         const data = { response: 'yes' };
         e.preventDefault();
         await axios.post(
-          `http://3.39.237.124:3000/challenge/${id}/accept`,
+          `http://${noticePort}:3000/challenge/${id}/accept`,
           data,
           {
             headers: { Authorization: accessToken },
@@ -163,7 +160,7 @@ async function initMessagesBox() {
         const id = parseInt(tagId.match(/\d+/)[0], 10);
         const data = { response: 'no' };
         await axios.post(
-          `http://3.39.237.124:3000/challenge/${id}/accept`,
+          `http://${noticePort}:3000/challenge/${id}/accept`,
           data,
           {
             headers: { Authorization: accessToken },
@@ -186,7 +183,7 @@ async function initLogBox() {
 
   try {
     const { data } = await axios.get(
-      `http://3.39.237.124:3000/challenge/message/log`,
+      `http://${noticePort}:3000/challenge/message/log`,
       {
         headers: { Authorization: accessToken },
       },
@@ -195,29 +192,22 @@ async function initLogBox() {
     const logMessages = data.data;
     let logTemp = '';
     for (const log of logMessages) {
-      const now = new Date();
-      const msgDate = new Date(log.createdAt);
-      msgDate.setHours(msgDate.getHours() - 9);
+      const createdAt = new Date(log.createdAt);
 
-      const diffInMilliseconds = Math.abs(now - msgDate);
-      const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60));
-      const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
-      const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
+      createdAt.setHours(createdAt.getHours() + 9);
 
-      let msgTime;
+      const year = createdAt.getFullYear();
+      const month = createdAt.getMonth() + 1;
+      const day = createdAt.getDate();
+      const hour = createdAt.getHours();
+      const minute = createdAt.getMinutes();
 
-      if (diffInDays >= 1) {
-        msgTime = `${diffInDays}일 전`;
-      } else if (diffInHours >= 1) {
-        msgTime = `${diffInHours}시간 전`;
-      } else if (diffInHours < 1) {
-        msgTime = `${diffInMinutes}분 전`;
-      }
+      const formattedDate = `${year}년 ${month}월 ${day}일 ${hour}시 ${minute}분`;
 
       const temp = `
         <a href="#" class="dropdown-item dropdown-item-unread">
           <div class="dropdown-item-desc">${log.message}
-            <div class="time text-primary">${msgTime}</div>
+            <div class="time text-primary">${formattedDate}</div>
           </div>
         </a>`;
 

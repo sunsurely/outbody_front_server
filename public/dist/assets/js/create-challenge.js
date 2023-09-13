@@ -1,3 +1,6 @@
+// const createChallengePort = '3.39.237.124';
+const createChallengePort = 'localhost';
+
 const accessToken = localStorage.getItem('cookie');
 
 // 도전 세부 설정
@@ -109,7 +112,7 @@ async function createChallenge() {
   };
 
   await axios
-    .post(`http://3.39.237.124:3000/challenge`, data, {
+    .post(`http://${createChallengePort}:3000/challenge`, data, {
       headers: {
         Authorization: accessToken,
       },
@@ -117,7 +120,7 @@ async function createChallenge() {
     .then((response) => {
       if (response.data.success === true) {
         alert('도전이 생성되었습니다.');
-        location.reload();
+        location.href = 'get-challenges.html';
       }
     })
     .catch((error) => {
