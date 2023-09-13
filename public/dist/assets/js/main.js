@@ -207,6 +207,7 @@ async function initializeList(page, pageSize) {
     $('#myChart1').css('display', 'block');
     $('#myChart2').css('display', 'block');
     $('#myChart3').css('display', 'block');
+    $('.main-footer').css('display', 'block');
     const records = data.data.pageinatedUsersRecords;
     totalPages = data.data.totalPages;
     for (let i = 1; i <= data.data.totalPages; i++) {
