@@ -14,7 +14,7 @@ $(document).ready(function () {
 const getAllPosts = async (page, pageSize) => {
   try {
     const response = await axios.get(
-      `http://3${port}:3000/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
+      `http://${port}:3000/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: accessToken,
@@ -25,7 +25,7 @@ const getAllPosts = async (page, pageSize) => {
 
     let allPosts = '';
 
-    response.data.data.pagenatedTotalPosts.forEach((post) => {
+    response.data.data.pagenatedTotalPosts.forEach(async (post) => {
       console.log(post);
       const profileImage = post.user.imgUrl
         ? `https://inflearn-nest-cat.s3.amazonaws.com/${post.user.imgUrl}`
@@ -41,35 +41,48 @@ const getAllPosts = async (page, pageSize) => {
 
       const formattedDate = `${year}년 ${month}월 ${day}일`;
 
+      // 오운완 별 좋아요 숫자
+      const like = await axios.get(
+        `http://${port}:3000/challenge/${post.challenges.id}/post/${post.id}/like`,
+        {
+          headers: {
+            Authorization: accessToken,
+          },
+        },
+      );
+      const likes = like.data.data.likeCount;
+
       let temphtml = `<div class="col-12 col-md-4 col-lg-3">
-          <article class="article article-style-c">
-            <div class="article-header">
-              <div class="article-image"
-              style="background-image: url(https://inflearn-nest-cat.s3.amazonaws.com/${post.imgUrl});
-              background-position: center; background-size: cover;">
-              </div>
-            </div>
-            <div class="article-details">
-              <div class="article-title">
-                <h2 class="ellipsis">
-                  <a href="post-comment.html?cid=${post.challenges.id}&pid=${post.id}">${post.description}</a>
-                </h2>
-              </div>
-              <div class="article-user">
-                <img alt="image" style="border-radius:50%; width:50px; height:50px; margin-right:15px"  src="${profileImage}">
-                <div class="article-user-details">
-                  <div class="user-detail-name">
-                    <a href="user-Info.html?id=${userId}">${post.user.name}</a>
-                    <div class="font-1000-bold"><i class="fas fa-circle"></i> ${post.user.point}점</div>
-                    <div style="margin-top: 20px">
-                      <p style="color: gray;">작성일: ${formattedDate}</p>
-                    </div>
-                  </div>
+      <article class="article article-style-c">
+        <div class="article-header">
+          <div class="article-image"
+            style="background-image: url(https://inflearn-nest-cat.s3.amazonaws.com/${post.imgUrl});
+            background-position: center; background-size: cover;">
+          </div>
+        </div>
+        <div class="article-details">
+          <div class="article-title">
+            <h2 class="ellipsis">
+              <a href="post-comment.html?cid=${post.challenges.id}&pid=${post.id}">${post.description}</a>
+              <i class="fas fa-heart" style="color: red;"></i>
+              <span class="post-likes" style="font-size: 10px;">${likes}</span> 
+            </h2>
+          </div>
+          <div class="article-user">
+            <img alt="image" style="border-radius: 50%; width: 50px; height: 50px; margin-right: 15px;" src="${profileImage}">
+            <div class="article-user-details">
+              <div class="user-detail-name">
+                <a href="user-Info.html?id=${userId}">${post.user.name}</a>
+                <div class="font-1000-bold"><i class="fas fa-circle"></i> ${post.user.point}점</div>
+                <div style="margin-top: 20px">
+                  <p style="color: gray;">작성일: ${formattedDate}</p>
                 </div>
               </div>
             </div>
-          </article>
-        </div>`;
+          </div>
+        </div>
+      </article>
+    </div>`;
       allPosts += temphtml;
     });
     $('#postcardList').html(allPosts);
