@@ -17,12 +17,12 @@ const getAllPosts = async (page, pageSize) => {
         },
       },
     );
-    console.log(response.data.data);
+    response.data.data;
 
     let allPosts = '';
 
     response.data.data.pagenatedTotalPosts.forEach((post) => {
-      console.log(post);
+      post;
       const profileImage = post.user.imgUrl
         ? `https://inflearn-nest-cat.s3.amazonaws.com/${post.user.imgUrl}`
         : `assets/img/avatar/avatar-1.png`;
@@ -70,7 +70,7 @@ const getAllPosts = async (page, pageSize) => {
     });
     $('#postcardList').html(allPosts);
   } catch (error) {
-    console.log(error);
+    error;
   }
 
   const pagenationTag = $('#total-posts');
@@ -98,7 +98,7 @@ const getAllPosts = async (page, pageSize) => {
   const nextBtn = $('#next_button');
   const pages = $('.page_number');
 
-  console.log(nowPage);
+  nowPage;
 
   $(pages)
     .find(`#nowPage-${nowPage}`)
@@ -124,14 +124,14 @@ const getAllPosts = async (page, pageSize) => {
           .css('background-color', 'rgb(103,119,239)');
         $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
       } catch (error) {
-        console.log('Error Message', error.response.data.message);
+        'Error Message', error.response.data.message;
       }
     }
   });
 
   // 다음
   $(nextBtn).click(async () => {
-    console.log('next', nowPage);
+    'next', nowPage;
     if (nowPage > 0 && nowPage < totalPages) {
       $(pages).find('.page-link').css('background-color', '');
       $(pages).find('.page-link').css('color', '');
@@ -149,7 +149,7 @@ const getAllPosts = async (page, pageSize) => {
           .css('background-color', 'rgb(103,119,239)');
         $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
       } catch (error) {
-        console.log(error);
+        error;
       }
     }
   });
