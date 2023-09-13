@@ -554,17 +554,21 @@ $('.regist-record').click(async () => {
 });
 
 async function getRecordData(page, pageSize) {
-  const data = await axios(
-    `http://${mainPort}:3000/record/page/?page=${page}&pageSize=${pageSize}`,
-    {
-      headers: {
-        Authorization: mainToken,
+  try {
+    const data = await axios(
+      `http://${mainPort}:3000/record/page/?page=${page}&pageSize=${pageSize}`,
+      {
+        headers: {
+          Authorization: mainToken,
+        },
+        withCredentials: true,
       },
-      withCredentials: true,
-    },
-  );
-  orderList = 'normal';
-  return data.data;
+    );
+    orderList = 'normal';
+    return data.data;
+  } catch (error) {
+    console.error(error.response.data.message);
+  }
 }
 
 async function initChart(chartName, recordArr, dateArr, stepSize, title) {
