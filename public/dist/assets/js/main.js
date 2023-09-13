@@ -199,14 +199,15 @@ async function initializeList(page, pageSize) {
   orderList = 'normal';
   const data = await getRecordData(page, pageSize);
 
-  const records = data.data.pageinatedUsersRecords;
-  totalPages = data.data.totalPages;
-  for (let i = 1; i <= data.data.totalPages; i++) {
-    pageNumbers += `<li class="page-item page_number">
-    <a class="page-link">${i}</a>
-  </li>`;
-  }
   if (records.length >= 1) {
+    const records = data.data.pageinatedUsersRecords;
+    totalPages = data.data.totalPages;
+    for (let i = 1; i <= data.data.totalPages; i++) {
+      pageNumbers += `<li class="page-item page_number">
+      <a class="page-link">${i}</a>
+    </li>`;
+    }
+
     records.forEach((record) => {
       const date = new Date(record.createdAt);
       const year = date.getFullYear().toString().slice(-2);
@@ -497,7 +498,7 @@ async function initializeList(page, pageSize) {
       });
     });
   } else {
-    const temp = `<div>체성분 등록을 하면 변화기록과 진단 내용을 볼 수 있습니다.`;
+    const temp = `<div>체성분 등록을 하면 변화기록과 진단 내용을 볼 수 있습니다.<div>`;
     $(recordTable).html(temp);
   }
 }
