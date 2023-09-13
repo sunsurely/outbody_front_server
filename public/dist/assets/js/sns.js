@@ -1,34 +1,36 @@
-// const snsPort = 'localhost';
-const snsPort = '3.39.237.124';
-
-// 로그인 여부 확인
 const accessToken = localStorage.getItem('cookie');
+
 let nowPage = 1;
+
 $(document).ready(function () {
   getAllPosts(1, 10);
 });
+
 // 모든 도전 게시글의 오운완 전부 다 조회 (비공개도전 제외)
 const getAllPosts = async (page, pageSize) => {
   try {
     const response = await axios.get(
-      `http://3${snsPort}:3000/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
+      `http://3.39.237.124:3000/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: accessToken,
         },
       },
     );
-    // console.log(response.data.data);
+    response.data.data;
 
     let allPosts = '';
 
     response.data.data.pagenatedTotalPosts.forEach((post) => {
-      // console.log(post);
+      post;
       const profileImage = post.user.imgUrl
         ? `https://inflearn-nest-cat.s3.amazonaws.com/${post.user.imgUrl}`
         : `assets/img/avatar/avatar-1.png`;
+
       const userId = post.userId;
+
       const createdAt = new Date(post.createdAt);
+
       const year = createdAt.getFullYear();
       const month = (createdAt.getMonth() + 1).toString().padStart(2, '0');
       const day = createdAt.getDate().toString().padStart(2, '0');
@@ -68,85 +70,109 @@ const getAllPosts = async (page, pageSize) => {
     });
     $('#postcardList').html(allPosts);
   } catch (error) {
-    console.log(error);
+    error;
   }
+
   const pagenationTag = $('#total-posts');
   const prevButton = `<li id="prev_button" class="page-item"><a class="page-link">이전</a></li>`;
   const nextButton = `<li id="next_button" class="page-item"><a class="page-link">다음</a></li>`;
+
   let pageNumbers = '';
   let pageNumbersHtml = '';
+
   const data = await getTotaldata(page, pageSize);
   totalPages = data.data.data.totalPages;
+
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers += `<li class="page-item page_number">
                       <a id="nowPage-${i}" class="page-link">${i}</a>
                     </li>`;
   }
+
   pageNumbersHtml = prevButton + pageNumbers + nextButton;
   pagenationTag.html(
     `<ul class="pagination justify-content-center">${pageNumbersHtml}</ul>`,
   );
+
   const prevBtn = $('#prev_button');
   const nextBtn = $('#next_button');
   const pages = $('.page_number');
-  // console.log(nowPage);
+
+  nowPage;
+
   $(pages)
     .find(`#nowPage-${nowPage}`)
     .css('background-color', 'rgb(103,119,239)');
   $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
+
   // 이전
   $(prevBtn).click(async () => {
     if (nowPage > 1) {
       $(pages).find('.page-link').css('background-color', '');
       $(pages).find('.page-link').css('color', '');
+
       try {
         const { data } = await getTotaldata(nowPage - 1, 10);
         const posts = data.data.pagenatedTotalPosts;
+
         setTotalPost(posts);
+
         nowPage -= 1;
+
         $(pages)
           .find(`#nowPage-${nowPage}`)
           .css('background-color', 'rgb(103,119,239)');
         $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
       } catch (error) {
-        console.log('Error Message', error.response.data.message);
+        'Error Message', error.response.data.message;
       }
     }
   });
+
   // 다음
   $(nextBtn).click(async () => {
-    // console.log('next', nowPage);
+    'next', nowPage;
     if (nowPage > 0 && nowPage < totalPages) {
       $(pages).find('.page-link').css('background-color', '');
       $(pages).find('.page-link').css('color', '');
+
       try {
         const { data } = await getTotaldata(nowPage + 1, 10);
         const posts = data.data.pagenatedTotalPosts;
+
         setTotalPost(posts);
+
         nowPage += 1;
+
         $(pages)
           .find(`#nowPage-${nowPage}`)
           .css('background-color', 'rgb(103,119,239)');
         $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
       } catch (error) {
-        console.log(error);
+        error;
       }
     }
   });
+
   // 숫자
   $(pages).each((index, page) => {
     $(page).click(async () => {
       $(pages).find('.page-link').css('background-color', '');
       $(pages).find('.page-link').css('color', '');
+
       try {
         const pageNumber = parseInt($(page).find('.page-link').text());
+
         const { data } = await getTotaldata(pageNumber, pageSize);
         const posts = data.data.pagenatedTotalPosts;
+
         setTotalPost(posts);
+
         $(page)
           .find(`#nowPage-${nowPage}`)
           .css('background-color', 'rgb(103,119,239)');
         $(page).find(`#nowPage-${nowPage}`).css('color', 'white');
+
         nowPage = pageNumber;
       } catch (error) {
         console.error('Error message:', error.response.data.message);
@@ -156,7 +182,7 @@ const getAllPosts = async (page, pageSize) => {
 
   async function getTotaldata(page, pageSize) {
     const data = await axios.get(
-      `http://${snsPort}:3000/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
+      `http://3.39.237.124:3000/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: ` ${accessToken}`,
@@ -165,18 +191,25 @@ const getAllPosts = async (page, pageSize) => {
     );
     return data;
   }
+
   async function setTotalPost(posts) {
     let allPosts = '';
+
     posts.forEach((post) => {
       const profileImage = post.user.imgUrl
         ? `https://inflearn-nest-cat.s3.amazonaws.com/${post.user.imgUrl}`
         : `assets/img/avatar/avatar-1.png`;
+
       const userId = post.userId;
+
       const createdAt = new Date(post.createdAt);
+
       const year = createdAt.getFullYear();
       const month = (createdAt.getMonth() + 1).toString().padStart(2, '0');
       const day = createdAt.getDate().toString().padStart(2, '0');
+
       const formattedDate = `${year}년 ${month}월 ${day}일`;
+
       let temphtml = `<div class="col-12 col-md-4 col-lg-2">
           <article class="article article-style-c">
             <div class="article-header">

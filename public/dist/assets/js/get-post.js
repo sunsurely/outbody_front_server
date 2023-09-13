@@ -1,5 +1,4 @@
-const getPostPort = 'localhost';
-// const getPostPort = '3.39.237.124';
+const getPostPort = '3.39.237.124';
 
 const postParams = new URLSearchParams(window.location.search);
 const challengeId = postParams.get('id');
@@ -81,7 +80,7 @@ const getPosts = async (page, pageSize) => {
     });
     $('.row').html(allPosts);
   } catch (error) {
-    console.log(error.response.data.message);
+    error.response.data.message;
   }
 
   const pagenationTag = $('#total-posts');
@@ -123,7 +122,7 @@ const getPosts = async (page, pageSize) => {
       try {
         const { data } = await getTotalpost(nowPage - 1, 1);
         const posts = data.data.result;
-        // console.log(posts);
+        posts;
 
         setTotalPost(posts);
 
@@ -134,7 +133,7 @@ const getPosts = async (page, pageSize) => {
           .css('background-color', 'rgb(103,119,239)');
         $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
       } catch (error) {
-        console.log('Error Message', error.response.data.message);
+        'Error Message', error.response.data.message;
       }
     }
   });
@@ -148,7 +147,7 @@ const getPosts = async (page, pageSize) => {
       try {
         const { data } = await getTotalpost(nowPage + 1, 1);
         const posts = data.data.result;
-        // console.log(posts);
+        posts;
 
         setTotalPost(posts);
 
@@ -159,7 +158,7 @@ const getPosts = async (page, pageSize) => {
           .css('background-color', 'rgb(103,119,239)');
         $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
       } catch (error) {
-        console.log('Error Message', error.response.data.message);
+        'Error Message', error.response.data.message;
       }
     }
   });
