@@ -1,5 +1,5 @@
-// const port = 'localhost';
-const port = '3.39.237.124';
+// const mainPort = 'localhost';
+const mainPort = '3.39.237.124';
 const accessToken = localStorage.getItem('cookie');
 
 let nowPage = 1;
@@ -96,7 +96,7 @@ async function initializeChart() {
 async function getBodyResults() {
   try {
     const { data } = await axios.get(
-      `http://${port}:3000/record/result/detail`,
+      `http://${mainPort}:3000/record/result/detail`,
       {
         headers: {
           Authorization: accessToken,
@@ -539,7 +539,7 @@ $('.regist-record').click(async () => {
   const data = { height, weight, fat, muscle, bmr };
 
   try {
-    await axios.post(`http://${port}:3000/record`, data, {
+    await axios.post(`http://${mainPort}:3000/record`, data, {
       headers: {
         Authorization: `${accessToken}`,
       },
@@ -554,7 +554,7 @@ $('.regist-record').click(async () => {
 
 async function getRecordData(page, pageSize) {
   const data = await axios(
-    `http://${port}:3000/record/page/?page=${page}&pageSize=${pageSize}`,
+    `http://${mainPort}:3000/record/page/?page=${page}&pageSize=${pageSize}`,
     {
       headers: {
         Authorization: accessToken,
@@ -667,7 +667,7 @@ function setRecordList(records) {
 
 async function getDateRangeRecord(startDate, endDate, page) {
   const { data } = await axios.get(
-    `http://${port}:3000/record/date/period/page/?page=${page}&pageSize=10&start=${startDate}&end=${endDate}`,
+    `http://${mainPort}:3000/record/date/period/page/?page=${page}&pageSize=10&start=${startDate}&end=${endDate}`,
 
     {
       headers: {

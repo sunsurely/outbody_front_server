@@ -1,5 +1,5 @@
-// const port = 'localhost';
-const port = '3.39.237.124';
+// const scriptPort = 'localhost';
+const scriptPort = '3.39.237.124';
 
 // 회원가입
 const signUp = async () => {
@@ -36,7 +36,7 @@ const signUp = async () => {
       return;
     }
 
-    await axios.post(`http://${port}:3000/user/signup`, {
+    await axios.post(`http://${scriptPort}:3000/user/signup`, {
       name,
       email,
       password,

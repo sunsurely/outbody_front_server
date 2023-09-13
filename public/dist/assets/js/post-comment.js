@@ -1,5 +1,5 @@
-// const port = 'localhost';
-const port = '3.39.237.124';
+// const postCommentPort = 'localhost';
+const postCommentPort = '3.39.237.124';
 
 const commentParams = new URLSearchParams(window.location.search);
 const challengeIdForComment = commentParams.get('cid');
@@ -17,7 +17,7 @@ $(document).ready(function () {
 const getOnePost = async () => {
   try {
     const response = await axios.get(
-      `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/detail`,
+      `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/detail`,
       {
         headers: {
           Authorization: accessToken,
@@ -67,7 +67,7 @@ const getOnePost = async () => {
 const getComment = async () => {
   try {
     const response = await axios.get(
-      `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/comment`,
+      `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
       {
         headers: {
           Authorization: accessToken,
@@ -126,7 +126,7 @@ const createComment = async () => {
     }
 
     await axios.post(
-      `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/comment`,
+      `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
       { comment: $('#comment_input').val() },
       {
         headers: {
@@ -159,7 +159,7 @@ const updateComment = async (commentId) => {
     }
 
     await axios.patch(
-      `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
+      `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
       { comment: $('#updateCmt_input').val() },
       {
         headers: {
@@ -182,7 +182,7 @@ $(document).on('click', '#updateCmt_btn', function () {
 const deleteComment = async (commentId) => {
   try {
     await axios.delete(
-      `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
+      `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
       {
         headers: {
           Authorization: accessToken,
@@ -228,7 +228,7 @@ const reportComment = async (commentId) => {
     }
 
     await axios.post(
-      `http://${port}:3001/report/${commentId}`,
+      `http://${postCommentPort}:3000/report/${commentId}`,
       { description: $('.report_input').val() },
       {
         headers: {
@@ -247,32 +247,31 @@ $(document).on('click', '#report-button', function () {
   reportComment($(this).attr('commentid'));
 });
 
-// 오운완 좋아요 생성
-let isLiked = null;
+let isLiked = false;
 
+// 오운완 좋아요 생성
 const addLike = async () => {
   const likeButton = $('#checkbox');
-  likeButton.on('click', async function () {
-    if (!isLiked) {
-      await axios
-        .post(
-          `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/like`,
+  try {
+    likeButton.on('click', async function () {
+      if (!isLiked) {
+        const response = await axios.post(
+          `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/like`,
           {
             headers: {
               Authorization: accessToken,
             },
           },
-        )
-        .then((response) => {
-          if (response.data.data) {
-            alert('좋아요를 눌렀습니다.');
-          }
-        })
-        .catch((error) => {
-          console.error('Error message:', error.response.data.message);
-        });
-    }
-  });
+        );
+        if (response.data.data) {
+          alert(`좋아요를 눌렀습니다.`);
+          isLiked = true;
+        }
+      }
+    });
+  } catch (error) {
+    alert(error.response.data.message);
+  }
 };
 
 // 오운완 좋아요 취소
@@ -281,14 +280,18 @@ const unLike = async (likeId) => {
   likeButton.on('click', async function () {
     try {
       if (isLiked) {
-        await axios.delete(
-          `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/like/${likeId}`,
+        const response = await axios.delete(
+          `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/like/${likeId}`,
           {
             headers: {
               Authorization: accessToken,
             },
           },
         );
+        if (response.data.data) {
+          alert(`좋아요를 취소했습니다.`);
+          isLiked = false;
+        }
       }
       alert('좋아요를 취소했습니다.');
     } catch (error) {
@@ -297,17 +300,18 @@ const unLike = async (likeId) => {
   });
 };
 
-// 오운완 좋아요 조회
+// 오운완 좋아요 조회 (sns에서 만듦)
 const getLikes = async () => {
   try {
     const response = await axios.get(
-      `http://${port}:3001/challenge/${challengeIdForComment}/post/${postId}/like`,
+      `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/like`,
       {
         headers: {
           Authorization: accessToken,
         },
       },
     );
+    console.log(response.data.data);
   } catch (error) {
     alert(error.response.data.message);
   }

@@ -1,5 +1,5 @@
-// const port = 'localhost';
-const port = '3.39.237.124';
+// const loginPort = 'localhost';
+const loginPort = '3.39.237.124';
 
 $(document).ready(function () {
   $('.btn-show-pass').on('click', function (event) {
@@ -27,7 +27,7 @@ const login = async () => {
   }
 
   await axios
-    .post(`http://${port}:3000/auth/login`, {
+    .post(`http://${loginPort}:3000/auth/login`, {
       email: $('#email').val(),
       password: $('#password').val(),
     })
