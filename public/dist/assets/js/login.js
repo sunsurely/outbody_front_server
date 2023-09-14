@@ -27,7 +27,7 @@ const login = async () => {
   }
 
   await axios
-    .post(`https://${loginPort}:3000/auth/login`, {
+    .post(`https://${loginPort}/auth/login`, {
       email: $('#email').val(),
       password: $('#password').val(),
     })
