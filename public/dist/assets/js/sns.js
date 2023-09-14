@@ -1,5 +1,10 @@
 const accessToken = localStorage.getItem('cookie');
 
+if (!accessToken) {
+  alert('로그인이 필요한 기능입니다.');
+  location.href = 'login.html';
+}
+
 let nowPage = 1;
 
 $(document).ready(function () {

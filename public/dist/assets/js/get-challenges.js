@@ -3,6 +3,11 @@ const getChallengesPort = '52.79.176.121';
 
 const getChallengesToken = localStorage.getItem('cookie');
 
+if (!getChallengesToken) {
+  alert('로그인이 필요한 기능입니다.');
+  location.href = 'login.html';
+}
+
 const filterApplyButton = document.querySelector('#filter-apply-button');
 const challengeFilter = $('#challenge-filter');
 let option = 'all';

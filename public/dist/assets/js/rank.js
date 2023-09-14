@@ -6,6 +6,11 @@ const challengeId = urlParams.get('id');
 // 로그인 여부 확인
 const rankToken = localStorage.getItem('cookie');
 
+if (!rankToken) {
+  alert('로그인이 필요한 기능입니다.');
+  location.href = 'login.html';
+}
+
 $(document).ready(function () {
   totalrankPage(1, 10);
   friendRankPage(1, 10);
