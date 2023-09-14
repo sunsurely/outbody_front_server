@@ -1,4 +1,4 @@
-const noticePort = '3.39.237.124';
+const noticePort = '52.79.176.121';
 // const noticePort = 'localhost';
 
 $(document).ready(function () {

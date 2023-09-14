@@ -1,4 +1,4 @@
-const adminPort = '3.39.237.124';
+const adminPort = '52.79.176.121';
 
 const adminToken = localStorage.getItem('cookie');
 if (!adminToken) {

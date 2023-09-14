@@ -1,7 +1,11 @@
-const mainPort = '3.39.237.124';
+const mainPort = '52.79.176.121';
 const mainToken = localStorage.getItem('cookie');
+const expiration = localStorage.getItem('tokenExpiration');
+const isTokenExpired = new Date().getTime() > expiration;
 
-if (!mainToken) {
+if (!mainToken || isTokenExpired) {
+  localStorage.setItem('cookie', '');
+  localStorage.setItem('tokenExpiration', '');
   alert('로그인이 필요한 기능입니다.');
   location.href = 'login.html';
 }

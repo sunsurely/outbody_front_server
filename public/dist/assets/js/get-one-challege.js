@@ -1,19 +1,46 @@
-const getOneChallengePort = '3.39.237.124';
+const getOneChallengePort = '52.79.176.121';
+// const getOneChallengePort = 'localhost';
 
 const urlParams = new URLSearchParams(window.location.search);
 const challengeId = urlParams.get('id');
 
-// 로그인 여부 확인
 const getAccessToken = localStorage.getItem('cookie');
+const expiration = localStorage.getItem('tokenExpiration');
+const isTokenExpired = new Date().getTime() > expiration;
+
+if (!getAccessToken || !isTokenExpired) {
+  localStorage.setItem('cookie', '');
+  localStorage.setItem('tokenExpiration', '');
+  alert('로그인이 필요한 기능입니다.');
+  location.href = 'login.html';
+}
 
 window.onload = function () {
   getChallengeDetail();
   getChallengers();
 };
 
+async function checkUserIsInChallenge() {
+  try {
+    const response = await axios.get(
+      `http://${getOneChallengePort}:3000/challenge/${challengeId}/userState`,
+      {
+        headers: {
+          Authorization: getAccessToken,
+        },
+      },
+    );
+    return response.data.data;
+  } catch (error) {
+    alert(error.response.data.message);
+    throw error;
+  }
+}
+
 // 도전 상세 조회 (도전)
 async function getChallengeDetail() {
-  axios
+  const result = await checkUserIsInChallenge();
+  await axios
     .get(`http://${getOneChallengePort}:3000/challenge/${challengeId}`, {
       headers: {
         Authorization: getAccessToken,
@@ -68,12 +95,23 @@ async function getChallengeDetail() {
           <div class="card-header">
             <h4>${challenge.title}</h4>
             <div class="card-header-action">
-              <a id="enter-challenge" class="btn btn-primary" style="color: white;">도전 입장</a>
-              <a id="leave-challenge" class="btn btn-primary" style="color: white;">도전 퇴장</a>
+              ${
+                result.isChallenger
+                  ? result.isThis
+                    ? result.isHost
+                      ? ''
+                      : `<a id="leave-challenge" class="btn btn-primary" style="color: white;">도전 퇴장</a>`
+                    : ''
+                  : `<a id="enter-challenge" class="btn btn-primary" style="color: white;">도전 입장</a>`
+              }
               <a class="btn btn-secondary" style="color: white;">${
                 challenge.userNumber
               } / ${challenge.userNumberLimit}명</a>
-              <a id="delete-challenge" class="btn btn-danger" style="color: white;">삭제</a>
+              ${
+                result.isHost
+                  ? `<a id="delete-challenge" class="btn btn-danger" style="color: white;">삭제</a>`
+                  : ''
+              }
             </div>
           </div>
           <div class="card-body">
@@ -148,7 +186,8 @@ async function getChallengeDetail() {
 
 // 도전 상세 조회 (도전자)
 async function getChallengers() {
-  axios
+  const result = await checkUserIsInChallenge();
+  await axios
     .get(
       `http://${getOneChallengePort}:3000/challenge/${challengeId}/challengers`,
       {
@@ -166,8 +205,12 @@ async function getChallengers() {
           <div class="card-header">
             <h4>참가자 목록</h4>
             <div class="card-header-action">
-              <a id="send-invitation-button" href="get-post.html?id=${challengeId}" class="btn btn-primary" style="color: white;">오운완 인증</a>
-              <a class="btn btn-primary" style="color: white;" data-toggle="modal" data-target="#createModal">친구 초대</a>
+              ${
+                result.isThis
+                  ? `<a id="send-invitation-button" href="get-post.html?id=${challengeId}" class="btn btn-primary" style="color: white;">오운완 인증</a>
+                    <a class="btn btn-primary" style="color: white;" data-toggle="modal" data-target="#createModal">친구 초대</a>`
+                  : ''
+              }
             </div>
           </div>
           <div class="card-body">
@@ -271,7 +314,7 @@ document.addEventListener('click', async (event) => {
         })
         .then((response) => {
           alert('도전 삭제 완료');
-          location.reload();
+          location.href = 'get-challenges.html';
         })
         .catch((error) => {
           alert(error.response.data.message);
@@ -318,7 +361,7 @@ $('#send-invitation-button').on('click', async () => {
   }
 
   const isFollowed = followResponse.data.data;
-  console.log(isFollowed);
+
   if (isFollowed) {
     const temp = `
     <div class="card card-primary">

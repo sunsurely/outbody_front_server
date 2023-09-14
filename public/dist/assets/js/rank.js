@@ -1,10 +1,19 @@
-const rankPort = '3.39.237.124';
+const rankPort = '52.79.176.121';
 
 const urlParams = new URLSearchParams(window.location.search);
 const challengeId = urlParams.get('id');
 
 // 로그인 여부 확인
 const rankToken = localStorage.getItem('cookie');
+const expiration = localStorage.getItem('tokenExpiration');
+const isTokenExpired = new Date().getTime() > expiration;
+
+if (!rankToken || isTokenExpired) {
+  localStorage.setItem('cookie', '');
+  localStorage.setItem('tokenExpiration', '');
+  alert('로그인이 필요한 기능입니다.');
+  location.href = 'login.html';
+}
 
 $(document).ready(function () {
   totalrankPage(1, 10);
