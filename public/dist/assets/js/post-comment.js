@@ -1,4 +1,4 @@
-const postCommentPort = '3.39.237.124';
+const postCommentPort = '52.79.176.121';
 
 const commentParams = new URLSearchParams(window.location.search);
 const challengeIdForComment = commentParams.get('cid');

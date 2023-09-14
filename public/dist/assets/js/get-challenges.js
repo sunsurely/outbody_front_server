@@ -1,7 +1,16 @@
-const getChallengesPort = '3.39.237.124';
+const getChallengesPort = '52.79.176.121';
 // const getChallengesPort = 'localhost';
 
 const getChallengesToken = localStorage.getItem('cookie');
+const expiration = localStorage.getItem('tokenExpiration');
+const isTokenExpired = new Date().getTime() > expiration;
+
+if (!getChallengesToken || isTokenExpired) {
+  localStorage.setItem('cookie', '');
+  localStorage.setItem('tokenExpiration', '');
+  alert('로그인이 필요한 기능입니다.');
+  location.href = 'login.html';
+}
 
 const filterApplyButton = document.querySelector('#filter-apply-button');
 const challengeFilter = $('#challenge-filter');

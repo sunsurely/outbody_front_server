@@ -1,10 +1,19 @@
-const getOneChallengePort = '3.39.237.124';
+const getOneChallengePort = '52.79.176.121';
 // const getOneChallengePort = 'localhost';
 
 const urlParams = new URLSearchParams(window.location.search);
 const challengeId = urlParams.get('id');
 
 const getAccessToken = localStorage.getItem('cookie');
+const expiration = localStorage.getItem('tokenExpiration');
+const isTokenExpired = new Date().getTime() > expiration;
+
+if (!getAccessToken || !isTokenExpired) {
+  localStorage.setItem('cookie', '');
+  localStorage.setItem('tokenExpiration', '');
+  alert('로그인이 필요한 기능입니다.');
+  location.href = 'login.html';
+}
 
 window.onload = function () {
   getChallengeDetail();
@@ -352,7 +361,7 @@ $('#send-invitation-button').on('click', async () => {
   }
 
   const isFollowed = followResponse.data.data;
-  console.log(isFollowed);
+
   if (isFollowed) {
     const temp = `
     <div class="card card-primary">

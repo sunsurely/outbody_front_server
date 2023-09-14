@@ -1,4 +1,4 @@
-const loginPort = '3.39.237.124';
+const loginPort = '52.79.176.121';
 // const loginPort = 'localhost';
 
 $(document).ready(function () {
@@ -37,6 +37,8 @@ const login = async () => {
         `cookie`,
         `Bearer ${response.data.data.accessToken}`,
       );
+      const expirationDate = new Date().getTime() + 21600 * 1000;
+      localStorage.setItem('tokenExpiration', expirationDate);
       if (response.data.data.status === 'admin') {
         location.href = 'admin.html';
       } else {
