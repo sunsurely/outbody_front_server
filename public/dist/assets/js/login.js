@@ -1,4 +1,4 @@
-const loginPort = 'sunsurely.shop';
+const loginPort = '3.39.237.124';
 // const loginPort = 'localhost';
 
 $(document).ready(function () {
@@ -27,7 +27,7 @@ const login = async () => {
   }
 
   await axios
-    .post(`https://${loginPort}:443/auth/login`, {
+    .post(`http://${loginPort}:3000/auth/login`, {
       email: $('#email').val(),
       password: $('#password').val(),
     })
