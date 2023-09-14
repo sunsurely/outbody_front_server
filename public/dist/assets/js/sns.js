@@ -2,7 +2,7 @@ const accessToken = localStorage.getItem('cookie');
 const expiration = localStorage.getItem('tokenExpiration');
 const isTokenExpired = new Date().getTime() > expiration;
 
-if (!accessToken || !isTokenExpired) {
+if (!accessToken || isTokenExpired) {
   localStorage.setItem('cookie', '');
   localStorage.setItem('tokenExpiration', '');
   alert('로그인이 필요한 기능입니다.');
