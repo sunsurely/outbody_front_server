@@ -3,7 +3,7 @@ const adminPort = '3.39.237.124';
 const adminToken = localStorage.getItem('cookie');
 if (!adminToken) {
   alert('접근 권한이 없습니다.');
-  location.href = 'login.html';
+  window.history.back();
 }
 
 // 1. 블랙리스트 생성모달
