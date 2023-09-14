@@ -2,6 +2,15 @@ const myinfoPort = '52.79.176.121';
 
 // 로그인 여부 확인
 const accessToken = localStorage.getItem('cookie');
+const expiration = localStorage.getItem('tokenExpiration');
+const isTokenExpired = new Date().getTime() > expiration;
+
+if (!accessToken || !isTokenExpired) {
+  localStorage.setItem('cookie', '');
+  localStorage.setItem('tokenExpiration', '');
+  alert('로그인이 필요한 기능입니다.');
+  location.href = 'login.html';
+}
 
 $(document).ready(function () {
   initMyPage();

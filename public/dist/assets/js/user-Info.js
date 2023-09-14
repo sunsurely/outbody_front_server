@@ -4,6 +4,15 @@ const userInfoParams = new URLSearchParams(window.location.search);
 const userId = userInfoParams.get('id');
 
 const userInfoToken = localStorage.getItem('cookie');
+const expiration = localStorage.getItem('tokenExpiration');
+const isTokenExpired = new Date().getTime() > expiration;
+
+if (!userInfoToken || !isTokenExpired) {
+  localStorage.setItem('cookie', '');
+  localStorage.setItem('tokenExpiration', '');
+  alert('로그인이 필요한 기능입니다.');
+  location.href = 'login.html';
+}
 
 $(document).ready(function () {
   userPage();

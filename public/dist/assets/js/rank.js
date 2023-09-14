@@ -5,8 +5,12 @@ const challengeId = urlParams.get('id');
 
 // 로그인 여부 확인
 const rankToken = localStorage.getItem('cookie');
+const expiration = localStorage.getItem('tokenExpiration');
+const isTokenExpired = new Date().getTime() > expiration;
 
-if (!rankToken) {
+if (!rankToken || !isTokenExpired) {
+  localStorage.setItem('cookie', '');
+  localStorage.setItem('tokenExpiration', '');
   alert('로그인이 필요한 기능입니다.');
   location.href = 'login.html';
 }
