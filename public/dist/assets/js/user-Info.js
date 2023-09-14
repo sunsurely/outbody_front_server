@@ -43,7 +43,6 @@ async function userPage() {
       },
     );
     const isFollowed = followData.data.data;
-    // console.log(isFollowed);
 
     const followBtn = $('#follow-user');
     $(followBtn).text(isFollowed ? 'unfollow' : 'follow');
