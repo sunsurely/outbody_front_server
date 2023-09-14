@@ -318,7 +318,7 @@ $('#send-invitation-button').on('click', async () => {
   }
 
   const isFollowed = followResponse.data.data;
-  console.log(isFollowed);
+
   if (isFollowed) {
     const temp = `
     <div class="card card-primary">
