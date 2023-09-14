@@ -1,4 +1,4 @@
-const loginPort = '3.39.237.124';
+const loginPort = 'outbody';
 // const loginPort = 'localhost';
 
 $(document).ready(function () {
@@ -27,7 +27,7 @@ const login = async () => {
   }
 
   await axios
-    .post(`http://${loginPort}:3000/auth/login`, {
+    .post(`https://${loginPort}:3000/auth/login`, {
       email: $('#email').val(),
       password: $('#password').val(),
     })
