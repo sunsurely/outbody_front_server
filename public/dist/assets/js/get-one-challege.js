@@ -287,17 +287,39 @@ $('#send-invitation-button').on('click', async () => {
   const searchedFriend = $('#searched-friend');
   $(searchedFriend).html('');
 
+  let userResponse, followResponse;
+
   try {
-    const response = await axios.get(
-      `http://3${getOneChallengePort}:3000/user/me/searchEmail/?email=${emailInput}`,
+    userResponse = await axios.get(
+      `http://${getOneChallengePort}:3000/user/me/searchEmail/?email=${emailInput}`,
       {
         headers: {
           Authorization: getAccessToken,
         },
       },
     );
-    const friend = response.data.data;
+  } catch (error) {
+    console.error(error.response.message);
+  }
 
+  const friend = userResponse.data.data;
+
+  try {
+    followResponse = await axios.get(
+      `http://${getOneChallengePort}:3000/follow/${friend.id}/isFollowed`,
+      {
+        headers: {
+          Authorization: getAccessToken,
+        },
+      },
+    );
+  } catch (error) {
+    console.error(error.response.message);
+  }
+
+  const isFollowed = followResponse.data.data;
+  console.log(isFollowed);
+  if (isFollowed) {
     const temp = `
     <div class="card card-primary">
       <div class="card-body">
@@ -312,33 +334,31 @@ $('#send-invitation-button').on('click', async () => {
       </div>
     </div>`;
     $(searchedFriend).html(temp);
-
-    $('#send-invitation').on('click', async () => {
-      const data = {
-        email: friend.email,
-      };
-
-      await axios
-        .post(
-          `http://${getOneChallengePort}:3000/challenge/${challengeId}/invite`,
-          data,
-          {
-            headers: {
-              Authorization: getAccessToken,
-            },
-          },
-        )
-        .then((response) => {
-          alert(
-            `${friend.name}(${friend.email})님에게 도전 초대문을 보냈습니다.`,
-          );
-          location.reload();
-        })
-        .catch((error) => {
-          alert(error.response.data.message);
-        });
-    });
-  } catch (error) {
-    alert(error.response.data.message);
   }
+
+  $('#send-invitation').on('click', async () => {
+    const data = {
+      email: friend.email,
+    };
+
+    await axios
+      .post(
+        `http://${getOneChallengePort}:3000/challenge/${challengeId}/invite`,
+        data,
+        {
+          headers: {
+            Authorization: getAccessToken,
+          },
+        },
+      )
+      .then((response) => {
+        alert(
+          `${friend.name}(${friend.email})님에게 도전 초대문을 보냈습니다.`,
+        );
+        location.reload();
+      })
+      .catch((error) => {
+        alert(error.response.data.message);
+      });
+  });
 });
