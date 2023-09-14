@@ -1,10 +1,34 @@
-const scriptPort = '3.39.237.124';
+const signupPort = '3.39.237.124';
+// const signupPort = 'localhost';
+
+// 인증번호 발송 (재용)
+$('#sendEmail').click(() => {
+  const email = $('#email').val();
+  sendEmail(email);
+});
+async function sendEmail(email) {
+  if (!email) {
+    alert('계정(e-mail)을 입력해주세요.');
+    return;
+  }
+  await axios
+    .post(`http://${signupPort}:3000/user/signup/email`, { email })
+    .then((response) => {
+      if (response.data.success === true) {
+        alert('인증번호가 발송되었습니다.');
+      }
+    })
+    .catch((error) => {
+      alert(error);
+    });
+}
 
 // 회원가입
 const signUp = async () => {
   try {
     const name = $('#name').val();
     const email = $('#email').val();
+    const verifyNumberInput = $('#verifyNumberInput').val();
     const password = $('#password').val();
     const confirmPassword = $('#confirm_password').val();
     const gender = $('#gender').val();
@@ -16,6 +40,10 @@ const signUp = async () => {
     }
     if (!email) {
       alert('계정(e-mail)을 입력해주세요');
+      return;
+    }
+    if (!verifyNumberInput) {
+      alert('인증번호를 입력해주세요');
       return;
     }
     if (!password) {
@@ -35,9 +63,10 @@ const signUp = async () => {
       return;
     }
 
-    await axios.post(`http://${scriptPort}:3000/user/signup`, {
+    await axios.post(`http://${signupPort}:3000/user/signup`, {
       name,
       email,
+      verifyNumberInput: parseInt(verifyNumberInput),
       password,
       gender,
       birthday,
@@ -47,6 +76,7 @@ const signUp = async () => {
     location.href = `login.html`;
   } catch (error) {
     alert(error.response.data.message);
+    console.error(error);
   }
 };
 $('#signUp_btn').click(signUp);
