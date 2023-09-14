@@ -281,17 +281,18 @@
                 <div class="card-header">
                   <h4>측정표 기록</h4>
                 </div>
+                <div class="place-holder-record" style=" margin:40px; font-size:18px; color:grey; font-weight: bold;">리스트 생성을 위해 체성분 등록버튼을 눌러주세요.</div>
                 <div class="card-body">
-                  <div class="table-responsive"  style="width:460px; height:801px">
-                    <table class="table">
+                  <div class="table-responsive"  style="width:470px; height:801px; display:none;" >
+                    <table class="table" >
                       <thead>
                         <tr>
                           <th style="padding:0 10px 0 40px">일자</th>
                           <th style="padding:0 15px">체중</th>
                           <th style="padding:0 10px">체지방률</th>
                           <th style="padding:0 10px">골격근량</th>
-                          <th style="padding:0 15px">기초대사량</th>
-                        </tr>
+                          <th style="padding:0 10px">기초대사량</th>
+                        </tr>                 
                       </thead>
                       <tbody id="record-table"></tbody>
                     </table>
@@ -313,17 +314,19 @@
                   <h4>체성분 변화 기록</h4>
                   <div class="card-header-action"></div>
                 </div>
+       
                 <div class="card-body">
-                  <canvas id="myChart" height="100"></canvas>
+                  <canvas id="myChart" style="height:100px; display:none;"></canvas>
+                </div>
+                <div class="place-holder-record" style="font-size:18px; color:blue; text-align: center; padding-bottom:15px;color:grey; font-weight: bold;">그래프 생성을 위해 체성분 등록버튼을 눌러주세요.</div>
+                <div class="card-body">
+                  <canvas id="myChart2" style="height:100px; display:none"></canvas>
                 </div>
                 <div class="card-body">
-                  <canvas id="myChart2" height="100"></canvas>
+                  <canvas id="myChart3" style="height:100px; display:none"></canvas>
                 </div>
                 <div class="card-body">
-                  <canvas id="myChart3" height="100"></canvas>
-                </div>
-                <div class="card-body">
-                  <canvas id="myChart4" height="100"></canvas>
+                  <canvas id="myChart4" style="height:100px; display:none"></canvas>
                 </div>
               </div>
 
@@ -331,12 +334,13 @@
             <div class="col-lg-4 col-md-12 col-12 col-sm-12">
               <div class="card card-primary" style="padding: 5px;">
                 <div class="card-header">
-                  <h4>종합 평가</h4>
+                  <h4>종합 평가</h4>                  
                 </div>
+                <div class="place-holder-record" style="font-size:18px; text-align: center; color:blue; margin-top:40px; margin-bottom:95px;color:grey; font-weight: bold;" >진단결과 생성을 위해 체성분 등록버튼을 눌러주세요.</div>
                 <div class="card-body">
-                  <ul class="list-unstyled list-unstyled-border">
+                  <ul class="list-unstyled list-unstyled-border total-record" style="display:none">
                     <li class="media">
-                      <div class="media-body">
+                      <div class="media-body ">
                         <div class="section-title mt-0" style="margin-bottom: 25px;">체중 조절</div>
                         <ul>
                           <li style="font-weight: bold">
@@ -444,7 +448,7 @@
         </div>
       </div>
 
-      <footer class="main-footer">
+      <footer class="main-footer" style="display: none;">
         <div class="footer-left">
           Copyright &copy; 2023
           <div class="bullet"></div>

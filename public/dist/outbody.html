@@ -192,6 +192,7 @@
           <div class="section-header">
             <h1>OUTBODY</h1>
             <div class="section-header-breadcrumb">
+              <div class="breadcrumb-item active"><a href="admin.html">Admin</a></div>
             </div>
           </div>
 
@@ -221,7 +222,7 @@
               <div class="col-12 col-md-6 col-lg-6">
                 <div class="card">
                   <div class="card-header">
-                    <h4>주요 기능</h4>
+                    <h4>주요 기능 설명</h4>
                   </div>
                   <div class="card-body">
                     <div id="accordion">
@@ -235,7 +236,8 @@
                               ㆍ 체성분 측정 결과를 토대로 기간 별 체성분 변화 그래프 제공<br>
                               ㆍ 해당 측정 일자의 체성분 분석표 상세조회<br>
                               ㆍ 체성분 기반 종합평가 제공 및 식단과 운동법에 대한 개인 맞춤형 피드백<br>
-                              ㆍ 연령과 성별을 기준으로 다른 사용자들의 평균 체성분 데이터 제공
+                              ㆍ 연령과 성별을 기준으로 다른 사용자들의 평균 체성분 데이터 제공<br>
+                              ㆍ 도전을 할 경우, 시작일 기준 7일 이내의 체성분 측정 기록 필수<br>
                             </div>
                           </p>
                         </div>
@@ -246,9 +248,9 @@
                         </div>
                         <div class="accordion-body collapse" id="panel-body-2" data-parent="#accordion">
                           <p class="mb-0"><div>
-                            ㆍ 다른 사용자에게 친구 요청<br>
-                            ㆍ 사용자가 현재 참여한 도전에 내 친구 초대<br>
-                            ㆍ 다른 사용자가 보낸 친구 요청 또는 도전 초대에 수락 또는 거절 가능<br>
+                            ㆍ 친구가 되고 싶은 다른 사용자에게 친구 요청 가능<br>
+                            ㆍ 사용자가 생성했거나, 또는 현재 참여한 도전에 내 친구 초대 가능<br>
+                            ㆍ 다른 사용자에게 받은 친구 요청 또는 도전 초대에 수락 또는 거절 가능<br>
                           </div></p>
                         </div>
                       </div>
@@ -259,11 +261,14 @@
                         <div class="accordion-body collapse" id="panel-body-3" data-parent="#accordion">
                           <p class="mb-0">
                             <div>
-                              ㆍ 도전 기간, 인원, 공개 여부, 목표 설정 후 생성<br>
-                              ㆍ 도전 생성 후 시작일이 경과했는데 참여자가 없을 경우, 자동 삭제 처리<br>
-                              ㆍ 도전 종료 시 성공/실패 여부 자동 판단 후, 점수 분배 및 차감 처리<br>
-                              ㆍ 비공개방을 생성하여 원하는 사용자만 이용 가능<br>
-                              ㆍ 참가한 도전 시작, 종료시 알림메시지 전송
+                              ㆍ 도전 기간, 인원, 공개/비공개 여부, 목표 설정 후 생성<br>
+                              ㆍ 비공개방은 조회되지 않으며, 원하는 사용자만 초대해서 이용 가능<br>
+                              ㆍ 공개방은 모두에게 조회되며, 시작일 전까지 자유롭게 입장, 퇴장 가능<br>
+                              ㆍ 도전 시작일이 경과했는데 참여자가 없을 경우, 자동 삭제 처리<br>
+                              ㆍ 본인이 생성한 도전방은 시작일이 경과했을 경우 퇴장 불가<br>
+                              ㆍ 한 도전에 참가하는동안 다른 도전에 참가 불가 (동시 점수획득 방지)<br>
+                              ㆍ 도전은 종료일 전날 22시에 종료되며, 종료일 00시에 점수 분배<br>
+                              ㆍ 참가한 도전 시작/종료시 알림메시지 전송<br>
                             </div>
                           </p>
                         </div>
@@ -275,9 +280,10 @@
                         <div class="accordion-body collapse" id="panel-body-4" data-parent="#accordion">
                           <p class="mb-0">
                             <div>
-                              ㆍ 도전방 내 사용자의 '오운완(출석 인증)' 게시물 작성<br>
-                              ㆍ 포스팅한 오운완 게시물은 "오운완" 탭에서 모든 사용자가 확인 가능<br>
-                              ㆍ 오운완 게시글 및 댓글을 통한 소통, 악성댓글 신고 가능
+                              ㆍ 도전방 내 사용자의 '오운완(출석 인증)' 게시글 작성<br>
+                              ㆍ 포스팅한 오운완 게시글은 '오운완' 탭에서 모든 사용자가 확인 가능<br>
+                              ㆍ 오운완 게시글은 도전 기간동안 전체조회 가능 (비공개방 제외)<br>
+                              ㆍ 오운완 게시글 및 댓글을 통한 사용자 간 소통, 악성댓글 신고 가능<br>
                             </div>
                           </p>
                         </div>
@@ -289,9 +295,53 @@
                         <div class="accordion-body collapse" id="panel-body-5" data-parent="#accordion">
                           <p class="mb-0">
                             <div>
-                              ㆍ 도전 목표 달성시 점수 부여, 미달성시 점수 차감<br>
-                              ㆍ 점수 기준 전체 순위 및 내 친구 순위 조회<br>
-                              ㆍ 2주간 도전 미참시 자동 점수 삭감으로 인한 도전 참여 동기 부여
+                              ㆍ 도전 종료후, 도전 기간과 비례하여 목표 달성시 점수 부여, 미달성시 차감<br>
+                              ㆍ 하나의 도전방은 동일한 목표를 가지며, 목표 복수설정 가능<br>
+                              ㆍ 도전방에 설정된 모든 목표를 성공해야만 목표 성공 (부분 성공 없음)<br>
+                              ㆍ 기본 점수 1,000점<br>
+                              ㆍ 도전방 입장시, 현재 사용자의 점수가 도전실패시 차감될 수 있는 점수보다 낮다면 입장 불가<br>
+                              <br>
+                              ㆍ 목표별 점수: <br>
+                              ① 오운완 게시글 포스팅 하루당 10점 (최소 일주일 3일)<br>
+                              (일주일에 5일로 설정했을 경우, 1주일 목표를 이루면 50점)<br>
+                              ② 체중감량 : 1kg당 20점<br>
+                              ③ 체지방율 감량: 1%당 40점<br>
+                              ④ 골격근량 증량: 1kg당 60점<br>
+                              <br>
+                              1. 참가자 모두가 목표 달성에 성공했을 경우: <br>
+                              전체 점수를 참가자 수로 나누어 모두 동일한 점수 부여<br>
+                              <br>
+                              Ex) 도전기간:4주, 도전자:4명 모두 성공<br>
+                              목표: 오운완게시글 주3일, 체중감량 2kg<br>
+                              한 사람당 받는 점수 = [{(도전기간(4) X 오운완점수(3*10)) + 체중감량점수(2*20)} X 전체인원수(4)] ÷ 성공인원수(4) = 160점<br>
+                              <br>
+                              2. 참가자 일부만 목표 달성에 성공했을 경우: <br>
+                              전체 점수를 성공한 사용자 수로 나누어 점수 부여<br>
+                              <br>
+                              Ex) 도전기간:6주, 도전자 6명 중 성공인원수 4명<br>
+                              목표: 오운완게시글 주4일, 골격근량 증량 1kg<br>
+                              (1)성공한 사람이 받는 점수 = [{(도전기간(6) X 오운완점수(4*10)) + 골격근량증량점수(1*60)} X 전체인원수(6)] ÷ 성공인원수(4) = 450점<br>
+                              <br>
+                              (2)실패한 사람이 차감되는 점수 = (도전기간(6) X 오운완점수(4*10)) + 골격근량증량점수(1*60) = -300점<br>
+                              <br>
+                              ㆍ 개인 점수를 기준으로, 전체 순위 및 내 친구 순위 조회 가능<br>
+                              ㆍ 2주간 도전 미참여시 자동 점수 삭감으로 인한 도전 참여 동기 부여<br>
+                            </div>
+                          </p>
+                        </div>
+                      </div>
+                      <div class="accordion">
+                        <div class="accordion-header" role="button" data-toggle="collapse" data-target="#panel-body-6">
+                          <h4>사용자</h4>
+                        </div>
+                        <div class="accordion-body collapse" id="panel-body-6" data-parent="#accordion">
+                          <p class="mb-0">
+                            <div>
+                              ㆍ 이메일 인증을 통한 회원가입 가능<br>
+                              ㆍ 사용자별 마이페이지로 친구조회, 참여한 도전목록 확인 가능<br>
+                              ㆍ 다른 사용자 페이지를 통해 참여한 도전목록 확인 가능<br>
+                              ㆍ 회원정보 및 비밀번호 변경 가능<br>
+                              ㆍ 댓글 신고받은 경우, 관리자가 판단하고 경우에 따라 계정이 중단될 수 있음
                             </div>
                           </p>
                         </div>
@@ -306,7 +356,7 @@
       </div>
       <footer class="main-footer">
         <div class="footer-left">
-          Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
+          Copyright &copy; 2023 <div class="bullet"></div> Design By <a>WildBody</a>
         </div>
         <div class="footer-right">
           
