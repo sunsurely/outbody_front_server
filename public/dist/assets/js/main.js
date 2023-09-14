@@ -1,4 +1,4 @@
-const mainPort = '3.39.237.124';
+const mainPort = '52.79.176.121';
 const mainToken = localStorage.getItem('cookie');
 
 if (!mainToken) {
