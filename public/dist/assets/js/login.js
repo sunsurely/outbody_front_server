@@ -1,4 +1,4 @@
-const loginPort = 'outbody';
+const loginPort = 'outbody.store';
 // const loginPort = 'localhost';
 
 $(document).ready(function () {
