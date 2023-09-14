@@ -275,10 +275,6 @@ async function editPassword() {
   const newpw = $('#newpw').val();
   const confirmpw = $('#confirmpw').val();
 
-  // console.log('현재 비밀번호', current);
-  // console.log('새로운 비밀번호', newpw);
-  // console.log('컨펌 비밀번호', confirmpw);
-
   if (current === '') {
     alert('현재 비밀번호를 입력해주세요.');
     return;
@@ -299,7 +295,7 @@ async function editPassword() {
   };
 
   await axios
-    .patch(`http://3.34.131.11:8080/user/me/password`, data, {
+    .patch(`http://${myinfoPort}:3000/user/me/password`, data, {
       headers: {
         Authorization: accessToken,
       },
