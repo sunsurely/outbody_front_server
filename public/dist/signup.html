@@ -1,198 +1,152 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no"
-      name="viewport"
-    />
-    <title>Register &mdash; OutBody</title>
 
-    <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport" />
+  <title>Register &mdash; OutBody</title>
 
-    <!-- axios -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!-- jquery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-    <!-- fontawesome -->
-    <script
-      src="https://kit.fontawesome.com/89de84782a.js"
-      crossorigin="anonymous"
-    ></script>
+  <!-- axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-    <!-- General CSS Files -->
-    <link
-      rel="stylesheet"
-      href="assets/modules/bootstrap/css/bootstrap.min.css"
-    />
-    <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css" />
+  <!-- fontawesome -->
+  <script src="https://kit.fontawesome.com/89de84782a.js" crossorigin="anonymous"></script>
 
-    <!-- CSS Libraries -->
-    <link
-      rel="stylesheet"
-      href="assets/modules/jquery-selectric/selectric.css"
-    />
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="assets/modules/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css" />
 
-    <!-- Template CSS -->
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="stylesheet" href="assets/css/components.css" />
-    <link rel="stylesheet" href="assets/css/signup.css" />
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="assets/modules/jquery-selectric/selectric.css" />
 
-    <!-- Start GA -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/signup.css" />
 
-      gtag('config', 'UA-94034622-3');
-    </script>
-    <!-- /END GA -->
-  </head>
+  <!-- Start GA -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
 
-  <body>
-    <div id="app">
-      <section class="section">
-        <div class="container mt-5">
-          <div class="row">
-            <div
-              class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2"
-            >
-              <div class="login-brand">
-                <img
-                  src="assets/img/Free_Sample_By_Wix.jpg"
-                  alt="logo"
-                  width="100"
-                  class="shadow-light rounded-circle"
-                />
-              </div>
+    gtag('config', 'UA-94034622-3');
+  </script>
+  <!-- /END GA -->
+</head>
 
-              <div class="signUp-box">
-                <div class="card card-primary">
-                  <div class="card-header">
-                    <h4>회원가입</h4>
+<body>
+  <div id="app">
+    <section class="section">
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+            <div class="login-brand">
+              <img src="assets/img/Free_Sample_By_Wix.jpg" alt="logo" width="100" class="shadow-light rounded-circle" />
+            </div>
+
+            <div class="signUp-box">
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h4>회원가입</h4>
+                </div>
+
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="frist_name">이름</label>
+                    <input id="name" type="text" class="form-control" name="name" autofocus />
                   </div>
-
-                  <div class="card-body">
-                    <div class="form-group">
-                      <label for="frist_name">이름</label>
-                      <input
-                        id="name"
-                        type="text"
-                        class="form-control"
-                        name="name"
-                        autofocus
-                      />
-                    </div>
-                    <div class="form-group">
-                      <label for="email">계정(e-mail)</label>
-                      <input
-                        id="email"
-                        type="email"
-                        class="form-control"
-                        name="email"
-                        autofocus
-                      />
-                    </div>
-
-                    <div class="form-group">
-                      <label for="password" class="d-block">비밀번호</label>
-                      <input
-                        id="password"
-                        type="password"
-                        class="form-control pwstrength"
-                        data-indicator="pwindicator"
-                        name="password"
-                      />
-                      <div id="pwindicator" class="pwindicator">
-                        <div class="bar"></div>
-                        <div class="label"></div>
+                  <div class="form-group">
+                    <label for="email">계정(e-mail)</label>
+                    <div class="input">
+                      <div class="input-group mb-3">
+                        <input id="email" type="email" class="form-control" name="email" autofocus />
+                        <div class="input-group-append">
+                          <button class="btn btn-primary" type="button" id="sendEmail">인증번호 발송</button>
+                        </div>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label for="password2" class="d-block"
-                        >비밀번호 확인</label
-                      >
-                      <input
-                        id="confirm_password"
-                        type="password"
-                        class="form-control"
-                        name="password-confirm"
-                      />
-                    </div>
-
-                    <div class="form-group">
-                      <label>성별</label>
-                      <select id="gender" class="form-control selectric">
-                        <option>-- 선택 --</option>
-                        <option>남자</option>
-                        <option>여자</option>
-                      </select>
-                    </div>
-
-                    <div class="form-group">
-                      <label
-                        >생일 (체성분 기반 개인 맞춤형 조언 제공을 위함)</label
-                      >
-                      <input
-                        id="user-birthday"
-                        type="date"
-                        class="form-control datepicker"
-                        placeholder="예: 2000-01-01"
-                      />
-                    </div>
-
-                    <div class="text-muted text-center">
-                      이미 회원가입 하셨나요? <a href="./login.html">로그인</a>
-                    </div>
-
-                    <div class="form-group">
-                      <button
-                        style="margin-bottom: 20px"
-                        type="button"
-                        class="btn btn-primary btn-lg btn-block"
-                        id="signUp_btn"
-                      >
-                        회원가입
-                      </button>
+                  </div>
+                  <div class="form-group">
+                    <label for="email">인증번호</label>
+                    <input id="verifyNumberInput" type="number" class="form-control" name="verifyNumberInput"
+                      autofocus />
+                  </div>
+                  <div class="form-group">
+                    <label for="password" class="d-block">비밀번호</label>
+                    <input id="password" type="password" class="form-control pwstrength" data-indicator="pwindicator"
+                      name="password" />
+                    <div id="pwindicator" class="pwindicator">
+                      <div class="bar"></div>
+                      <div class="label"></div>
                     </div>
                   </div>
-                </div>
+                  <div class="form-group">
+                    <label for="password2" class="d-block">비밀번호 확인</label>
+                    <input id="confirm_password" type="password" class="form-control" name="password-confirm" />
+                  </div>
+                  <div class="form-group">
+                    <label>성별</label>
+                    <select id="gender" class="form-control selectric">
+                      <option>-- 선택 --</option>
+                      <option>남자</option>
+                      <option>여자</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>생일 (체성분 기반 개인 맞춤형 조언 제공을 위함)</label>
+                    <input id="user-birthday" type="date" class="form-control datepicker" placeholder="예: 2000-01-01" />
+                  </div>
 
-                <div class="simple-footer">
-                  Copyright &copy; 2023
-                  <a style="font-weight: bold">WildBody</a>
+                  <div class="text-muted text-center">
+                    이미 회원가입 하셨나요? <a href="./login.html">로그인</a>
+                  </div>
+
+                  <div class="form-group">
+                    <button style="margin-bottom: 20px" type="button" class="btn btn-primary btn-lg btn-block"
+                      id="signUp_btn">
+                      회원가입
+                    </button>
+                  </div>
                 </div>
+              </div>
+
+              <div class="simple-footer">
+                Copyright &copy; 2023
+                <a style="font-weight: bold">WildBody</a>
               </div>
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
+  </div>
 
-    <!-- General JS Scripts -->
-    <script src="assets/modules/jquery.min.js"></script>
-    <script src="assets/modules/popper.js"></script>
-    <script src="assets/modules/tooltip.js"></script>
-    <script src="assets/modules/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
-    <script src="assets/modules/moment.min.js"></script>
-    <script src="assets/js/stisla.js"></script>
+  <!-- General JS Scripts -->
+  <script src="assets/modules/jquery.min.js"></script>
+  <script src="assets/modules/popper.js"></script>
+  <script src="assets/modules/tooltip.js"></script>
+  <script src="assets/modules/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+  <script src="assets/modules/moment.min.js"></script>
+  <script src="assets/js/stisla.js"></script>
 
-    <!-- JS Libraies -->
-    <script src="assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
-    <script src="assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
+  <!-- JS Libraies -->
+  <script src="assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
+  <script src="assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
 
-    <!-- Page Specific JS File -->
-    <script src="assets/js/page/auth-register.js"></script>
+  <!-- Page Specific JS File -->
+  <script src="assets/js/page/auth-register.js"></script>
 
-    <!-- Template JS File -->
-    <script src="assets/js/scripts.js"></script>
-    <script src="assets/js/signup.js"></script>
-  </body>
+  <!-- Template JS File -->
+  <script src="assets/js/scripts.js"></script>
+  <script src="assets/js/signup.js"></script>
+</body>
+
 </html>

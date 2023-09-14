@@ -1,9 +1,9 @@
 const getOneChallengePort = '3.39.237.124';
+// const getOneChallengePort = 'localhost';
 
 const urlParams = new URLSearchParams(window.location.search);
 const challengeId = urlParams.get('id');
 
-// 로그인 여부 확인
 const getAccessToken = localStorage.getItem('cookie');
 
 window.onload = function () {
@@ -289,7 +289,7 @@ $('#send-invitation-button').on('click', async () => {
 
   try {
     const response = await axios.get(
-      `http://3${getOneChallengePort}:3000/user/me/searchEmail/?email=${emailInput}`,
+      `http://${getOneChallengePort}:3000/user/me/searchEmail/?email=${emailInput}`,
       {
         headers: {
           Authorization: getAccessToken,
