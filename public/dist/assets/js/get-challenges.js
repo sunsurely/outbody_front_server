@@ -61,39 +61,41 @@ async function initChallengeList(option) {
           <td>${challenge.startDate} ~ ${challenge.endDate} (${
             challenge.challengeWeek
           }주)</td>
-          <td>
-            <button class="btn btn-primary">
-              오운완 출석<span class="badge badge-transparent">${
+          <td class="challenges-list">
+            <div class="btn challenge-list">
+              오운완 출석<span class="badge challenge-span">${
                 challenge.goalAttend
               }일</span>
-            </button>
-            <button class="btn btn-primary">
-              체중 <span class="badge badge-transparent">-${
+            </div>
+            <div class="btn challenge-list">
+              체중 <span class="badge challenge-span">-${
                 challenge.goalWeight
               }kg</span>
-            </button>
-            <button class="btn btn-primary">
-              골격근량 <span class="badge badge-transparent">+${
+            </div>
+            <div class="btn challenge-list">
+              골격근량 <span class="badge challenge-span">+${
                 challenge.goalMuscle
               }kg</span>
-            </button>
-            <button class="btn btn-primary">
-              체지방률 <span class="badge badge-transparent">-${
+            </div>
+            <div class="btn challenge-list">
+              체지방률 <span class="badge challenge-span">-${
                 challenge.goalFat
               }%</span>
-            </button>
+            </div>
           </td>
           <td>
-            <button class="btn btn-danger">
-              실패 시<span class="badge badge-transparent">-${
+           <div class="challenges-point">
+            <div class="challenge-fail">
+              실패 시<span class="badge fail-span">-${
                 challenge.entryPoint
               }점</span>
-            </button>
-            <button class="btn btn-success">
-              성공 시 최대<span class="badge badge-transparent">+${
+            </div>
+            <div class="challenge-success">
+              성공 시 최대<span class="badge success-span">+${
                 challenge.entryPoint * challenge.userNumber
               }점</span>
-            </button>
+            </div>
+           </div>
           </td>
           <td>${challenge.userNumber} / ${challenge.userNumberLimit}명</td>
           <td>
