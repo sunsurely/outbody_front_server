@@ -6,8 +6,22 @@ async function logout() {
   alert('로그아웃 되었습니다.');
   location.href = 'login.html';
 }
-const logoutButton = document.getElementById('logout-button');
-logoutButton.addEventListener('click', logout);
+$(document).ready(() => {
+  const mainToken = localStorage.getItem('cookie');
+  const expiration = localStorage.getItem('tokenExpiration');
+  const isTokenExpired = new Date().getTime() > expiration;
+
+  const logoutButton = $('#logout-button');
+  $(logoutButton).on('click', () => {
+    console.log('왜 안돼지?');
+    if (!mainToken || isTokenExpired) {
+      console.log('왜 안되지?');
+      location.href = 'login.html';
+    } else {
+      logout();
+    }
+  });
+});
 
 // ChartJS
 if (window.Chart) {

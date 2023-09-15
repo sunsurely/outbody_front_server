@@ -11,8 +11,12 @@ const isTokenExpired = new Date().getTime() > expiration;
 if (!rankToken || isTokenExpired) {
   localStorage.setItem('cookie', '');
   localStorage.setItem('tokenExpiration', '');
+  const inoutBtn = $('#logout-button');
+  $(inoutBtn).text('Login');
   alert('로그인이 필요한 기능입니다.');
-  location.href = 'login.html';
+} else {
+  const inoutBtn = $('#logout-button');
+  $(inoutBtn).text('Logout');
 }
 
 $(document).ready(function () {
