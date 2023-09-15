@@ -6,7 +6,8 @@ const isTokenExpired = new Date().getTime() > expiration;
 if (!mainToken || isTokenExpired) {
   localStorage.setItem('cookie', '');
   localStorage.setItem('tokenExpiration', '');
-  const InoutBtn = $('.inout-btn').text('Login');
+  const inoutBtn = $('.inout-btn');
+  $(inoutBtn).text('Login');
   alert('로그인이 필요한 기능입니다.');
 }
 
