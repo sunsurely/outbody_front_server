@@ -8,6 +8,7 @@ if (!mainToken || isTokenExpired) {
   localStorage.setItem('tokenExpiration', '');
   const inoutBtn = $('#logout-button');
   $(inoutBtn).text('Login');
+  $('.profile-button').css('display', 'none');
   setTimeout(() => {
     alert('로그인이 필요한 기능입니다.');
   }, 500);
