@@ -1,4 +1,4 @@
-const getOneChallengePort = '3.35.140.25';
+const getOneChallengePort = 'sunsurely.shop';
 // const getOneChallengePort = 'localhost';
 
 const urlParams = new URLSearchParams(window.location.search);

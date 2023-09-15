@@ -1,4 +1,4 @@
-const createChallengePort = '3.35.140.25';
+const createChallengePort = 'sunsurely.shop';
 // const createChallengePort = 'localhost';
 
 const createChallengeToken = localStorage.getItem('cookie');
@@ -112,7 +112,7 @@ async function createChallenge() {
   };
 
   await axios
-    .post(`http://${createChallengePort}:3000/challenge`, data, {
+    .post(`https://${createChallengePort}/challenge`, data, {
       headers: {
         Authorization: createChallengeToken,
       },

@@ -1,4 +1,4 @@
-const userInfoPort = '3.35.140.25';
+const userInfoPort = 'sunsurely.shop';
 
 const userInfoParams = new URLSearchParams(window.location.search);
 const userId = userInfoParams.get('id');
@@ -22,7 +22,7 @@ $(document).ready(function () {
 async function userPage() {
   try {
     const { data } = await axios.get(
-      `http://${userInfoPort}:3000/user/${userId}`,
+      `https://${userInfoPort}:3000/user/${userId}`,
       {
         headers: {
           Authorization: userInfoToken,
@@ -34,7 +34,7 @@ async function userPage() {
     $('#profile-image').attr(
       'src',
       user.imgUrl
-        ? `https://inflearn-nest-cat.s3.amazonaws.com/${user.imgUrl}`
+        ? `http://inflearn-nest-cat.s3.amazonaws.com/${user.imgUrl}`
         : 'assets/img/avatar/avatar-1.png',
     );
     $('#user-point').text(user.point);
@@ -44,7 +44,7 @@ async function userPage() {
     $('#descriptionTag').text(descriptionText);
 
     const followData = await axios.get(
-      `http://${userInfoPort}:3000/follow/${userId}/isFollowed`,
+      `https://${userInfoPort}:3000/follow/${userId}/isFollowed`,
       {
         headers: {
           Authorization: userInfoToken,
@@ -60,7 +60,7 @@ async function userPage() {
       if ($(this).text() === 'follow') {
         try {
           await axios.post(
-            `http://${userInfoPort}:3000/follow/${userId}/request`,
+            `https://${userInfoPort}:3000/follow/${userId}/request`,
             {},
             {
               headers: { Authorization: userInfoToken },
@@ -77,7 +77,7 @@ async function userPage() {
       }
 
       try {
-        await axios.delete(`http://${userInfoPort}:3000/follow/${userId}`, {
+        await axios.delete(`https://${userInfoPort}:3000/follow/${userId}`, {
           headers: {
             Authorization: userInfoToken,
           },
@@ -99,7 +99,7 @@ async function userPage() {
     }
     if (challengeId) {
       const challengeData = await axios.get(
-        `http://${userInfoPort}:3000/challenge/${challengeId}`,
+        `https://${userInfoPort}:3000/challenge/${challengeId}`,
         {
           headers: {
             Authorization: userInfoToken,

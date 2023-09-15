@@ -1,4 +1,4 @@
-const rankPort = '3.35.140.25';
+const rankPort = 'sunsurely.shop';
 
 const urlParams = new URLSearchParams(window.location.search);
 const challengeId = urlParams.get('id');
@@ -229,7 +229,7 @@ async function totalrankPage(page, pageSize) {
 
 async function getTotaldata(page, pageSize) {
   const data = await axios.get(
-    `http://${rankPort}:3000/rank/total/page/?page=${page}&pageSize=${pageSize}`,
+    `https://${rankPort}/rank/total/page/?page=${page}&pageSize=${pageSize}`,
     {
       headers: {
         Authorization: ` ${rankToken}`,
@@ -443,7 +443,7 @@ async function friendRankPage(page, pageSize) {
 
 async function getFriendData(page, pageSize) {
   const data = await axios.get(
-    `http://${rankPort}:3000/rank/followings/page/?page=${page}&pageSize=${pageSize}`,
+    `https://${rankPort}/rank/followings/page/?page=${page}&pageSize=${pageSize}`,
     {
       headers: {
         Authorization: ` ${rankToken}`,

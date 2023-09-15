@@ -1,4 +1,4 @@
-const signupPort = '3.35.140.25';
+const signupPort = 'sunsurely.shop';
 // const signupPort = 'localhost';
 
 // 인증번호 발송 (재용)
@@ -12,7 +12,7 @@ async function sendEmail(email) {
     return;
   }
   await axios
-    .post(`http://${signupPort}:3000/user/signup/email`, { email })
+    .post(`https://${signupPort}/user/signup/email`, { email })
     .then((response) => {
       if (response.data.success === true) {
         alert('인증번호가 발송되었습니다.');
@@ -63,7 +63,7 @@ const signUp = async () => {
       return;
     }
 
-    await axios.post(`http://${signupPort}:3000/user/signup`, {
+    await axios.post(`https://${signupPort}/user/signup`, {
       name,
       email,
       verifyNumberInput: parseInt(verifyNumberInput),
