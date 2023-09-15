@@ -99,92 +99,97 @@ async function getChallengeDetail() {
 
       const challengeDetail = document.querySelector('#challenge-detail');
       challengeDetail.innerHTML = `<div class="card card-primary">
-          <div class="card-header">
-            <h4>${challenge.title}</h4>
-            <div class="card-header-action">
-              ${
-                result.isChallenger
-                  ? result.isThis
-                    ? result.isHost
-                      ? ''
-                      : `<a id="leave-challenge" class="btn btn-primary" style="color: white;">도전 퇴장</a>`
-                    : ''
-                  : `<a id="enter-challenge" class="btn btn-primary" style="color: white;">도전 입장</a>`
-              }
-              <a class="btn btn-secondary" style="color: white;">${
-                challenge.userNumber
-              } / ${challenge.userNumberLimit}명</a>
-              ${
-                result.isHost
-                  ? `<a id="delete-challenge" class="btn btn-danger" style="color: white;">삭제</a>`
-                  : ''
-              }
+      <div class="card-header">
+        <h4>${challenge.title}</h4>
+        <div class="card-header-action">
+          ${
+            result.isChallenger
+              ? result.isThis
+                ? result.isHost
+                  ? ''
+                  : `<a id="leave-challenge" class="btn btn-primary" style="color: white;">도전 퇴장</a>`
+                : ''
+              : `<a id="enter-challenge" class="btn btn-primary" style="color: white;">도전 입장</a>`
+          }
+          <a class="challenge-user" style="color: white;">${
+            challenge.userNumber
+          } / ${challenge.userNumberLimit}명</a>
+          ${
+            result.isHost
+              ? `<a id="delete-challenge" class="btn btn-danger" style="color: white;">삭제</a>`
+              : ''
+          }
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="section-title mt-0">설명</div>
+        <p>${challenge.description}</p>
+        <div class="section-title mt-0" style="margin-bottom: 20px;">기간</div>          
+        
+        <div class="challenges-date">
+          <div class="challenge-date" style="margin-bottom: 20px;">시작일
+            <span class="badge span-css">${challenge.startDate}</span>
+            &nbsp종료일 <span class="badge span-css">${
+              challenge.endDate
+            }</span>&nbsp
+          </div>
+          <div class="challenge-date" style="margin-bottom: 20px;">
+            도전 종료까지 <span id="countdown" class="badge span-css"></span>&nbsp남음
+          </div>
+        </div>
+
+        <div class="section-title mt-0" style="margin-bottom: 20px;">목표</div>
+        <div class="challenges-list">
+          <div class="challenge-list" style="margin-bottom: 20px;">
+            오운완 출석<span class="badge span-css">${
+              challenge.goalAttend
+            }일</span>
+          </div>
+          <div class="challenge-list" style="margin-bottom: 20px;">
+            체중 <span class="badge span-css">-${challenge.goalWeight}kg</span>
+          </div>
+          <div class="challenge-list" style="margin-bottom: 20px;">
+            골격근량 <span class="badge span-css">+${
+              challenge.goalMuscle
+            }kg</span>
+          </div>
+          <div class="challenge-list" style="margin-bottom: 20px;">
+            체지방률 <span class="badge span-css">-${challenge.goalFat}%</span>
+          </div>
+        </div>
+
+        <div class="section-title mt-0" style="margin-bottom: 20px;">점수</div>
+        <div class="success-box">
+          <div class="challenge-fail" style="margin-bottom: 10px;">
+            실패 시<span class="badge fail-span">-${
+              challenge.entryPoint
+            }점</span>
+          </div>
+          <div class="challenge-success" style="margin-bottom: 10px;">
+            성공 시 최대<span class="badge success-span">+${
+              challenge.userNumber * challenge.entryPoint
+            }점</span>
+          </div>
+        </div>
+      
+        </div>
+
+      <div class="card-footer bg-whitesmoke">
+        <ul class="list-unstyled list-unstyled-border" style="margin-top: 20px;">
+          <li class="media">
+            <img alt="image" style="border-radius:50%; width:50px; height:50px; margin-right: 15px;" src="${profileImage}">
+            <div class="media-body">
+              <div class="mt-0 mb-1 font-weight-bold">${
+                challenge.userName
+              }</div>
+              <div class="font-1000-bold"><i class="fas fa-circle"></i> ${
+                challenge.userPoint
+              }점</div>
             </div>
-          </div>
-          <div class="card-body">
-            <div class="section-title mt-0">설명</div>
-            <p>${challenge.description}</p>
-            <div class="section-title mt-0" style="margin-bottom: 20px;">기간</div>          
-            <button class="btn btn-primary" style="margin-bottom: 20px;">시작일
-              <span class="badge badge-transparent">${
-                challenge.startDate
-              }</span>
-              &nbsp종료일 <span class="badge badge-transparent">${
-                challenge.endDate
-              }</span>&nbsp
-            </button>
-            <button class="btn btn-primary" style="margin-bottom: 20px;">
-              도전 종료까지 <span id="countdown" class="badge badge-transparent"></span>&nbsp남음
-            </button>
-            <div class="section-title mt-0" style="margin-bottom: 20px;">목표</div>
-            <button class="btn btn-primary" style="margin-bottom: 20px;">
-              오운완 출석<span class="badge badge-transparent">${
-                challenge.goalAttend
-              }일</span>
-            </button>
-            <button class="btn btn-primary" style="margin-bottom: 20px;">
-              체중 <span class="badge badge-transparent">-${
-                challenge.goalWeight
-              }kg</span>
-            </button>
-            <button class="btn btn-primary" style="margin-bottom: 20px;">
-              골격근량 <span class="badge badge-transparent">+${
-                challenge.goalMuscle
-              }kg</span>
-            </button>
-            <button class="btn btn-primary" style="margin-bottom: 20px;">
-              체지방률 <span class="badge badge-transparent">-${
-                challenge.goalFat
-              }%</span>
-            </button>
-            <div class="section-title mt-0" style="margin-bottom: 20px;">점수</div>
-            <button class="btn btn-danger" style="margin-bottom: 10px;">
-              실패 시<span class="badge badge-transparent">-${
-                challenge.entryPoint
-              }점</span>
-            </button>
-            <button class="btn btn-success" style="margin-bottom: 10px;">
-              성공 시 최대<span class="badge badge-transparent">+${
-                challenge.userNumber * challenge.entryPoint
-              }점</span>
-            </button>
-          </div>
-          <div class="card-footer bg-whitesmoke">
-            <ul class="list-unstyled list-unstyled-border" style="margin-top: 20px;">
-              <li class="media">
-                <img alt="image" style="border-radius:50%; width:50px; height:50px; margin-right: 15px;" src="${profileImage}">
-                <div class="media-body">
-                  <div class="mt-0 mb-1 font-weight-bold">${
-                    challenge.userName
-                  }</div>
-                  <div class="font-1000-bold"><i class="fas fa-circle"></i> ${
-                    challenge.userPoint
-                  }점</div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>`;
+          </li>
+        </ul>
+      </div>
+    </div>`;
     })
     .catch((error) => {
       alert(error.response.data.message);
