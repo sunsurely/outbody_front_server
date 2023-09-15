@@ -12,11 +12,11 @@ if (!rankToken || isTokenExpired) {
   localStorage.setItem('cookie', '');
   localStorage.setItem('tokenExpiration', '');
   const inoutBtn = $('#logout-button');
-  $(inoutBtn).text('Login');
+  $(inoutBtn).html('<i class="fas fa-sign-out-alt"></i>Login');
   alert('로그인이 필요한 기능입니다.');
 } else {
   const inoutBtn = $('#logout-button');
-  $(inoutBtn).text('Logout');
+  $(inoutBtn).html('<i class="fas fa-sign-out-alt"></i> Logout');
 }
 
 $(document).ready(function () {
