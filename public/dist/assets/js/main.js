@@ -6,6 +6,11 @@ const isTokenExpired = new Date().getTime() > expiration;
 if (!mainToken || isTokenExpired) {
   localStorage.setItem('cookie', '');
   localStorage.setItem('tokenExpiration', '');
+  $('#createRecord ').css('visibility', 'hidden');
+  $('.daterange-btn').css('visibility', 'hidden');
+  $('.place-holder-record').text(
+    '로그인 후 체성분 관리 기능을 이용할 수 있습니다.',
+  );
   const inoutBtn = $('#logout-button');
   $(inoutBtn).text('Login');
   $('.profile-button').css('display', 'none');
