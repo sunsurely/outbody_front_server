@@ -1,4 +1,4 @@
-const rankPort = '52.79.176.121';
+const rankPort = 'sunsurely.shop';
 
 const urlParams = new URLSearchParams(window.location.search);
 const challengeId = urlParams.get('id');
@@ -11,8 +11,15 @@ const isTokenExpired = new Date().getTime() > expiration;
 if (!rankToken || isTokenExpired) {
   localStorage.setItem('cookie', '');
   localStorage.setItem('tokenExpiration', '');
-  alert('로그인이 필요한 기능입니다.');
-  location.href = 'login.html';
+  const inoutBtn = $('#logout-button');
+  $('.profile-button').css('display', 'none');
+  $(inoutBtn).text('Login');
+  setTimeout(() => {
+    alert('로그인이 필요한 기능입니다.');
+  }, 500);
+} else {
+  const inoutBtn = $('#logout-button');
+  $(inoutBtn).html('<i class="fas fa-sign-out-alt"></i> Logout');
 }
 
 $(document).ready(function () {
@@ -229,7 +236,7 @@ async function totalrankPage(page, pageSize) {
 
 async function getTotaldata(page, pageSize) {
   const data = await axios.get(
-    `http://${rankPort}:3000/rank/total/page/?page=${page}&pageSize=${pageSize}`,
+    `https://${rankPort}/rank/total/page/?page=${page}&pageSize=${pageSize}`,
     {
       headers: {
         Authorization: ` ${rankToken}`,
@@ -443,7 +450,7 @@ async function friendRankPage(page, pageSize) {
 
 async function getFriendData(page, pageSize) {
   const data = await axios.get(
-    `http://${rankPort}:3000/rank/followings/page/?page=${page}&pageSize=${pageSize}`,
+    `https://${rankPort}/rank/followings/page/?page=${page}&pageSize=${pageSize}`,
     {
       headers: {
         Authorization: ` ${rankToken}`,

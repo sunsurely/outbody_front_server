@@ -1,4 +1,4 @@
-const adminPort = '52.79.176.121';
+const adminPort = 'sunsurely.shop';
 
 const adminToken = localStorage.getItem('cookie');
 if (!adminToken) {
@@ -27,7 +27,7 @@ $('#findBlackList').on('click', async () => {
   $(searchedUser).html('');
   try {
     const response = await axios.get(
-      `http://${adminPort}:3000/user/me/searchEmail/?email=${email}`,
+      `https://${adminPort}/user/me/searchEmail/?email=${email}`,
       {
         headers: {
           Authorization: adminToken,
@@ -44,7 +44,7 @@ $('#findBlackList').on('click', async () => {
           <div id=${userId}>
             <img class="rounded-circle" src=${
               user.imgUrl
-                ? `https://inflearn-nest-cat.s3.amazonaws.com/${user.imgUrl}`
+                ? `httpss://inflearn-nest-cat.s3.amazonaws.com/${user.imgUrl}`
                 : 'assets/img/avatar/avatar-1.png'
             } style="width:50px; margin-right:10px">
             <span>${user.name}(${userEmail})</span>
@@ -62,7 +62,7 @@ $('#findBlackList').on('click', async () => {
       }
       const data = { email, description };
       try {
-        await axios.post(`http://${adminPort}:3000/blacklist`, data, {
+        await axios.post(`https://${adminPort}:3000/blacklist`, data, {
           headers: { Authorization: adminToken },
         });
         alert(
@@ -88,7 +88,7 @@ let totalPages = 0;
 // 신고기록 목록 조회 (페이지네이션)
 async function recordPage(page, pageSize) {
   await axios
-    .get(`http://${adminPort}:3000/report?page=${page}&pageSize=${pageSize}`, {
+    .get(`https://${adminPort}:3000/report?page=${page}&pageSize=${pageSize}`, {
       headers: {
         Authorization: adminToken,
       },
@@ -214,7 +214,7 @@ async function recordPage(page, pageSize) {
 async function getReports(page, pageSize) {
   try {
     const { data } = await axios.get(
-      `http://${adminPort}:3000/report?page=${page}&pageSize=${pageSize}`,
+      `https://${adminPort}:3000/report?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: adminToken,
@@ -276,7 +276,7 @@ $(document).on('click', '.blacklist-link', function (event) {
         const description = $('#blackdescription').val();
         const data = { description };
 
-        axios.post(`http://${adminPort}:3000/blacklist/${userId}`, data, {
+        axios.post(`https://${adminPort}:3000/blacklist/${userId}`, data, {
           headers: { Authorization: adminToken },
         });
         alert(`해당 회원을 영구 정지 회원으로 등록했습니다.`);
@@ -297,7 +297,7 @@ $(document).on('click', '.blacklist-link', function (event) {
 async function checkAdmin() {
   try {
     const { data } = await axios.get(
-      `http://${adminPort}:3000/blacklist/permision`,
+      `https://${adminPort}:3000/blacklist/permision`,
       {
         headers: {
           Authorization: adminToken,

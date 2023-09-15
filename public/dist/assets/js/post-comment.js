@@ -1,4 +1,4 @@
-const postCommentPort = '52.79.176.121';
+const postCommentPort = 'sunsurely.shop';
 
 const commentParams = new URLSearchParams(window.location.search);
 const challengeIdForComment = commentParams.get('cid');
@@ -16,7 +16,7 @@ $(document).ready(function () {
 const getOnePost = async () => {
   try {
     const response = await axios.get(
-      `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/detail`,
+      `https://${postCommentPort}/challenge/${challengeIdForComment}/post/${postId}/detail`,
       {
         headers: {
           Authorization: postCommentToken,
@@ -66,7 +66,7 @@ const getOnePost = async () => {
 const getComment = async () => {
   try {
     const response = await axios.get(
-      `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
+      `https://${postCommentPort}/challenge/${challengeIdForComment}/post/${postId}/comment`,
       {
         headers: {
           Authorization: postCommentToken,
@@ -125,7 +125,7 @@ const createComment = async () => {
     }
 
     await axios.post(
-      `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
+      `https://${postCommentPort}/challenge/${challengeIdForComment}/post/${postId}/comment`,
       { comment: $('#comment_input').val() },
       {
         headers: {
@@ -158,7 +158,7 @@ const updateComment = async (commentId) => {
     }
 
     await axios.patch(
-      `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
+      `https://${postCommentPort}/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
       { comment: $('#updateCmt_input').val() },
       {
         headers: {
@@ -181,7 +181,7 @@ $(document).on('click', '#updateCmt_btn', function () {
 const deleteComment = async (commentId) => {
   try {
     await axios.delete(
-      `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
+      `https://${postCommentPort}/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
       {
         headers: {
           Authorization: postCommentToken,
@@ -227,7 +227,7 @@ const reportComment = async (commentId) => {
     }
 
     await axios.post(
-      `http://${postCommentPort}:3000/report/${commentId}`,
+      `https://${postCommentPort}/report/${commentId}`,
       { description: $('.report_input').val() },
       {
         headers: {
@@ -255,7 +255,7 @@ const addLike = async () => {
     likeButton.on('click', async function () {
       if (!isLiked) {
         const response = await axios.post(
-          `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/like`,
+          `https://${postCommentPort}/challenge/${challengeIdForComment}/post/${postId}/like`,
           {
             headers: {
               Authorization: postCommentToken,
@@ -280,7 +280,7 @@ const unLike = async (likeId) => {
     try {
       if (isLiked) {
         const response = await axios.delete(
-          `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/like/${likeId}`,
+          `https://${postCommentPort}/challenge/${challengeIdForComment}/post/${postId}/like/${likeId}`,
           {
             headers: {
               Authorization: postCommentToken,
@@ -303,7 +303,7 @@ const unLike = async (likeId) => {
 const getLikes = async () => {
   try {
     const response = await axios.get(
-      `http://${postCommentPort}:3000/challenge/${challengeIdForComment}/post/${postId}/like`,
+      `https://${postCommentPort}/challenge/${challengeIdForComment}/post/${postId}/like`,
       {
         headers: {
           Authorization: postCommentToken,

@@ -1,4 +1,4 @@
-const mainPort = '52.79.176.121';
+const mainPort = 'sunsurely.shop';
 const mainToken = localStorage.getItem('cookie');
 const expiration = localStorage.getItem('tokenExpiration');
 const isTokenExpired = new Date().getTime() > expiration;
@@ -6,8 +6,20 @@ const isTokenExpired = new Date().getTime() > expiration;
 if (!mainToken || isTokenExpired) {
   localStorage.setItem('cookie', '');
   localStorage.setItem('tokenExpiration', '');
-  alert('로그인이 필요한 기능입니다.');
-  location.href = 'login.html';
+  $('#createRecord ').css('visibility', 'hidden');
+  $('.daterange-btn').css('visibility', 'hidden');
+  $('.place-holder-record').text(
+    '로그인 후 체성분 관리 기능을 이용할 수 있습니다.',
+  );
+  const inoutBtn = $('#logout-button');
+  $(inoutBtn).text('Login');
+  $('.profile-button').css('display', 'none');
+  setTimeout(() => {
+    alert('로그인이 필요한 기능입니다.');
+  }, 500);
+} else {
+  const inoutBtn = $('#logout-button');
+  $(inoutBtn).html('<i class="fas fa-sign-out-alt"></i> Logout');
 }
 
 let nowPage = 1;
@@ -105,7 +117,7 @@ async function initializeChart() {
 async function getBodyResults() {
   try {
     const { data } = await axios.get(
-      `http://${mainPort}:3000/record/result/detail`,
+      `https://${mainPort}/record/result/detail`,
       {
         headers: {
           Authorization: mainToken,
@@ -553,7 +565,7 @@ $('.regist-record').click(async () => {
   const data = { height, weight, fat, muscle, bmr };
 
   try {
-    await axios.post(`http://${mainPort}:3000/record`, data, {
+    await axios.post(`https://${mainPort}/record`, data, {
       headers: {
         Authorization: `${mainToken}`,
       },
@@ -569,7 +581,7 @@ $('.regist-record').click(async () => {
 async function getRecordData(page, pageSize) {
   try {
     const data = await axios(
-      `http://${mainPort}:3000/record/page/?page=${page}&pageSize=${pageSize}`,
+      `https://${mainPort}/record/page/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: mainToken,
@@ -685,7 +697,7 @@ function setRecordList(records) {
 
 async function getDateRangeRecord(startDate, endDate, page) {
   const { data } = await axios.get(
-    `http://${mainPort}:3000/record/date/period/page/?page=${page}&pageSize=10&start=${startDate}&end=${endDate}`,
+    `https://${mainPort}/record/date/period/page/?page=${page}&pageSize=10&start=${startDate}&end=${endDate}`,
 
     {
       headers: {

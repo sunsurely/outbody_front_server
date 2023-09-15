@@ -1,4 +1,4 @@
-const getPostPort = '52.79.176.121';
+const getPostPort = 'sunsurely.shop';
 
 const postParams = new URLSearchParams(window.location.search);
 const challengeId = postParams.get('id');
@@ -16,7 +16,7 @@ $(document).ready(function () {
 const getPosts = async (page, pageSize) => {
   try {
     const response = await axios.get(
-      `http://${getPostPort}:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
+      `https://${getPostPort}/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: getPostToken,
@@ -191,7 +191,7 @@ const getPosts = async (page, pageSize) => {
 
   async function getTotalpost(page, pageSize) {
     const data = await axios.get(
-      `http://${getPostPort}:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
+      `https://${getPostPort}/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: ` ${getPostToken}`,
@@ -278,16 +278,12 @@ const createPost = async () => {
     formData.append('description', description);
 
     await axios
-      .post(
-        `http://${getPostPort}:3000/challenge/${challengeId}/post`,
-        formData,
-        {
-          headers: {
-            Authorization: getPostToken,
-            'Content-Type': 'multipart/form-data',
-          },
+      .post(`https://${getPostPort}/challenge/${challengeId}/post`, formData, {
+        headers: {
+          Authorization: getPostToken,
+          'Content-Type': 'multipart/form-data',
         },
-      )
+      })
       .then((response) => {
         alert('오운완 생성이 완료되었습니다.');
         location.reload();
@@ -321,7 +317,7 @@ image.addEventListener('change', (event) => {
 const deletePost = async (postId) => {
   try {
     await axios.delete(
-      `http://${getPostPort}:3000/challenge/${challengeId}/post/${postId}`,
+      `https://${getPostPort}/challenge/${challengeId}/post/${postId}`,
       {
         headers: {
           Authorization: getPostToken,

@@ -1,0 +1,95 @@
+.challenge-user {
+  display: inline-block;
+  background-color: #cdd3d8;
+  color: white;
+  padding-left: 13px;
+  padding-right: 13px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 30px;
+}
+
+.challenges-date {
+  display: flex;
+}
+
+.challenge-date {
+  background-color: #6777ef;
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  margin-right: 5px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.span-css {
+  background-color: #96a2ff;
+  color: white;
+  margin: 3px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.challenges-list {
+  display: flex;
+}
+
+.challenge-list {
+  background-color: #6777ef;
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  margin-right: 5px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.success-box {
+  display: flex;
+}
+
+.challenge-fail {
+  background-color: #fc544b;
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  margin-right: 5px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.fail-span {
+  background-color: #ff8079;
+  color: white;
+  margin: 3px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.challenge-success {
+  background-color: #63ed7a;
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  margin-right: 5px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.success-span {
+  background-color: #8cff9f;
+  color: white;
+  margin: 3px;
+  font-size: 12px;
+  font-weight: 600;
+}

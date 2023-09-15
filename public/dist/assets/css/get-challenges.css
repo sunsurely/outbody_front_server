@@ -1,0 +1,48 @@
+.challenges-list {
+  display: flex;
+}
+
+.challenge-list {
+  background-color: #6777ef;
+  color: white;
+  margin: 3px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.challenge-span {
+  background-color: #96a2ff;
+  color: white;
+}
+
+.challenges-point {
+  display: flex;
+}
+
+.challenge-fail {
+  background-color: #fc544b;
+  color: white;
+  margin: 3px;
+  border-radius: 5px;
+  text-align: center;
+  padding: 3px;
+}
+
+.challenge-success {
+  background-color: #63ed7a;
+  color: white;
+  margin: 3px;
+  border-radius: 5px;
+  text-align: center;
+  padding: 3px;
+}
+
+.fail-span {
+  background-color: #ff8079;
+  color: white;
+}
+
+.success-span {
+  background-color: #8cff9f;
+  color: white;
+}
