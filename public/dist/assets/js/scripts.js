@@ -7,15 +7,13 @@ async function logout() {
   location.href = 'login.html';
 }
 $(document).ready(() => {
-  const mainToken = localStorage.getItem('cookie');
+  const scriptToken = localStorage.getItem('cookie');
   const expiration = localStorage.getItem('tokenExpiration');
   const isTokenExpired = new Date().getTime() > expiration;
 
   const logoutButton = $('#logout-button');
   $(logoutButton).on('click', () => {
-    console.log('왜 안돼지?');
-    if (!mainToken || isTokenExpired) {
-      console.log('왜 안되지?');
+    if (!scriptToken || isTokenExpired) {
       location.href = 'login.html';
     } else {
       logout();

@@ -8,7 +8,9 @@ if (!mainToken || isTokenExpired) {
   localStorage.setItem('tokenExpiration', '');
   const inoutBtn = $('#logout-button');
   $(inoutBtn).text('Login');
-  alert('로그인이 필요한 기능입니다.');
+  setTimeout(() => {
+    alert('로그인이 필요한 기능입니다.');
+  }, 500);
 } else {
   const inoutBtn = $('#logout-button');
   $(inoutBtn).html('<i class="fas fa-sign-out-alt"></i> Logout');
