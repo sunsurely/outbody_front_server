@@ -6,8 +6,8 @@ const isTokenExpired = new Date().getTime() > expiration;
 if (!mainToken || isTokenExpired) {
   localStorage.setItem('cookie', '');
   localStorage.setItem('tokenExpiration', '');
+  const InoutBtn = $('.inout-btn').text('Login');
   alert('로그인이 필요한 기능입니다.');
-  location.href = 'login.html';
 }
 
 let nowPage = 1;
