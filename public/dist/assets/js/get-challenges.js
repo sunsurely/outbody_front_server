@@ -26,14 +26,11 @@ filterApplyButton.addEventListener('click', () => {
 async function initChallengeList(option) {
   let nowPage = 1;
   await axios
-    .get(
-      `http://${getChallengesPort}:3000/challenge?filter=${option}&page=${1}`,
-      {
-        headers: {
-          Authorization: getChallengesToken,
-        },
+    .get(`https://${getChallengesPort}/challenge?filter=${option}&page=${1}`, {
+      headers: {
+        Authorization: getChallengesToken,
       },
-    )
+    })
     .then((response) => {
       const challengeTable = document.querySelector('#challenge-table');
       challengeTable.innerHTML = `<tr>
@@ -469,7 +466,7 @@ async function initChallengeList(option) {
 async function getChallenges(option, page) {
   try {
     const { data } = await axios.get(
-      `http://${getChallengesPort}:3000/challenge?filter=${option}&page=${page}`,
+      `https://${getChallengesPort}/challenge?filter=${option}&page=${page}`,
       {
         headers: {
           Authorization: getChallengesToken,
