@@ -70,22 +70,22 @@ async function initChallengeList(option) {
             challenge.challengeWeek
           }주)</td>
           <td class="challenges-list">
-            <div class="btn challenge-list">
+            <div class="challenge-list">
               오운완 출석<span class="badge challenge-span">${
                 challenge.goalAttend
               }일</span>
             </div>
-            <div class="btn challenge-list">
+            <div class="challenge-list">
               체중 <span class="badge challenge-span">-${
                 challenge.goalWeight
               }kg</span>
             </div>
-            <div class="btn challenge-list">
+            <div class="challenge-list">
               골격근량 <span class="badge challenge-span">+${
                 challenge.goalMuscle
               }kg</span>
             </div>
-            <div class="btn challenge-list">
+            <div class="challenge-list">
               체지방률 <span class="badge challenge-span">-${
                 challenge.goalFat
               }%</span>

@@ -127,7 +127,7 @@ async function getChallengeDetail() {
         <div class="section-title mt-0" style="margin-bottom: 20px;">기간</div>          
         
         <div class="challenges-date">
-          <div class="challenges-date" style="margin-bottom: 20px;">시작일
+          <div class="challenge-date" style="margin-bottom: 20px;">시작일
             <span class="badge span-css">${challenge.startDate}</span>
             &nbsp종료일 <span class="badge span-css">${
               challenge.endDate
