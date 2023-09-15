@@ -23,7 +23,7 @@ window.onload = function () {
 async function checkUserIsInChallenge() {
   try {
     const response = await axios.get(
-      `http://${getOneChallengePort}:3000/challenge/${challengeId}/userState`,
+      `https://${getOneChallengePort}/challenge/${challengeId}/userState`,
       {
         headers: {
           Authorization: getAccessToken,
@@ -41,7 +41,7 @@ async function checkUserIsInChallenge() {
 async function getChallengeDetail() {
   const result = await checkUserIsInChallenge();
   await axios
-    .get(`http://${getOneChallengePort}:3000/challenge/${challengeId}`, {
+    .get(`https://${getOneChallengePort}/challenge/${challengeId}`, {
       headers: {
         Authorization: getAccessToken,
       },
@@ -189,7 +189,7 @@ async function getChallengers() {
   const result = await checkUserIsInChallenge();
   await axios
     .get(
-      `http://${getOneChallengePort}:3000/challenge/${challengeId}/challengers`,
+      `https://${getOneChallengePort}/challenge/${challengeId}/challengers`,
       {
         headers: {
           Authorization: getAccessToken,
@@ -248,7 +248,7 @@ document.addEventListener('click', async (event) => {
   if (target.matches('#enter-challenge')) {
     await axios
       .post(
-        `http://${getOneChallengePort}:3000/challenge/${challengeId}/enter`,
+        `https://${getOneChallengePort}/challenge/${challengeId}/enter`,
         null,
         {
           headers: {
@@ -278,7 +278,7 @@ document.addEventListener('click', async (event) => {
     if (leaveConfirm) {
       await axios
         .delete(
-          `http://${getOneChallengePort}:3000/challenge/${challengeId}/leave`,
+          `https://${getOneChallengePort}/challenge/${challengeId}/leave`,
           {
             headers: {
               Authorization: getAccessToken,
@@ -307,7 +307,7 @@ document.addEventListener('click', async (event) => {
 
     if (deleteConfirm) {
       await axios
-        .delete(`http://${getOneChallengePort}:3000/challenge/${challengeId}`, {
+        .delete(`https://${getOneChallengePort}/challenge/${challengeId}`, {
           headers: {
             Authorization: getAccessToken,
           },
@@ -334,7 +334,7 @@ $('#send-invitation-button').on('click', async () => {
 
   try {
     userResponse = await axios.get(
-      `http://${getOneChallengePort}:3000/user/me/searchEmail/?email=${emailInput}`,
+      `https://${getOneChallengePort}/user/me/searchEmail/?email=${emailInput}`,
       {
         headers: {
           Authorization: getAccessToken,
@@ -349,7 +349,7 @@ $('#send-invitation-button').on('click', async () => {
 
   try {
     followResponse = await axios.get(
-      `http://${getOneChallengePort}:3000/follow/${friend.id}/isFollowed`,
+      `https://${getOneChallengePort}/follow/${friend.id}/isFollowed`,
       {
         headers: {
           Authorization: getAccessToken,
@@ -386,7 +386,7 @@ $('#send-invitation-button').on('click', async () => {
 
     await axios
       .post(
-        `http://${getOneChallengePort}:3000/challenge/${challengeId}/invite`,
+        `https://${getOneChallengePort}/challenge/${challengeId}/invite`,
         data,
         {
           headers: {

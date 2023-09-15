@@ -21,14 +21,11 @@ $(document).ready(function () {
 // 사용자 정보조회
 async function userPage() {
   try {
-    const { data } = await axios.get(
-      `https://${userInfoPort}:3000/user/${userId}`,
-      {
-        headers: {
-          Authorization: userInfoToken,
-        },
+    const { data } = await axios.get(`https://${userInfoPort}/user/${userId}`, {
+      headers: {
+        Authorization: userInfoToken,
       },
-    );
+    });
     const user = data.data;
 
     $('#profile-image').attr(
@@ -44,7 +41,7 @@ async function userPage() {
     $('#descriptionTag').text(descriptionText);
 
     const followData = await axios.get(
-      `https://${userInfoPort}:3000/follow/${userId}/isFollowed`,
+      `https://${userInfoPort}/follow/${userId}/isFollowed`,
       {
         headers: {
           Authorization: userInfoToken,
@@ -60,7 +57,7 @@ async function userPage() {
       if ($(this).text() === 'follow') {
         try {
           await axios.post(
-            `https://${userInfoPort}:3000/follow/${userId}/request`,
+            `https://${userInfoPort}/follow/${userId}/request`,
             {},
             {
               headers: { Authorization: userInfoToken },
@@ -77,7 +74,7 @@ async function userPage() {
       }
 
       try {
-        await axios.delete(`https://${userInfoPort}:3000/follow/${userId}`, {
+        await axios.delete(`https://${userInfoPort}/follow/${userId}`, {
           headers: {
             Authorization: userInfoToken,
           },
@@ -99,7 +96,7 @@ async function userPage() {
     }
     if (challengeId) {
       const challengeData = await axios.get(
-        `https://${userInfoPort}:3000/challenge/${challengeId}`,
+        `https://${userInfoPort}/challenge/${challengeId}`,
         {
           headers: {
             Authorization: userInfoToken,
