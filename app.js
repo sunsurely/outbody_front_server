@@ -7,7 +7,7 @@ const port = 3001;
 
 app.use(
   cors({
-    origin: 'https://sunsurely.shop',
+    origin: 'http://3.34.131.11:3000',
     credentials: true,
   }),
 );
