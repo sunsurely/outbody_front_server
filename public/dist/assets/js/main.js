@@ -1,4 +1,4 @@
-const mainPort = '52.79.176.121';
+const mainPort = '3.35.140.25';
 const mainToken = localStorage.getItem('cookie');
 const expiration = localStorage.getItem('tokenExpiration');
 const isTokenExpired = new Date().getTime() > expiration;

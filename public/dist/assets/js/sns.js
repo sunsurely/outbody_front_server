@@ -19,7 +19,7 @@ $(document).ready(function () {
 const getAllPosts = async (page, pageSize) => {
   try {
     const response = await axios.get(
-      `http://52.79.176.121:3000/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
+      `http://3.35.140.25:3000/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: accessToken,
@@ -191,7 +191,7 @@ const getAllPosts = async (page, pageSize) => {
 
   async function getTotaldata(page, pageSize) {
     const data = await axios.get(
-      `http://52.79.176.121:3000/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
+      `http://3.35.140.25:3000/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: ` ${accessToken}`,

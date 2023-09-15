@@ -1,4 +1,4 @@
-const getOneChallengePort = '52.79.176.121';
+const getOneChallengePort = '3.35.140.25';
 // const getOneChallengePort = 'localhost';
 
 const urlParams = new URLSearchParams(window.location.search);
