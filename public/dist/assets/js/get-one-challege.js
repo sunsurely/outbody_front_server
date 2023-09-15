@@ -11,8 +11,15 @@ const isTokenExpired = new Date().getTime() > expiration;
 if (!getAccessToken || isTokenExpired) {
   localStorage.setItem('cookie', '');
   localStorage.setItem('tokenExpiration', '');
-  alert('로그인이 필요한 기능입니다.');
-  location.href = 'login.html';
+  const inoutBtn = $('#logout-button');
+  $('.profile-button').css('display', 'none');
+  $(inoutBtn).text('Login');
+  setTimeout(() => {
+    alert('로그인이 필요한 기능입니다.');
+  }, 500);
+} else {
+  const inoutBtn = $('#logout-button');
+  $(inoutBtn).html('<i class="fas fa-sign-out-alt"></i> Logout');
 }
 
 window.onload = function () {
