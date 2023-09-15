@@ -3924,4 +3924,19 @@ body:not(.sidebar-mini)
   }
 }
 
+/* accordion */
+.accordion-header::before {
+  content: '▶️';
+  float: left;
+  margin-right: 5px;
+  line-height: 60%;
+}
+
+/* 확장된 상태에서는 ▼(아래쪽 화살표) 아이콘 표시 */
+.accordion-header[aria-expanded='true']::before {
+  content: '🔽';
+  margin-right: 5px;
+  line-height: 60%;
+}
+
 /*# sourceMappingURL=style.css.map */
