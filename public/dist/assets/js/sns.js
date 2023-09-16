@@ -5,8 +5,16 @@ const isTokenExpired = new Date().getTime() > expiration;
 if (!accessToken || isTokenExpired) {
   localStorage.setItem('cookie', '');
   localStorage.setItem('tokenExpiration', '');
-  alert('로그인이 필요한 기능입니다.');
-  location.href = 'login.html';
+  const inoutBtn = $('#logout-button');
+  $('.profile-button').css('display', 'none');
+  $('.profile-button').css('display', 'none');
+  $(inoutBtn).text('Login');
+  setTimeout(() => {
+    alert('로그인이 필요한 기능입니다.');
+  }, 500);
+} else {
+  const inoutBtn = $('#logout-button');
+  $(inoutBtn).html('<i class="fas fa-sign-out-alt"></i> Logout');
 }
 
 let nowPage = 1;
@@ -19,7 +27,7 @@ $(document).ready(function () {
 const getAllPosts = async (page, pageSize) => {
   try {
     const response = await axios.get(
-      `http://52.79.176.121:3000/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
+      `https://sunsurely.shop/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: accessToken,
@@ -191,7 +199,7 @@ const getAllPosts = async (page, pageSize) => {
 
   async function getTotaldata(page, pageSize) {
     const data = await axios.get(
-      `http://52.79.176.121:3000/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
+      `https://sunsurely.shop/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: ` ${accessToken}`,

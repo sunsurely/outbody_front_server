@@ -1,4 +1,4 @@
-const getChallengesPort = '52.79.176.121';
+const getChallengesPort = 'sunsurely.shop';
 // const getChallengesPort = 'localhost';
 
 const getChallengesToken = localStorage.getItem('cookie');
@@ -8,8 +8,16 @@ const isTokenExpired = new Date().getTime() > expiration;
 if (!getChallengesToken || isTokenExpired) {
   localStorage.setItem('cookie', '');
   localStorage.setItem('tokenExpiration', '');
-  alert('로그인이 필요한 기능입니다.');
-  location.href = 'login.html';
+  const inoutBtn = $('#logout-button');
+  $('.profile-button').css('display', 'none');
+  $('.regi-chalenge').css('display', 'none');
+  $(inoutBtn).text('Login');
+  setTimeout(() => {
+    alert('로그인이 필요한 기능입니다.');
+  }, 500);
+} else {
+  const inoutBtn = $('#logout-button');
+  $(inoutBtn).html('<i class="fas fa-sign-out-alt"></i> Logout');
 }
 
 const filterApplyButton = document.querySelector('#filter-apply-button');
@@ -26,14 +34,11 @@ filterApplyButton.addEventListener('click', () => {
 async function initChallengeList(option) {
   let nowPage = 1;
   await axios
-    .get(
-      `http://${getChallengesPort}:3000/challenge?filter=${option}&page=${1}`,
-      {
-        headers: {
-          Authorization: getChallengesToken,
-        },
+    .get(`https://${getChallengesPort}/challenge?filter=${option}&page=${1}`, {
+      headers: {
+        Authorization: getChallengesToken,
       },
-    )
+    })
     .then((response) => {
       const challengeTable = document.querySelector('#challenge-table');
       challengeTable.innerHTML = `<tr>
@@ -64,39 +69,41 @@ async function initChallengeList(option) {
           <td>${challenge.startDate} ~ ${challenge.endDate} (${
             challenge.challengeWeek
           }주)</td>
-          <td>
-            <button class="btn btn-primary">
-              오운완 출석<span class="badge badge-transparent">${
+          <td class="challenges-list">
+            <div class="challenge-list">
+              오운완 출석<span class="badge challenge-span">${
                 challenge.goalAttend
               }일</span>
-            </button>
-            <button class="btn btn-primary">
-              체중 <span class="badge badge-transparent">-${
+            </div>
+            <div class="challenge-list">
+              체중 <span class="badge challenge-span">-${
                 challenge.goalWeight
               }kg</span>
-            </button>
-            <button class="btn btn-primary">
-              골격근량 <span class="badge badge-transparent">+${
+            </div>
+            <div class="challenge-list">
+              골격근량 <span class="badge challenge-span">+${
                 challenge.goalMuscle
               }kg</span>
-            </button>
-            <button class="btn btn-primary">
-              체지방률 <span class="badge badge-transparent">-${
+            </div>
+            <div class="challenge-list">
+              체지방률 <span class="badge challenge-span">-${
                 challenge.goalFat
               }%</span>
-            </button>
+            </div>
           </td>
           <td>
-            <button class="btn btn-danger">
-              실패 시<span class="badge badge-transparent">-${
+           <div class="challenges-point">
+            <div class="challenge-fail">
+              실패 시<span class="badge fail-span">-${
                 challenge.entryPoint
               }점</span>
-            </button>
-            <button class="btn btn-success">
-              성공 시 최대<span class="badge badge-transparent">+${
+            </div>
+            <div class="challenge-success">
+              성공 시 최대<span class="badge success-span">+${
                 challenge.entryPoint * challenge.userNumber
               }점</span>
-            </button>
+            </div>
+           </div>
           </td>
           <td>${challenge.userNumber} / ${challenge.userNumberLimit}명</td>
           <td>
@@ -469,7 +476,7 @@ async function initChallengeList(option) {
 async function getChallenges(option, page) {
   try {
     const { data } = await axios.get(
-      `http://${getChallengesPort}:3000/challenge?filter=${option}&page=${page}`,
+      `https://${getChallengesPort}/challenge?filter=${option}&page=${page}`,
       {
         headers: {
           Authorization: getChallengesToken,
