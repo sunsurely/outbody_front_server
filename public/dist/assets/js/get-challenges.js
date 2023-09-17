@@ -1,5 +1,5 @@
-const getChallengesPort = 'sunsurely.shop';
-// const getChallengesPort = 'localhost';
+// const getChallengesPort = 'http://localhost:3000';
+const getChallengesPort = 'https://wildbody.shop';
 
 const getChallengesToken = localStorage.getItem('cookie');
 const expiration = localStorage.getItem('tokenExpiration');
@@ -34,7 +34,7 @@ filterApplyButton.addEventListener('click', () => {
 async function initChallengeList(option) {
   let nowPage = 1;
   await axios
-    .get(`https://${getChallengesPort}/challenge?filter=${option}&page=${1}`, {
+    .get(`${getChallengesPort}/challenge?filter=${option}&page=${1}`, {
       headers: {
         Authorization: getChallengesToken,
       },
@@ -54,7 +54,7 @@ async function initChallengeList(option) {
       challengeTable.innerHTML += response.data.data.challenges
         .map((challenge) => {
           const profileImage = challenge.hostImageUrl
-            ? `https://inflearn-nest-cat.s3.amazonaws.com/${challenge.hostImageUrl}`
+            ? `inflearn-nest-cat.s3.amazonaws.com/${challenge.hostImageUrl}`
             : `assets/img/avatar/avatar-1.png`;
 
           let publicView = challenge.publicView;
@@ -178,7 +178,7 @@ async function initChallengeList(option) {
             challengeTable.innerHTML += data.challenges
               .map((challenge) => {
                 const profileImage = challenge.hostImageUrl
-                  ? `https://inflearn-nest-cat.s3.amazonaws.com/${challenge.hostImageUrl}`
+                  ? `inflearn-nest-cat.s3.amazonaws.com/${challenge.hostImageUrl}`
                   : `assets/img/avatar/avatar-1.png`;
 
                 let publicView = challenge.publicView;
@@ -281,7 +281,7 @@ async function initChallengeList(option) {
             challengeTable.innerHTML += data.challenges
               .map((challenge) => {
                 const profileImage = challenge.hostImageUrl
-                  ? `https://inflearn-nest-cat.s3.amazonaws.com/${challenge.hostImageUrl}`
+                  ? `inflearn-nest-cat.s3.amazonaws.com/${challenge.hostImageUrl}`
                   : `assets/img/avatar/avatar-1.png`;
 
                 let publicView = challenge.publicView;
@@ -387,7 +387,7 @@ async function initChallengeList(option) {
             challengeTable.innerHTML += data.challenges
               .map((challenge) => {
                 const profileImage = challenge.hostImageUrl
-                  ? `https://inflearn-nest-cat.s3.amazonaws.com/${challenge.hostImageUrl}`
+                  ? `inflearn-nest-cat.s3.amazonaws.com/${challenge.hostImageUrl}`
                   : `assets/img/avatar/avatar-1.png`;
 
                 let publicView = challenge.publicView;
@@ -476,7 +476,7 @@ async function initChallengeList(option) {
 async function getChallenges(option, page) {
   try {
     const { data } = await axios.get(
-      `https://${getChallengesPort}/challenge?filter=${option}&page=${page}`,
+      `${getChallengesPort}/challenge?filter=${option}&page=${page}`,
       {
         headers: {
           Authorization: getChallengesToken,

@@ -1,5 +1,5 @@
-const loginPort = 'sunsurely.shop';
-// const loginPort = 'localhost';
+// const loginPort = 'http://localhost:3000';
+const loginPort = 'https://wildbody.shop';
 
 $(document).ready(function () {
   $('.btn-show-pass').on('click', function (event) {
@@ -27,7 +27,7 @@ const login = async () => {
   }
 
   await axios
-    .post(`https://${loginPort}/auth/login`, {
+    .post(`${loginPort}/auth/login`, {
       email: $('#email').val(),
       password: $('#password').val(),
     })

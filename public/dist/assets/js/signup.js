@@ -1,5 +1,5 @@
-const signupPort = 'sunsurely.shop';
-// const signupPort = 'localhost';
+// const signupPort = 'http://localhost:3000';
+const signupPort = 'https://wildbody.shop';
 
 // 인증번호 발송 (재용)
 $('#sendEmail').click(() => {
@@ -12,7 +12,7 @@ async function sendEmail(email) {
     return;
   }
   await axios
-    .post(`https://${signupPort}/user/signup/email`, { email })
+    .post(`${signupPort}/user/signup/email`, { email })
     .then((response) => {
       if (response.data.success === true) {
         alert('인증번호가 발송되었습니다.');
@@ -63,7 +63,7 @@ const signUp = async () => {
       return;
     }
 
-    await axios.post(`https://${signupPort}/user/signup`, {
+    await axios.post(`${signupPort}/user/signup`, {
       name,
       email,
       verifyNumberInput: parseInt(verifyNumberInput),

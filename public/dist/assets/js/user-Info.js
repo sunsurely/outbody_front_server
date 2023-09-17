@@ -1,4 +1,5 @@
-const userInfoPort = 'sunsurely.shop';
+// const userInfoPort = 'http://localhost:3000';
+const userInfoPort = 'https://wildbody.shop';
 
 const userInfoParams = new URLSearchParams(window.location.search);
 const userId = userInfoParams.get('id');
@@ -25,7 +26,7 @@ $(document).ready(function () {
 // 사용자 정보조회
 async function userPage() {
   try {
-    const { data } = await axios.get(`https://${userInfoPort}/user/${userId}`, {
+    const { data } = await axios.get(`${userInfoPort}/user/${userId}`, {
       headers: {
         Authorization: userInfoToken,
       },
@@ -35,7 +36,7 @@ async function userPage() {
     $('#profile-image').attr(
       'src',
       user.imgUrl
-        ? `http://inflearn-nest-cat.s3.amazonaws.com/${user.imgUrl}`
+        ? `inflearn-nest-cat.s3.amazonaws.com/${user.imgUrl}`
         : 'assets/img/avatar/avatar-1.png',
     );
     $('#user-point').text(user.point);
@@ -45,7 +46,7 @@ async function userPage() {
     $('#descriptionTag').text(descriptionText);
 
     const followData = await axios.get(
-      `https://${userInfoPort}/follow/${userId}/isFollowed`,
+      `${userInfoPort}/follow/${userId}/isFollowed`,
       {
         headers: {
           Authorization: userInfoToken,
@@ -61,7 +62,7 @@ async function userPage() {
       if ($(this).text() === 'follow') {
         try {
           await axios.post(
-            `https://${userInfoPort}/follow/${userId}/request`,
+            `${userInfoPort}/follow/${userId}/request`,
             {},
             {
               headers: { Authorization: userInfoToken },
@@ -78,7 +79,7 @@ async function userPage() {
       }
 
       try {
-        await axios.delete(`https://${userInfoPort}/follow/${userId}`, {
+        await axios.delete(`${userInfoPort}/follow/${userId}`, {
           headers: {
             Authorization: userInfoToken,
           },
@@ -100,7 +101,7 @@ async function userPage() {
     }
     if (challengeId) {
       const challengeData = await axios.get(
-        `https://${userInfoPort}/challenge/${challengeId}`,
+        `${userInfoPort}/challenge/${challengeId}`,
         {
           headers: {
             Authorization: userInfoToken,

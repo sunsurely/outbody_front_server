@@ -1,4 +1,5 @@
-const postCommentPort = 'sunsurely.shop';
+// const postCommentPort = 'http://localhost:3000';
+const postCommentPort = 'https://wildbody.shop';
 
 const commentParams = new URLSearchParams(window.location.search);
 const challengeIdForComment = commentParams.get('cid');
@@ -16,7 +17,7 @@ $(document).ready(function () {
 const getOnePost = async () => {
   try {
     const response = await axios.get(
-      `https://${postCommentPort}/challenge/${challengeIdForComment}/post/${postId}/detail`,
+      `${postCommentPort}/challenge/${challengeIdForComment}/post/${postId}/detail`,
       {
         headers: {
           Authorization: postCommentToken,
@@ -28,7 +29,7 @@ const getOnePost = async () => {
     const post = response.data.data;
 
     const profileImage = post.userImage
-      ? `https://inflearn-nest-cat.s3.amazonaws.com/${post.userImage}`
+      ? `inflearn-nest-cat.s3.amazonaws.com/${post.userImage}`
       : `assets/img/avatar/avatar-1.png`;
 
     let temphtml = `<div class="card-header">
@@ -48,7 +49,7 @@ const getOnePost = async () => {
                         <div class="carousel-inner">
                           <div class="carousel-item active">
                             <img class="d-block w-100"
-                            src="https://inflearn-nest-cat.s3.amazonaws.com/${post.imgUrl}"
+                            src="inflearn-nest-cat.s3.amazonaws.com/${post.imgUrl}"
                             style="margin-botton: 20px;">
                             <h6 style="float: left; margin-top: 20px">${post.description}</h6>
                           </div>
@@ -66,7 +67,7 @@ const getOnePost = async () => {
 const getComment = async () => {
   try {
     const response = await axios.get(
-      `https://${postCommentPort}/challenge/${challengeIdForComment}/post/${postId}/comment`,
+      `${postCommentPort}/challenge/${challengeIdForComment}/post/${postId}/comment`,
       {
         headers: {
           Authorization: postCommentToken,
@@ -77,7 +78,7 @@ const getComment = async () => {
     let allComments = '';
     response.data.data.forEach((comment) => {
       const profileImage = comment.userImg
-        ? `https://inflearn-nest-cat.s3.amazonaws.com/${comment.userImg}`
+        ? `inflearn-nest-cat.s3.amazonaws.com/${comment.userImg}`
         : `assets/img/avatar/avatar-1.png`;
 
       let temphtml = `<li class="media" id="comment-${comment.commentId}">
@@ -125,7 +126,7 @@ const createComment = async () => {
     }
 
     await axios.post(
-      `https://${postCommentPort}/challenge/${challengeIdForComment}/post/${postId}/comment`,
+      `${postCommentPort}/challenge/${challengeIdForComment}/post/${postId}/comment`,
       { comment: $('#comment_input').val() },
       {
         headers: {
@@ -158,7 +159,7 @@ const updateComment = async (commentId) => {
     }
 
     await axios.patch(
-      `https://${postCommentPort}/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
+      `${postCommentPort}/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
       { comment: $('#updateCmt_input').val() },
       {
         headers: {
@@ -181,7 +182,7 @@ $(document).on('click', '#updateCmt_btn', function () {
 const deleteComment = async (commentId) => {
   try {
     await axios.delete(
-      `https://${postCommentPort}/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
+      `${postCommentPort}/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
       {
         headers: {
           Authorization: postCommentToken,
@@ -227,7 +228,7 @@ const reportComment = async (commentId) => {
     }
 
     await axios.post(
-      `https://${postCommentPort}/report/${commentId}`,
+      `${postCommentPort}/report/${commentId}`,
       { description: $('.report_input').val() },
       {
         headers: {
@@ -255,7 +256,7 @@ const addLike = async () => {
     likeButton.on('click', async function () {
       if (!isLiked) {
         const response = await axios.post(
-          `https://${postCommentPort}/challenge/${challengeIdForComment}/post/${postId}/like`,
+          `${postCommentPort}/challenge/${challengeIdForComment}/post/${postId}/like`,
           {
             headers: {
               Authorization: postCommentToken,
@@ -280,7 +281,7 @@ const unLike = async (likeId) => {
     try {
       if (isLiked) {
         const response = await axios.delete(
-          `https://${postCommentPort}/challenge/${challengeIdForComment}/post/${postId}/like/${likeId}`,
+          `${postCommentPort}/challenge/${challengeIdForComment}/post/${postId}/like/${likeId}`,
           {
             headers: {
               Authorization: postCommentToken,
@@ -303,7 +304,7 @@ const unLike = async (likeId) => {
 const getLikes = async () => {
   try {
     const response = await axios.get(
-      `https://${postCommentPort}/challenge/${challengeIdForComment}/post/${postId}/like`,
+      `${postCommentPort}/challenge/${challengeIdForComment}/post/${postId}/like`,
       {
         headers: {
           Authorization: postCommentToken,

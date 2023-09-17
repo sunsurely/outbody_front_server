@@ -1,4 +1,5 @@
-const rankPort = 'sunsurely.shop';
+// const rankPort = 'http://localhost:3000';
+const rankPort = 'https://wildbody.shop';
 
 const urlParams = new URLSearchParams(window.location.search);
 const challengeId = urlParams.get('id');
@@ -236,7 +237,7 @@ async function totalrankPage(page, pageSize) {
 
 async function getTotaldata(page, pageSize) {
   const data = await axios.get(
-    `https://${rankPort}/rank/total/page/?page=${page}&pageSize=${pageSize}`,
+    `${rankPort}/rank/total/page/?page=${page}&pageSize=${pageSize}`,
     {
       headers: {
         Authorization: ` ${rankToken}`,
@@ -450,7 +451,7 @@ async function friendRankPage(page, pageSize) {
 
 async function getFriendData(page, pageSize) {
   const data = await axios.get(
-    `https://${rankPort}/rank/followings/page/?page=${page}&pageSize=${pageSize}`,
+    `${rankPort}/rank/followings/page/?page=${page}&pageSize=${pageSize}`,
     {
       headers: {
         Authorization: ` ${rankToken}`,
