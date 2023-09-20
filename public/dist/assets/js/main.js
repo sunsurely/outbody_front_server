@@ -1,4 +1,4 @@
-const mainPort = 'sunsurely.shop';
+const mainPort = '3.38.108.185';
 const mainToken = localStorage.getItem('cookie');
 const expiration = localStorage.getItem('tokenExpiration');
 const isTokenExpired = new Date().getTime() > expiration;
@@ -117,7 +117,7 @@ async function initializeChart() {
 async function getBodyResults() {
   try {
     const { data } = await axios.get(
-      `https://${mainPort}/record/result/detail`,
+      `http://${mainPort}/record/result/detail`,
       {
         headers: {
           Authorization: mainToken,
@@ -565,7 +565,7 @@ $('.regist-record').click(async () => {
   const data = { height, weight, fat, muscle, bmr };
 
   try {
-    await axios.post(`https://${mainPort}/record`, data, {
+    await axios.post(`http://${mainPort}/record`, data, {
       headers: {
         Authorization: `${mainToken}`,
       },
@@ -581,7 +581,7 @@ $('.regist-record').click(async () => {
 async function getRecordData(page, pageSize) {
   try {
     const data = await axios(
-      `https://${mainPort}/record/page/?page=${page}&pageSize=${pageSize}`,
+      `http://${mainPort}/record/page/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: mainToken,
@@ -697,7 +697,7 @@ function setRecordList(records) {
 
 async function getDateRangeRecord(startDate, endDate, page) {
   const { data } = await axios.get(
-    `https://${mainPort}/record/date/period/page/?page=${page}&pageSize=10&start=${startDate}&end=${endDate}`,
+    `http://${mainPort}/record/date/period/page/?page=${page}&pageSize=10&start=${startDate}&end=${endDate}`,
 
     {
       headers: {

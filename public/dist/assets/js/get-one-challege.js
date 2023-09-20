@@ -1,4 +1,4 @@
-const getOneChallengePort = 'sunsurely.shop';
+const getOneChallengePort = '3.38.108.185';
 // const getOneChallengePort = 'localhost';
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -30,7 +30,7 @@ window.onload = function () {
 async function checkUserIsInChallenge() {
   try {
     const response = await axios.get(
-      `https://${getOneChallengePort}/challenge/${challengeId}/userState`,
+      `http://${getOneChallengePort}/challenge/${challengeId}/userState`,
       {
         headers: {
           Authorization: getAccessToken,
@@ -48,7 +48,7 @@ async function checkUserIsInChallenge() {
 async function getChallengeDetail() {
   const result = await checkUserIsInChallenge();
   await axios
-    .get(`https://${getOneChallengePort}/challenge/${challengeId}`, {
+    .get(`http://${getOneChallengePort}/challenge/${challengeId}`, {
       headers: {
         Authorization: getAccessToken,
       },
@@ -94,7 +94,7 @@ async function getChallengeDetail() {
       setInterval(updateTime, 1000);
 
       const profileImage = challenge.userImageUrl
-        ? `https://inflearn-nest-cat.s3.amazonaws.com/${challenge.userImageUrl}`
+        ? `http://inflearn-nest-cat.s3.amazonaws.com/${challenge.userImageUrl}`
         : `assets/img/avatar/avatar-1.png`;
 
       const challengeDetail = document.querySelector('#challenge-detail');
@@ -200,14 +200,11 @@ async function getChallengeDetail() {
 async function getChallengers() {
   const result = await checkUserIsInChallenge();
   await axios
-    .get(
-      `https://${getOneChallengePort}/challenge/${challengeId}/challengers`,
-      {
-        headers: {
-          Authorization: getAccessToken,
-        },
+    .get(`http://${getOneChallengePort}/challenge/${challengeId}/challengers`, {
+      headers: {
+        Authorization: getAccessToken,
       },
-    )
+    })
     .then((response) => {
       const challengerCardHeader = document.querySelector(
         '#challenger-card-header',
@@ -234,7 +231,7 @@ async function getChallengers() {
       challengerList.innerHTML += response.data.data
         .map((challenger) => {
           const profileImage = challenger.user.imgUrl
-            ? `https://inflearn-nest-cat.s3.amazonaws.com/${challenger.user.imgUrl}`
+            ? `http://inflearn-nest-cat.s3.amazonaws.com/${challenger.user.imgUrl}`
             : `assets/img/avatar/avatar-1.png`;
 
           return `<li class="media">
@@ -260,7 +257,7 @@ document.addEventListener('click', async (event) => {
   if (target.matches('#enter-challenge')) {
     await axios
       .post(
-        `https://${getOneChallengePort}/challenge/${challengeId}/enter`,
+        `http://${getOneChallengePort}/challenge/${challengeId}/enter`,
         null,
         {
           headers: {
@@ -290,7 +287,7 @@ document.addEventListener('click', async (event) => {
     if (leaveConfirm) {
       await axios
         .delete(
-          `https://${getOneChallengePort}/challenge/${challengeId}/leave`,
+          `http://${getOneChallengePort}/challenge/${challengeId}/leave`,
           {
             headers: {
               Authorization: getAccessToken,
@@ -319,7 +316,7 @@ document.addEventListener('click', async (event) => {
 
     if (deleteConfirm) {
       await axios
-        .delete(`https://${getOneChallengePort}/challenge/${challengeId}`, {
+        .delete(`http://${getOneChallengePort}/challenge/${challengeId}`, {
           headers: {
             Authorization: getAccessToken,
           },
@@ -346,7 +343,7 @@ $('#send-invitation-button').on('click', async () => {
 
   try {
     userResponse = await axios.get(
-      `https://${getOneChallengePort}/user/me/searchEmail/?email=${emailInput}`,
+      `http://${getOneChallengePort}/user/me/searchEmail/?email=${emailInput}`,
       {
         headers: {
           Authorization: getAccessToken,
@@ -361,7 +358,7 @@ $('#send-invitation-button').on('click', async () => {
 
   try {
     followResponse = await axios.get(
-      `https://${getOneChallengePort}/follow/${friend.id}/isFollowed`,
+      `http://${getOneChallengePort}/follow/${friend.id}/isFollowed`,
       {
         headers: {
           Authorization: getAccessToken,
@@ -381,7 +378,7 @@ $('#send-invitation-button').on('click', async () => {
         <div id=${friend.id}>
           <img class="rounded-circle" src=${
             friend.imgUrl
-              ? `https://inflearn-nest-cat.s3.amazonaws.com/${friend.imgUrl}`
+              ? `http://inflearn-nest-cat.s3.amazonaws.com/${friend.imgUrl}`
               : 'assets/img/avatar/avatar-1.png'
           } style="width:50px; margin-right:10px">
           <span> ${friend.name}(${friend.email})</span>
@@ -398,7 +395,7 @@ $('#send-invitation-button').on('click', async () => {
 
     await axios
       .post(
-        `https://${getOneChallengePort}/challenge/${challengeId}/invite`,
+        `http://${getOneChallengePort}/challenge/${challengeId}/invite`,
         data,
         {
           headers: {

@@ -1,4 +1,4 @@
-const noticePort = 'sunsurely.shop';
+const noticePort = '3.38.108.185';
 // const noticePort = 'localhost';
 
 $(document).ready(function () {
@@ -12,7 +12,7 @@ async function initMessagesBox() {
   $(messageBox).html('');
   let followResponse, challengeResponse;
   try {
-    followResponse = await axios.get(`https://${noticePort}/follow/request`, {
+    followResponse = await axios.get(`http://${noticePort}/follow/request`, {
       headers: { Authorization: accessToken },
     });
   } catch (error) {
@@ -21,7 +21,7 @@ async function initMessagesBox() {
 
   try {
     challengeResponse = await axios.get(
-      `https://${noticePort}/challenge/invite/list`,
+      `http://${noticePort}/challenge/invite/list`,
       {
         headers: {
           Authorization: accessToken,
@@ -65,7 +65,7 @@ async function initMessagesBox() {
 
     const id = res.userId;
     const profileImage = res.imgUrl
-      ? `https://inflearn-nest-cat.s3.amazonaws.com/${res.imgUrl}`
+      ? `https://outbody.s3.amazonaws.com/${res.imgUrl}`
       : `assets/img/avatar/avatar-1.png`;
 
     const parts = res.message.split('님이');
@@ -103,7 +103,7 @@ async function initMessagesBox() {
       const tagId = $(this).attr('id');
       const id = parseInt(tagId.match(/\d+/)[0], 10);
       const data = { response: 'yes' };
-      await axios.post(`https://${noticePort}/follow/${id}/accept`, data, {
+      await axios.post(`http://${noticePort}/follow/${id}/accept`, data, {
         headers: { Authorization: accessToken },
       });
 
@@ -118,7 +118,7 @@ async function initMessagesBox() {
       const tagId = $(this).attr('id');
       const id = parseInt(tagId.match(/\d+/)[0], 10);
       const data = { response: 'no' };
-      await axios.post(`https://${noticePort}/follow/${id}/accept`, data, {
+      await axios.post(`http://${noticePort}/follow/${id}/accept`, data, {
         headers: { Authorization: accessToken },
       });
 
@@ -134,7 +134,7 @@ async function initMessagesBox() {
         const id = tagId.charAt(tagId.length - 1);
         const data = { response: 'yes' };
         e.preventDefault();
-        await axios.post(`https://${noticePort}/challenge/${id}/accept`, data, {
+        await axios.post(`http://${noticePort}/challenge/${id}/accept`, data, {
           headers: { Authorization: accessToken },
         });
 
@@ -152,7 +152,7 @@ async function initMessagesBox() {
         const tagId = $(this).attr('id');
         const id = parseInt(tagId.match(/\d+/)[0], 10);
         const data = { response: 'no' };
-        await axios.post(`https://${noticePort}/challenge/${id}/accept`, data, {
+        await axios.post(`http://${noticePort}/challenge/${id}/accept`, data, {
           headers: { Authorization: accessToken },
         });
 
@@ -172,7 +172,7 @@ async function initLogBox() {
 
   try {
     const { data } = await axios.get(
-      `https://${noticePort}/challenge/message/log`,
+      `http://${noticePort}/challenge/message/log`,
       {
         headers: { Authorization: accessToken },
       },

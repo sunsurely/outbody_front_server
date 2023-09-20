@@ -27,7 +27,7 @@ $(document).ready(function () {
 const getAllPosts = async (page, pageSize) => {
   try {
     const response = await axios.get(
-      `https://sunsurely.shop/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
+      `http://3.38.108.185/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: accessToken,
@@ -41,7 +41,7 @@ const getAllPosts = async (page, pageSize) => {
     response.data.data.pagenatedTotalPosts.forEach((post) => {
       post;
       const profileImage = post.user.imgUrl
-        ? `https://inflearn-nest-cat.s3.amazonaws.com/${post.user.imgUrl}`
+        ? `https://outbody.s3.amazonaws.com/${post.user.imgUrl}`
         : `assets/img/avatar/avatar-1.png`;
 
       const userId = post.userId;
@@ -58,7 +58,7 @@ const getAllPosts = async (page, pageSize) => {
           <article class="article article-style-c">
             <div class="article-header">
               <div class="article-image"
-              style="background-image: url(https://inflearn-nest-cat.s3.amazonaws.com/${post.imgUrl});
+              style="background-image: url(https://outbody.s3.amazonaws.com/${post.imgUrl});
               background-position: center; background-size: cover;">
               </div>
             </div>
@@ -199,7 +199,7 @@ const getAllPosts = async (page, pageSize) => {
 
   async function getTotaldata(page, pageSize) {
     const data = await axios.get(
-      `https://sunsurely.shop/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
+      `http://sunsurely.shop/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: ` ${accessToken}`,
@@ -214,7 +214,7 @@ const getAllPosts = async (page, pageSize) => {
 
     posts.forEach((post) => {
       const profileImage = post.user.imgUrl
-        ? `https://inflearn-nest-cat.s3.amazonaws.com/${post.user.imgUrl}`
+        ? `https://outbody.s3.amazonaws.com/${post.user.imgUrl}`
         : `assets/img/avatar/avatar-1.png`;
 
       const userId = post.userId;
@@ -231,7 +231,7 @@ const getAllPosts = async (page, pageSize) => {
           <article class="article article-style-c">
             <div class="article-header">
               <div class="article-image"
-              style="background-image: url(https://inflearn-nest-cat.s3.amazonaws.com/${post.imgUrl});
+              style="background-image: url(https://outbody.s3.amazonaws.com/${post.imgUrl});
               background-position: center; background-size: cover;">
               </div>
             </div>

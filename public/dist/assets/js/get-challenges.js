@@ -1,4 +1,4 @@
-const getChallengesPort = 'sunsurely.shop';
+const getChallengesPort = '3.38.108.185';
 // const getChallengesPort = 'localhost';
 
 const getChallengesToken = localStorage.getItem('cookie');
@@ -34,7 +34,7 @@ filterApplyButton.addEventListener('click', () => {
 async function initChallengeList(option) {
   let nowPage = 1;
   await axios
-    .get(`https://${getChallengesPort}/challenge?filter=${option}&page=${1}`, {
+    .get(`http://${getChallengesPort}/challenge?filter=${option}&page=${1}`, {
       headers: {
         Authorization: getChallengesToken,
       },
@@ -178,7 +178,7 @@ async function initChallengeList(option) {
             challengeTable.innerHTML += data.challenges
               .map((challenge) => {
                 const profileImage = challenge.hostImageUrl
-                  ? `https://inflearn-nest-cat.s3.amazonaws.com/${challenge.hostImageUrl}`
+                  ? `http://inflearn-nest-cat.s3.amazonaws.com/${challenge.hostImageUrl}`
                   : `assets/img/avatar/avatar-1.png`;
 
                 let publicView = challenge.publicView;
@@ -281,7 +281,7 @@ async function initChallengeList(option) {
             challengeTable.innerHTML += data.challenges
               .map((challenge) => {
                 const profileImage = challenge.hostImageUrl
-                  ? `https://inflearn-nest-cat.s3.amazonaws.com/${challenge.hostImageUrl}`
+                  ? `http://inflearn-nest-cat.s3.amazonaws.com/${challenge.hostImageUrl}`
                   : `assets/img/avatar/avatar-1.png`;
 
                 let publicView = challenge.publicView;
@@ -387,7 +387,7 @@ async function initChallengeList(option) {
             challengeTable.innerHTML += data.challenges
               .map((challenge) => {
                 const profileImage = challenge.hostImageUrl
-                  ? `https://inflearn-nest-cat.s3.amazonaws.com/${challenge.hostImageUrl}`
+                  ? `http://inflearn-nest-cat.s3.amazonaws.com/${challenge.hostImageUrl}`
                   : `assets/img/avatar/avatar-1.png`;
 
                 let publicView = challenge.publicView;
@@ -476,7 +476,7 @@ async function initChallengeList(option) {
 async function getChallenges(option, page) {
   try {
     const { data } = await axios.get(
-      `https://${getChallengesPort}/challenge?filter=${option}&page=${page}`,
+      `http://${getChallengesPort}/challenge?filter=${option}&page=${page}`,
       {
         headers: {
           Authorization: getChallengesToken,

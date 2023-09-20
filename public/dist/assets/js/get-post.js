@@ -1,4 +1,4 @@
-const getPostPort = 'sunsurely.shop';
+const getPostPort = '3.38.108.185';
 
 const postParams = new URLSearchParams(window.location.search);
 const challengeId = postParams.get('id');
@@ -16,7 +16,7 @@ $(document).ready(function () {
 const getPosts = async (page, pageSize) => {
   try {
     const response = await axios.get(
-      `https://${getPostPort}/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
+      `http://${getPostPort}/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: getPostToken,
@@ -31,7 +31,7 @@ const getPosts = async (page, pageSize) => {
     posts.forEach((post) => {
       // console.log(post);
       const profileImage = post.userImageUrl
-        ? `https://inflearn-nest-cat.s3.amazonaws.com/${post.userImageUrl}`
+        ? `https://outbody.s3.amazonaws.com/${post.userImageUrl}`
         : `assets/img/avatar/avatar-1.png`;
 
       const userId = post.userId;
@@ -48,7 +48,7 @@ const getPosts = async (page, pageSize) => {
           <article class="article article-style-c">
             <div class="article-header">
               <div class="article-image"
-              style="background-image: url(https://inflearn-nest-cat.s3.amazonaws.com/${post.imgUrl});
+              style="background-image: url(https://outbody.s3.amazonaws.com/${post.imgUrl});
               background-position: center; background-size: cover;">
               </div>
             </div>
@@ -191,7 +191,7 @@ const getPosts = async (page, pageSize) => {
 
   async function getTotalpost(page, pageSize) {
     const data = await axios.get(
-      `https://${getPostPort}/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
+      `http://${getPostPort}/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: ` ${getPostToken}`,
@@ -207,7 +207,7 @@ const getPosts = async (page, pageSize) => {
 
     posts.forEach((post) => {
       const profileImage = post.userImageUrl
-        ? `https://inflearn-nest-cat.s3.amazonaws.com/${post.userImageUrl}`
+        ? `http://inflearn-nest-cat.s3.amazonaws.com/${post.userImageUrl}`
         : `assets/img/avatar/avatar-1.png`;
 
       const userId = post.userId;
@@ -224,7 +224,7 @@ const getPosts = async (page, pageSize) => {
           <article class="article article-style-c">
             <div class="article-header">
               <div class="article-image"
-              style="background-image: url(https://inflearn-nest-cat.s3.amazonaws.com/${post.imgUrl});
+              style="background-image: url(http://inflearn-nest-cat.s3.amazonaws.com/${post.imgUrl});
               background-position: center; background-size: cover;">
               </div>
             </div>
@@ -278,7 +278,7 @@ const createPost = async () => {
     formData.append('description', description);
 
     await axios
-      .post(`https://${getPostPort}/challenge/${challengeId}/post`, formData, {
+      .post(`http://${getPostPort}/challenge/${challengeId}/post`, formData, {
         headers: {
           Authorization: getPostToken,
           'Content-Type': 'multipart/form-data',
@@ -317,7 +317,7 @@ image.addEventListener('change', (event) => {
 const deletePost = async (postId) => {
   try {
     await axios.delete(
-      `https://${getPostPort}/challenge/${challengeId}/post/${postId}`,
+      `http://${getPostPort}/challenge/${challengeId}/post/${postId}`,
       {
         headers: {
           Authorization: getPostToken,

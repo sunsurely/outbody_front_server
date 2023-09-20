@@ -1,4 +1,4 @@
-const userInfoPort = 'sunsurely.shop';
+const userInfoPort = '3.38.108.185';
 
 const userInfoParams = new URLSearchParams(window.location.search);
 const userId = userInfoParams.get('id');
@@ -25,7 +25,7 @@ $(document).ready(function () {
 // 사용자 정보조회
 async function userPage() {
   try {
-    const { data } = await axios.get(`https://${userInfoPort}/user/${userId}`, {
+    const { data } = await axios.get(`http://${userInfoPort}/user/${userId}`, {
       headers: {
         Authorization: userInfoToken,
       },
@@ -35,7 +35,7 @@ async function userPage() {
     $('#profile-image').attr(
       'src',
       user.imgUrl
-        ? `http://inflearn-nest-cat.s3.amazonaws.com/${user.imgUrl}`
+        ? `https://outbody.s3.amazonaws.com/${user.imgUrl}`
         : 'assets/img/avatar/avatar-1.png',
     );
     $('#user-point').text(user.point);
@@ -45,7 +45,7 @@ async function userPage() {
     $('#descriptionTag').text(descriptionText);
 
     const followData = await axios.get(
-      `https://${userInfoPort}/follow/${userId}/isFollowed`,
+      `http://${userInfoPort}/follow/${userId}/isFollowed`,
       {
         headers: {
           Authorization: userInfoToken,
@@ -61,7 +61,7 @@ async function userPage() {
       if ($(this).text() === 'follow') {
         try {
           await axios.post(
-            `https://${userInfoPort}/follow/${userId}/request`,
+            `http://${userInfoPort}/follow/${userId}/request`,
             {},
             {
               headers: { Authorization: userInfoToken },
@@ -78,7 +78,7 @@ async function userPage() {
       }
 
       try {
-        await axios.delete(`https://${userInfoPort}/follow/${userId}`, {
+        await axios.delete(`http://${userInfoPort}/follow/${userId}`, {
           headers: {
             Authorization: userInfoToken,
           },
@@ -100,7 +100,7 @@ async function userPage() {
     }
     if (challengeId) {
       const challengeData = await axios.get(
-        `https://${userInfoPort}/challenge/${challengeId}`,
+        `http://${userInfoPort}/challenge/${challengeId}`,
         {
           headers: {
             Authorization: userInfoToken,

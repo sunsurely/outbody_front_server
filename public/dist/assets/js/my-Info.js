@@ -1,4 +1,4 @@
-const myinfoPort = 'sunsurely.shop';
+const myinfoPort = '3.38.108.185';
 
 // 로그인 여부 확인
 const accessToken = localStorage.getItem('cookie');
@@ -109,7 +109,7 @@ async function updateUserInfo() {
   formData.append('name', myName);
 
   await axios
-    .patch(`https://${myinfoPort}/user/me`, formData, {
+    .patch(`http://${myinfoPort}/user/me`, formData, {
       headers: {
         Authorization: accessToken,
         'Content-Type': 'multipart/form-data',
@@ -165,7 +165,7 @@ async function initMyPage() {
   const profileImg = $('#profile-image');
 
   try {
-    const { data } = await axios.get(`https://${myinfoPort}/user/me/profile`, {
+    const { data } = await axios.get(`http://${myinfoPort}/user/me/profile`, {
       headers: {
         Authorization: accessToken,
       },
@@ -174,7 +174,7 @@ async function initMyPage() {
     const challengeId = data.data.challengeId;
     if (challengeId) {
       const challengeData = await axios.get(
-        `https://${myinfoPort}/challenge/${challengeId}`,
+        `http://${myinfoPort}/challenge/${challengeId}`,
         {
           headers: {
             Authorization: accessToken,
@@ -195,7 +195,7 @@ async function initMyPage() {
       );
     }
 
-    const rankData = await axios.get(`https://${myinfoPort}/user/me/rank`, {
+    const rankData = await axios.get(`http://${myinfoPort}/user/me/rank`, {
       headers: {
         Authorization: accessToken,
       },
@@ -240,7 +240,7 @@ async function initMyPage() {
     $(profileImg).attr(
       'src',
       myData.imgUrl
-        ? `https://inflearn-nest-cat.s3.amazonaws.com/${myData.imgUrl}`
+        ? `https://outbody.s3.amazonaws.com/${myData.imgUrl}`
         : 'assets/img/avatar/avatar-1.png',
     );
     $(myFriends).html(followTemp);
@@ -262,7 +262,7 @@ $(document).on('click', '.delete-friend-button', function () {
 });
 async function deleteFriend(followerId) {
   try {
-    await axios.delete(`https://${myinfoPort}/follow/${followerId}`, {
+    await axios.delete(`http://${myinfoPort}/follow/${followerId}`, {
       headers: {
         Authorization: accessToken,
       },
@@ -301,7 +301,7 @@ async function editPassword() {
   };
 
   await axios
-    .patch(`https://${myinfoPort}/user/me/password`, data, {
+    .patch(`http://${myinfoPort}/user/me/password`, data, {
       headers: {
         Authorization: accessToken,
       },
@@ -324,7 +324,7 @@ $(signoutBtn).click(async () => {
   const password = $('#signoutpassword').val();
   const data = { password };
   try {
-    await axios.delete(`https://${myinfoPort}/user/me/signout`, {
+    await axios.delete(`http://${myinfoPort}/user/me/signout`, {
       data,
       headers: { Authorization: accessToken },
     });
@@ -342,7 +342,7 @@ $('#searchFriendByEmail').on('click', async () => {
   $(searchUser).html('');
   try {
     const response = await axios.get(
-      `https://${myinfoPort}/user/me/searchEmail/?email=${email}`,
+      `http://${myinfoPort}/user/me/searchEmail/?email=${email}`,
       {
         headers: {
           Authorization: accessToken,
@@ -364,7 +364,7 @@ $('#searchFriendByEmail').on('click', async () => {
         <div id=${user.id}>
           <img class="rounded-circle" src=${
             user.imgUrl
-              ? `https://inflearn-nest-cat.s3.amazonaws.com/${user.imgUrl}`
+              ? `https://outbody.s3.amazonaws.com/${user.imgUrl}`
               : 'assets/img/avatar/avatar-1.png'
           } style="width:50px; margin-right:10px">
           <span>${user.name}(${emailText})</span>
@@ -379,7 +379,7 @@ $('#searchFriendByEmail').on('click', async () => {
       try {
         if (isChecked) {
           await axios.post(
-            `https://${myinfoPort}/follow/${userId}/request`,
+            `http://${myinfoPort}/follow/${userId}/request`,
             {},
             {
               headers: { Authorization: accessToken },
