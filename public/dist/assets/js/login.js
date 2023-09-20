@@ -1,4 +1,4 @@
-const loginPort = '3.38.108.185';
+const loginPort = '3.38.108.185:3000';
 // const loginPort = 'localhost';
 
 $(document).ready(function () {
